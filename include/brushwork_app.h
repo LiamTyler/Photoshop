@@ -18,6 +18,7 @@
 #include "include/base_gfx_app.h"
 #include "include/color_data.h"
 #include "include/pixel_buffer.h"
+#include "include/tool.h"
 
 /*******************************************************************************
  * Namespaces
@@ -56,6 +57,7 @@ class BrushWorkApp : public BaseGfxApp {
         ColorData background_color);
 
  private:
+    Tool* pen;
     void InitGlui(void);
     void InitGraphics(void);
 

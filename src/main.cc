@@ -14,6 +14,7 @@
  ******************************************************************************/
 #include "include/brushwork_app.h"
 #include "include/color_data.h"
+#include "include/tool.h"
 
 /*******************************************************************************
  * Non-Member Functions

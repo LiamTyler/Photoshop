@@ -17,6 +17,7 @@
 #include <iostream>
 #include "include/color_data.h"
 #include "include/pixel_buffer.h"
+#include "include/tool.h"
 
 /*******************************************************************************
  * Namespaces
@@ -37,12 +38,16 @@ BrushWorkApp::BrushWorkApp(int width,
       cur_color_blue_(0.0),
       spinner_r_(nullptr),
       spinner_g_(nullptr),
-      spinner_b_(nullptr) {}
+      spinner_b_(nullptr) {
+          pen = new Tool();
+      }
 
 BrushWorkApp::~BrushWorkApp(void) {
     if (display_buffer_) {
         delete display_buffer_;
     }
+
+    delete pen;
 }
 
 /*******************************************************************************
@@ -76,11 +81,24 @@ void BrushWorkApp::Display(void) {
     DrawPixels(0, 0, width(), height(), display_buffer_->data());
 }
 
-void BrushWorkApp::MouseDragged(int x, int y) {}
+void BrushWorkApp::MouseDragged(int x, int y) {
+    ColorData current_color = ColorData(
+            cur_color_red_,
+            cur_color_green_,
+            cur_color_blue_);
+
+    pen -> applyTool(display_buffer_, current_color, x, y);
+}
+
 void BrushWorkApp::MouseMoved(int x, int y) {}
 
 void BrushWorkApp::LeftMouseDown(int x, int y) {
     std::cout << "mousePressed " << x << " " << y << std::endl;
+    ColorData current_color = ColorData(
+            cur_color_red_,
+            cur_color_green_,
+            cur_color_blue_);
+    pen -> applyTool(display_buffer_, current_color, x, y);
 }
 
 void BrushWorkApp::LeftMouseUp(int x, int y) {
