@@ -102,7 +102,7 @@ $(OBJDIR) $(PREPROCDIR) $(LIBDIR):
 
 # The Cleaner
 clean:
-	@rm -rf $(LIBDIR) $(OBJDIR)
+	rm -rf $(LIBDIR) $(OBJDIR)
 
 ###############################################################################
 # Pattern Rules
