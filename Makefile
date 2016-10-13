@@ -1,25 +1,38 @@
-all: brushwork
+CXX = g++
+CXXINCDIRS = -I. -I./ext/glui/include
+SRCDIR = ./src
+OBJDIR = ./obj
+INCDIR = ./include
+EXE = brushwork
+CXXFLAGS += $(CXXINCDIRS)
+CXXFLAGS += -std=c++11
+CXXLIBDIRS = -lglut -lGL -lGLU -lglui -L./ext/glui/lib
 
-brushwork: main.o base_gfx_app.o brushwork_app.o color_data.o pixel_buffer.o tool.o
-	g++ main.o base_gfx_app.o brushwork_app.o color_data.o pixel_buffer.o tool.o -o brushwork -std=c++11 -lglut -lGL -lGLU -lglui -L./ext/glui/lib
+SRC_CXX = $(wildcard $(SRCDIR)/*.cc)
+OBJECTS_CXX = $(patsubst $(SRCDIR)/%.cc, $(OBJDIR)/%.o, $(SRC_CXX))
 
-main.o: src/main.cc
-	g++ -c -I. -I./ext/glui/include src/main.cc -std=c++11
+# For dependency check
+make-depend-cxx=$(CXX) -MM -MF $3 -MP -MT $2 $(CXXFLAGS) $1
 
-brushwork_app.o: src/brushwork_app.cc
-	g++ -c -I. -I./ext/glui/include src/brushwork_app.cc -std=c++11
+# These are the targets that aren't actually files
+.PHONY: clean all 
 
-base_gfx_app.o: src/base_gfx_app.cc
-	g++ -c -I. -I./ext/glui/include src/base_gfx_app.cc -std=c++11
+all: $(EXE)
 
-color_data.o: src/color_data.cc
-	g++ -c -I. -I./ext/glui/include src/color_data.cc -std=c++11
+# For dependency check
+ifneq "$MAKECMDGOALS" "clean"
+-include $(addprefix $(OBJDIR)/,$(notdir $(OBJECTS_CXX:.o=.d)))
+endif
 
-pixel_buffer.o: src/pixel_buffer.cc
-	g++ -c -I. -I./ext/glui/include src/pixel_buffer.cc -std=c++11
+$(EXE): $(OBJECTS_CXX) | $(BINDIR)
+	$(CXX) -o $@ $^	$(CXXLIBDIRS)
 
-tool.o: src/tool.cc
-	g++ -c -I. -I./ext/glui/include src/tool.cc -std=c++11
+$(OBJDIR)/%.o: $(SRCDIR)/%.cc | $(OBJDIR)
+	@$(call make-depend-cxx,$<,$@,$(subst .o,.d,$@))
+	$(CXX) $(CXXFLAGS) -c -o  $@ $<
+
+$(BINDIR) $(OBJDIR):
+	mkdir -p $@
 
 clean:
-	rm *o brushwork
+	rm -rf $(OBJDIR)
