@@ -58,7 +58,7 @@ void Tool::applyTool(PixelBuffer* buff, ColorData current_color, int x, int y) {
            // Needs to be buff->height() - y because pixels buffer's 0,0 is the lower left
            // corner, while in brushwork, 0,0 is the upper left
            int cur_y = screen_h - (y + step_y - mid_y);
-           if(cur_x >= 0 && cur_x <= screen_w && cur_y >= 0 && cur_y <= screen_h) {
+           if(cur_x >= 0 && cur_x < screen_w && cur_y >= 0 && cur_y < screen_h) {
                double intensity = mask_[step_x][step_y];
                //TODO: copy constructor
                buff->set_pixel(cur_x, cur_y, current_color * intensity + buff->get_pixel(cur_x, cur_y) * (1.0 - intensity));
