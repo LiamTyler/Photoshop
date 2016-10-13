@@ -1,9 +1,22 @@
 #include "include/tool.h"
 #include <iostream>
 #include <iomanip>
+#include <cmath>
 
 using image_tools::PixelBuffer;
 using image_tools::ColorData;
+
+void createCircle(double** mask, int height, int width, double radius) {
+    int cent_x = width / 2;
+    int cent_y = height / 2;
+    for(int h = 0; h < height; h++) {
+        for(int w = 0; w < width; w++) {
+            if(pow(w - cent_x, 2) + pow(h - cent_y, 2) <= radius * radius) {
+                mask[h][w] = 1.0; 
+            }
+        }
+    }
+}
 
 void Tool::construct(int width, int height) {
     width_ = width;
@@ -15,12 +28,7 @@ void Tool::construct(int width, int height) {
         mask_[i] = new double[width];
     }
 
-    // Initialize the mask to be all opaque (all 1.0 doubles)
-    for(int h = 0; h < height; h++) {
-        for(int w = 0; w < width; w++) {
-            mask_[h][w] = 0.25;
-        }
-    }
+    createCircle(mask_, height_, width_, static_cast<double>(width) / 2);
 }
 
 Tool::Tool(int width, int height) {
@@ -28,7 +36,7 @@ Tool::Tool(int width, int height) {
 }
 
 Tool::Tool() {
-    construct(20,20);
+    construct(120,120);
 }
 
 Tool::~Tool() {
