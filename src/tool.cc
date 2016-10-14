@@ -18,6 +18,23 @@ void createCircle(double** mask, int height, int width, double radius) {
     }
 }
 
+void createSpray(double** mask, int height, int width, double radius) {
+    int cent_x = width / 2;
+    int cent_y = height / 2;
+    for(int h = 0; h < height; h++) {
+        for(int w = 0; w < width; w++) {
+	    float intensity = (1.0 - (sqrt(pow(w - cent_x, 2) + pow(h - cent_y, 2)))/radius) * 0.2;
+	    //std::cout << "intensity = " << intensity << std::endl;
+            if(intensity > 0) {
+                mask[h][w] = intensity; 
+            }
+	    else {
+		mask[h][w] = 0.0;
+	    }
+        }
+    }
+}
+
 void Tool::construct(int width, int height) {
     width_ = width;
     height_ = height;
@@ -28,7 +45,7 @@ void Tool::construct(int width, int height) {
         mask_[i] = new double[width];
     }
 
-    createCircle(mask_, height_, width_, static_cast<double>(width) / 2);
+    createSpray(mask_, height_, width_, static_cast<double>(width) / 2);
 }
 
 Tool::Tool(int width, int height) {
@@ -36,7 +53,7 @@ Tool::Tool(int width, int height) {
 }
 
 Tool::Tool() {
-    construct(120,120);
+    construct(41,41);
 }
 
 Tool::~Tool() {
@@ -65,4 +82,12 @@ void Tool::applyTool(PixelBuffer* buff, ColorData current_color, int x, int y) {
            }
        }
    }
+}
+
+int Tool::getWidth() {
+	return width_;
+}
+
+int Tool::getHeight() {
+	return height_;
 }
