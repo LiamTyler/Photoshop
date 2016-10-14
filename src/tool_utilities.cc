@@ -27,7 +27,6 @@ namespace tool_utilities {
         }
     }
 
-
     void createSpray(double** mask, int height, int width, double radius) {
         int cent_x = width / 2;
         int cent_y = height / 2;

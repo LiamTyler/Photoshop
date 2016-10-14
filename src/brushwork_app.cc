@@ -18,6 +18,7 @@
 #include "include/color_data.h"
 #include "include/pixel_buffer.h"
 #include "include/tool.h"
+#include "include/pen.h"
 
 /*******************************************************************************
  * Namespaces
@@ -39,7 +40,7 @@ BrushWorkApp::BrushWorkApp(int width,
       spinner_r_(nullptr),
       spinner_g_(nullptr),
       spinner_b_(nullptr) {
-          pen = new Tool();
+          pen = new Pen();
           last_point_x_ = -1;
           last_point_y_ = -1;
       }

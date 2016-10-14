@@ -10,9 +10,6 @@
  ******************************************************************************/
 
 #include "include/tool.h"
-#include "include/tool_utilities.h"
-#include <iostream>
-#include <iomanip>
 #include <cmath>
 
 using image_tools::PixelBuffer;
@@ -26,10 +23,7 @@ Tool::Tool(int width, int height) {
     for (int i = 0; i < height; i++) {
          mask_[i] = new double[width];
     }
-
-    toocreateSpray(mask_, height_, width_, static_cast<double>(width_) / 2);
 }
-
 
 Tool::Tool() : Tool(41, 41) {}
 
@@ -70,4 +64,8 @@ int Tool::getWidth() {
 
 int Tool::getHeight() {
     return height_;
+}
+
+double** Tool::getMask() {
+    return mask_;
 }
