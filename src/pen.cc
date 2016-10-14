@@ -20,12 +20,17 @@ using image_tools::PixelBuffer;
 using image_tools::ColorData;
 
 Pen::Pen(int width, int height) : Tool(width, height) {
+    radius_ = static_cast<double>(width) / 2;
     tool_utilities::createCircle(this->getMask(),
                                 height,
                                 width,
-                                static_cast<double>(this->getWidth()) / 2);
+                                radius_);
 }
 
 Pen::Pen() : Pen(3,3) {}
 
 Pen::~Pen() {}
+
+double Pen::getRadius() {
+    return radius_;
+}
