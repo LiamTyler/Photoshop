@@ -7,8 +7,6 @@
 using image_tools::PixelBuffer;
 using image_tools::ColorData;
 
-Tool::Tool(int width, int height) {
-
 void createCircle(double** mask, int height, int width, double radius) {
     int cent_x = width / 2;
     int cent_y = height / 2;
@@ -38,7 +36,20 @@ void createSpray(double** mask, int height, int width, double radius) {
     }
 }
 
-Tool::Tool() : Tool(120,120) {}
+Tool::Tool(int width, int height) {
+    width_ = width;
+    height_ = height;
+    // Allocate the memory for the 2d mask with height rows and width columns
+    mask_ = new double*[height];
+    for(int i = 0; i < height; i++) {
+         mask_[i] = new double[width];
+    }
+
+    createSpray(mask_, height_, width_, static_cast<double>(width_) / 2);
+}
+
+
+Tool::Tool() : Tool(41,41) {}
 
 Tool::~Tool() {
     for(int i = 0; i < height_; i++) {
