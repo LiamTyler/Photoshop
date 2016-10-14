@@ -27,4 +27,23 @@ namespace tool_utilities {
         }
     }
 
+
+    void createSpray(double** mask, int height, int width, double radius) {
+        int cent_x = width / 2;
+        int cent_y = height / 2;
+        for (int h = 0; h < height; h++) {
+            for (int w = 0; w < width; w++) {
+                float intensity = (1.0 - (sqrt(pow(w - cent_x, 2) +
+                                   pow(h - cent_y, 2)))/radius) * 0.2;
+
+                // std::cout << "intensity = " << intensity << std::endl;
+                if (intensity > 0) {
+                    mask[h][w] = intensity;
+                } else {
+                    mask[h][w] = 0.0;
+                }
+            }
+        }
+    }
+
 }  // namespace tool_utilities
