@@ -14,7 +14,6 @@ class Tool {
         int width_;
         int height_;
         double** mask_;
-        void construct(int width, int height);
 };
 
 #endif

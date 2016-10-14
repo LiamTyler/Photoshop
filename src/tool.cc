@@ -1,4 +1,5 @@
 #include "include/tool.h"
+#include "include/tool_utilities.h"
 #include <iostream>
 #include <iomanip>
 #include <cmath>
@@ -6,19 +7,7 @@
 using image_tools::PixelBuffer;
 using image_tools::ColorData;
 
-void createCircle(double** mask, int height, int width, double radius) {
-    int cent_x = width / 2;
-    int cent_y = height / 2;
-    for(int h = 0; h < height; h++) {
-        for(int w = 0; w < width; w++) {
-            if(pow(w - cent_x, 2) + pow(h - cent_y, 2) <= radius * radius) {
-                mask[h][w] = 1.0; 
-            }
-        }
-    }
-}
-
-void Tool::construct(int width, int height) {
+Tool::Tool(int width, int height) {
     width_ = width;
     height_ = height;
 
@@ -28,16 +17,10 @@ void Tool::construct(int width, int height) {
         mask_[i] = new double[width];
     }
 
-    createCircle(mask_, height_, width_, static_cast<double>(width) / 2);
+    tool_utilities::createCircle(mask_, height_, width_, static_cast<double>(width) / 2);
 }
 
-Tool::Tool(int width, int height) {
-    construct(width, height);
-}
-
-Tool::Tool() {
-    construct(120,120);
-}
+Tool::Tool() : Tool(120,120) {}
 
 Tool::~Tool() {
     for(int i = 0; i < height_; i++) {
