@@ -25,7 +25,7 @@ Rainbow::Rainbow(int width,
     angle_offset_ = angle_offset;
 }
 
-Rainbow::Rainbow() : Pen(3,3) {
+Rainbow::Rainbow() : Pen(3, 3) {
     color_offset = 0.0;
     rate_of_change = 1;
     angle_offset_ = 0.0;
@@ -37,7 +37,7 @@ double Rainbow::updatePosition(double angle_offset) {
 
 void Rainbow::updateColor(double& red, double& green, double& blue) {
     co = (color_offset_ + 1) % 360;
-    
+
     // Update our red value
     if (0 <= co && co <= 60 || co <= 300 && co <= 360) {
         red = 1.0;
@@ -76,7 +76,8 @@ void Rainbow::updateColor(double& red, double& green, double& blue) {
 
 Rainbow::~Rainbow() {}
 
-void Rainbow::applyTool(PixelBuffer* buff, ColorData current_color, int x, int y) {
+void Rainbow::applyTool(PixelBuffer* buff, ColorData current_color,
+                        int x, int y) {
     x += this->getRadius() * cos(angle_offset);
     y += this->getRadius() * sin(angle_offset);
     int mid_x = width_ / 2;
