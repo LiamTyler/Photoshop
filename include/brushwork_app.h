@@ -42,6 +42,9 @@ class BrushWorkApp : public BaseGfxApp {
 
     virtual ~BrushWorkApp(void);
 
+    int last_point_x_;
+    int last_point_y_;
+
     void MouseDragged(int x, int y);
     void MouseMoved(int x, int y);
     void LeftMouseDown(int x, int y);

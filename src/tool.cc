@@ -8,16 +8,34 @@ using image_tools::PixelBuffer;
 using image_tools::ColorData;
 
 Tool::Tool(int width, int height) {
-    width_ = width;
-    height_ = height;
 
-    // Allocate the memory for the 2d mask with height rows and width columns
-    mask_ = new double*[height];
-    for(int i = 0; i < height; i++) {
-        mask_[i] = new double[width];
+void createCircle(double** mask, int height, int width, double radius) {
+    int cent_x = width / 2;
+    int cent_y = height / 2;
+    for(int h = 0; h < height; h++) {
+        for(int w = 0; w < width; w++) {
+            if(pow(w - cent_x, 2) + pow(h - cent_y, 2) <= radius * radius) {
+                mask[h][w] = 1.0; 
+            }
+        }
     }
+}
 
-    tool_utilities::createCircle(mask_, height_, width_, static_cast<double>(width) / 2);
+void createSpray(double** mask, int height, int width, double radius) {
+    int cent_x = width / 2;
+    int cent_y = height / 2;
+    for(int h = 0; h < height; h++) {
+        for(int w = 0; w < width; w++) {
+	    float intensity = (1.0 - (sqrt(pow(w - cent_x, 2) + pow(h - cent_y, 2)))/radius) * 0.2;
+	    //std::cout << "intensity = " << intensity << std::endl;
+            if(intensity > 0) {
+                mask[h][w] = intensity; 
+            }
+	    else {
+		mask[h][w] = 0.0;
+	    }
+        }
+    }
 }
 
 Tool::Tool() : Tool(120,120) {}
@@ -48,4 +66,12 @@ void Tool::applyTool(PixelBuffer* buff, ColorData current_color, int x, int y) {
            }
        }
    }
+}
+
+int Tool::getWidth() {
+	return width_;
+}
+
+int Tool::getHeight() {
+	return height_;
 }

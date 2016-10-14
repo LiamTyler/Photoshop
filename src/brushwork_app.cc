@@ -40,6 +40,8 @@ BrushWorkApp::BrushWorkApp(int width,
       spinner_g_(nullptr),
       spinner_b_(nullptr) {
           pen = new Tool();
+	  last_point_x_ = -1;
+	  last_point_y_ = -1;
       }
 
 BrushWorkApp::~BrushWorkApp(void) {
@@ -87,7 +89,19 @@ void BrushWorkApp::MouseDragged(int x, int y) {
             cur_color_green_,
             cur_color_blue_);
 
+    if (last_point_x_ != -1){
+        int n = sqrt(pow((last_point_x_ - x), 2) + pow((last_point_y_ - y), 2))/(pen -> getWidth() / 2);
+	for (float i = 0.0; i < 1.0; i+=((float)1/(float)n)){
+	    int new_x = last_point_x_ + (i * (x - last_point_x_));
+	    int new_y = last_point_y_ + (i * (y - last_point_y_));
+	    pen -> applyTool(display_buffer_, current_color, new_x, new_y);
+	}
+    }
+
     pen -> applyTool(display_buffer_, current_color, x, y);
+
+    last_point_x_ = x;
+    last_point_y_ = y;
 }
 
 void BrushWorkApp::MouseMoved(int x, int y) {}
@@ -102,6 +116,8 @@ void BrushWorkApp::LeftMouseDown(int x, int y) {
 }
 
 void BrushWorkApp::LeftMouseUp(int x, int y) {
+    last_point_x_ = -1;
+    last_point_y_ = -1;
     std::cout << "mouseReleased " << x << " " << y << std::endl;
 }
 
