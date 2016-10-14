@@ -39,6 +39,7 @@ gluimake:
 
 clean:
 	rm -rf $(OBJDIR)
+	rm $(EXE)
 
 veryclean: clean
 	$(MAKE) -C ./ext/glui clean
