@@ -11,6 +11,8 @@
 
 #include "include/tool.h"
 #include <cmath>
+#include <iomanip>
+#include <iostream>
 
 using image_tools::PixelBuffer;
 using image_tools::ColorData;
@@ -34,7 +36,8 @@ Tool::~Tool() {
     delete[] mask_;
 }
 
-void Tool::applyTool(PixelBuffer* buff, ColorData current_color, int x, int y) {
+void Tool::applyTool(PixelBuffer* buff, ColorData current_color,
+                    int x, int y) {
     int mid_x = width_ / 2;
     int mid_y = height_ / 2;
     int screen_h = buff->height();

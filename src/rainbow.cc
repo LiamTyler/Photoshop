@@ -11,13 +11,15 @@
 
 #include "include/rainbow.h"
 #include <cmath>
+#include <iostream>
+#include <iomanip>
 
 using image_tools::PixelBuffer;
 using image_tools::ColorData;
 
 Rainbow::Rainbow(int width,
                 int height,
-                double color_offset,
+                int color_offset,
                 int rate_of_change,
                 int angle_offset) : Pen(width, height) {
     color_offset_ = color_offset;
@@ -25,79 +27,110 @@ Rainbow::Rainbow(int width,
     angle_offset_ = angle_offset;
 }
 
-Rainbow::Rainbow() : Pen(3,3) {
-    color_offset = 0.0;
-    rate_of_change = 1;
-    angle_offset_ = 0.0;
+Rainbow::Rainbow() : Pen(3, 3) {
+    color_offset_ = 0;
+    rate_of_change_ = 1;
+    angle_offset_ = 0;
 }
 
-double Rainbow::updatePosition(double angle_offset) {
-    return (angle_offset + 1) % 360;
+void Rainbow::updateAngle() {
+    angle_offset_ = (angle_offset_ + 1) % 360;
 }
 
-void Rainbow::updateColor(double& red, double& green, double& blue) {
-    co = (color_offset_ + 1) % 360;
-    
-    // Update our red value
-    if (0 <= co && co <= 60 || co <= 300 && co <= 360) {
-        red = 1.0;
+void Rainbow::updateColor(double* red, double* green, double*blue) {
+    int co = (color_offset_ + 1) % 360;
+
+    // Update our *red value
+    if (co <= 60 || 300 <= co) {
+        *red = 1.0;
     } else if (60 < co && co < 120) {
-        red = 1.0 - (co - 60.0) / 60;
+        *red = 1.0 - (co - 60.0) / 60;
     } else if (120 <= co && co <= 240) {
-        red = 0;
+        *red = 0;
     } else {
-        red = (co - 300.0) / 60;
+        *red = (co - 240.0) / 60;
     }
 
-    // Update our green value
+    // Update our *green value
     if (0 <= co && co < 60) {
-        green = co / 60.0;
+        *green = co / 60.0;
     } else if (60 <= co && co <= 180) {
-        green = 1.0;
+        *green = 1.0;
     } else if (180 < co && co < 240) {
-        green = 1.0 - (co - 240.0) / 60;
+        *green = 1.0 - (co - 180.0) / 60;
     } else {
-        green = 0;
+        *green = 0;
     }
 
-    // Update our blue value
+    // Update our *blue value
     if (0 <= co && co <= 120) {
-        blue = 0.0;
+        *blue = 0.0;
     } else if (120 < co && co < 180) {
-        blue = (co - 180.0) / 60;
+        *blue = (co - 120.0) / 60;
     } else if (180 <= co && co <= 300) {
+        *blue = 1.0;
+    } else {
+        *blue = 1.0 - (co - 300.0) / 60;
+    }
+
+    /* Method with black but no purple and sharp changes
+    if (0 <= co && co < 60) {
+        red = co / 60.0;
+    } else if (60 <= co && co <= 120) {
+        red = 1.0;
+    } else if (120 < co && co < 180) {
+        red = 1.0 - (co - 120.0) / 60.0;
+    } else {
+        red = 0;
+    }
+
+    if (co <= 60 || 300 <= co) {
+        green = 0;
+    } else if (60 < co && co < 120) {
+        green = (co - 60.0) / 60.0;
+    } else if (120 <= co && co <= 240) {
+        green = 1.0;
+    } else {
+        green = 1.0 - (co - 240.0) - 60.0;
+    }
+
+    if (0 <= co && co <= 180) {
+        blue = 0;
+    } else if (180 < co && co < 240) {
+        blue = (co - 180.0) / 60.0;
+    } else if (240 <= co && co <= 300) {
         blue = 1.0;
     } else {
-        blue = 1.0 - (co - 360.0) / 60;
+        blue = 1.0 - (co - 300.0) / 60.0;
     }
+    */
 
     color_offset_ = co;
 }
 
 Rainbow::~Rainbow() {}
 
-void Rainbow::applyTool(PixelBuffer* buff, ColorData current_color, int x, int y) {
-    x += this->getRadius() * cos(angle_offset);
-    y += this->getRadius() * sin(angle_offset);
-    int mid_x = width_ / 2;
-    int mid_y = height_ / 2;
-    int screen_h = buff->height();
-    int screen_w = buff->width();
-
-    for (int step_x = 0; step_x < width_; step_x++) {
-        for (int step_y = 0; step_y < height_; step_y++) {
-            int cur_x = x + step_x - mid_x;
-            // Needs to be buff->height() - y because pixels buffer's
-            // 0,0 is the lower left
-            // corner, while in brushwork, 0,0 is the upper left
-            int cur_y = screen_h - (y + step_y - mid_y);
-            if (cur_x >= 0 && cur_x < screen_w &&
-                cur_y >= 0 && cur_y < screen_h) {
-                    double intensity = mask_[step_x][step_y];
-                    // copy constructor
-                    buff->set_pixel(cur_x, cur_y, current_color * intensity +
-                            buff->get_pixel(cur_x, cur_y) * (1.0 - intensity));
-            }
-        }
+void Rainbow::applyTool(PixelBuffer* buff, ColorData current_color,
+                        int x, int y) {
+    /* movement code
+    if (last_x != -1 && last_y != -1) {
+        double direction = std::atan(static_cast<double>(last_y) / last_x);
+        double theta = angle_offset_ * M_PI / 180.0;
+        x += this->getRadius() * 2 * std::cos(theta) *
+             std::abs(std::cos(M_PI / 4 - direction));
+        y += this->getRadius() * 2 * std::sin(theta) *
+             std::abs(std::cos(direction));
+        this->updateAngle();
+    } else {
+        angle_offset_ = 0;
     }
+    */
+
+    double new_r = current_color.red();
+    double new_g = current_color.green();
+    double new_b = current_color.blue();
+    this->updateColor(&new_r, &new_g, &new_b);
+    ColorData new_c = ColorData(new_r, new_g, new_b);
+
+    this->Tool::applyTool(buff, new_c, x, y);
 }

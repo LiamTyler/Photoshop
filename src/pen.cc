@@ -27,7 +27,7 @@ Pen::Pen(int width, int height) : Tool(width, height) {
                                 radius_);
 }
 
-Pen::Pen() : Pen(3,3) {}
+Pen::Pen() : Pen(3, 3) {}
 
 Pen::~Pen() {}
 

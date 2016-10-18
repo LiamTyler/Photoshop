@@ -19,18 +19,19 @@
 class Rainbow : public Pen {
  public:
   Rainbow(int width, int height, int color_offset, int rate_of_change,
-          double position_offset);
+          int angle_offset);
   Rainbow();
   ~Rainbow();
   void applyTool(image_tools::PixelBuffer* buff,
                 image_tools::ColorData current_color,
-                int x,
-                int y);
+                int x, int y);
+  void updateAngle();
+  void updateColor(double* red, double* green, double* blue);
 
  private:
   int color_offset_;  // Angle through the color wheel
-  int rate_of_change_;  // How much 
-  int angle_offset;  // Theta in the equation x = r*cos(theta) y = sin(theta)
+  int rate_of_change_;  // How quickly the sin wave will change
+  int angle_offset_;  // Theta in the equation y = r*sin(theta)
 };
 
 #endif  // INCLUDE_RAINBOW_H_

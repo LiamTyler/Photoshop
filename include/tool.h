@@ -20,7 +20,7 @@ class Tool {
   Tool(int width, int height);
   Tool();
   ~Tool();
-  void applyTool(image_tools::PixelBuffer* buff,
+  virtual void applyTool(image_tools::PixelBuffer* buff,
     image_tools::ColorData current_color, int x, int y);
   int getWidth();
   int getHeight();
