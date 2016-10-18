@@ -25,6 +25,6 @@ Highlighter::Highlighter(int width, int height) : Tool(width, height) {
                                 width);
 }
 
-Highlighter::Highlighter() : Highlighter(5,15) {}
+Highlighter::Highlighter() : Highlighter(5, 15) {}
 
 Highlighter::~Highlighter() {}
