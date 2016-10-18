@@ -31,7 +31,7 @@ Rainbow::Rainbow() : Pen(3, 3) {
     color_offset_ = 0;
     rate_of_change_ = 1;
     angle_offset_ = 0;
-}
+
 
 void Rainbow::updateAngle() {
     angle_offset_ = (angle_offset_ + 1) % 360;
@@ -43,7 +43,7 @@ void Rainbow::updateColor(double* red, double* green, double*blue) {
     // Update our *red value
     if (co <= 60 || 300 <= co) {
         *red = 1.0;
-    } else if (60 < co && co < 120) {
+   } else if (60 < co && co < 120) {
         *red = 1.0 - (co - 60.0) / 60;
     } else if (120 <= co && co <= 240) {
         *red = 0;
@@ -123,7 +123,7 @@ void Rainbow::applyTool(PixelBuffer* buff, ColorData current_color,
         this->updateAngle();
     } else {
         angle_offset_ = 0;
-    }
+   }
     */
 
     double new_r = current_color.red();
