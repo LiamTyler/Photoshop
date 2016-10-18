@@ -1,10 +1,10 @@
 /*******************************************************************************
- * Name            : pen.cc
+ * Name            : spray_can.cc
  * Project         : BrushWork
  * Module          : tools
- * Description     : CC file for the Pen.cc
+ * Description     : CC file for the spray_can
  * Copyright       : 2016 CSCI3081W Group Bits Please
- * Creation Date   : 10/14/16
+ * Creation Date   : 10/16/16
  * Original Author : Group Bits Please
  *
  ******************************************************************************/
@@ -14,18 +14,18 @@
 #include <cmath>
 #include "include/tool.h"
 #include "include/tool_utilities.h"
-#include "include/pen.h"
+#include "include/spray_can.h"
 
 using image_tools::PixelBuffer;
 using image_tools::ColorData;
 
-Pen::Pen(int width, int height) : Tool(width, height) {
-    tool_utilities::createCircle(this->getMask(),
+SprayCan::SprayCan(int width, int height) : Tool(width, height) {
+    tool_utilities::createSpray(this->getMask(),
                                 height,
                                 width,
                                 static_cast<double>(this->getWidth()) / 2);
 }
 
-Pen::Pen() : Pen(3, 3) {}
+SprayCan::SprayCan() : SprayCan(41, 41) {}
 
-Pen::~Pen() {}
+SprayCan::~SprayCan() {}

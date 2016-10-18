@@ -15,10 +15,13 @@
 #include "include/brushwork_app.h"
 #include <cmath>
 #include <iostream>
+#include <typeinfo>
 #include "include/color_data.h"
 #include "include/pixel_buffer.h"
 #include "include/tool.h"
 #include "include/pen.h"
+#include "include/spray_can.h"
+#include "include/eraser.h"
 
 /*******************************************************************************
  * Namespaces
@@ -40,7 +43,7 @@ BrushWorkApp::BrushWorkApp(int width,
       spinner_r_(nullptr),
       spinner_g_(nullptr),
       spinner_b_(nullptr) {
-          pen = new Pen();
+          pen = new Eraser();
           last_point_x_ = -1;
           last_point_y_ = -1;
       }
@@ -85,10 +88,16 @@ void BrushWorkApp::Display(void) {
 }
 
 void BrushWorkApp::MouseDragged(int x, int y) {
-    ColorData current_color = ColorData(
-            cur_color_red_,
-            cur_color_green_,
-            cur_color_blue_);
+    ColorData current_color;
+    // if (cur_tool_ == **Whatever eraser is**) {
+        current_color = display_buffer_->background_color();
+    // }
+    // else{
+    //    current_color = ColorData(
+    //        cur_color_red_,
+    //        cur_color_green_,
+    //        cur_color_blue_);
+    // }
 
     if (last_point_x_ != -1) {
         int n = sqrt(pow((last_point_x_ - x), 2) +
@@ -111,10 +120,16 @@ void BrushWorkApp::MouseMoved(int x, int y) {}
 
 void BrushWorkApp::LeftMouseDown(int x, int y) {
     std::cout << "mousePressed " << x << " " << y << std::endl;
-    ColorData current_color = ColorData(
-            cur_color_red_,
-            cur_color_green_,
-            cur_color_blue_);
+    ColorData current_color;
+    // if (cur_tool_ == **Whatever eraser is**) {
+        current_color = display_buffer_->background_color();
+    // }
+    // else{
+    //    current_color = ColorData(
+    //        cur_color_red_,
+    //        cur_color_green_,
+    //        cur_color_blue_);
+    // }
     pen -> applyTool(display_buffer_, current_color, x, y);
 }
 
