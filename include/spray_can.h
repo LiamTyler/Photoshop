@@ -1,28 +1,24 @@
 /*******************************************************************************
- * Name            : pen.h
+ * Name            : spray_can.h
  * Project         : BrushWork
  * Module          : App
- * Description     : Header of pen
+ * Description     : Header of spray_can
  * Copyright       : 2016 CSCI3081W Team Bits Please. All rights reserved.
- * Creation Date   : 10/14/16
+ * Creation Date   : 10/16/16
  * Original Author : Group Bits Please
  *
  ******************************************************************************/
 
-#ifndef INCLUDE_PEN_H_
-#define INCLUDE_PEN_H_
+#ifndef INCLUDE_SPRAY_CAN_H_
+#define INCLUDE_SPRAY_CAN_H_
 
-#include "include/tool.h"
+#include "include/spray_can.h"
 
-class Pen : public Tool {
+class SprayCan : public Tool {
  public:
-  Pen(int width, int height);
-  Pen();
-  ~Pen();
-  double getRadius();
-
- private:
-  double radius_;
+  SprayCan(int width, int height);
+  SprayCan();
+  ~SprayCan();
 };
 
-#endif  // INCLUDE_PEN_H_
+#endif  // INCLUDE_SPRAY_CAN_H_

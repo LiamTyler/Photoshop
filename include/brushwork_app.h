@@ -42,8 +42,6 @@ class BrushWorkApp : public BaseGfxApp {
 
     virtual ~BrushWorkApp(void);
 
-    int last_point_x_;
-    int last_point_y_;
 
     void MouseDragged(int x, int y);
     void MouseMoved(int x, int y);
@@ -59,8 +57,10 @@ class BrushWorkApp : public BaseGfxApp {
         int y,
         ColorData background_color);
 
+    void updateCurrentColor();
+    ColorData getCurrentColor();
+
  private:
-    Tool* pen;
     void InitGlui(void);
     void InitGraphics(void);
 
@@ -93,10 +93,17 @@ class BrushWorkApp : public BaseGfxApp {
     /** Pointer to pixel data for the screen */
     PixelBuffer *display_buffer_;
 
-    int cur_tool_; /**< Currently selected tool from UI  */
+    Tool* cur_tool_;
+    int cur_tool_index_; /**< Currently selected tool from UI  */
+    Tool* tool_select_[6];
+
     float cur_color_red_;
     float cur_color_green_;
     float cur_color_blue_;
+    ColorData current_color_;
+
+    int last_x_;
+    int last_y_;
 
     GLUI_Spinner *spinner_r_; /**< Hook for accessing the UI red amount  */
     GLUI_Spinner *spinner_g_; /**< Hook for accessing the UI green amount  */
