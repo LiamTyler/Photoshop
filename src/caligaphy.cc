@@ -23,6 +23,12 @@ Caligraphy::Caligraphy(int width, int height) : Tool(width, height) {
     tool_utilities::createCaligraphy(this->getMask(),
                                 height,
                                 width);
+    for( int h=0; h < height; h++) {
+	for(int w=0; w < width; w++) {
+		std::cout << this->getMask()[h][w] << " ";
+	}
+	std::cout << std::endl;
+}
 }
 
 Caligraphy::Caligraphy() : Caligraphy(5,15) {}

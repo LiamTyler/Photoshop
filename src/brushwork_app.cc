@@ -21,6 +21,7 @@
 #include "include/tool.h"
 #include "include/pen.h"
 #include "include/caligraphy.h"
+#include "include/highlighter.h"
 #include "include/rainbow.h"
 #include "include/spray_can.h"
 #include "include/eraser.h"
@@ -49,7 +50,7 @@ BrushWorkApp::BrushWorkApp(int width,
           tool_select_[1] = new Eraser();
           tool_select_[2] = new SprayCan();
           tool_select_[3] = new Caligraphy();
-          tool_select_[4] = new Pen();
+          tool_select_[4] = new Highlighter();
           tool_select_[5] = new Rainbow();
           cur_tool_ = tool_select_[0];
           last_x_ = -1;
