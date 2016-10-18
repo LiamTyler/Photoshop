@@ -21,7 +21,7 @@ class Tool {
   Tool();
   ~Tool();
   virtual void applyTool(image_tools::PixelBuffer* buff,
-    image_tools::ColorData current_color, int x, int y);
+    image_tools::ColorData current_color, int x, int y, int last_x, int last_y);
   int getWidth();
   int getHeight();
   double** getMask();

@@ -21,6 +21,6 @@ class Eraser : public Tool {
   ~Eraser();
   void applyTool(image_tools::PixelBuffer* buff,
                 image_tools::ColorData current_color,
-                int x, int y);
+                int x, int y, int last_x, int last_y);
 };
 #endif  // INCLUDE_ERASER_H_

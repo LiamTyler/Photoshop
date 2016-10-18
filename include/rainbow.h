@@ -25,7 +25,7 @@ class Rainbow : public Pen {
   // Override the applyTool so we can update the color before we apply the mask
   void applyTool(image_tools::PixelBuffer* buff,
                 image_tools::ColorData current_color,
-                int x, int y);
+                int x, int y, int last_x, int last_y);
   // Cycle the color through the color wheel acording to this algorithm:
   // http://academe.co.uk/wp-content/uploads/2012/04/
   // 451px-HSV-RGB-comparison.svg_.png

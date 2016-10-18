@@ -111,13 +111,15 @@ void BrushWorkApp::MouseDragged(int x, int y) {
         for (float i = percent_step; i < 1.0; i+=percent_step) {
             int new_x = base_x + (i * dx);
             int new_y = base_y + (i * dy);
-            cur_tool_->applyTool(display_buffer_, current_color_, new_x, new_y);
+            cur_tool_->applyTool(display_buffer_, current_color_, new_x, new_y,
+                                 last_x_, last_y_);
             last_x_ = new_x;
             last_y_ = new_y;
        }
     }
 
-    cur_tool_->applyTool(display_buffer_, current_color_, x, y);
+    cur_tool_->applyTool(display_buffer_, current_color_, x, y,
+                         last_x_, last_y_);
 
     last_x_ = x;
     last_y_ = y;
@@ -128,7 +130,8 @@ void BrushWorkApp::MouseMoved(int x, int y) {}
 void BrushWorkApp::LeftMouseDown(int x, int y) {
     std::cout << "mousePressed " << x << " " << y << std::endl;
 
-    cur_tool_->applyTool(display_buffer_, current_color_, x, y);
+    cur_tool_->applyTool(display_buffer_, current_color_, x, y,
+                         last_x_, last_y_);
     last_x_ = x;
     last_y_ = y;
 }

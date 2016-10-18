@@ -37,7 +37,7 @@ Tool::~Tool() {
 }
 
 void Tool::applyTool(PixelBuffer* buff, ColorData current_color,
-                    int x, int y) {
+                    int x, int y, int last_x, int last_y) {
     int mid_x = width_ / 2;
     int mid_y = height_ / 2;
     int screen_h = buff->height();

@@ -31,6 +31,6 @@ Eraser::Eraser() : Eraser(21, 21) {}
 Eraser::~Eraser() {}
 
 void Eraser::applyTool(PixelBuffer* buff, ColorData current_color,
-                        int x, int y) {
-    this->Tool::applyTool(buff, buff->background_color(), x, y);
+                        int x, int y, int last_x, int last_y) {
+    this->Tool::applyTool(buff, buff->background_color(), x, y, last_x, last_y);
 }
