@@ -30,7 +30,7 @@ class Rainbow : public Pen {
 
  private:
   int color_offset_;  // Angle through the color wheel
-  int rate_of_change_;  // How quickly the sin wave will change
+  int rate_of_change_;  // How quickly the color will change
   int angle_offset_;  // Theta in the equation y = r*sin(theta)
 };
 

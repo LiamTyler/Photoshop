@@ -21,6 +21,8 @@
 #include "include/tool.h"
 #include "include/pen.h"
 #include "include/rainbow.h"
+#include "include/spray_can.h"
+#include "include/eraser.h"
 
 /*******************************************************************************
  * Namespaces
@@ -43,15 +45,15 @@ BrushWorkApp::BrushWorkApp(int width,
       spinner_g_(nullptr),
       spinner_b_(nullptr) {
           tool_select_[0] = new Pen();
-          tool_select_[1] = new Pen();
-          tool_select_[2] = new Pen();
+          tool_select_[1] = new Eraser();
+          tool_select_[2] = new SprayCan();
           tool_select_[3] = new Pen();
           tool_select_[4] = new Pen();
           tool_select_[5] = new Rainbow();
           cur_tool_ = tool_select_[0];
           last_x_ = -1;
           last_y_ = -1;
-      }
+     }
 
 BrushWorkApp::~BrushWorkApp(void) {
     if (display_buffer_) {
@@ -97,7 +99,7 @@ void BrushWorkApp::Display(void) {
 void BrushWorkApp::MouseDragged(int x, int y) {
     if (last_x_ != -1) {
         int n = sqrt(pow((last_x_ - x), 2) +
-                pow((last_y_ - y), 2))/(cur_tool_ -> getWidth() / 2);
+                pow((last_y_ - y), 2))/(cur_tool_ -> getWidth() / 8.0);
         float percent_step = 1.0/static_cast<float>(n);
         int base_x = last_x_;
         int base_y = last_y_;
@@ -110,7 +112,7 @@ void BrushWorkApp::MouseDragged(int x, int y) {
             cur_tool_->applyTool(display_buffer_, current_color_, new_x, new_y);
             last_x_ = new_x;
             last_y_ = new_y;
-        }
+       }
     }
 
     cur_tool_->applyTool(display_buffer_, current_color_, x, y);
