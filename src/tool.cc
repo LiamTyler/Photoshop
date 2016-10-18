@@ -43,8 +43,8 @@ void Tool::applyTool(PixelBuffer* buff, ColorData current_color,
     int screen_h = buff->height();
     int screen_w = buff->width();
 
-    for (int step_x = 0; step_x < width_; step_x++) {
-        for (int step_y = 0; step_y < height_; step_y++) {
+    for (int step_y = 0; step_y < height_; step_y++) {
+        for (int step_x = 0; step_x < width_; step_x++) {
             int cur_x = x + step_x - mid_x;
             // Needs to be buff->height() - y because pixels buffer's
             // 0,0 is the lower left
@@ -52,7 +52,7 @@ void Tool::applyTool(PixelBuffer* buff, ColorData current_color,
             int cur_y = screen_h - (y + step_y - mid_y);
             if (cur_x >= 0 && cur_x < screen_w &&
                 cur_y >= 0 && cur_y < screen_h) {
-                    double intensity = mask_[step_x][step_y];
+                    double intensity = mask_[step_y][step_x];
                     // copy constructor
                     buff->set_pixel(cur_x, cur_y, current_color * intensity +
                             buff->get_pixel(cur_x, cur_y) * (1.0 - intensity));
