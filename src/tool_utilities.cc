@@ -44,5 +44,21 @@ namespace tool_utilities {
             }
         }
     }
+    
+    void createCaligraphy(double** mask, int height, int width) {
+        for(int h = 0; h < height; h++) {
+            for(int w = 0; w < width; w++) {
+                mask[h][w] = 1;
+            }
+        }
+    }
+    
+    void createHighlighter(double** mask, int height, int width) {
+        for(int h = 0; h < height; h++) {
+            for(int w = 0; w < width; w++) {
+                mask[h][w] = 0.4;
+            }
+        }
+    }
 
 }  // namespace tool_utilities
