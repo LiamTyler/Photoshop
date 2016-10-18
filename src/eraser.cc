@@ -29,3 +29,8 @@ Eraser::Eraser(int width, int height) : Tool(width, height) {
 Eraser::Eraser() : Eraser(21, 21) {}
 
 Eraser::~Eraser() {}
+
+void Eraser::applyTool(PixelBuffer* buff, ColorData current_color,
+                        int x, int y) {
+    this->Tool::applyTool(buff, buff->background_color(), x, y);
+}

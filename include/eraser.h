@@ -19,6 +19,8 @@ class Eraser : public Tool {
   Eraser(int width, int height);
   Eraser();
   ~Eraser();
+  void applyTool(image_tools::PixelBuffer* buff,
+                image_tools::ColorData current_color,
+                int x, int y);
 };
-
 #endif  // INCLUDE_ERASER_H_
