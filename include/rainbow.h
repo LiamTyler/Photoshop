@@ -22,16 +22,18 @@ class Rainbow : public Pen {
           int angle_offset);
   Rainbow();
   ~Rainbow();
+  // Override the applyTool so we can update the color before we apply the mask
   void applyTool(image_tools::PixelBuffer* buff,
                 image_tools::ColorData current_color,
                 int x, int y);
-  void updateAngle();
+  // Cycle the color through the color wheel acording to this algorithm:
+  // http://academe.co.uk/wp-content/uploads/2012/04/
+  // 451px-HSV-RGB-comparison.svg_.png
   void updateColor(double* red, double* green, double* blue);
 
  private:
-  int color_offset_;  // Angle through the color wheel
-  int rate_of_change_;  // How quickly the color will change
-  int angle_offset_;  // Theta in the equation y = r*sin(theta)
+  double color_offset_;  // Angle through the color wheel
+  double rate_of_change_;  // How quickly the color will change
 };
 
 #endif  // INCLUDE_RAINBOW_H_

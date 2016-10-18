@@ -24,22 +24,19 @@ Rainbow::Rainbow(int width,
                 int angle_offset) : Pen(width, height) {
     color_offset_ = color_offset;
     rate_of_change_ = rate_of_change;
-    angle_offset_ = angle_offset;
 }
 
 Rainbow::Rainbow() : Pen(3, 3) {
     color_offset_ = 0;
-    rate_of_change_ = 1;
-    angle_offset_ = 0;
-}
-
-
-void Rainbow::updateAngle() {
-    angle_offset_ = (angle_offset_ + 1) % 360;
+    rate_of_change_ = .2;
 }
 
 void Rainbow::updateColor(double* red, double* green, double*blue) {
-    int co = (color_offset_ + 1) % 360;
+    color_offset_ += rate_of_change_;
+    if (color_offset_ >= 360) {
+        color_offset_ = 0;
+    }
+    double co = color_offset_;
 
     // Update our *red value
     if (co <= 60 || 300 <= co) {
@@ -73,40 +70,6 @@ void Rainbow::updateColor(double* red, double* green, double*blue) {
     } else {
         *blue = 1.0 - (co - 300.0) / 60;
     }
-
-    /* Method with black but no purple and sharp changes
-    if (0 <= co && co < 60) {
-        red = co / 60.0;
-    } else if (60 <= co && co <= 120) {
-        red = 1.0;
-    } else if (120 < co && co < 180) {
-        red = 1.0 - (co - 120.0) / 60.0;
-    } else {
-        red = 0;
-    }
-
-    if (co <= 60 || 300 <= co) {
-        green = 0;
-    } else if (60 < co && co < 120) {
-        green = (co - 60.0) / 60.0;
-    } else if (120 <= co && co <= 240) {
-        green = 1.0;
-    } else {
-        green = 1.0 - (co - 240.0) - 60.0;
-    }
-
-    if (0 <= co && co <= 180) {
-        blue = 0;
-    } else if (180 < co && co < 240) {
-        blue = (co - 180.0) / 60.0;
-    } else if (240 <= co && co <= 300) {
-        blue = 1.0;
-    } else {
-        blue = 1.0 - (co - 300.0) / 60.0;
-    }
-    */
-
-    color_offset_ = co;
 }
 
 Rainbow::~Rainbow() {}
