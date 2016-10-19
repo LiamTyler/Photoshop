@@ -21,7 +21,7 @@
 ###### Figure 1: UML diagram of the tools
 ![Tools UML][ToolsUML]
 
-> There are a few key design choices here. First, notice how most tools do not override the applyTool method from the parent class. This is because the default applyTool is generic. Observe the implementation below:
+> There are a few key design choices here. First, notice how half of the tools do not override the applyTool method from the parent class. This is because the default applyTool is generic. Observe the implementation below:
 
 ```C++
 void Tool::applyTool(PixelBuffer* buff, ColorData current_color, int x, int y) {
@@ -77,9 +77,7 @@ Pen::Pen() : Pen(3, 3) {}
 
 > When instantiating a pen, the Tool constructor is called first, then the rest of the pen constructor is to initalize the mask. If the mask was a design that might be desired for multiple tools, we separated out the initialization of the mask from the tool itself into a function. We store these functions in a namespace called tool_utilities. Here, the pen is initialized to an opaque circle.
 
-> The last thing to note 
-
-
+> The last thing to note is the interpolation of points when the user is moving the mouse quickly. Our applyTool methods are designed to handle a single stamp down on the screen. The interpolation part happens in the mouse dragged event of brushwork_app.
 
 
 ### 1.2 Design Justification
