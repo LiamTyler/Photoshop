@@ -26,6 +26,7 @@ SprayCan::SprayCan(int width, int height) : Tool(width, height) {
                                 static_cast<double>(this->getWidth()) / 2);
 }
 
+// Default SprayCan size is 41 x 41
 SprayCan::SprayCan() : SprayCan(41, 41) {}
 
 SprayCan::~SprayCan() {}
