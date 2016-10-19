@@ -241,19 +241,17 @@ class Pencil : public Tool {
 
 3) Create .cc file for the tool in src
 
-> Now, we must create the .cc file for the tool. This is where we will set the height and width of the tool along with any other variables that the tool may need. This file will also call the function we created specifically for the new tool. With the example of pencil, we will need to set the height and width both to 1 and call the createPencil() fucntion that we made earlier.
+> Now, we must create the .cc file for the tool. This is where we will set the height and width of the tool along with any other variables that the tool may need. This file will also call the function we created specifically for the new tool. With the example of pencil, we will need to set the height and width both to 1 and call the FillMask() fucntion that we made earlier.
 
 ```C++
 Pencil::Pencil(int width, int height) : Tool(width, height) {
-    tool_utilities::createPencil(this->getMask(),
-                                height,
-                                width);
+    tool_utilities::FillMask(this->get_mask(), height, width, 1.0);
 }
 
 Pencil::Pencil() : Pencil(1, 1) {}
 ```
 
-> There are a couple things to note from the snippet of code above. One: to meet the requirments that the pencil be a single pixel, we set both the height and width to 1, but this is where we can change the size of the pencil if we want it to be different than a single pixel. Two: we call createPencil from tool_utilities and this is necessary to obtain the premade mask. 
+> There are a couple things to note from the snippet of code above. One: to meet the requirments that the pencil be a single pixel, we set both the height and width to 1, but this is where we can change the size of the pencil if we want it to be different than a single pixel. Two: we call FillMask() from tool_utilities in order to access the premade mask.
 
 4) Add tool into the tool array in brushwork_app
 
