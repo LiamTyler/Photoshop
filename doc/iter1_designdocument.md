@@ -19,7 +19,7 @@
 > In our design we viewed tools as a form of specialization. The main two features of any tool are: it has a mask, and that mask can be applied to the screen in some way. We created a base class called Tool that creates a default mask and default applyTool behavior. We then created subclasses for each one of the six tools, which would initialize the mask to be specific to that tool, and change the applyTool behavior as necessary. This design is shown in Figure 1.
 
 ###### Figure 1: UML diagram of the tools
-![UML Diagram][UMLDiagram]
+![Tools UML][ToolsUML]
 
 > There are a few key design choices here. First, notice how most tools do not override the applyTool method from the parent class. This is because the default applyTool is generic. Observe the implementation below:
 
