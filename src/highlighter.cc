@@ -38,7 +38,6 @@ void Highlighter::applyTool(PixelBuffer* buff, ColorData current_color,
     int min_height = last_y - height / 2;
     int max_width = min_width + width;
     int max_height = min_height + height;
-    //std::cout << "min_width: " << min_width << ", min_height: " << min_height << std::endl;
 
     int mid_x = width / 2;
     int mid_y = height / 2;
@@ -54,7 +53,7 @@ void Highlighter::applyTool(PixelBuffer* buff, ColorData current_color,
 
             if (cur_x >= 0 && cur_x < screen_w &&
                 cur_y >= 0 && cur_y < screen_h &&
-                !(min_width <= cur_x && cur_x < max_width && 
+                !(min_width <= cur_x && cur_x < max_width &&
                  min_height <= ly && ly < max_height)) {
                     double intensity = cur_mask[step_y][step_x];
                     buff->set_pixel(cur_x, cur_y, current_color * intensity +
