@@ -26,6 +26,7 @@ Eraser::Eraser(int width, int height) : Tool(width, height) {
                                 static_cast<double>(this->getWidth()) / 2);
 }
 
+// Default Eraser size is 21 x 21
 Eraser::Eraser() : Eraser(21, 21) {}
 
 Eraser::~Eraser() {}

@@ -100,6 +100,9 @@ void BrushWorkApp::Display(void) {
 
 void BrushWorkApp::MouseDragged(int x, int y) {
     if (last_x_ != -1) {
+        /* Find the distance between (last_x_, last_y_) and (x, y) and divide by
+        an eigth of the width of the mask to determine the number n times to
+        applyTool between (last_x_, last_y_) and (x, y) */
         int n = sqrt(pow((last_x_ - x), 2) +
                 pow((last_y_ - y), 2))/(cur_tool_ -> getWidth() / 8.0);
         float percent_step = 1.0/static_cast<float>(n);
@@ -137,6 +140,9 @@ void BrushWorkApp::LeftMouseDown(int x, int y) {
 }
 
 void BrushWorkApp::LeftMouseUp(int x, int y) {
+    /* Whenever mouse is released, set last_x_ and last_y_ to -1 so
+    last_x_ and last_y_ don't get connected to the new x and y the next
+    time the mouse is dragged */
     last_x_ = -1;
     last_y_ = -1;
     std::cout << "mouseReleased " << x << " " << y << std::endl;
