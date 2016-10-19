@@ -13,8 +13,8 @@
  ******************************************************************************/
 
 namespace tool_utilities {
-    void createCircle(double** mask, int height, int width, double radius);
-    void fillMask(double** mask, int height, int width, double opacity);
+    void CreateCircle(double** mask, int height, int width, double radius);
+    void FillMask(double** mask, int height, int width, double opacity);
 }
 
 #endif  // INCLUDE_TOOL_UTILITIES_H_

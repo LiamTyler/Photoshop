@@ -20,7 +20,7 @@ using image_tools::PixelBuffer;
 using image_tools::ColorData;
 
 Caligraphy::Caligraphy(int width, int height) : Tool(width, height) {
-    tool_utilities::fillMask(this->getMask(), height, width, 1.0);
+    tool_utilities::FillMask(this->get_mask(), height, width, 1.0);
 }
 
 Caligraphy::Caligraphy() : Caligraphy(5, 15) {}

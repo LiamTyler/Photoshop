@@ -21,10 +21,10 @@ using image_tools::ColorData;
 
 SprayCan::SprayCan(int width, int height) : Tool(width, height) {
     double radius = static_cast<double>(width) / 2;
-    double** mask = this->getMask();
+    double** mask = this->get_mask();
 
     /* Sets all pixels to some intensity between 0 and 0.2
-       depending on its distance from the center */
+    depending on its distance from the center */
     int cent_x = width / 2;
     int cent_y = height / 2;
     for (int h = 0; h < height; h++) {
@@ -45,7 +45,6 @@ SprayCan::SprayCan(int width, int height) : Tool(width, height) {
     }
 }
 
-// Default SprayCan size is 41 x 41
 SprayCan::SprayCan() : SprayCan(41, 41) {}
 
 SprayCan::~SprayCan() {}
