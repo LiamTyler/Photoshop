@@ -22,7 +22,7 @@ using image_tools::ColorData;
 SprayCan::SprayCan(int width, int height) : Tool(width, height) {
     double radius = static_cast<double>(width) / 2;
     double** mask = this->getMask();
-    
+
     /* Sets all pixels to some intensity between 0 and 0.2
        depending on its distance from the center */
     int cent_x = width / 2;

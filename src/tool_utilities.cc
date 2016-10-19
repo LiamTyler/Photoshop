@@ -31,7 +31,7 @@ namespace tool_utilities {
         }
     }
 
-   void fillMask(double** mask, int height, int width, double opacity) {
+    void fillMask(double** mask, int height, int width, double opacity) {
         for (int h = 0; h < height; h++) {
             for (int w = 0; w < width; w++) {
                 mask[h][w] = opacity;
