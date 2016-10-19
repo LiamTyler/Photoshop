@@ -182,6 +182,73 @@ void BrushWorkApp::MouseDragged(int x, int y) {
 
 ### Programming Tutorial: Adding a New Pencil Tool to BrushWork
 
-1. <Step 1>
-2. <Step 2>
-<etc>
+
+> In this tutorial we will walk through how to add a new tool to Brushwork. We will accomplish this feat in four steps and use the tool of pencil as an example.
+
+1) Create a mask of the tool in tool_utilities
+
+> To start, we first need to make a mask of the tool that we would want to create. For the example of the pencil, we will just make it a single, non-transparent pixel that completely replaces the existing colors on the canvas. To create a mask, we will create a function that sets the mask to follow those instructions and we will write said function in tool_utilities.cc.
+
+``` C++
+void createPencil(double** mask, int height, int width) {
+        for (int h = 0; h < height; h++) {
+            for (int w = 0; w < width; w++) {
+                mask[h][w] = 1;
+            }
+        }
+    }
+```
+    
+> The snippet of code above does two things. First, the function makes a rectangular mask of passed width and passed height. Second, the code sets every position in the mask to be completely opaque.
+This may seem excessive for a single pixel, but we made the function this way in case we wanted to change the size of the pencil to be greater than one pixel.
+
+
+2) Create .h file for the tool in include 
+
+> Next, we need to create a header file for the tool. The header file will define the parameters that are needed by the tool. In the case of the pencil tool, we will need the width and height.
+
+``` C++
+#include "include/tool.h"
+
+class Pencil : public Tool {
+ public:
+  Pencil(int width, int height);
+  Pencil();
+  ~Pencil();
+};
+```
+
+> Since we already have tool.h which provides a basic outline of any tool, we extended from tool.h to get the width and height as seen from the snippet of code above.
+
+3) Create .cpp file for the tool in src
+
+> Now, we must create the .cc file for the tool. This is where we will set the height and width of the tool along with any other variables that the tool may need. This file will also call the function we created specifically for the new tool. With the example of pencil, we will need to set the height and width both to 1 and call the createPencil() fucntion that we made earlier.
+
+```C++
+Pencil::Pencil(int width, int height) : Tool(width, height) {
+    tool_utilities::createPencil(this->getMask(),
+                                height,
+                                width);
+}
+
+Pencil::Pencil() : Pencil(1, 1) {}
+```
+
+> There are a couple things to note from the snippet of code above. One: to meet the requirments that the pencil be a single pixel, we set both the height and width to 1, but this is where we can change the size of the pencil if we want it to be different than a single pixel. Two: we call createPencil from tool_utilities and this is necessary to obtain the premade mask. 
+
+4) Add tool into the tool array in brushwork_app
+
+> Finally, the last step we need to complete is to add the new tool into the array of current tools be used. The current tools being used are stored in brushwork_app in an array called tool_select_. Here, the new tool will be assigned a number and this number will be used to dtermine the current tool being used.
+
+```C++
+tool_select_[0] = new Pen();
+          tool_select_[1] = new Eraser();
+          tool_select_[2] = new SprayCan();
+          tool_select_[3] = new Caligraphy();
+          tool_select_[4] = new Highlighter();
+          tool_select_[5] = new Rainbow();
+          tool_select_[6] = new Pencil();
+          cur_tool_ = tool_select_[0];
+```
+
+> The portion of code from  brushwork_app above demonstrates that pencil gets assigned a number 6 which is used to identify the tool. This is how we keep track of the tools. Also, in burshwork.h we will need to make the array one size larger to accommodate for the new tool. 
