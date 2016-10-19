@@ -44,9 +44,9 @@ void Tool::applyTool(PixelBuffer* buff, ColorData current_color, int x, int y) {
 }
 ```
 
-> It takes the assumption that the mask is already created, and just needs to be applied with the current color to the screen. It centers the mask over where the mouse is, and then for each pixel of the mask, sets the corresponding pixel on the screen according to the formula given above in set_pixel. For most of our tools, this behavior is fine, but the method is virtual however, so new behavior can be defined, as needed in the eraser and rainbow tools.
+> It takes the assumption that the mask is already created, and just needs to be applied with the current color to the screen. It centers the mask over where the mouse is, and then for each pixel of the mask, sets the corresponding pixel on the screen according to the formula given above in set_pixel. For many tools, this is all that is needed, but for other ones like the eraser, rainbow, and highlighter, the method is virtual so those classes can override it with new behavior as needed.
 
-> The next key design point was how we handled our masks. Our masks are 2D float arrays, where each element in the array corresponds to one pixel of the mask, and where the value of the floating point number is how intense we want that pixel to be (0.0 is transparent, and 1.0 is completely opaque). Each tool will specialize the design of the mask, but the first step is that the mask is created in memory at all. To do this, we made this mask a member variable of our Tool class, and allocate memory for the mask in the Tool constructor:
+> The next key design point was how we handled our masks. Our masks are 2D float arrays, where each element in the array corresponds to one pixel of the mask, and where the value of the floating point number is how intense we want that pixel to be (0.0 is transparent, and 1.0 is completely opaque). Each tool will specialize the design of the mask, but the first step is that the mask is created in memory at all. To do this, we made this 2D array a member variable of our Tool class, and allocate memory for the mask in the Tool constructor:
 
 ```C++
 Tool::Tool(int width, int height) {
@@ -60,7 +60,24 @@ Tool::Tool(int width, int height) {
 }
 ```
 
-> We designed our tools so that every tool will first call the parent constructor to allocate the mask, then each tool will specify the design on that mask. For example, take the pen
+> We designed our tools so that every tool will first call the parent constructor to allocate the mask, then each tool will specify the design on that mask. For example, take the pen:
+
+```C++
+Pen::Pen(int width, int height) : Tool(width, height) {
+    radius_ = static_cast<double>(width) / 2;
+    tool_utilities::createCircle(this->getMask(),
+                                height,
+                                width,
+                                radius_);
+}
+
+Pen::Pen() : Pen(3, 3) {}
+```
+
+> When instantiating a pen, the Tool constructor is called first, then the rest of the pen constructor is to initalize the mask. If the mask was a design that might be desired for multiple tools, we separated out the initialization of the mask from the tool itself into a function. We store these functions in a namespace called tool_utilities. Here, the pen is initialized to an opaque circle.
+
+> The last thing to note 
+
 
 
 
