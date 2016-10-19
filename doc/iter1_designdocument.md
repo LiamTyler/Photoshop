@@ -271,4 +271,4 @@ tool_select_[0] = new Pen();
 
 > The portion of code from  brushwork_app above demonstrates that pencil gets assigned a number 6 which is used to identify the tool. This is how we keep track of the tools. Also, in burshwork.h we will need to make the array one size larger to accommodate for the new tool. 
 
-[ToolsUML]: https://github.umn.edu/umn-csci-3081F16/repo-group-Bits-Please/doc/figures/tools.png
+[ToolsUML]: https://github.umn.edu/umn-csci-3081F16/repo-group-Bits-Please/blob/develop/doc/figures/tools.png
