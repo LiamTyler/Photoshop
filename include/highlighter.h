@@ -19,6 +19,8 @@ class Highlighter : public Tool {
   Highlighter(int width, int height);
   Highlighter();
   ~Highlighter();
+  void applyTool(image_tools::PixelBuffer* buff,
+    image_tools::ColorData current_color, int x, int y, int last_x, int last_y);
 };
 
 #endif  // INCLUDE_HIGHLIGHTER_H_
