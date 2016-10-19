@@ -18,8 +18,7 @@
 
 class Rainbow : public Pen {
  public:
-  Rainbow(int width, int height, int color_offset, int rate_of_change,
-          int angle_offset);
+  Rainbow(int width, int height, double color_offset, double rate_of_change);
   Rainbow();
   ~Rainbow();
   // Override the applyTool so we can update the color before we apply the mask

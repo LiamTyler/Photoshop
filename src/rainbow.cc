@@ -19,9 +19,8 @@ using image_tools::ColorData;
 
 Rainbow::Rainbow(int width,
                 int height,
-                int color_offset,
-                int rate_of_change,
-                int angle_offset) : Pen(width, height) {
+                double color_offset,
+                double rate_of_change) : Pen(width, height) {
     color_offset_ = color_offset;
     rate_of_change_ = rate_of_change;
 }
