@@ -16,7 +16,7 @@
 > First, in the **Design Description** section below, describe the design you developed to address this challenge. We expect that you will include at least one figure showing the relationships of the classes affected by your design. Second, in the **Design Justification** section below present the most compelling argument you can for why this design is justified.  Note that our expectation is that you will need to discuss the pros (and maybe cons) of your final design as compared to alternative designs that you discussed in your group in order to make a strong case for justifying your design.
 
 ### 1.1 Design Description
-> In our design we viewed tools as a form of specialization. The main two features of any tool are: it has a mask, and that mask can be applied to the screen in some way. We created a base class called Tool that creates a default mask and default applyTool behavior. We then created subclasses for each one of the six tools, which would initialize the mask to be specific to that tool, and change the applyTool behavior as necessary. This design is shown in Figure 1.
+> In our final design we viewed tools as a form of specialization. The main two features of any tool are: it has a mask, and that mask can be applied to the screen in some way. We created a base class called Tool that creates a default mask and default applyTool behavior. We then created subclasses for each one of the six tools, which would initialize the mask to be specific to that tool, and change the applyTool behavior as necessary. This design is shown in Figure 1.
 
 ###### Figure 1: UML diagram of the tools
 ![Tools UML][ToolsUML]
@@ -81,7 +81,9 @@ Pen::Pen() : Pen(3, 3) {}
 
 
 ### 1.2 Design Justification
+> Our goal was to create a system of tools where common behavior is shared, it's easy to add a new tool, and maintainable for any new features we might want in later iterations. We believe that the design explained above is an effective in accomplishing those goals, and superior compared to other designs.
 
+> The first decision in our design was to views tools as a specialization of a generic tool. To examine why this is effective, note again that the main abstractions of tools are their mask, and how it's applied. Every single tool is going to need a 
 
 ## 2  Design Question Two
 > Unlike most of the tools, the Eraser returns the canvas to its original color. One of the challenges in this iteration is giving the eraser the authority or information required to have this effect while having minimal impact on the way the rest of the tools are defined. 
