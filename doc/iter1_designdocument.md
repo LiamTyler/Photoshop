@@ -83,7 +83,9 @@ Pen::Pen() : Pen(3, 3) {}
 ### 1.2 Design Justification
 > Our goal was to create a system of tools where common behavior is shared, it's easy to add a new tool, and maintainable for any new features we might want in later iterations. We believe that the design explained above is an effective in accomplishing those goals, and superior compared to other designs.
 
-> The first decision in our design was to views tools as a specialization of a generic tool. To examine why this is effective, note again that the main abstractions of tools are their mask, and how it's applied. Every single tool is going to need a 
+> The first decision in our design was to views tools as a specialization of a generic tool. To examine why this is effective, note again that the main abstractions of tools are their mask, and how it's applied. Every single tool is going to need a mask, and that mask to be allocated in memory. So, as seen in the tool constructor in figure (number figure), it makes sense to have that mask allocation in the Tool class. We decided to have the mask directly in the Tool class as a 2D floating array, and then have functions that initialize the masks. One counter argument to this approach could be: why not encapsulate masks into their own class? Wouldn't it be better to do that, so that future changes to mask are separated from the Tool class? Well, 
+
+
 
 ## 2  Design Question Two
 > Unlike most of the tools, the Eraser returns the canvas to its original color. One of the challenges in this iteration is giving the eraser the authority or information required to have this effect while having minimal impact on the way the rest of the tools are defined. 
