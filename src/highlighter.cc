@@ -20,9 +20,7 @@ using image_tools::PixelBuffer;
 using image_tools::ColorData;
 
 Highlighter::Highlighter(int width, int height) : Tool(width, height) {
-    tool_utilities::createHighlighter(this->getMask(),
-                                height,
-                                width);
+    tool_utilities::fillMask(this->getMask(), height, width, 0.4);
 }
 
 Highlighter::Highlighter() : Highlighter(5, 15) {}
