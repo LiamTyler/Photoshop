@@ -18,7 +18,8 @@
 ### 1.1 Design Description
 > In our design we viewed tools as a form of specialization. The main two features of any tool are: it has a mask, and that mask can be applied to the screen in some way. We created a base class called Tool that creates a default mask and default applyTool behavior. We then created subclasses for each one of the six tools, which would initialize the mask to be specific to that tool, and change the applyTool behavior as necessary. This design is shown in Figure 1.
 
-# insert figure 1 (uml of the tools)
+###### Figure 1: UML diagram of the tools
+![UML Diagram][UMLDiagram]
 
 > There are a few key design choices here. First, notice how most tools do not override the applyTool method from the parent class. This is because the default applyTool is generic. Observe the implementation below:
 
@@ -269,3 +270,5 @@ tool_select_[0] = new Pen();
 ```
 
 > The portion of code from  brushwork_app above demonstrates that pencil gets assigned a number 6 which is used to identify the tool. This is how we keep track of the tools. Also, in burshwork.h we will need to make the array one size larger to accommodate for the new tool. 
+
+[ToolsUML]: https://github.umn.edu/umn-csci-3081F16/repo-group-Bits-Please/doc/figures/tools.png
