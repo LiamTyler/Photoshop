@@ -77,11 +77,12 @@ Rainbow::~Rainbow() {}
 
 void Rainbow::ApplyTool(PixelBuffer* buff, ColorData current_color,
                         int x, int y, int last_x, int last_y) {
+    // Rainbow-fy the color
     double new_r = current_color.red();
     double new_g = current_color.green();
     double new_b = current_color.blue();
     this->UpdateColor(&new_r, &new_g, &new_b);
     ColorData new_c = ColorData(new_r, new_g, new_b);
-
+    // Now pass call the default ApplyTool with the new rainbow color
     this->Tool::ApplyTool(buff, new_c, x, y, last_x, last_y);
 }

@@ -3,7 +3,8 @@ CXXINCDIRS = -I. -I./ext/glui/include
 SRCDIR = ./src
 OBJDIR = ./obj
 INCDIR = ./include
-EXE = brushwork
+BINDIR = ./bin
+EXE = $(BINDIR)/brushwork
 CXXFLAGS += $(CXXINCDIRS)
 CXXFLAGS += -std=c++11
 CXXLIBDIRS = -lglut -lGL -lGLU -lglui -L./ext/glui/lib
@@ -39,7 +40,7 @@ gluimake:
 
 clean:
 	rm -rf $(OBJDIR)
-	rm $(EXE)
+	rm -rf $(BINDIR)
 
 veryclean: clean
 	$(MAKE) -C ./ext/glui clean

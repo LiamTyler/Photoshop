@@ -46,6 +46,7 @@ BrushWorkApp::BrushWorkApp(int width,
       spinner_r_(nullptr),
       spinner_g_(nullptr),
       spinner_b_(nullptr) {
+          // Initialize the tools in the order displayed in the GUI
           tool_select_[0] = new Pen();
           tool_select_[1] = new Eraser();
           tool_select_[2] = new SprayCan();
