@@ -1,6 +1,6 @@
 # Brushwork
 
-One Paragraph of project description goes here
+Brushwork is a photoshop program. It allows the users to draw on a canvas using a variety of different tools such as: pen, spraycan, highlighter, and more. When the program first opens, the users will see two windows: a blank canvas, and a small window with an interface to change the controls. The control window is for changing which tool is selected, and which color that tool is going to apply. Once the program has started, the user is free to select any of the controls, and start drawing on the cavas by pressing down on the left mouse and/or dragging it in the pattern they want to be drawn. They can switch tools and colors at any time, and can erase portions of the canvas at a time using the eraser tool. These are all the features of the project as of iteration 1. To close out the program, left click on the "Quit" button in the controls window.
 
 ## Getting Started
 
@@ -15,7 +15,6 @@ To install and run our project:
 1. Clone the project repo
 2. Type "make" in the main project directory
 3. Run the executable bin/brushwork
-
 
 ### And coding style tests
 
