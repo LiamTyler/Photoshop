@@ -41,14 +41,11 @@ void Highlighter::ApplyTool(PixelBuffer* buff, ColorData current_color,
     int mid_y = height / 2;
     int screen_h = buff->height();
     int screen_w = buff->width();
-<<<<<<< HEAD
-    double** cur_mask = this->getMask();
-    /* Check the current mask appliation with previous
-    mask application to avoid intense opacity */
-=======
     double** cur_mask = this->get_mask();
 
->>>>>>> develop
+    /* Check the current mask appliation with previous
+    mask application to avoid intense opacity */
+
     for (int step_y = 0; step_y < height; step_y++) {
         for (int step_x = 0; step_x < width; step_x++) {
             int cur_x = x + step_x - mid_x;
