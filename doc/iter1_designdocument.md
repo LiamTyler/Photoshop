@@ -81,9 +81,13 @@ Pen::Pen() : Pen(3, 3) {}
 
 
 ### 1.2 Design Justification
-> Our goal was to create a system of tools where common behavior is shared, it's easy to add a new tool, and maintainable for any new features we might want in later iterations. We believe that the design explained above is an effective in accomplishing those goals, and superior compared to other designs.
+> Our goals for this design were: to create a system of tools where common behavior is shared, high simplicity, high understandability, and high extendability for adding new tools. We believe that the design explained above is an effective in accomplishing those goals, and superior compared to other designs.
 
-> The first decision in our design was to views tools as a specialization of a generic tool. To examine why this is effective, note again that the main abstractions of tools are their mask, and how it's applied. Every single tool is going to need a mask, and that mask to be allocated in memory. So, as seen in the tool constructor in figure (number figure), it makes sense to have that mask allocation in the Tool class. We decided to have the mask directly in the Tool class as a 2D floating array, and then have functions that initialize the masks. One counter argument to this approach could be: why not encapsulate masks into their own class? Wouldn't it be better to do that, so that future changes to mask are separated from the Tool class? Well, 
+> The first decision in our design was to views tools as a specialization of a generic tool. To examine why this is effective, note again that the main abstractions of tools are their mask, and how it's applied. Every single tool is going to need a mask, and that mask to be allocated in memory. So, as seen in the tool constructor in figure (number figure), it makes sense to have that mask allocation in the Tool class. We decided to have the mask directly in the Tool class as a 2D floating array, and then have functions that initialize the masks. One counter argument to this approach could be: why not encapsulate masks into their own class? Wouldn't it be better to do that, so that future changes to mask are separated from the Tool class? Well, we didn't think it was worth it.
+
+> The reason for that lies in the fact that one major aspect of software design, is to identify the parts of your design that are likely to change. The key thing here is that we do not forsee many changes happening to the mask. If in the future the mask suddenly needs several added features, then yes, it probably would be better to have a looser coupling between the tools and their masks. As of now though, a mask is really just a container for the intensity and shape. Since we do not believe that is likely to change, we keep it in the Tool. This is beneficial because it gives us higher cohesion; each tool, by itself, has everything a tool needs to function. Yes this causes higher coupling between the mask and ApplyTool method, but we believe that our design still maintains high simplicity and understandability, which were major goals for our design.
+
+> 
 
 
 
