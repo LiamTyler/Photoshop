@@ -25,7 +25,7 @@ Bits Please
 
 ###### Figure 1.2: ApplyTool() for Tool (tool.cc).
 ```C++
-void Tool::applyTool(PixelBuffer* buff, ColorData current_color, int x, int y) {
+void Tool::ApplyTool(PixelBuffer* buff, ColorData current_color, int x, int y) {
     int mid_x = width_ / 2;
     int mid_y = height_ / 2;
     int screen_h = buff->height();
@@ -69,7 +69,7 @@ Tool::Tool(int width, int height) {
 ```C++
 Pen::Pen(int width, int height) : Tool(width, height) {
     radius_ = static_cast<double>(width) / 2;
-    tool_utilities::createCircle(this->getMask(),
+    tool_utilities::CreateCircle(this->getMask(),
                                 height,
                                 width,
                                 radius_);
@@ -86,12 +86,41 @@ Pen::Pen() : Pen(3, 3) {}
 ### 1.2 Design Justification
 > Our goals for this design were: to create a system of tools where common behavior is shared, high simplicity, high understandability, and high extendability for adding new tools. We believe that the design explained above is an effective in accomplishing those goals, and superior compared to other designs.
 
-> The first decision in our design was to views tools as a specialization of a generic tool. To examine why this is effective, note again that the main abstractions of tools are their mask, and how it's applied. Every single tool is going to need a mask, and that mask to be allocated in memory. So, as seen in the tool constructor in figure (number figure), it makes sense to have that mask allocation in the Tool class. We decided to have the mask directly in the Tool class as a 2D floating array, and then have functions that initialize the masks. One counter argument to this approach could be: why not encapsulate masks into their own class? Wouldn't it be better to do that, so that future changes to mask are separated from the Tool class? Well, we didn't think it was worth it.
+> The first decision in our design was to views tools as a specialization of a generic tool. To examine why this is effective, note again that the main abstractions of tools are their mask, and how it's applied. Every single tool is going to need a mask, and that mask to be allocated in memory. So, as seen in the tool constructor in figure 1.3, it makes sense to have that mask allocation in the Tool class. We decided to have the mask directly in the Tool class as a 2D floating array, and then have functions that initialize the masks. One counter argument to this approach could be: why not encapsulate masks into their own class? Wouldn't it be better to do that, so that future changes to mask are separated from the Tool class? Well, we didn't think it was worth it.
 
 > The reason for that lies in the fact that one major aspect of software design, is to identify the parts of your design that are likely to change. The key thing here is that we do not forsee many changes happening to the mask. If in the future the mask suddenly needs several added features, then yes, it probably would be better to have a looser coupling between the tools and their masks. As of now though, a mask is really just a container for the intensity and shape. Since we do not believe that is likely to change, we keep it in the Tool. This is beneficial because it gives us higher cohesion; each tool, by itself, has everything a tool needs to function. Yes this causes higher coupling between the mask and ApplyTool method, but we believe that our design still maintains high simplicity and understandability, which were major goals for our design.
 
-> 
+> The next major decision we made was on how we initialize the masks. Many of the tools have similar shapes (either circle or rectangle). We decided to make a namespace called tool_utilities, and put functions in here that many of the tools might want to use. As seen below in figure 1.5, we put functions CreateCircle and FillMask in here.
 
+###### Figure 1.5: Tool Utilities (tool_utilities.h).
+```C++
+namespace tool_utilities {
+    void CreateCircle(double** mask, int height, int width, double radius);
+    void FillMask(double** mask, int height, int width, double opacity);
+}
+```
+
+> We call these functions in our tool constructors to intialize the masks. This has the advantage of avoiding code duplication, since the functions are only written once. In fact, only the spray can doesn't use one of these functions, because it has the unique linear falloff aspect. Another counter argument might be again, why not just have a class for cicle masks, and another for rectangular masks? The problem with that is that it limits these functions to just masks. With our design, these functions can be applied to any 2D array. With very little modification, we could make our functions work on the screen itself. This might be useful in the future if we need to draw shapes on the screen, as many photoshop programs allow you to do that.
+
+> The next decision was to have the ApplyTool method have a default implementation in the Tool class. The pro with this is that it avoids code duplication. Most masks, once they are created, merely need to be stamped onto the screen. Half of our tools (rainbow, highlighter, and eraser) override the default ApplyTool method, but even then, most of them barely have to make any modification. Take figure 1.6 as an example.
+
+###### Figure 1.6: Rainbow's ApplyTool (rainbow.cc).
+```C++
+void Rainbow::ApplyTool(PixelBuffer* buff, ColorData current_color,
+                        int x, int y, int last_x, int last_y) {
+    double new_r = current_color.red();
+    double new_g = current_color.green();
+    double new_b = current_color.blue();
+    this->UpdateColor(&new_r, &new_g, &new_b);
+    ColorData new_c = ColorData(new_r, new_g, new_b);
+
+    this->Tool::ApplyTool(buff, new_c, x, y, last_x, last_y);
+}
+```
+
+> As shown above, the Rainbow's ApplyTool merely makes a small change ('rainbow-fying' the color) and then the mask and color are all ready to be stamped, so it calls the default ApplyTool. Designing our ApplyTool this way allows for high extensibility, and low code duplication.
+
+> The last design aspect mentioned, was the decision to implement the interpolation in brushwork_app's MouseDragged method. This is effective because the interpolation is independent of what tool is selected. It's merely fixing the illusion that the every pixel is hit when dragging the mouse, and has no real relation to a tool itself. All that has to be done is repeated calls to ApplyTool, so it makes sense that it is outside the scope of our tool design, and handled in brushwork's MouseDragged.
 
 
 ## 2  Design Question Two
