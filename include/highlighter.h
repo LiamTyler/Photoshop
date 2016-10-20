@@ -14,6 +14,7 @@
 
 #include "include/tool.h"
 
+// Inheirit width and height from tool
 class Highlighter : public Tool {
  public:
   Highlighter(int width, int height);
