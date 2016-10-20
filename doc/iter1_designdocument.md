@@ -9,10 +9,10 @@ Bits Please
 
 
 ## 1  Design Question One
-> This iteration of the project is all about tools. Naturally, a key design decision is how these tools are represented. Each tool has several characteristics, including the shape of the tool, its size, and the way it blends with the canvas when the tool is applied. Some tools share characteristics with other tools, such as how the pen and calligraphy pen tools blend with the canvas in the same manner. 
-
+> This iteration of the project is all about tools. Naturally, a key design decision is how these tools are represented. Each tool has several characteristics, including the shape of the tool, its size, and the way it blends with the canvas when the tool is applied. Some tools share characteristics with other tools, such as how the pen and calligraphy pen tools blend with the canvas in the same manner. First, in the **Design Description** section below, describe the design you developed to address this challenge. We expect that you will include at least one figure showing the relationships of the classes affected by your design. Second, in the **Design Justification** section below present the most compelling argument you can for why this design is justified.  Note that our expectation is that you will need to discuss the pros (and maybe cons) of your final design as compared to alternative designs that you discussed in your group in order to make a strong case for justifying your design.
+  
 ### 1.1 Design Description
-> In our final design we viewed tools as a form of specialization. The main two features of any tool are: it has a mask, and that mask can be applied to the screen in some way. We created a base class called Tool that creates a default mask and default ApplyTool behavior. We then created subclasses for each one of the six tools, which would initialize the mask to be specific to that tool, and change the ApplyTool behavior as necessary. This design is shown in Figure 1.
+> In our final design we viewed tools as a form of specialization. The main two features of any tool are: it has a mask, and that mask can be applied to the screen in some way. We created a base class called Tool that creates a default mask and default ApplyTool behavior. We then created subclasses for each one of the six tools, which would initialize the mask to be specific to that tool, and change the ApplyTool behavior as necessary. This design is shown in Figure 1.1.
 
 ###### Figure 1.1: UML diagram of the tools
 ![Tools UML][ToolsUML]
@@ -235,6 +235,7 @@ void BrushWorkApp::MouseDragged(int x, int y) {
 
 ## 3  Design Question Three
 > A new developer on your team must add a new tool to BrushWork. This tool is called  _Pencil._ This tool is a single, non-transparent pixel that completely replaces the existing colors on the canvas in the same way as the pen or caligraphy pen blend.
+> Describe in the form of a tutorial (including code snippets) exactly what changes would need to be made to your program in order to fully integrate this new tool.
 
 ### Programming Tutorial: Adding a New Pencil Tool to BrushWork
 
