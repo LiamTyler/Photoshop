@@ -18,11 +18,12 @@
 
 using image_tools::PixelBuffer;
 using image_tools::ColorData;
-
+// Call the rectangular mask from tool_utilities
 Caligraphy::Caligraphy(int width, int height) : Tool(width, height) {
     tool_utilities::fillMask(this->getMask(), height, width, 1.0);
 }
 
+// Set the size of the mask
 Caligraphy::Caligraphy() : Caligraphy(5, 15) {}
 
 Caligraphy::~Caligraphy() {}
