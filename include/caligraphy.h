@@ -14,7 +14,7 @@
 
 #include "include/tool.h"
 
-//Inheirit width and height from tool
+// Inheirit width and height from tool
 class Caligraphy : public Tool {
  public:
   Caligraphy(int width, int height);
