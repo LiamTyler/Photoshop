@@ -12,7 +12,7 @@ Brushwork is a photoshop program. It allows the users to draw on a canvas using 
 
 To install and run our project:
 
-1. Clone the project repo
+1. Clone the project repo, or download and extract the tar file.
 2. Type "make" in the main project directory
 3. Run the executable bin/brushwork
 
