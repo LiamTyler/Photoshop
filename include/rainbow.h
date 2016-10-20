@@ -16,7 +16,7 @@
 #include "include/pixel_buffer.h"
 #include "include/color_data.h"
 
-class Rainbow : public Pen {
+class Rainbow : public Tool {
  public:
   Rainbow(int width, int height, double color_offset, double rate_of_change);
   Rainbow();

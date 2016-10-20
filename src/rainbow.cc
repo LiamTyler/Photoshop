@@ -13,6 +13,7 @@
 #include <cmath>
 #include <iostream>
 #include <iomanip>
+#include "include/tool_utilities.h"
 
 using image_tools::PixelBuffer;
 using image_tools::ColorData;
@@ -20,15 +21,16 @@ using image_tools::ColorData;
 Rainbow::Rainbow(int width,
                 int height,
                 double color_offset,
-                double rate_of_change) : Pen(width, height) {
+                double rate_of_change) : Tool(width, height) {
+    tool_utilities::CreateCircle(this->get_mask(),
+                                height,
+                                width,
+                                static_cast<double>(width) / 2);
     color_offset_ = color_offset;
     rate_of_change_ = rate_of_change;
 }
 
-Rainbow::Rainbow() : Pen(3, 3) {
-    color_offset_ = 0;
-    rate_of_change_ = .2;
-}
+Rainbow::Rainbow() : Rainbow(3, 3, 0.0, 0.2) {}
 
 void Rainbow::UpdateColor(double* red, double* green, double*blue) {
     color_offset_ += rate_of_change_;
