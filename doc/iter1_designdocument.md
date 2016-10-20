@@ -1,6 +1,6 @@
 # Design Justifications for BrushWork
 #### Group Name:
-<Group Name Here>
+Bits Please
 
 #### Members:
 - Liam Tyler
@@ -16,13 +16,14 @@
 > First, in the **Design Description** section below, describe the design you developed to address this challenge. We expect that you will include at least one figure showing the relationships of the classes affected by your design. Second, in the **Design Justification** section below present the most compelling argument you can for why this design is justified.  Note that our expectation is that you will need to discuss the pros (and maybe cons) of your final design as compared to alternative designs that you discussed in your group in order to make a strong case for justifying your design.
 
 ### 1.1 Design Description
-> In our final design we viewed tools as a form of specialization. The main two features of any tool are: it has a mask, and that mask can be applied to the screen in some way. We created a base class called Tool that creates a default mask and default applyTool behavior. We then created subclasses for each one of the six tools, which would initialize the mask to be specific to that tool, and change the applyTool behavior as necessary. This design is shown in Figure 1.
+> In our final design we viewed tools as a form of specialization. The main two features of any tool are: it has a mask, and that mask can be applied to the screen in some way. We created a base class called Tool that creates a default mask and default ApplyTool behavior. We then created subclasses for each one of the six tools, which would initialize the mask to be specific to that tool, and change the ApplyTool behavior as necessary. This design is shown in Figure 1.
 
-###### Figure 1: UML diagram of the tools
+###### Figure 1.1: UML diagram of the tools
 ![Tools UML][ToolsUML]
 
-> There are a few key design choices here. First, notice how half of the tools do not override the applyTool method from the parent class. This is because the default applyTool is generic. Observe the implementation below:
+> There are a few key design choices here. First, notice how half of the tools do not override the ApplyTool method from the parent class. This is because the default ApplyTool is generic. Observe the implementation below:
 
+###### Figure 1.2: ApplyTool() for Tool (tool.cc).
 ```C++
 void Tool::applyTool(PixelBuffer* buff, ColorData current_color, int x, int y) {
     int mid_x = width_ / 2;
@@ -49,6 +50,7 @@ void Tool::applyTool(PixelBuffer* buff, ColorData current_color, int x, int y) {
 
 > The next key design point was how we handled our masks. Our masks are 2D float arrays, where each element in the array corresponds to one pixel of the mask, and where the value of the floating point number is how intense we want that pixel to be (0.0 is transparent, and 1.0 is completely opaque). Each tool will specialize the design of the mask, but the first step is that the mask is created in memory at all. To do this, we made this 2D array a member variable of our Tool class, and allocate memory for the mask in the Tool constructor:
 
+###### Figure 1.3: Tool Constructor (tool.cc).
 ```C++
 Tool::Tool(int width, int height) {
     width_ = width;
@@ -63,6 +65,7 @@ Tool::Tool(int width, int height) {
 
 > We designed our tools so that every tool will first call the parent constructor to allocate the mask, then each tool will specify the design on that mask. For example, take the pen:
 
+###### Figure 1.4: Pen Constructor (pen.cc).
 ```C++
 Pen::Pen(int width, int height) : Tool(width, height) {
     radius_ = static_cast<double>(width) / 2;
@@ -77,7 +80,7 @@ Pen::Pen() : Pen(3, 3) {}
 
 > When instantiating a pen, the Tool constructor is called first, then the rest of the pen constructor is to initalize the mask. If the mask was a design that might be desired for multiple tools, we separated out the initialization of the mask from the tool itself into a function. We store these functions in a namespace called tool_utilities. Here, the pen is initialized to an opaque circle.
 
-> The last thing to note is the interpolation of points when the user is moving the mouse quickly. Our applyTool methods are designed to handle a single stamp down on the screen. The interpolation part happens in the mouse dragged event of brushwork_app.
+> The last thing to note is the interpolation of points when the user is moving the mouse quickly. Our ApplyTool methods are designed to handle a single stamp down on the screen. The interpolation part happens in the mouse dragged event of brushwork_app.
 
 
 ### 1.2 Design Justification
@@ -96,14 +99,14 @@ Pen::Pen() : Pen(3, 3) {}
 > First, in the **Design Description** section below, describe the design you developed to address this challenge.  Second, in the **Design Justification** section below present the most compelling argument you can for why this design is justified.  Note that our expectation is that you will need to discuss the pros (and maybe cons) of your final design as compared to alternative designs that you discussed in your group in order to make a strong case for justifying your design.
 
 ### 2.1 Design Description
-> We decided to make Eraser a subclass of Tool so that the Eraser will have an applyTool() method just like the other tools. The only difference is that the Eraser applies the background color instead of the current color selected by the user. To accomplish this, Eraser overrides the applyTool() method, as shown in Figure 2.1 below. Instead of applying the tool with the current_color, Eraser applies iteself with the background_color.
+> We decided to make Eraser a subclass of Tool so that the Eraser would have an ApplyTool() method just like the other tools. The only difference is that the Eraser applies the background color instead of the current color selected by the user. To accomplish this, Eraser overrides the ApplyTool() method, as shown in Figure 2.1 below. Instead of applying the tool with the current_color, Eraser applies iteself with the background_color.
 
-###### Figure 2.1: applyTool() for the Eraser (eraser.cc).
+###### Figure 2.1: ApplyTool() for the Eraser (eraser.cc).
 
 ```C++
-void Eraser::applyTool(PixelBuffer* buff, ColorData current_color,
-                        int x, int y) {
-    this->Tool::applyTool(buff, buff->background_color(), x, y);
+void Eraser::ApplyTool(PixelBuffer* buff, ColorData current_color,
+                        int x, int y, int last_x, int last_y) {
+    this->Tool::ApplyTool(buff, buff->background_color(), x, y, last_x, last_y);
 }
 ```
 
@@ -163,21 +166,24 @@ void BrushWorkApp::InitializeBuffers(
 ```
 
 ### 2.2 Design Justification
-> Rather than setting the Eraser to a certain color, we decided to get the background_color from the PixelBuffer using the background_color() method. This way, no matter what color the background gets set to initially, Eraser will use the correct color. One con is that if the background color was somehow changed while the program was running, Eraser would still use the initial background color. Since there isn't a way for the user to change the background color, we decided getting the initial color would be sufficient at this point. In the future, if we add a way for the user to change the background color, we could add an update_background_color() method that would update the background_color in the PixelBuffer.
+> Rather than setting the Eraser to a certain color, we decided to get the background_color_ from the PixelBuffer using the background_color() method. This way, no matter what color the background gets set to initially, Eraser will use the correct color. One con is that if the background color was somehow changed while the program was running, Eraser would still use the initial background color. Since there isn't a way for the user to change the background color, we decided getting the initial color would be sufficient at this point. In the future, if we add a way for the user to change the background color, we could add an update_background_color() method that would update the background_color_ in the PixelBuffer.
 
-> Our first implementation of the Eraser involved an if statement within MouseDragged() that determined whether or not the cur_tool was the Eraser. If it was the Eraser, current_color got changed to background_color rather than the current color. We decided this was a bad design because anytime you added another tool, you'd need to add to the if statement to include another option for current_color. For example, our additional tool is the Rainbow tool, which applies colors to the window in a rainbow pattern. Therefore, we had another tool that did not use the current_color.
+> Our first implementation of the Eraser involved an if statement within MouseDragged() that determined whether or not the cur_tool_ was the Eraser. If cur_tool_ was the Eraser, current_color_ got changed to the background_color_ rather than the color selected by the user. We decided this was a bad design because anytime you added another tool that used a color other than current_color_, you'd need to add to the if statement. For example, our additional tool is the Rainbow tool, which applies colors to the window in a rainbow pattern.
 
-> Instead of using an if statement within MouseDragged(), we decided to make tool's apply_tool() method virtual. This way, we could override apply_tool() when necessary. In the Eraser's applyTool() method, we actually call Tool's applyTool() method, since the only difference is the color that gets applied. Regardless of what the cur_tool is, current_color gets passed into applyTool() within MouseDragged(). Then, inside Eraser's applyTool() method, Tool's applyTool() method gets called but with the background_color instead of current_color.
+> Instead of using an if statement within MouseDragged(), we decided to make tool's ApplyTool() method virtual. This way, we could override ApplyTool() when necessary. In the Eraser's ApplyTool() method, we call Tool's ApplyTool() method, since the only difference is the color that gets applied. Making the ApplyTool() method virutal was useful for the Rainbow tool as well as the highlighter.
 
-> By changing the color to be applied within the Eraser class, we do not have to change anything in brushwork_app. As shown below in Figure 2.5, we can simply call applyTool() on whatever tool is the cur_tool_, and the tool will be applied properly.
+> By changing the color to be applied within the Eraser class, we do not have to change anything in brushwork_app. As shown below in Figure 2.5, within MouseDragged(), we can simply call ApplyTool() on whatever tool is the cur_tool_, and the tool will be applied properly.
 
 ###### Figure 2.5: MouseDragged() for the BrushWorkApp (brushwork_app.cc).
 
 ```C++
 void BrushWorkApp::MouseDragged(int x, int y) {
     if (last_x_ != -1) {
+        /* Find the distance between (last_x_, last_y_) and (x, y) and divide by
+        an eigth of the width of the mask to determine the number n times to
+        ApplyTool between (last_x_, last_y_) and (x, y) */
         int n = sqrt(pow((last_x_ - x), 2) +
-                pow((last_y_ - y), 2))/(cur_tool_ -> getWidth() / 8.0);
+                pow((last_y_ - y), 2))/(cur_tool_ -> get_width() / 8.0);
         float percent_step = 1.0/static_cast<float>(n);
         int base_x = last_x_;
         int base_y = last_y_;
@@ -187,13 +193,15 @@ void BrushWorkApp::MouseDragged(int x, int y) {
         for (float i = percent_step; i < 1.0; i+=percent_step) {
             int new_x = base_x + (i * dx);
             int new_y = base_y + (i * dy);
-            cur_tool_->applyTool(display_buffer_, current_color_, new_x, new_y);
+            cur_tool_->ApplyTool(display_buffer_, current_color_, new_x, new_y,
+                                 last_x_, last_y_);
             last_x_ = new_x;
             last_y_ = new_y;
        }
     }
 
-    cur_tool_->applyTool(display_buffer_, current_color_, x, y);
+    cur_tool_->ApplyTool(display_buffer_, current_color_, x, y,
+                         last_x_, last_y_);
 
     last_x_ = x;
     last_y_ = y;

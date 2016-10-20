@@ -36,7 +36,7 @@ Tool::~Tool() {
     delete[] mask_;
 }
 
-void Tool::applyTool(PixelBuffer* buff, ColorData current_color,
+void Tool::ApplyTool(PixelBuffer* buff, ColorData current_color,
                     int x, int y, int last_x, int last_y) {
     int mid_x = width_ / 2;
     int mid_y = height_ / 2;
@@ -61,14 +61,14 @@ void Tool::applyTool(PixelBuffer* buff, ColorData current_color,
     }
 }
 
-int Tool::getWidth() {
+int Tool::get_width() {
     return width_;
 }
 
-int Tool::getHeight() {
+int Tool::get_height() {
     return height_;
 }
 
-double** Tool::getMask() {
+double** Tool::get_mask() {
     return mask_;
 }

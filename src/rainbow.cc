@@ -30,7 +30,7 @@ Rainbow::Rainbow() : Pen(3, 3) {
     rate_of_change_ = .2;
 }
 
-void Rainbow::updateColor(double* red, double* green, double*blue) {
+void Rainbow::UpdateColor(double* red, double* green, double*blue) {
     color_offset_ += rate_of_change_;
     if (color_offset_ >= 360) {
         color_offset_ = 0;
@@ -73,13 +73,13 @@ void Rainbow::updateColor(double* red, double* green, double*blue) {
 
 Rainbow::~Rainbow() {}
 
-void Rainbow::applyTool(PixelBuffer* buff, ColorData current_color,
+void Rainbow::ApplyTool(PixelBuffer* buff, ColorData current_color,
                         int x, int y, int last_x, int last_y) {
     double new_r = current_color.red();
     double new_g = current_color.green();
     double new_b = current_color.blue();
-    this->updateColor(&new_r, &new_g, &new_b);
+    this->UpdateColor(&new_r, &new_g, &new_b);
     ColorData new_c = ColorData(new_r, new_g, new_b);
 
-    this->Tool::applyTool(buff, new_c, x, y, last_x, last_y);
+    this->Tool::ApplyTool(buff, new_c, x, y, last_x, last_y);
 }

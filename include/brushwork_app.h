@@ -57,8 +57,8 @@ class BrushWorkApp : public BaseGfxApp {
         int y,
         ColorData background_color);
 
-    void updateCurrentColor();
-    ColorData getCurrentColor();
+    void update_current_color();
+    ColorData get_current_color();
 
  private:
     void InitGlui(void);

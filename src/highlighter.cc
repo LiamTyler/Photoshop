@@ -20,7 +20,7 @@ using image_tools::PixelBuffer;
 using image_tools::ColorData;
 
 Highlighter::Highlighter(int width, int height) : Tool(width, height) {
-    tool_utilities::fillMask(this->getMask(), height, width, 0.4);
+    tool_utilities::FillMask(this->get_mask(), height, width, 0.4);
 }
 
 Highlighter::Highlighter() : Highlighter(5, 15) {}
@@ -28,10 +28,10 @@ Highlighter::Highlighter() : Highlighter(5, 15) {}
 Highlighter::~Highlighter() {}
 
 
-void Highlighter::applyTool(PixelBuffer* buff, ColorData current_color,
+void Highlighter::ApplyTool(PixelBuffer* buff, ColorData current_color,
                         int x, int y, int last_x, int last_y) {
-    int width = this->getWidth();
-    int height = this->getHeight();
+    int width = this->get_width();
+    int height = this->get_height();
     int min_width = last_x - width / 2;
     int min_height = last_y - height / 2;
     int max_width = min_width + width;
@@ -41,9 +41,14 @@ void Highlighter::applyTool(PixelBuffer* buff, ColorData current_color,
     int mid_y = height / 2;
     int screen_h = buff->height();
     int screen_w = buff->width();
+<<<<<<< HEAD
     double** cur_mask = this->getMask();
     /* Check the current mask appliation with previous
     mask application to avoid intense opacity */
+=======
+    double** cur_mask = this->get_mask();
+
+>>>>>>> develop
     for (int step_y = 0; step_y < height; step_y++) {
         for (int step_x = 0; step_x < width; step_x++) {
             int cur_x = x + step_x - mid_x;

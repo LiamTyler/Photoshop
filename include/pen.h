@@ -19,10 +19,6 @@ class Pen : public Tool {
   Pen(int width, int height);
   Pen();
   ~Pen();
-  double getRadius();
-
- private:
-  double radius_;
 };
 
 #endif  // INCLUDE_PEN_H_

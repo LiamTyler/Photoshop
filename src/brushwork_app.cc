@@ -102,9 +102,9 @@ void BrushWorkApp::MouseDragged(int x, int y) {
     if (last_x_ != -1) {
         /* Find the distance between (last_x_, last_y_) and (x, y) and divide by
         an eigth of the width of the mask to determine the number n times to
-        applyTool between (last_x_, last_y_) and (x, y) */
+        ApplyTool between (last_x_, last_y_) and (x, y) */
         int n = sqrt(pow((last_x_ - x), 2) +
-                pow((last_y_ - y), 2))/(cur_tool_ -> getWidth() / 8.0);
+                pow((last_y_ - y), 2))/(cur_tool_ -> get_width() / 8.0);
         float percent_step = 1.0/static_cast<float>(n);
         int base_x = last_x_;
         int base_y = last_y_;
@@ -114,14 +114,14 @@ void BrushWorkApp::MouseDragged(int x, int y) {
         for (float i = percent_step; i < 1.0; i+=percent_step) {
             int new_x = base_x + (i * dx);
             int new_y = base_y + (i * dy);
-            cur_tool_->applyTool(display_buffer_, current_color_, new_x, new_y,
+            cur_tool_->ApplyTool(display_buffer_, current_color_, new_x, new_y,
                                  last_x_, last_y_);
             last_x_ = new_x;
             last_y_ = new_y;
        }
     }
 
-    cur_tool_->applyTool(display_buffer_, current_color_, x, y,
+    cur_tool_->ApplyTool(display_buffer_, current_color_, x, y,
                          last_x_, last_y_);
 
     last_x_ = x;
@@ -133,7 +133,7 @@ void BrushWorkApp::MouseMoved(int x, int y) {}
 void BrushWorkApp::LeftMouseDown(int x, int y) {
     std::cout << "mousePressed " << x << " " << y << std::endl;
 
-    cur_tool_->applyTool(display_buffer_, current_color_, x, y,
+    cur_tool_->ApplyTool(display_buffer_, current_color_, x, y,
                          last_x_, last_y_);
     last_x_ = x;
     last_y_ = y;
@@ -155,13 +155,13 @@ void BrushWorkApp::InitializeBuffers(
     display_buffer_ = new PixelBuffer(width, height, background_color);
 }
 
-void BrushWorkApp::updateCurrentColor() {
+void BrushWorkApp::update_current_color() {
     current_color_.red(cur_color_red_);
     current_color_.green(cur_color_green_);
     current_color_.blue(cur_color_blue_);
 }
 
-ColorData BrushWorkApp::getCurrentColor() {
+ColorData BrushWorkApp::get_current_color() {
     return current_color_;
 }
 
@@ -198,7 +198,7 @@ void BrushWorkApp::InitGlui(void) {
     cur_color_blue_ = 0;
     spinner_b_  = new GLUI_Spinner(color_panel, "Blue:", &cur_color_blue_,
                                    UI_COLOR_B, s_gluicallback);
-    this->updateCurrentColor();
+    this->update_current_color();
     spinner_b_->set_float_limits(0, 1.0);
     new GLUI_Button(color_panel, "Red", UI_PRESET_RED, s_gluicallback);
     new GLUI_Button(color_panel, "Orange", UI_PRESET_ORANGE, s_gluicallback);
@@ -275,7 +275,7 @@ void BrushWorkApp::GluiControl(int control_id) {
         break;
     }
 
-    this->updateCurrentColor();
+    this->update_current_color();
 
     spinner_b_->set_float_val(cur_color_blue_);
     spinner_g_->set_float_val(cur_color_green_);
