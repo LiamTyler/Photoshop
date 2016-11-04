@@ -190,10 +190,10 @@ void BaseGfxApp::s_gluicallback(int control_id) {
 }
 
 void BaseGfxApp::s_idle(void) {
-  int timeSinceStart = glutGet(GLUT_ELAPSED_TIME);
-  int delta = timeSinceStart - s_current_app_->milliseconds_;
+  int time_since_start = glutGet(GLUT_ELAPSED_TIME);
+  int delta = time_since_start - s_current_app_->milliseconds_;
   if (delta > 0) {
-    s_current_app_->milliseconds_ = timeSinceStart;
+    s_current_app_->milliseconds_ = time_since_start;
     s_current_app_->Update(delta);
   }
 }
@@ -204,4 +204,4 @@ void BaseGfxApp::SetWindowDimensions(int width, int height) {
   glutReshapeWindow(width_, height_);
 }
 
-}  // namespace image_tools
+}  /* namespace image_tools */
