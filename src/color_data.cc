@@ -62,4 +62,5 @@ ColorData operator- (const ColorData& a, const ColorData& b) {
         return ColorData(a.red_ - b.red_, a.green_ - b.green_,
                          a.blue_ - b.blue_, a.alpha_ - b.alpha_);
 }
-}  // namespace image_tools
+
+}  /* namespace image_tools */

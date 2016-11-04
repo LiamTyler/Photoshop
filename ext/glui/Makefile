@@ -24,8 +24,8 @@
 
 SRCDIR          = ./src
 OBJDIR          = ./obj
-EXTDIR          = ./ext
 LIBDIR          = ./lib
+INSTALLDIR      = ../lib
 
 ###############################################################################
 # Definitions
@@ -83,10 +83,18 @@ TARGET = $(LIBDIR)/libglui.a
 
 # Phony targets: targets of this type will be run everytime by make (i.e. make
 # does not assume that the target recipe will build the target name)
-.PHONY: clean veryclean
+.PHONY: clean veryclean install uninstall
 
 # The default target
 all: $(TARGET)
+
+# The installer
+install: $(TARGET) | $(INSTALLDIR)
+	cp $(TARGET) $(INSTALLDIR)
+
+# The uninstaller
+uninstall:
+	rm -rf $(INSTALLDIR)/libglui.a
 
 # The Target Library
 $(addprefix $(OBJDIR)/, $(OBJECTS_CXX)): | $(OBJDIR)
@@ -97,12 +105,12 @@ $(TARGET): $(addprefix $(OBJDIR)/, $(OBJECTS_CXX)) | $(LIBDIR)
 # files/directories that have to be present in order for a given target build
 # to succeed, but that make knows do not need to be remade each time their
 # modification time is updated and they are newer than the target being built.
-$(OBJDIR) $(PREPROCDIR) $(LIBDIR):
+$(OBJDIR) $(LIBDIR) $(INSTALLDIR):
 	@mkdir -p $@
 
 # The Cleaner
 clean:
-	rm -rf $(LIBDIR) $(OBJDIR)
+	@rm -rf $(LIBDIR) $(OBJDIR)
 
 ###############################################################################
 # Pattern Rules
