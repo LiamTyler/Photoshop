@@ -69,6 +69,7 @@ class ColorData {
   float blue_;
   float alpha_;
 };
-}  // namespace image_tools
 
-#endif  // SRC_INCLUDE_COLOR_DATA_H_
+}  /* namespace image_tools */
+
+#endif  /* SRC_INCLUDE_COLOR_DATA_H_ */

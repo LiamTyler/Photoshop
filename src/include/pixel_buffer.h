@@ -9,12 +9,13 @@
  *
  ******************************************************************************/
 
-#ifndef INCLUDE_PIXEL_BUFFER_H_
-#define INCLUDE_PIXEL_BUFFER_H_
+#ifndef SRC_INCLUDE_PIXEL_BUFFER_H_
+#define SRC_INCLUDE_PIXEL_BUFFER_H_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
+#include <vector>
 #include "include/color_data.h"
 
 /*******************************************************************************
@@ -36,14 +37,17 @@ namespace image_tools {
 class PixelBuffer {
  public:
   PixelBuffer(int w, int h, ColorData background_color);
-  virtual ~PixelBuffer(void);
+  PixelBuffer(const PixelBuffer&rhs);
+  virtual ~PixelBuffer(void) {}
+
+  PixelBuffer& operator=(const PixelBuffer &rhs);
 
   /**
    * @brief Set the value for a pixel within the buffer/on the screen
    */
   void set_pixel(int x, int y, const ColorData& color);
 
-  inline ColorData const *data(void) const { return pixels_; }
+  inline ColorData const *data(void) const { return &pixels_[0]; }
   inline int height(void) const { return height_; }
   inline int width(void) const { return width_; }
 
@@ -51,12 +55,7 @@ class PixelBuffer {
    * @brief Get the background color that was used to initialize the PixelBuffer
    * @return The background color
    */
-  ColorData background_color(void) { return *background_color_; }
-
-  /**
-   * @brief Fill the pixel buffer with the specified color
-   */
-  void FillPixelBufferWithColor(ColorData color);
+  const ColorData& background_color(void) const { return background_color_; }
 
   /**
    * @brief Get the color of a specific pixel
@@ -64,16 +63,14 @@ class PixelBuffer {
    */
   ColorData get_pixel(int x, int y) const;
 
-
  private:
   const int width_; /**< X dimension--cannot be changed  */
   const int height_; /**< Y dimension--cannot be changed  */
 
-  ColorData *pixels_; /**< Raw pixel data */
-  ColorData *background_color_; /** Color used to initialize the pixel buffer */
-
-  PixelBuffer(const PixelBuffer&rhs) = delete;
-  PixelBuffer& operator=(const PixelBuffer &rhs) = delete;
+  std::vector<ColorData> pixels_; /**< Raw pixel data */
+  ColorData background_color_; /** Color used to initialize the pixel buffer */
 };
-}  // namespace image_tools
-#endif  // INCLUDE_PIXEL_BUFFER_H_
+
+}  /* namespace image_tools */
+
+#endif  /* SRC_INCLUDE_PIXEL_BUFFER_H_ */

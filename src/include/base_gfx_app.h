@@ -259,6 +259,10 @@ class BaseGfxApp {
   inline BaseGfxApp* s_current_app(void) { return s_current_app_; }
 
  private:
+  /* Copy assignment/construction is disallowed */
+  BaseGfxApp(const BaseGfxApp &rhs) = delete;
+  BaseGfxApp& operator=(const BaseGfxApp &rhs) = delete;
+
   int glut_window_handle_; /**< Underlying glut window handle */
 
   GLUI *glui_; /**< Pointer to GLUI master */
@@ -272,11 +276,8 @@ class BaseGfxApp {
 
   /** Has glutInit been called? (only allowed once per program) */
   static bool s_glut_initialized_;
-
-  /* Copy assignment/construction is disallowed */
-  BaseGfxApp(const BaseGfxApp &rhs) = delete;
-  BaseGfxApp& operator=(const BaseGfxApp &rhs) = delete;
 };
-}  // namespace image_tools
 
-#endif  // SRC_INCLUDE_BASE_GFX_APP_H_
+}  /* namespace image_tools */
+
+#endif  /* SRC_INCLUDE_BASE_GFX_APP_H_ */

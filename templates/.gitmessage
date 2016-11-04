@@ -4,7 +4,7 @@
 # <Title> (aka <type>(<scope>): <subject>)
 # <body>
 # <footer>
-#<contributors>
+# <contributors>
 # Layout Explanation:
 # <scope>   : whatever module(s) are affected
 # <type>    : Must be one of the types below:
