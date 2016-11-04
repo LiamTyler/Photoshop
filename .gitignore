@@ -27,4 +27,8 @@
 *.exe
 *.out
 *.app
-brushwork
+build/
+
+# Externals
+ext/
+!ext/cpplint/cpplint.py
