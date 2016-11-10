@@ -1,25 +1,27 @@
 /*******************************************************************************
- * Name            : caligraphy.h
+ * Name            : calligraphy.h
  * Project         : BrushWork
  * Module          : App
- * Description     : Header of caligraphy
+ * Description     : Header of calligraphy
  * Copyright       : 2016 CSCI3081W Team Bits Please. All rights reserved.
  * Creation Date   : 10/14/16
  * Original Author : Group Bits Please
  *
  ******************************************************************************/
 
-#ifndef SRC_INCLUDE_CALIGRAPHY_H_
-#define SRC_INCLUDE_CALIGRAPHY_H_
+#ifndef SRC_INCLUDE_CALLIGRAPHY_H_
+#define SRC_INCLUDE_CALLIGRAPHY_H_
 
+#include <string>
 #include "include/tool.h"
 
 // Inheirit width and height from tool
-class Caligraphy : public Tool {
+class TCalligraphy : public Tool {
  public:
-  Caligraphy(int width, int height);
-  Caligraphy();
-  ~Caligraphy();
+  TCalligraphy(int width, int height);
+  TCalligraphy();
+  ~TCalligraphy();
+  std::string name(void) { return "Calligraphy Pen"; }
 };
 
-#endif  // SRC_INCLUDE_CALIGRAPHY_H_
+#endif  // SRC_INCLUDE_CALLIGRAPHY_H_

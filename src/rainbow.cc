@@ -2,7 +2,7 @@
  * Name            : rainbow.cc
  * Project         : BrushWork
  * Module          : tools
- * Description     : CC file for the Rainbow class
+ * Description     : CC file for the TRainbow class
  * Copyright       : 2016 CSCI3081W Group Bits Please
  * Creation Date   : 10/14/16
  * Original Author : Group Bits Please
@@ -18,21 +18,21 @@
 using image_tools::PixelBuffer;
 using image_tools::ColorData;
 
-Rainbow::Rainbow(int width,
+TRainbow::TRainbow(int width,
                 int height,
                 double color_offset,
-                double rate_of_change) : Tool(width, height) {
+                double rate_of_change) : Tool(width, height),
+                                         color_offset_(color_offset),
+                                         rate_of_change_(rate_of_change) {
     tool_utilities::CreateCircle(this->get_mask(),
                                 height,
                                 width,
                                 static_cast<double>(width) / 2);
-    color_offset_ = color_offset;
-    rate_of_change_ = rate_of_change;
 }
 
-Rainbow::Rainbow() : Rainbow(3, 3, 0.0, 0.2) {}
+TRainbow::TRainbow() : TRainbow(3, 3, 0.0, 0.2) {}
 
-void Rainbow::UpdateColor(double* red, double* green, double*blue) {
+void TRainbow::UpdateColor(double* red, double* green, double*blue) {
     color_offset_ += rate_of_change_;
     if (color_offset_ >= 360) {
         color_offset_ = 0;
@@ -73,9 +73,9 @@ void Rainbow::UpdateColor(double* red, double* green, double*blue) {
     }
 }
 
-Rainbow::~Rainbow() {}
+TRainbow::~TRainbow() {}
 
-void Rainbow::ApplyTool(PixelBuffer* buff, ColorData current_color,
+void TRainbow::ApplyTool(PixelBuffer* buff, ColorData current_color,
                         int x, int y, int last_x, int last_y) {
     // Rainbow-fy the color
     double new_r = current_color.red();

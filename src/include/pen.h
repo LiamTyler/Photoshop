@@ -12,13 +12,15 @@
 #ifndef SRC_INCLUDE_PEN_H_
 #define SRC_INCLUDE_PEN_H_
 
+#include <string>
 #include "include/tool.h"
 
-class Pen : public Tool {
+class TPen : public Tool {
  public:
-  Pen(int width, int height);
-  Pen();
-  ~Pen();
+  TPen(int width, int height);
+  TPen();
+  ~TPen();
+  std::string name(void) { return "Pen"; }
 };
 
 #endif  // SRC_INCLUDE_PEN_H_

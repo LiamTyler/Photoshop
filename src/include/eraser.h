@@ -12,15 +12,17 @@
 #ifndef SRC_INCLUDE_ERASER_H_
 #define SRC_INCLUDE_ERASER_H_
 
+#include <string>
 #include "include/eraser.h"
 
-class Eraser : public Tool {
+class TEraser : public Tool {
  public:
-  Eraser(int width, int height);
-  Eraser();
-  ~Eraser();
+  TEraser(int width, int height);
+  TEraser();
+  ~TEraser();
   void ApplyTool(image_tools::PixelBuffer* buff,
                 image_tools::ColorData current_color,
                 int x, int y, int last_x, int last_y);
+  std::string name(void) { return "Eraser"; }
 };
 #endif  // SRC_INCLUDE_ERASER_H_

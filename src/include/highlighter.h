@@ -12,16 +12,18 @@
 #ifndef SRC_INCLUDE_HIGHLIGHTER_H_
 #define SRC_INCLUDE_HIGHLIGHTER_H_
 
+#include <string>
 #include "include/tool.h"
 
 // Inheirit width and height from tool
-class Highlighter : public Tool {
+class THighlighter : public Tool {
  public:
-  Highlighter(int width, int height);
-  Highlighter();
-  ~Highlighter();
+  THighlighter(int width, int height);
+  THighlighter();
+  ~THighlighter();
   void ApplyTool(image_tools::PixelBuffer* buff,
     image_tools::ColorData current_color, int x, int y, int last_x, int last_y);
+  std::string name(void) { return "Highlighter"; }
 };
 
 #endif  // SRC_INCLUDE_HIGHLIGHTER_H_

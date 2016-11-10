@@ -19,7 +19,7 @@
 using image_tools::PixelBuffer;
 using image_tools::ColorData;
 
-SprayCan::SprayCan(int width, int height) : Tool(width, height) {
+TSprayCan::TSprayCan(int width, int height) : Tool(width, height) {
     double radius = static_cast<double>(width) / 2;
     double** mask = this->get_mask();
 
@@ -45,6 +45,6 @@ SprayCan::SprayCan(int width, int height) : Tool(width, height) {
     }
 }
 
-SprayCan::SprayCan() : SprayCan(41, 41) {}
+TSprayCan::TSprayCan() : TSprayCan(41, 41) {}
 
-SprayCan::~SprayCan() {}
+TSprayCan::~TSprayCan() {}

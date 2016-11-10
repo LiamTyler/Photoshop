@@ -12,6 +12,7 @@
 #ifndef SRC_INCLUDE_TOOL_H_
 #define SRC_INCLUDE_TOOL_H_
 
+#include <string>
 #include "include/color_data.h"
 #include "include/pixel_buffer.h"
 
@@ -25,6 +26,7 @@ class Tool {
   int get_width();
   int get_height();
   double** get_mask();
+  virtual std::string name(void) = 0;
 
  private:
   Tool(const Tool &t) = delete;

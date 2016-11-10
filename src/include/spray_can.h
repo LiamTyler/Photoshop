@@ -12,13 +12,15 @@
 #ifndef SRC_INCLUDE_SPRAY_CAN_H_
 #define SRC_INCLUDE_SPRAY_CAN_H_
 
+#include <string>
 #include "include/spray_can.h"
 
-class SprayCan : public Tool {
+class TSprayCan : public Tool {
  public:
-  SprayCan(int width, int height);
-  SprayCan();
-  virtual ~SprayCan();
+  TSprayCan(int width, int height);
+  TSprayCan();
+  virtual ~TSprayCan();
+  std::string name(void) { return "Spray Can"; }
 };
 
 #endif  // SRC_INCLUDE_SPRAY_CAN_H_

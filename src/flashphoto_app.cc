@@ -21,13 +21,7 @@
 #include "include/color_data.h"
 #include "include/pixel_buffer.h"
 #include "include/ui_ctrl.h"
-#include "include/pen.h"
-#include "include/caligraphy.h"
-#include "include/highlighter.h"
-#include "include/rainbow.h"
-#include "include/spray_can.h"
-#include "include/eraser.h"
-
+#include "include/tool_factory.h"
 
 /*******************************************************************************
  * Namespaces
@@ -45,6 +39,7 @@ FlashPhotoApp::FlashPhotoApp(int width, int height) : BaseGfxApp(width, height),
     display_buffer_(nullptr),
     cur_tool_index_(0),
     cur_tool_(nullptr),
+    tools_(),
     last_x_(-1),
     last_y_(-1),
     cur_color_red_(0.0),
@@ -71,27 +66,23 @@ void FlashPhotoApp::Init(
     // Set the name of the window
     set_caption("FlashPhoto");
 
+    // Set up Tools
+    for (int i = 0; i < ToolFactory::num_tools(); i++) {
+        Tool* t = ToolFactory::CreateTool(i);
+        assert(t);
+        tools_.push_back(t);
+        std::cout << "tool " << i << " created" << std::endl;
+    }
+    cur_tool_index_ = 0;
+    cur_tool_ = tools_[0];
+    last_x_ = -1;
+    last_y_ = -1;
+
     // Initialize Interface
     InitializeBuffers(background_color, width(), height());
 
     InitGlui();
     InitGraphics();
-
-    // Set up Tools
-    // Really should put in tool factory class
-    tool_select_[0] = new Pen();
-    tool_select_[1] = new Eraser();
-    tool_select_[2] = new SprayCan();
-    tool_select_[3] = new Caligraphy();
-    tool_select_[4] = new Highlighter();
-    tool_select_[5] = new Rainbow();
-    for (int i = 0; i < 6; i++) {
-        assert(tool_select_[i]);
-    }
-    cur_tool_index_ = 0;
-    cur_tool_ = tool_select_[0];
-    last_x_ = -1;
-    last_y_ = -1;
 }
 
 void FlashPhotoApp::Display(void) {
@@ -101,10 +92,6 @@ void FlashPhotoApp::Display(void) {
 FlashPhotoApp::~FlashPhotoApp(void) {
     if (display_buffer_) {
         delete display_buffer_;
-    }
-
-    for (int i = 0; i < 6; i++) {
-        delete tool_select_[i];
     }
 }
 
@@ -168,13 +155,8 @@ void FlashPhotoApp::InitGlui(void) {
                                                      UICtrl::UI_TOOLTYPE,
                                                      s_gluicallback);
         // Create interface buttons for different tools:
-        // TODO(tyler147): make related to tool factory
-        new GLUI_RadioButton(radio, "Pen");
-        new GLUI_RadioButton(radio, "Eraser");
-        new GLUI_RadioButton(radio, "Spray Can");
-        new GLUI_RadioButton(radio, "Caligraphy Pen");
-        new GLUI_RadioButton(radio, "Highlighter");
-        new GLUI_RadioButton(radio, "Rainbow");
+        for (int i = 0; i < ToolFactory::num_tools(); i++)
+            new GLUI_RadioButton(radio, tools_[i]->name().c_str());
         new GLUI_RadioButton(radio, "Stamp");
         new GLUI_RadioButton(radio, "Blur");
     }
@@ -239,7 +221,7 @@ void FlashPhotoApp::InitGlui(void) {
 void FlashPhotoApp::GluiControl(int control_id) {
     switch (control_id) {
         case UICtrl::UI_TOOLTYPE:
-            cur_tool_ = tool_select_[cur_tool_index_];
+            cur_tool_ = tools_[cur_tool_index_];
             break;
         case UICtrl::UI_PRESET_RED:
             cur_color_red_ = 1;

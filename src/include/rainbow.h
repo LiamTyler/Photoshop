@@ -12,15 +12,16 @@
 #ifndef SRC_INCLUDE_RAINBOW_H_
 #define SRC_INCLUDE_RAINBOW_H_
 
+#include <string>
 #include "include/pen.h"
 #include "include/pixel_buffer.h"
 #include "include/color_data.h"
 
-class Rainbow : public Tool {
+class TRainbow : public Tool {
  public:
-  Rainbow(int width, int height, double color_offset, double rate_of_change);
-  Rainbow();
-  ~Rainbow();
+  TRainbow(int width, int height, double color_offset, double rate_of_change);
+  TRainbow();
+  ~TRainbow();
   // Override the applyTool so we can update the color before we apply the mask
   void ApplyTool(image_tools::PixelBuffer* buff,
                 image_tools::ColorData current_color,
@@ -29,6 +30,7 @@ class Rainbow : public Tool {
   // http://academe.co.uk/wp-content/uploads/2012/04/
   // 451px-HSV-RGB-comparison.svg_.png
   void UpdateColor(double* red, double* green, double* blue);
+  std::string name(void) { return "Raindbow Pen"; }
 
  private:
   double color_offset_;  // Angle through the color wheel

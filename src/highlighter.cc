@@ -19,16 +19,16 @@
 using image_tools::PixelBuffer;
 using image_tools::ColorData;
 
-Highlighter::Highlighter(int width, int height) : Tool(width, height) {
+THighlighter::THighlighter(int width, int height) : Tool(width, height) {
     tool_utilities::FillMask(this->get_mask(), height, width, 0.4);
 }
 
-Highlighter::Highlighter() : Highlighter(5, 15) {}
+THighlighter::THighlighter() : THighlighter(5, 15) {}
 
-Highlighter::~Highlighter() {}
+THighlighter::~THighlighter() {}
 
 
-void Highlighter::ApplyTool(PixelBuffer* buff, ColorData current_color,
+void THighlighter::ApplyTool(PixelBuffer* buff, ColorData current_color,
                         int x, int y, int last_x, int last_y) {
     int width = this->get_width();
     int height = this->get_height();
