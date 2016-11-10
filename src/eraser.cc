@@ -32,5 +32,6 @@ Eraser::~Eraser() {}
 
 void Eraser::ApplyTool(PixelBuffer* buff, ColorData current_color,
                         int x, int y, int last_x, int last_y) {
+    std::cout << "about to apply the parent applyTool" << std::endl;
     this->Tool::ApplyTool(buff, buff->background_color(), x, y, last_x, last_y);
 }

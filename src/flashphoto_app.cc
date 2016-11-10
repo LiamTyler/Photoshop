@@ -6,6 +6,7 @@
  * Copyright       : 2016 CSCI3081W TAs. All rights reserved.
  * Creation Date   : 2/15/15
  * Original Author : Seth Johnson
+ * New Authors     : Liam Tyler
  *
  ******************************************************************************/
 
@@ -13,12 +14,19 @@
  * Includes
  ******************************************************************************/
 #include "include/flashphoto_app.h"
+#include <assert.h>
 #include <cmath>
 #include <iostream>
+#include <iomanip>
 #include "include/color_data.h"
 #include "include/pixel_buffer.h"
 #include "include/ui_ctrl.h"
 #include "include/pen.h"
+#include "include/caligraphy.h"
+#include "include/highlighter.h"
+#include "include/rainbow.h"
+#include "include/spray_can.h"
+#include "include/eraser.h"
 
 
 /*******************************************************************************
@@ -36,9 +44,12 @@ FlashPhotoApp::FlashPhotoApp(int width, int height) : BaseGfxApp(width, height),
     glui_ctrl_hooks_(),
     display_buffer_(nullptr),
     cur_tool_index_(0),
+    cur_tool_(nullptr),
     cur_color_red_(0.0),
     cur_color_green_(0.0),
-    cur_color_blue_(0.0) {}
+    cur_color_blue_(0.0),
+    last_x_(-1),
+    last_y_(-1) {}
 
 /*******************************************************************************
  * Member Functions
@@ -65,8 +76,18 @@ void FlashPhotoApp::Init(
     InitGlui();
     InitGraphics();
 
-    // Set up 
+    // Set up Tools
+    // Really should put in tool factory class
     tool_select_[0] = new Pen();
+    tool_select_[1] = new Eraser();
+    tool_select_[2] = new SprayCan();
+    tool_select_[3] = new Caligraphy();
+    tool_select_[4] = new Highlighter();
+    tool_select_[5] = new Rainbow();
+    for (int i = 0; i < 6; i++) {
+        assert(tool_select_[i]);
+    }
+    cur_tool_index_ = 0;
     cur_tool_ = tool_select_[0];
     last_x_ = -1;
     last_y_ = -1;
@@ -81,19 +102,19 @@ FlashPhotoApp::~FlashPhotoApp(void) {
         delete display_buffer_;
     }
 
-    for(int i = 0; i < 1; i++) {
+    for (int i = 0; i < 6; i++) {
         delete tool_select_[i];
     }
 }
 
 
 void FlashPhotoApp::MouseDragged(int x, int y) {
-    if(last_x_ != -1) {
-        /* Find the distance between (last_x_, last_y_) and (x, y) and divide by
-         * an eigth of the width of the mask to determine the number n times to
-         * ApplyTool between (last_x_, last_y_) and (x, y) */
+    if (last_x_ != -1) {
+    /* Find the distance between (last_x_, last_y_) and (x, y) and divide by
+     * an eigth of the width of the mask to determine the number n times to
+     * ApplyTool between (last_x_, last_y_) and (x, y) */
         int n = sqrt(pow((last_x_ - x), 2) +
-                    pow((last_y_ - y), 2))/(cur_tool_ -> get_width() / 8.0);
+                pow((last_y_ - y), 2))/(cur_tool_ -> get_width() / 8.0);
         float percent_step = 1.0/static_cast<float>(n);
         int base_x = last_x_;
         int base_y = last_y_;
@@ -103,7 +124,7 @@ void FlashPhotoApp::MouseDragged(int x, int y) {
             int new_x = base_x + (i * dx);
             int new_y = base_y + (i * dy);
             cur_tool_->ApplyTool(display_buffer_, current_color_, new_x, new_y,
-                    last_x_, last_y_);
+                                 last_x_, last_y_);
             last_x_ = new_x;
             last_y_ = new_y;
         }
@@ -118,7 +139,8 @@ void FlashPhotoApp::MouseMoved(int x, int y) {}
 
 void FlashPhotoApp::LeftMouseDown(int x, int y) {
     std::cout << "mousePressed " << x << " " << y << std::endl;
-    cur_tool_->ApplyTool(display_buffer_, current_color_, x, y, last_x_, last_y_);
+    cur_tool_->ApplyTool(display_buffer_, current_color_,
+                         x, y, last_x_, last_y_);
     last_x_ = x;
     last_y_ = y;
 }
@@ -140,15 +162,18 @@ void FlashPhotoApp::InitGlui(void) {
 
     GLUI_Panel *toolPanel = new GLUI_Panel(glui(), "Tool Type");
     {
-        GLUI_RadioGroup *radio = new GLUI_RadioGroup(toolPanel, &cur_tool_index_,
-                UICtrl::UI_TOOLTYPE,
-                s_gluicallback);
+        GLUI_RadioGroup *radio = new GLUI_RadioGroup(toolPanel,
+                                                     &cur_tool_index_,
+                                                     UICtrl::UI_TOOLTYPE,
+                                                     s_gluicallback);
         // Create interface buttons for different tools:
+        // TODO(tyler147): make related to tool factory
         new GLUI_RadioButton(radio, "Pen");
         new GLUI_RadioButton(radio, "Eraser");
         new GLUI_RadioButton(radio, "Spray Can");
         new GLUI_RadioButton(radio, "Caligraphy Pen");
         new GLUI_RadioButton(radio, "Highlighter");
+        new GLUI_RadioButton(radio, "Rainbow");
         new GLUI_RadioButton(radio, "Stamp");
         new GLUI_RadioButton(radio, "Blur");
     }
@@ -193,6 +218,7 @@ void FlashPhotoApp::InitGlui(void) {
         new GLUI_Button(color_panel, "Black", UICtrl::UI_PRESET_BLACK,
                 s_gluicallback);
     }
+    update_colors();
 
     /* Initialize state management (undo, redo, quit) */
     state_manager_.InitGlui(glui(), s_gluicallback);
@@ -211,6 +237,9 @@ void FlashPhotoApp::InitGlui(void) {
 
 void FlashPhotoApp::GluiControl(int control_id) {
     switch (control_id) {
+        case UICtrl::UI_TOOLTYPE:
+            cur_tool_ = tool_select_[cur_tool_index_];
+            break;
         case UICtrl::UI_PRESET_RED:
             cur_color_red_ = 1;
             cur_color_green_ = 0;
