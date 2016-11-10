@@ -9,8 +9,8 @@
  *
  ******************************************************************************/
 
-#ifndef INCLUDE_HIGHLIGHTER_H_
-#define INCLUDE_HIGHLIGHTER_H_
+#ifndef SRC_INCLUDE_HIGHLIGHTER_H_
+#define SRC_INCLUDE_HIGHLIGHTER_H_
 
 #include "include/tool.h"
 
@@ -24,4 +24,4 @@ class Highlighter : public Tool {
     image_tools::ColorData current_color, int x, int y, int last_x, int last_y);
 };
 
-#endif  // INCLUDE_HIGHLIGHTER_H_
+#endif  // SRC_INCLUDE_HIGHLIGHTER_H_

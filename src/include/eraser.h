@@ -9,8 +9,8 @@
  *
  ******************************************************************************/
 
-#ifndef INCLUDE_ERASER_H_
-#define INCLUDE_ERASER_H_
+#ifndef SRC_INCLUDE_ERASER_H_
+#define SRC_INCLUDE_ERASER_H_
 
 #include "include/eraser.h"
 
@@ -23,4 +23,4 @@ class Eraser : public Tool {
                 image_tools::ColorData current_color,
                 int x, int y, int last_x, int last_y);
 };
-#endif  // INCLUDE_ERASER_H_
+#endif  // SRC_INCLUDE_ERASER_H_

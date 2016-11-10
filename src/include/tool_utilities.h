@@ -1,5 +1,5 @@
-#ifndef INCLUDE_TOOL_UTILITIES_H_
-#define INCLUDE_TOOL_UTILITIES_H_
+#ifndef SRC_INCLUDE_TOOL_UTILITIES_H_
+#define SRC_INCLUDE_TOOL_UTILITIES_H_
 
 /*******************************************************************************
  * Name            : tool_utilities.h
@@ -17,4 +17,4 @@ namespace tool_utilities {
     void FillMask(double** mask, int height, int width, double opacity);
 }
 
-#endif  // INCLUDE_TOOL_UTILITIES_H_
+#endif  // SRC_INCLUDE_TOOL_UTILITIES_H_

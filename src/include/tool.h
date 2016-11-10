@@ -9,8 +9,8 @@
  *
  ******************************************************************************/
 
-#ifndef INCLUDE_TOOL_H_
-#define INCLUDE_TOOL_H_
+#ifndef SRC_INCLUDE_TOOL_H_
+#define SRC_INCLUDE_TOOL_H_
 
 #include "include/color_data.h"
 #include "include/pixel_buffer.h"
@@ -19,7 +19,7 @@ class Tool {
  public:
   Tool(int width, int height);
   Tool();
-  ~Tool();
+  virtual ~Tool();
   virtual void ApplyTool(image_tools::PixelBuffer* buff,
     image_tools::ColorData current_color, int x, int y, int last_x, int last_y);
   int get_width();
@@ -27,9 +27,11 @@ class Tool {
   double** get_mask();
 
  private:
+  Tool(const Tool &t) = delete;
+  Tool& operator=(const Tool &t) = delete;
   int width_;
   int height_;
   double** mask_;
 };
 
-#endif  // INCLUDE_TOOL_H_
+#endif  // SRC_INCLUDE_TOOL_H_

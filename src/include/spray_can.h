@@ -9,8 +9,8 @@
  *
  ******************************************************************************/
 
-#ifndef INCLUDE_SPRAY_CAN_H_
-#define INCLUDE_SPRAY_CAN_H_
+#ifndef SRC_INCLUDE_SPRAY_CAN_H_
+#define SRC_INCLUDE_SPRAY_CAN_H_
 
 #include "include/spray_can.h"
 
@@ -18,7 +18,7 @@ class SprayCan : public Tool {
  public:
   SprayCan(int width, int height);
   SprayCan();
-  ~SprayCan();
+  virtual ~SprayCan();
 };
 
-#endif  // INCLUDE_SPRAY_CAN_H_
+#endif  // SRC_INCLUDE_SPRAY_CAN_H_

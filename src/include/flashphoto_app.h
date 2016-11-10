@@ -87,8 +87,6 @@ class FlashPhotoApp : public BaseGfxApp {
   void InitializeBuffers(ColorData initial_color,
                          int width, int height);
 
-  void update_current_color();
-
   /* Copy/move assignment/construction disallowed */
   FlashPhotoApp(const FlashPhotoApp &rhs) = delete;
   FlashPhotoApp& operator=(const FlashPhotoApp &rhs) = delete;
