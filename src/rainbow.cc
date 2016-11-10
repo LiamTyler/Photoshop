@@ -21,13 +21,13 @@ using image_tools::ColorData;
 Rainbow::Rainbow(int width,
                 int height,
                 double color_offset,
-                double rate_of_change) : Tool(width, height) {
+                double rate_of_change) : Tool(width, height),
+                                         color_offset_(color_offset),
+                                         rate_of_change_(rate_of_change) {
     tool_utilities::CreateCircle(this->get_mask(),
                                 height,
                                 width,
                                 static_cast<double>(width) / 2);
-    color_offset_ = color_offset;
-    rate_of_change_ = rate_of_change;
 }
 
 Rainbow::Rainbow() : Rainbow(3, 3, 0.0, 0.2) {}
