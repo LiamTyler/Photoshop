@@ -23,6 +23,7 @@
 #include "include/io_manager.h"
 #include "include/ui_ctrl.h"
 #include "include/state_manager.h"
+#include "include/tool.h"
 
 /*******************************************************************************
  * Namespaces
@@ -86,6 +87,8 @@ class FlashPhotoApp : public BaseGfxApp {
   void InitializeBuffers(ColorData initial_color,
                          int width, int height);
 
+  void update_current_color();
+
   /* Copy/move assignment/construction disallowed */
   FlashPhotoApp(const FlashPhotoApp &rhs) = delete;
   FlashPhotoApp& operator=(const FlashPhotoApp &rhs) = delete;
@@ -118,11 +121,18 @@ class FlashPhotoApp : public BaseGfxApp {
   PixelBuffer *display_buffer_;
 
   // These are used to store the selections from the GLUI user interface
-  int cur_tool_;  /**< Currently selected tool from UI */
+  int cur_tool_index_;  /**< Currently selected tool from UI */
+  Tool* cur_tool_;
+  Tool* tool_select_[1];
+
+  int last_x_;
+  int last_y_;
 
   float cur_color_red_;
   float cur_color_green_;
   float cur_color_blue_;
+
+  ColorData current_color_;
 };
 
 }  /* namespace image_tools */
