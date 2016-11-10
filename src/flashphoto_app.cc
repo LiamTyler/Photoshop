@@ -45,11 +45,12 @@ FlashPhotoApp::FlashPhotoApp(int width, int height) : BaseGfxApp(width, height),
     display_buffer_(nullptr),
     cur_tool_index_(0),
     cur_tool_(nullptr),
+    last_x_(-1),
+    last_y_(-1),
     cur_color_red_(0.0),
     cur_color_green_(0.0),
     cur_color_blue_(0.0),
-    last_x_(-1),
-    last_y_(-1) {}
+    current_color_(ColorData(0, 0, 0)) {}
 
 /*******************************************************************************
  * Member Functions

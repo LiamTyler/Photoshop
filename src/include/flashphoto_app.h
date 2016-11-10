@@ -121,7 +121,7 @@ class FlashPhotoApp : public BaseGfxApp {
   // These are used to store the selections from the GLUI user interface
   int cur_tool_index_;  /**< Currently selected tool from UI */
   Tool* cur_tool_;
-  Tool* tool_select_[1];
+  Tool* tool_select_[6];
 
   int last_x_;
   int last_y_;
