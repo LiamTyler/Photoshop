@@ -17,9 +17,9 @@
 using image_tools::PixelBuffer;
 using image_tools::ColorData;
 
-Tool::Tool(int width, int height) {
-    width_ = width;
-    height_ = height;
+Tool::Tool(int width, int height) : width_(width),
+                                    height_(height),
+                                    mask_(nullptr) {
     // Allocate the memory for the 2d mask with height rows and width columns
     mask_ = new double*[height];
     for (int i = 0; i < height; i++) {
