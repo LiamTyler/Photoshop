@@ -31,7 +31,7 @@ namespace image_tools {
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-FlashPhotoApp::FlashPhotoApp(int width, int height) : BaseGfxApp(width, height),
+FlashPhotoApp::FlashPhotoApp(int w, int h) : BaseGfxApp(w, h),
     filter_manager_(),
     io_manager_(),
     state_manager_(),
@@ -140,8 +140,8 @@ void FlashPhotoApp::LeftMouseUp(int x, int y) {
 }
 
 void FlashPhotoApp::InitializeBuffers(ColorData background_color,
-        int width, int height) {
-    display_buffer_ = new PixelBuffer(width, height, background_color);
+        int w, int h) {
+    display_buffer_ = new PixelBuffer(w, h, background_color);
 }
 
 void FlashPhotoApp::InitGlui(void) {

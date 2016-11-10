@@ -32,13 +32,13 @@ bool BaseGfxApp::s_glut_initialized_ = false;
 /*******************************************************************************
  * Constructors/Destructors
  ******************************************************************************/
-BaseGfxApp::BaseGfxApp(int width,
-                       int height)
+BaseGfxApp::BaseGfxApp(int w,
+                       int h)
     : glut_window_handle_(0),
       glui_(nullptr),
       drag_(false),
-      width_(width),
-      height_(height),
+      width_(w),
+      height_(h),
       milliseconds_(0) {
   s_current_app_ = this;
 }
@@ -100,12 +100,12 @@ void BaseGfxApp::RunMainLoop(void) {
   glutMainLoop();
 }
 
-void BaseGfxApp::Reshape(int width, int height) {
+void BaseGfxApp::Reshape(int w, int h) {
   // This code essentially disables the ability to interactively resize
   // the graphics window. BaseGfxApp defaults to a window that
   // cannot be resized by dragging the corner with the mouse.
-  if (s_current_app_->width() != width ||
-      s_current_app_->height() != height) {
+  if (s_current_app_->width() != w ||
+      s_current_app_->height() != h) {
     glutReshapeWindow(s_current_app_->width(), s_current_app_->height());
   }
 }
@@ -116,10 +116,10 @@ void BaseGfxApp::RenderOneFrame(void) {
   glutSwapBuffers();
 }
 
-void BaseGfxApp::DrawPixels(int start_x, int start_y, int width,
-                            int height, void const * const pixels) {
+void BaseGfxApp::DrawPixels(int start_x, int start_y, int w,
+                            int h, void const * const pixels) {
   glRasterPos2i(start_x, start_y);
-  glDrawPixels(width, height, GL_RGBA, GL_FLOAT, pixels);
+  glDrawPixels(w, h, GL_RGBA, GL_FLOAT, pixels);
 
   unsigned err = glGetError();
   if (err != GL_NO_ERROR) {
@@ -198,9 +198,9 @@ void BaseGfxApp::s_idle(void) {
   }
 }
 
-void BaseGfxApp::SetWindowDimensions(int width, int height) {
-  height_ = height;
-  width_ = width;
+void BaseGfxApp::SetWindowDimensions(int w, int h) {
+  height_ = h;
+  width_ = w;
   glutReshapeWindow(width_, height_);
 }
 

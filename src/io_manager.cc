@@ -98,11 +98,11 @@ bool IOManager::is_valid_image_file(const std::string & name) {
   return is_valid;
 }
 
-void IOManager::set_image_file(const std::string & file_name) {
+void IOManager::set_image_file(const std::string & fname) {
   // If a directory was selected
   // instead of a file, use the
   // latest file typed or selected.
-  std::string image_file = file_name;
+  std::string image_file = fname;
   if (!is_valid_image_file_name(image_file)) {
     image_file = file_name_;
   }

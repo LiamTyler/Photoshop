@@ -29,11 +29,11 @@ namespace image_tools {
  ******************************************************************************/
 PixelBuffer::PixelBuffer(int w,
                          int h,
-                         ColorData background_color)
+                         ColorData bc)
     : width_(w),
       height_(h),
-      pixels_(w*h, background_color),
-      background_color_(background_color) {}
+      pixels_(w*h, bc),
+      background_color_(bc) {}
 
 PixelBuffer::PixelBuffer(
     const PixelBuffer&rhs) : PixelBuffer(rhs.width_,
