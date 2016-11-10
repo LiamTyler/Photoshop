@@ -9,8 +9,8 @@
  *
  ******************************************************************************/
 
-#ifndef INCLUDE_PEN_H_
-#define INCLUDE_PEN_H_
+#ifndef SRC_INCLUDE_PEN_H_
+#define SRC_INCLUDE_PEN_H_
 
 #include "include/tool.h"
 
@@ -21,4 +21,4 @@ class Pen : public Tool {
   ~Pen();
 };
 
-#endif  // INCLUDE_PEN_H_
+#endif  // SRC_INCLUDE_PEN_H_

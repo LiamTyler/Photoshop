@@ -36,9 +36,12 @@ FlashPhotoApp::FlashPhotoApp(int width, int height) : BaseGfxApp(width, height),
     glui_ctrl_hooks_(),
     display_buffer_(nullptr),
     cur_tool_index_(0),
+    cur_tool_(nullptr),
     cur_color_red_(0.0),
     cur_color_green_(0.0),
-    cur_color_blue_(0.0) {}
+    cur_color_blue_(0.0),
+    last_x_(-1),
+    last_y_(-1) {}
 
 /*******************************************************************************
  * Member Functions
@@ -65,7 +68,7 @@ void FlashPhotoApp::Init(
     InitGlui();
     InitGraphics();
 
-    // Set up 
+    // Set up Tools
     tool_select_[0] = new Pen();
     cur_tool_ = tool_select_[0];
     last_x_ = -1;
@@ -81,19 +84,19 @@ FlashPhotoApp::~FlashPhotoApp(void) {
         delete display_buffer_;
     }
 
-    for(int i = 0; i < 1; i++) {
+    for (int i = 0; i < 1; i++) {
         delete tool_select_[i];
     }
 }
 
 
 void FlashPhotoApp::MouseDragged(int x, int y) {
-    if(last_x_ != -1) {
-        /* Find the distance between (last_x_, last_y_) and (x, y) and divide by
-         * an eigth of the width of the mask to determine the number n times to
-         * ApplyTool between (last_x_, last_y_) and (x, y) */
+    if (last_x_ != -1) {
+    /* Find the distance between (last_x_, last_y_) and (x, y) and divide by
+     * an eigth of the width of the mask to determine the number n times to
+     * ApplyTool between (last_x_, last_y_) and (x, y) */
         int n = sqrt(pow((last_x_ - x), 2) +
-                    pow((last_y_ - y), 2))/(cur_tool_ -> get_width() / 8.0);
+                pow((last_y_ - y), 2))/(cur_tool_ -> get_width() / 8.0);
         float percent_step = 1.0/static_cast<float>(n);
         int base_x = last_x_;
         int base_y = last_y_;
@@ -103,7 +106,7 @@ void FlashPhotoApp::MouseDragged(int x, int y) {
             int new_x = base_x + (i * dx);
             int new_y = base_y + (i * dy);
             cur_tool_->ApplyTool(display_buffer_, current_color_, new_x, new_y,
-                    last_x_, last_y_);
+                                 last_x_, last_y_);
             last_x_ = new_x;
             last_y_ = new_y;
         }
@@ -118,7 +121,8 @@ void FlashPhotoApp::MouseMoved(int x, int y) {}
 
 void FlashPhotoApp::LeftMouseDown(int x, int y) {
     std::cout << "mousePressed " << x << " " << y << std::endl;
-    cur_tool_->ApplyTool(display_buffer_, current_color_, x, y, last_x_, last_y_);
+    cur_tool_->ApplyTool(display_buffer_, current_color_,
+                         x, y, last_x_, last_y_);
     last_x_ = x;
     last_y_ = y;
 }
@@ -140,9 +144,10 @@ void FlashPhotoApp::InitGlui(void) {
 
     GLUI_Panel *toolPanel = new GLUI_Panel(glui(), "Tool Type");
     {
-        GLUI_RadioGroup *radio = new GLUI_RadioGroup(toolPanel, &cur_tool_index_,
-                UICtrl::UI_TOOLTYPE,
-                s_gluicallback);
+        GLUI_RadioGroup *radio = new GLUI_RadioGroup(toolPanel,
+                                                     &cur_tool_index_,
+                                                     UICtrl::UI_TOOLTYPE,
+                                                     s_gluicallback);
         // Create interface buttons for different tools:
         new GLUI_RadioButton(radio, "Pen");
         new GLUI_RadioButton(radio, "Eraser");

@@ -9,8 +9,8 @@
  *
  ******************************************************************************/
 
-#ifndef INCLUDE_RAINBOW_H_
-#define INCLUDE_RAINBOW_H_
+#ifndef SRC_INCLUDE_RAINBOW_H_
+#define SRC_INCLUDE_RAINBOW_H_
 
 #include "include/pen.h"
 #include "include/pixel_buffer.h"
@@ -35,4 +35,4 @@ class Rainbow : public Tool {
   double rate_of_change_;  // How quickly the color will change
 };
 
-#endif  // INCLUDE_RAINBOW_H_
+#endif  // SRC_INCLUDE_RAINBOW_H_

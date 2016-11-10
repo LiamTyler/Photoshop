@@ -9,8 +9,8 @@
  *
  ******************************************************************************/
 
-#ifndef INCLUDE_TOOL_H_
-#define INCLUDE_TOOL_H_
+#ifndef SRC_INCLUDE_TOOL_H_
+#define SRC_INCLUDE_TOOL_H_
 
 #include "include/color_data.h"
 #include "include/pixel_buffer.h"
@@ -32,4 +32,4 @@ class Tool {
   double** mask_;
 };
 
-#endif  // INCLUDE_TOOL_H_
+#endif  // SRC_INCLUDE_TOOL_H_

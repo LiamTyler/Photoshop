@@ -9,8 +9,8 @@
  *
  ******************************************************************************/
 
-#ifndef INCLUDE_CALIGRAPHY_H_
-#define INCLUDE_CALIGRAPHY_H_
+#ifndef SRC_INCLUDE_CALIGRAPHY_H_
+#define SRC_INCLUDE_CALIGRAPHY_H_
 
 #include "include/tool.h"
 
@@ -22,4 +22,4 @@ class Caligraphy : public Tool {
   ~Caligraphy();
 };
 
-#endif  // INCLUDE_CALIGRAPHY_H_
+#endif  // SRC_INCLUDE_CALIGRAPHY_H_
