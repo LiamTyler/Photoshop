@@ -12,6 +12,8 @@
 #ifndef SRC_INCLUDE_COLOR_DATA_H_
 #define SRC_INCLUDE_COLOR_DATA_H_
 
+#include <iostream>
+
 /*******************************************************************************
  * Namespaces
  ******************************************************************************/
@@ -59,6 +61,7 @@ class ColorData {
   friend ColorData operator* (const ColorData& a, float f);
   friend ColorData operator+ (const ColorData& a, const ColorData& b);
   friend ColorData operator- (const ColorData& a, const ColorData& b);
+  friend std::ostream& operator<<(std::ostream& out, const ColorData& c);
 
  private:
   static inline float clamp_value(float input, float a, float b)

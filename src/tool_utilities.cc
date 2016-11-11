@@ -26,6 +26,8 @@ namespace tool_utilities {
                 if (pow(w - cent_x, 2) + pow(h - cent_y, 2)
                    <= radius * radius) {
                     mask[h][w] = 1.0;
+                } else {
+                    mask[h][w] = 0.0;
                 }
             }
         }

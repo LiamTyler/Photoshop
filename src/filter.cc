@@ -49,13 +49,13 @@ void Filter::CreateKernal(int width, int height) {
 void Filter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
     int buff_height = oldimage->height();
     int buff_width = oldimage->width();
-    ColorData total = ColorData();
+    ColorData total;
     int kern_mid_x = width_ / 2;
     int kern_mid_y = height_ / 2;
 
     for (int r = 0; r < buff_height; r++) {
         for (int c = 0; c < buff_width; c++) {
-            total = ColorData();
+            total = ColorData(0,0,0);
             // Center the kernal over the pixel, and apply it by
             // getting the running total of pixel * intensity
             for (int kr = 0; kr < height_; kr++) {
@@ -69,6 +69,7 @@ void Filter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
                 }
             }
             newimage->set_pixel(c, r, total);
+            //std::cout << "Pixel at (" << r << "," << c << "): " << total << std::endl;
         }
     }
 }

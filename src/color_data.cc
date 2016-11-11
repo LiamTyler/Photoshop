@@ -61,6 +61,11 @@ ColorData operator+ (const ColorData& a, const ColorData& b) {
 ColorData operator- (const ColorData& a, const ColorData& b) {
         return ColorData(a.red_ - b.red_, a.green_ - b.green_,
                          a.blue_ - b.blue_, a.alpha_ - b.alpha_);
+
+}
+std::ostream& operator<<(std::ostream& out, const ColorData& b) {
+    out << "(" << b.red_ << "," << b.green_ << "," << b.blue_ << ")";
+    return out;
 }
 
 }  /* namespace image_tools */
