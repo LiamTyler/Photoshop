@@ -13,8 +13,9 @@
 #include "include/blur_filter.h"
 #include "include/tool_utilities.h"
 
-BlurFilter::BlurFilter(int width, int height, double amount) :
-                       Filter(width, height),
+BlurFilter::BlurFilter(double amount) :
+                       Filter(static_cast<int>(amount),
+                              static_cast<int>(amount)),
                        amount_(amount) {}
 
 BlurFilter::BlurFilter() : amount_(0.0) {}

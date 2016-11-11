@@ -21,7 +21,7 @@ using image_tools::PixelBuffer;
 
 class BlurFilter : public Filter {
  public:
-  BlurFilter(int width, int height, double amount);
+  explicit BlurFilter(double amount);
   BlurFilter();
   ~BlurFilter();
   std::string name(void) { return "Blur"; }
