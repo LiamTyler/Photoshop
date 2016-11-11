@@ -31,16 +31,25 @@ Filter::~Filter() {
 }
 
 void Filter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
-    buff_height = oldimage->height();
-    buff_width = oldimage->width();
+    int buff_height = oldimage->height();
+    int buff_width = oldimage->width();
     ColorData total = ColorData();
+    int kern_mid_x = width_ / 2;
+    int kern_mid_y = height_ / 2;
+
     for (int r = 0; r < buff_height; r++) {
         for (int c = 0; c < buff_width; c++) {
             total = 0;
+            // Center the kernal over the pixel, and apply it by
+            // getting the running total of pixel * intensity
             for (int kr = 0; kr < height_; kr++) {
                 for (int kc = 0; kc < width_; kc++) {
-                    total = total + oldimage->get_pixel(c, r)
-                                    * kernal_[kr][kc];
+                    int cur_x = c - kern_mid_x + kc;
+                    int cur_y = r - kern_mid_y + kr;
+                    if (0 <= cur_x && cur_x < buff_width &&
+                        0 <= cur_y && cur_y < buff_height)
+                        total = total + oldimage->get_pixel(cur_x, cur_y)
+                                        * kernal_[kr][kc];
                 }
             }
             newimage->set_pixel(c, r);
