@@ -55,7 +55,7 @@ void Filter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
 
     for (int r = 0; r < buff_height; r++) {
         for (int c = 0; c < buff_width; c++) {
-            total = ColorData(0,0,0);
+            total = ColorData(0, 0, 0);
             // Center the kernal over the pixel, and apply it by
             // getting the running total of pixel * intensity
             for (int kr = 0; kr < height_; kr++) {
@@ -69,7 +69,8 @@ void Filter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
                 }
             }
             newimage->set_pixel(c, r, total);
-            //std::cout << "Pixel at (" << r << "," << c << "): " << total << std::endl;
+            // std::cout << "Pixel at (" << r << "," << c << "): "
+            // << total << std::endl;
         }
     }
 }
