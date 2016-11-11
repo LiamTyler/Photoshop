@@ -29,7 +29,7 @@ class Filter {
   inline double** get_kernal() { return kernal_; }
   virtual std::string name(void) = 0;
 
- proteced:
+ protected:
   void AllocateKernal(int width, int height);
   void DeallocateKernal();
   virtual void InitializeKernal() = 0;

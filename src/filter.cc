@@ -15,6 +15,7 @@
 #include "include/color_data.h"
 
 using image_tools::PixelBuffer;
+using image_tools::ColorData;
 
 Filter::Filter() : width_(0),
                    height_(0),
@@ -30,6 +31,12 @@ Filter::~Filter() {
     DeallocateKernal();
 }
 
+void Filter::CreateKernal(int width, int height) {
+    DeallocateKernal();
+    AllocateKernal(width, height);
+    InitializeKernal();
+}
+
 void Filter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
     int buff_height = oldimage->height();
     int buff_width = oldimage->width();
@@ -39,7 +46,7 @@ void Filter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
 
     for (int r = 0; r < buff_height; r++) {
         for (int c = 0; c < buff_width; c++) {
-            total = 0;
+            total = ColorData();
             // Center the kernal over the pixel, and apply it by
             // getting the running total of pixel * intensity
             for (int kr = 0; kr < height_; kr++) {
@@ -52,7 +59,7 @@ void Filter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
                                         * kernal_[kr][kc];
                 }
             }
-            newimage->set_pixel(c, r);
+            newimage->set_pixel(c, r, total);
         }
     }
 }

@@ -19,13 +19,18 @@
 
 using image_tools::PixelBuffer;
 
-class BlurFilter : Filter {
+class BlurFilter : public Filter {
  public:
-  BlurFilter(int width, int height);
+  BlurFilter(int width, int height, double amount);
   BlurFilter();
   ~BlurFilter();
-  void ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage);
   std::string name(void) { return "Blur"; }
+
+ protected:
+  void InitializeKernal();
+
+ private:
+  double amount_;
 };
 
 #endif  // SRC_INCLUDE_BLUR_FILTER_H_
