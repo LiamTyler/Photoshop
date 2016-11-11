@@ -15,6 +15,8 @@
 #include "include/filter_manager.h"
 #include <iostream>
 #include "include/ui_ctrl.h"
+#include "include/pixel_buffer.h"
+#include "include/blur_filter.h"
 
 /*******************************************************************************
  * Namespaces
@@ -51,9 +53,12 @@ void FilterManager::ApplySaturate(void) {
         << saturation_amount_ << std::endl;
 }
 
-void FilterManager::ApplyBlur(void) {
+void FilterManager::ApplyBlur(PixelBuffer* oldimage, PixelBuffer* newimage) {
     std::cout << "Apply has been clicked for Blur with amount = "
         << blur_amount_ << std::endl;
+    // TODO(tyler147): Why does it tweak out if b = BlurFilter(blur_amount_);
+    BlurFilter b(blur_amount_);
+    b.ApplyFilter(oldimage, newimage);
 }
 
 void FilterManager::ApplySharpen(void) {

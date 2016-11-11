@@ -37,6 +37,7 @@ FlashPhotoApp::FlashPhotoApp(int w, int h) : BaseGfxApp(w, h),
     state_manager_(),
     glui_ctrl_hooks_(),
     display_buffer_(nullptr),
+    scratch_buffer_(nullptr),
     cur_tool_index_(0),
     cur_tool_(nullptr),
     tools_(),
@@ -142,6 +143,7 @@ void FlashPhotoApp::LeftMouseUp(int x, int y) {
 void FlashPhotoApp::InitializeBuffers(ColorData background_color,
         int w, int h) {
     display_buffer_ = new PixelBuffer(w, h, background_color);
+    scratch_buffer_ = new PixelBuffer(w, h, background_color);
 }
 
 void FlashPhotoApp::InitGlui(void) {
@@ -272,7 +274,8 @@ void FlashPhotoApp::GluiControl(int control_id) {
             update_colors();
             break;
         case UICtrl::UI_APPLY_BLUR:
-            filter_manager_.ApplyBlur();
+            filter_manager_.ApplyBlur(display_buffer_, scratch_buffer_);
+            display_buffer_ = scratch_buffer_;
             break;
         case UICtrl::UI_APPLY_SHARP:
             filter_manager_.ApplySharpen();

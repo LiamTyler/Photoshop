@@ -42,7 +42,7 @@ class FilterManager {
    *
    * @param buffer The buffer. Updated to point to a new filtered buffer.
    */
-  void ApplyBlur(void);
+  void ApplyBlur(PixelBuffer* oldimage, PixelBuffer* newimage);
 
   /**
    * @brief Apply a sharpening filter to the buffer, sharpening blurry/undefined

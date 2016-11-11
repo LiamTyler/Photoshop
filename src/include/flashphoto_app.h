@@ -118,6 +118,7 @@ class FlashPhotoApp : public BaseGfxApp {
 
   /** Pointer to pixel data for the screen */
   PixelBuffer *display_buffer_;
+  PixelBuffer *scratch_buffer_;
 
   // These are used to store the selections from the GLUI user interface
   int cur_tool_index_;  /**< Currently selected tool from UI */

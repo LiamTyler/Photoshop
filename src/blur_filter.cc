@@ -16,7 +16,10 @@
 BlurFilter::BlurFilter(double amount) :
                        Filter(static_cast<int>(amount),
                               static_cast<int>(amount)),
-                       amount_(amount) {}
+                       amount_(amount) {
+                           CreateKernal(static_cast<int>(amount),
+                                        static_cast<int>(amount));
+                       }
 
 BlurFilter::BlurFilter() : amount_(0.0) {}
 

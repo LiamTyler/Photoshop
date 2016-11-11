@@ -10,6 +10,8 @@
  ******************************************************************************/
 
 #include <string>
+#include <iostream>
+#include <iomanip>
 #include "include/filter.h"
 #include "include/pixel_buffer.h"
 #include "include/color_data.h"
@@ -34,7 +36,14 @@ Filter::~Filter() {
 void Filter::CreateKernal(int width, int height) {
     DeallocateKernal();
     AllocateKernal(width, height);
+    std::cout << "Kernal: w = " << width_ << ", h = " << height_ << std::endl;
     InitializeKernal();
+    for (int r = 0; r < height_; r++) {
+        for (int c = 0; c < width_; c++) {
+            std::cout << kernal_[r][c] << " ";
+        }
+        std::cout << std::endl;
+    }
 }
 
 void Filter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
