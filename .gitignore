@@ -35,3 +35,6 @@ ext/
 
 # configs
 config/
+
+# Text editor tmp files
+.*.swp
