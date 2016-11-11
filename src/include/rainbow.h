@@ -30,7 +30,7 @@ class TRainbow : public Tool {
   // http://academe.co.uk/wp-content/uploads/2012/04/
   // 451px-HSV-RGB-comparison.svg_.png
   void UpdateColor(double* red, double* green, double* blue);
-  std::string name(void) { return "Raindbow Pen"; }
+  std::string name(void) { return "Rainbow Pen"; }
 
  private:
   double color_offset_;  // Angle through the color wheel
