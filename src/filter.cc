@@ -77,7 +77,7 @@ void Filter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
             }
             // Adjust color if the mask was partially off the edge
             double p = applied / (width_ * height_);
-            ColorData adjusted = total + (bgc * (1 / p));
+            ColorData adjusted = total + (bgc * (1 - p));
             newimage->set_pixel(c, r, adjusted);
             // std::cout << "Pixel at (" << r << "," << c << "): "
             // << total << std::endl;
