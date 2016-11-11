@@ -64,7 +64,7 @@ class FilterManager {
    *
    * @param buffer The buffer. Updated to point to a new filtered buffer.
    */
-  void ApplyEdgeDetect(void);
+  void ApplyEdgeDetect(PixelBuffer* oldimage, PixelBuffer* newimage);
 
   /**
    * @brief Apply a threshold detection filter to the buffer
