@@ -36,7 +36,6 @@ KernalFilter::~KernalFilter() {
 void KernalFilter::CreateKernal(int width, int height) {
     DeallocateKernal();
     AllocateKernal(width, height);
-    std::cout << "Kernal: w = " << width_ << ", h = " << height_ << std::endl;
     InitializeKernal();
     /* Print out kernal to check if the initialize worked
     for (int r = 0; r < height_; r++) {
@@ -76,7 +75,7 @@ void KernalFilter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
             }
             newimage->set_pixel(c, r, total);
             // std::cout << "Pixel at (" << r << "," << c << "): "
-            // << total << std::endl;
+            // << total.clamped_color() << std::endl;
         }
     }
 }
@@ -90,9 +89,9 @@ void KernalFilter::AllocateKernal(int width, int height) {
     width_ = width;
     height_ = height;
     // TODO(tyler147): Make this faster by using a single new
-    kernal_ = new double*[height_];
+    kernal_ = new float*[height_];
     for (int h = 0; h < height_; h++)
-        kernal_[h] = new double[width_];
+        kernal_[h] = new float[width_]();
 }
 
 void KernalFilter::DeallocateKernal() {

@@ -13,7 +13,7 @@
 #include "include/blur_filter.h"
 #include "include/tool_utilities.h"
 
-BlurFilter::BlurFilter(double amount) :
+BlurFilter::BlurFilter(float amount) :
                        KernalFilter(static_cast<int>(amount),
                                     static_cast<int>(amount)),
                        amount_(amount) {
@@ -28,8 +28,9 @@ BlurFilter::~BlurFilter() {}
 void BlurFilter::InitializeKernal() {
     int width = get_width();
     int height = get_height();
-    double** kern = get_kernal();
-    tool_utilities::CreateCircle(kern, height, width, width / 2);
+    float** kern = get_kernal();
+    tool_utilities::CreateCircle(kern, height, width,
+                                 static_cast<float>(width / 2));
 
     // Find out how many pixels there are in the circle
     int total = 0;

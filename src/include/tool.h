@@ -25,7 +25,7 @@ class Tool {
     image_tools::ColorData current_color, int x, int y, int last_x, int last_y);
   int get_width();
   int get_height();
-  double** get_mask();
+  float** get_mask();
   virtual std::string name(void) = 0;
 
  private:
@@ -33,7 +33,7 @@ class Tool {
   Tool& operator=(const Tool &t) = delete;
   int width_;
   int height_;
-  double** mask_;
+  float** mask_;
 };
 
 #endif  // SRC_INCLUDE_TOOL_H_

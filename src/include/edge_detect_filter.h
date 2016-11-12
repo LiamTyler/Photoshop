@@ -13,13 +13,13 @@
 #define SRC_INCLUDE_EDGE_DETECT_FILTER_H_
 
 #include <string>
-#include "include/filter.h"
+#include "include/kernal_filter.h"
 #include "include/color_data.h"
 #include "include/pixel_buffer.h"
 
 using image_tools::PixelBuffer;
 
-class EdgeDetectFilter : public Filter {
+class EdgeDetectFilter : public KernalFilter {
  public:
   EdgeDetectFilter();
   ~EdgeDetectFilter();

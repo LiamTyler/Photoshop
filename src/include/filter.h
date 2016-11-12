@@ -22,10 +22,6 @@ class Filter {
   virtual ~Filter() {}
   virtual void ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) = 0;
   virtual std::string name(void) = 0;
-
-// private:
-// Filter(const Filter &f) = delete;
-// Filter& operator=(const Filter &f) = delete;
 };
 
 #endif  // SRC_INCLUDE_FILTER_H_

@@ -14,8 +14,8 @@
 #include "include/tool_utilities.h"
 
 EdgeDetectFilter::EdgeDetectFilter() :
-                       Filter(3,3) {
-   CreateKernal(3,3);
+                       KernalFilter(3, 3) {
+    CreateKernal(3, 3);
 }
 
 EdgeDetectFilter::~EdgeDetectFilter() {}
@@ -23,18 +23,17 @@ EdgeDetectFilter::~EdgeDetectFilter() {}
 void EdgeDetectFilter::InitializeKernal() {
     int width = get_width();
     int height = get_height();
-    double** kern = get_kernal();
+    float** kern = get_kernal();
     int center_width = width/2;
     int center_height = height/2;
-    int total = (width * height) - 1;
+    float total = static_cast<float>((width * height) - 1);
 
-    for (int r = 0; r < height; r++){
-        for (int c = 0; c < width; c++){
-            if (r == center_height && c == center_width){
+    for (int r = 0; r < height; r++) {
+        for (int c = 0; c < width; c++) {
+            if (r == center_height && c == center_width) {
                 kern[r][c] = total;
-            }
-            else {
-                kern[r][c] = -1;
+            } else {
+                kern[r][c] = -1.0;
             }
         }
     }

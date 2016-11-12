@@ -27,7 +27,7 @@ class KernalFilter : public Filter {
   virtual void CreateKernal(int width, int height);
   inline int get_width() { return width_; }
   inline int get_height() { return height_; }
-  inline double** get_kernal() { return kernal_; }
+  inline float** get_kernal() { return kernal_; }
   virtual std::string name(void) = 0;
 
  protected:
@@ -40,7 +40,7 @@ class KernalFilter : public Filter {
   KernalFilter& operator=(const KernalFilter &f) = delete;
   int width_;
   int height_;
-  double** kernal_;
+  float** kernal_;
 };
 
 #endif  // SRC_INCLUDE_KERNAL_FILTER_H_

@@ -21,7 +21,7 @@ using image_tools::PixelBuffer;
 
 class BlurFilter : public KernalFilter {
  public:
-  explicit BlurFilter(double amount);
+  explicit BlurFilter(float amount);
   BlurFilter();
   ~BlurFilter();
   std::string name(void) { return "Blur"; }
@@ -30,7 +30,7 @@ class BlurFilter : public KernalFilter {
   void InitializeKernal();
 
  private:
-  double amount_;
+  float amount_;
 };
 
 #endif  // SRC_INCLUDE_BLUR_FILTER_H_
