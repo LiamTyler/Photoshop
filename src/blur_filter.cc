@@ -14,8 +14,8 @@
 #include "include/tool_utilities.h"
 
 BlurFilter::BlurFilter(float amount) :
-                       Filter(static_cast<int>(amount),
-                              static_cast<int>(amount)),
+                       KernalFilter(static_cast<int>(amount),
+                                    static_cast<int>(amount)),
                        amount_(amount) {
                            CreateKernal(static_cast<int>(amount),
                                         static_cast<int>(amount));

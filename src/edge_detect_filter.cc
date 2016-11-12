@@ -14,7 +14,7 @@
 #include "include/tool_utilities.h"
 
 EdgeDetectFilter::EdgeDetectFilter() :
-                       Filter(3, 3) {
+                       KernalFilter(3, 3) {
     CreateKernal(3, 3);
 }
 

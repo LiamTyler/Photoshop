@@ -13,13 +13,13 @@
 #define SRC_INCLUDE_BLUR_FILTER_H_
 
 #include <string>
-#include "include/filter.h"
+#include "include/kernal_filter.h"
 #include "include/color_data.h"
 #include "include/pixel_buffer.h"
 
 using image_tools::PixelBuffer;
 
-class BlurFilter : public Filter {
+class BlurFilter : public KernalFilter {
  public:
   explicit BlurFilter(float amount);
   BlurFilter();
