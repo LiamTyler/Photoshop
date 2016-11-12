@@ -9,10 +9,12 @@
  *
  ******************************************************************************/
 
+
+#include "include/kernal_filter.h"
+#include <algorithm>
 #include <string>
 #include <iostream>
 #include <iomanip>
-#include "include/kernal_filter.h"
 #include "include/pixel_buffer.h"
 #include "include/color_data.h"
 
@@ -71,14 +73,16 @@ void KernalFilter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
                         applied += 1;
                         total = total + oldimage->get_pixel(cur_x, cur_y)
                                         * kernal_[kr][kc];
+                    } else {
+                        total = total +
+                                oldimage->get_pixel(
+                                std::min(buff_width - 1, std::max(0, cur_x)),
+                                std::min(buff_height - 1, std::max(0, cur_y)))
+                                * kernal_[kr][kc];
                     }
-                    /* else {
-                        total = total + bgc * kernal_[kr][kc];
-                    }
-                    */
                 }
             }
-            total = total* (height_ * width_ / applied);
+            // total = total* (height_ * width_ / applied);
             newimage->set_pixel(c, r, total.clamped_color() );
             // std::cout << "Pixel at (" << r << "," << c << "): "
             // << total.clamped_color() << std::endl;
