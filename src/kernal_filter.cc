@@ -1,8 +1,8 @@
 /*******************************************************************************
  * Name            : filter.cc
  * Project         : FlashPhotoApp
- * Module          : Parent Filter class
- * Description     : CC of Filter class
+ * Module          : Parent KernalFilter class
+ * Description     : CC of KernalFilter class
  * Copyright       : Group Bits Please
  * Creation Date   : 11/10/16
  * Original Author : Group Bits Please
@@ -12,28 +12,28 @@
 #include <string>
 #include <iostream>
 #include <iomanip>
-#include "include/filter.h"
+#include "include/kernal_filter.h"
 #include "include/pixel_buffer.h"
 #include "include/color_data.h"
 
 using image_tools::PixelBuffer;
 using image_tools::ColorData;
 
-Filter::Filter() : width_(0),
+KernalFilter::KernalFilter() : width_(0),
                    height_(0),
                    kernal_(nullptr) {}
 
-Filter::Filter(int width, int height) : width_(width),
+KernalFilter::KernalFilter(int width, int height) : width_(width),
                                         height_(height),
                                         kernal_(nullptr) {
     AllocateKernal(width, height);
 }
 
-Filter::~Filter() {
+KernalFilter::~KernalFilter() {
     DeallocateKernal();
 }
 
-void Filter::CreateKernal(int width, int height) {
+void KernalFilter::CreateKernal(int width, int height) {
     DeallocateKernal();
     AllocateKernal(width, height);
     std::cout << "Kernal: w = " << width_ << ", h = " << height_ << std::endl;
@@ -48,19 +48,17 @@ void Filter::CreateKernal(int width, int height) {
     */
 }
 
-void Filter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
+void KernalFilter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
     int buff_height = oldimage->height();
     int buff_width = oldimage->width();
     ColorData total;
     ColorData bgc = oldimage->background_color();
     int kern_mid_x = width_ / 2;
     int kern_mid_y = height_ / 2;
-    double applied;
 
     for (int r = 0; r < buff_height; r++) {
         for (int c = 0; c < buff_width; c++) {
             total = ColorData(0, 0, 0);
-            applied = 0;
             // Center the kernal over the pixel, and apply it by
             // getting the running total of pixel * intensity
             for (int kr = 0; kr < height_; kr++) {
@@ -69,23 +67,21 @@ void Filter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
                     int cur_y = r - kern_mid_y + kr;
                     if (0 <= cur_x && cur_x < buff_width &&
                         0 <= cur_y && cur_y < buff_height) {
-                            applied += 1;
                         total = total + oldimage->get_pixel(cur_x, cur_y)
                                         * kernal_[kr][kc];
+                    } else {
+                        total = total + bgc * kernal_[kr][kc];
                     }
                 }
             }
-            // Adjust color if the mask was partially off the edge
-            double p = applied / (width_ * height_);
-            ColorData adjusted = total + (bgc * (1 - p));
-            newimage->set_pixel(c, r, adjusted);
+            newimage->set_pixel(c, r, total);
             // std::cout << "Pixel at (" << r << "," << c << "): "
             // << total << std::endl;
         }
     }
 }
 
-void Filter::AllocateKernal(int width, int height) {
+void KernalFilter::AllocateKernal(int width, int height) {
     // If kernal already exists, delete it
     if (kernal_ != nullptr) {
         DeallocateKernal();
@@ -99,7 +95,7 @@ void Filter::AllocateKernal(int width, int height) {
         kernal_[h] = new double[width_];
 }
 
-void Filter::DeallocateKernal() {
+void KernalFilter::DeallocateKernal() {
     if (kernal_ == nullptr)
         return;
     for (int h = 0; h < height_; h++)
