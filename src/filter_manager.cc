@@ -18,6 +18,7 @@
 #include "include/pixel_buffer.h"
 #include "include/blur_filter.h"
 #include "include/edge_detect_filter.h"
+#include "include/quantize_filter.h"
 #include "include/threshold_filter.h"
 #include "include/sharpen_filter.h"
 
@@ -44,14 +45,16 @@ FilterManager::FilterManager(void) :
 /*******************************************************************************
  * Member Functions
  ******************************************************************************/
-void FilterManager::ApplyChannel(void) {
+void FilterManager::ApplyChannel(PixelBuffer* oldimage,
+                                 PixelBuffer* newimage) {
     std::cout << "Apply has been clicked for Channels with red = "
         << channel_color_red_
         << ", green = " << channel_color_green_
         << ", blue = " << channel_color_blue_ << std::endl;
 }
 
-void FilterManager::ApplySaturate(void) {
+void FilterManager::ApplySaturate(PixelBuffer* oldimage,
+                                  PixelBuffer* newimage) {
     std::cout << "Apply has been clicked for Saturate with amount = "
         << saturation_amount_ << std::endl;
 }
@@ -64,15 +67,15 @@ void FilterManager::ApplyBlur(PixelBuffer* oldimage, PixelBuffer* newimage) {
     b.ApplyFilter(oldimage, newimage);
 }
 
-void FilterManager::ApplySharpen(PixelBuffer* oldimage,
-                                 PixelBuffer* newimage) {
+void FilterManager::ApplySharpen(PixelBuffer* oldimage, PixelBuffer* newimage) {
     std::cout << "Apply has been clicked for Sharpen with amount = "
         << sharpen_amount_ << std::endl;
     SharpenFilter s(sharpen_amount_);
     s.ApplyFilter(oldimage, newimage);
 }
 
-void FilterManager::ApplyMotionBlur(void) {
+void FilterManager::ApplyMotionBlur(PixelBuffer* oldimage,
+                                    PixelBuffer* newimage) {
     std::cout << "Apply has been clicked for Sharpen with amount = "
         << motion_blur_amount_
         << " and direction " << motion_blur_direction_ << std::endl;
@@ -85,18 +88,22 @@ void FilterManager::ApplyEdgeDetect(PixelBuffer* oldimage,
     e.ApplyFilter(oldimage, newimage);
 }
 
-void FilterManager::ApplyQuantize(void) {
+void FilterManager::ApplyQuantize(PixelBuffer* oldimage,
+                                  PixelBuffer* newimage) {
     std::cout << "Apply has been clicked for Quantize with bins = "
         << quantize_bins_ << std::endl;
+    QuantizeFilter q(quantize_bins_);
+    q.ApplyFilter(oldimage, newimage);
 }
 void FilterManager::ApplyThreshold(PixelBuffer* oldimage,
-                                    PixelBuffer* newimage) {
+                                   PixelBuffer* newimage) {
     std::cout << "Apply Threshold has been clicked with amount ="
         << threshold_amount_ << std::endl;
     ThresholdFilter t(threshold_amount_);
     t.ApplyFilter(oldimage, newimage);
 }
-void FilterManager::ApplySpecial(void) {
+void FilterManager::ApplySpecial(PixelBuffer* oldimage,
+                                 PixelBuffer* newimage) {
     std::cout << "Apply has been clicked for Special" << std::endl;
 }
 

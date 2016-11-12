@@ -57,7 +57,7 @@ class FilterManager {
    *
    * @param buffer The buffer. Updated to point to a new filtered buffer.
    */
-  void ApplyMotionBlur(void);
+  void ApplyMotionBlur(PixelBuffer* oldimage, PixelBuffer* newimage);
 
   /**
    * @brief Apply an edge detection filter to the buffer
@@ -78,14 +78,14 @@ class FilterManager {
    *
    * @param buffer The buffer. Updated to point to a new filtered buffer.
    */
-  void ApplyChannel(void);
+  void ApplyChannel(PixelBuffer* oldimage, PixelBuffer* newimage);
 
   /**
    * @brief Apply a channel filter to the buffer
    *
    * @param buffer The buffer. Updated to point to a new filtered buffer.
    */
-  void ApplySaturate(void);
+  void ApplySaturate(PixelBuffer* oldimage, PixelBuffer* newimage);
 
 
   /**
@@ -93,14 +93,14 @@ class FilterManager {
    *
    * @param buffer The buffer. Updated to point to a new filtered buffer.
    */
-  void ApplyQuantize(void);
+  void ApplyQuantize(PixelBuffer* oldimage, PixelBuffer* newimage);
 
   /**
    * @brief Apply a special filter to the buffer
    *
    * @param buffer The buffer. Updated to point to a new filtered buffer.
    */
-  void ApplySpecial(void);
+  void ApplySpecial(PixelBuffer* oldimage, PixelBuffer* newimage);
 
   /**
    * @brief Initialize the elements of the GLUI interface required by the

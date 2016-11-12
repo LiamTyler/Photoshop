@@ -276,45 +276,33 @@ void FlashPhotoApp::GluiControl(int control_id) {
             break;
         case UICtrl::UI_APPLY_BLUR:
             filter_manager_.ApplyBlur(display_buffer_, scratch_buffer_);
-            tmp = display_buffer_;
-            display_buffer_ = scratch_buffer_;
-            scratch_buffer_ = tmp;
             break;
         case UICtrl::UI_APPLY_SHARP:
             filter_manager_.ApplySharpen(display_buffer_, scratch_buffer_);
-            tmp = display_buffer_;
-            display_buffer_ = scratch_buffer_;
-            scratch_buffer_ = tmp;
             break;
         case UICtrl::UI_APPLY_MOTION_BLUR:
-            filter_manager_.ApplyMotionBlur();
+            filter_manager_.ApplyMotionBlur(display_buffer_, scratch_buffer_);
             break;
         case UICtrl::UI_APPLY_EDGE:
             filter_manager_.ApplyEdgeDetect(display_buffer_, scratch_buffer_);
-            tmp = display_buffer_;
-            display_buffer_ = scratch_buffer_;
-            scratch_buffer_ = tmp;
             break;
         case UICtrl::UI_APPLY_THRESHOLD:
             filter_manager_.ApplyThreshold(display_buffer_, scratch_buffer_);
-            tmp = display_buffer_;
-            display_buffer_ = scratch_buffer_;
-            scratch_buffer_ = tmp;
             break;
 //        case UICtrl::UI_APPLY_DITHER:
 //            filter_manager_.ApplyThreshold(display_buffer_, scratch_buffer_);
 //            break;
         case UICtrl::UI_APPLY_SATURATE:
-            filter_manager_.ApplySaturate();
+            filter_manager_.ApplySaturate(display_buffer_, scratch_buffer_);
             break;
         case UICtrl::UI_APPLY_CHANNEL:
-            filter_manager_.ApplyChannel();
+            filter_manager_.ApplyChannel(display_buffer_, scratch_buffer_);
             break;
         case UICtrl::UI_APPLY_QUANTIZE:
-            filter_manager_.ApplyQuantize();
+            filter_manager_.ApplyQuantize(display_buffer_, scratch_buffer_);
             break;
         case UICtrl::UI_APPLY_SPECIAL_FILTER:
-            filter_manager_.ApplySpecial();
+            filter_manager_.ApplySpecial(display_buffer_, scratch_buffer_);
             break;
         case UICtrl::UI_FILE_BROWSER:
             io_manager_.set_image_file(io_manager_.file_browser()->get_file());
@@ -341,6 +329,13 @@ void FlashPhotoApp::GluiControl(int control_id) {
             break;
         default:
             break;
+    }
+
+    if (control_id >= UICtrl::UI_APPLY_BLUR &&
+        control_id <= UICtrl::UI_APPLY_SPECIAL_FILTER) {
+        tmp = display_buffer_;
+        display_buffer_ = scratch_buffer_;
+        scratch_buffer_ = tmp;
     }
 
     // Forces canvas to update changes made in this function
