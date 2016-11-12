@@ -39,7 +39,7 @@ void KernalFilter::CreateKernal(int width, int height) {
     DeallocateKernal();
     AllocateKernal(width, height);
     InitializeKernal();
-    /* Print out kernal to check if the initialize worked
+    /* Print out kernal to check if the initialize worked 
     for (int r = 0; r < height_; r++) {
         for (int c = 0; c < width_; c++) {
             std::cout << kernal_[r][c] << " ";
