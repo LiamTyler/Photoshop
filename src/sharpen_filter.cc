@@ -14,9 +14,9 @@
 #include "include/tool_utilities.h"
 
 SharpenFilter::SharpenFilter(float amount) :
-                       KernalFilter(3,3),
+                       KernalFilter(3, 3),
                        amount_(amount) {
-                           CreateKernal(3,3);
+                           CreateKernal(3, 3);
                        }
 
 SharpenFilter::SharpenFilter() : amount_(0.0) {}

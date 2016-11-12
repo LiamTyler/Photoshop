@@ -282,7 +282,7 @@ void FlashPhotoApp::GluiControl(int control_id) {
             break;
         case UICtrl::UI_APPLY_SHARP:
             filter_manager_.ApplySharpen(display_buffer_, scratch_buffer_);
-			tmp = display_buffer_;
+            tmp = display_buffer_;
             display_buffer_ = scratch_buffer_;
             scratch_buffer_ = tmp;
             break;

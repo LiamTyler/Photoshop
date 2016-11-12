@@ -68,8 +68,8 @@ void FilterManager::ApplySharpen(PixelBuffer* oldimage,
                                  PixelBuffer* newimage) {
     std::cout << "Apply has been clicked for Sharpen with amount = "
         << sharpen_amount_ << std::endl;
-	SharpenFilter s(sharpen_amount_);
-	s.ApplyFilter(oldimage, newimage);
+    SharpenFilter s(sharpen_amount_);
+    s.ApplyFilter(oldimage, newimage);
 }
 
 void FilterManager::ApplyMotionBlur(void) {

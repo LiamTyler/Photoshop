@@ -43,8 +43,8 @@ void KernalFilter::CreateKernal(int width, int height) {
             std::cout << kernal_[r][c] << " ";
         }
         std::cout << std::endl;
-    } */
-    
+    }
+    */
 }
 
 void KernalFilter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
