@@ -22,6 +22,7 @@
 #include "include/threshold_filter.h"
 #include "include/sharpen_filter.h"
 #include "include/motion_blur_filter.h"
+#include "include/channels_filter.h"
 
 /*******************************************************************************
  * Namespaces
@@ -52,6 +53,9 @@ void FilterManager::ApplyChannel(PixelBuffer* oldimage,
         << channel_color_red_
         << ", green = " << channel_color_green_
         << ", blue = " << channel_color_blue_ << std::endl;
+    ChannelsFilter c(channel_color_red_, channel_color_green_, \
+                    channel_color_blue_);
+    c.ApplyFilter(oldimage, newimage);
 }
 
 void FilterManager::ApplySaturate(PixelBuffer* oldimage,
