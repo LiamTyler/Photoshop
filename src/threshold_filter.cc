@@ -9,8 +9,8 @@
  *
  ******************************************************************************/
 
-#include <string>
 #include "include/threshold_filter.h"
+#include <string>
 #include "include/tool_utilities.h"
 #include "include/color_data.h"
 

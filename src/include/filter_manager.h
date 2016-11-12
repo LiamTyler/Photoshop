@@ -50,7 +50,7 @@ class FilterManager {
    *
    * @param buffer The buffer. Updated to point to a new filtered buffer.
    */
-  void ApplySharpen(void);
+  void ApplySharpen(PixelBuffer* oldimage, PixelBuffer* newimage);
 
   /**
    * @brief Apply a motion blurring filter to the buffer

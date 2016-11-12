@@ -19,6 +19,7 @@
 #include "include/blur_filter.h"
 #include "include/edge_detect_filter.h"
 #include "include/threshold_filter.h"
+#include "include/sharpen_filter.h"
 
 /*******************************************************************************
  * Namespaces
@@ -63,9 +64,12 @@ void FilterManager::ApplyBlur(PixelBuffer* oldimage, PixelBuffer* newimage) {
     b.ApplyFilter(oldimage, newimage);
 }
 
-void FilterManager::ApplySharpen(void) {
+void FilterManager::ApplySharpen(PixelBuffer* oldimage,
+                                 PixelBuffer* newimage) {
     std::cout << "Apply has been clicked for Sharpen with amount = "
         << sharpen_amount_ << std::endl;
+	SharpenFilter s(sharpen_amount_);
+	s.ApplyFilter(oldimage, newimage);
 }
 
 void FilterManager::ApplyMotionBlur(void) {

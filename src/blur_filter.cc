@@ -9,8 +9,8 @@
  *
  ******************************************************************************/
 
-#include <string>
 #include "include/blur_filter.h"
+#include <string>
 #include "include/tool_utilities.h"
 
 BlurFilter::BlurFilter(float amount) :
