@@ -19,6 +19,7 @@
 #include "include/blur_filter.h"
 #include "include/edge_detect_filter.h"
 #include "include/quantize_filter.h"
+#include "include/threshold_filter.h"
 
 /*******************************************************************************
  * Namespaces
@@ -95,6 +96,8 @@ void FilterManager::ApplyThreshold(PixelBuffer* oldimage,
                                    PixelBuffer* newimage) {
     std::cout << "Apply Threshold has been clicked with amount ="
         << threshold_amount_ << std::endl;
+    ThresholdFilter t(threshold_amount_);
+    t.ApplyFilter(oldimage, newimage);
 }
 void FilterManager::ApplySpecial(PixelBuffer* oldimage,
                                  PixelBuffer* newimage) {
