@@ -18,6 +18,7 @@
 #include "include/pixel_buffer.h"
 #include "include/blur_filter.h"
 #include "include/edge_detect_filter.h"
+#include "include/threshold_filter.h"
 
 /*******************************************************************************
  * Namespaces
@@ -84,9 +85,12 @@ void FilterManager::ApplyQuantize(void) {
     std::cout << "Apply has been clicked for Quantize with bins = "
         << quantize_bins_ << std::endl;
 }
-void FilterManager::ApplyThreshold(void) {
+void FilterManager::ApplyThreshold(PixelBuffer* oldimage,
+                                    PixelBuffer* newimage) {
     std::cout << "Apply Threshold has been clicked with amount ="
         << threshold_amount_ << std::endl;
+    ThresholdFilter t(threshold_amount_);
+    t.ApplyFilter(oldimage, newimage);
 }
 void FilterManager::ApplySpecial(void) {
     std::cout << "Apply has been clicked for Special" << std::endl;

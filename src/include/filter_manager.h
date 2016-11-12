@@ -71,7 +71,7 @@ class FilterManager {
    *
    * @param buffer The buffer. Updated to point to a new filtered buffer.
    */
-  void ApplyThreshold(void);
+  void ApplyThreshold(PixelBuffer* oldimage, PixelBuffer* newimage);
 
   /**
    * @brief Apply a channel filter to the buffer

@@ -293,11 +293,14 @@ void FlashPhotoApp::GluiControl(int control_id) {
             scratch_buffer_ = tmp;
             break;
         case UICtrl::UI_APPLY_THRESHOLD:
-            filter_manager_.ApplyThreshold();
+            filter_manager_.ApplyThreshold(display_buffer_, scratch_buffer_);
+            tmp = display_buffer_;
+            display_buffer_ = scratch_buffer_;
+            scratch_buffer_ = tmp;
             break;
-        case UICtrl::UI_APPLY_DITHER:
-            filter_manager_.ApplyThreshold();
-            break;
+//        case UICtrl::UI_APPLY_DITHER:
+//            filter_manager_.ApplyThreshold(display_buffer_, scratch_buffer_);
+//            break;
         case UICtrl::UI_APPLY_SATURATE:
             filter_manager_.ApplySaturate();
             break;
