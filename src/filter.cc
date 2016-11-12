@@ -70,15 +70,18 @@ void Filter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
                     if (0 <= cur_x && cur_x < buff_width &&
                         0 <= cur_y && cur_y < buff_height) {
                             applied += 1;
-                        total = total + oldimage->get_pixel(cur_x, cur_y)
-                                        * kernal_[kr][kc];
+                        total = total + (oldimage->get_pixel(cur_x, cur_y)
+                                        * kernal_[kr][kc]);
+                    } else {
+                        total = total + (bgc * kernal_[kr][kc]);
                     }
                 }
             }
             // Adjust color if the mask was partially off the edge
-            double p = applied / (width_ * height_);
-            ColorData adjusted = total + (bgc * (1 - p));
-            newimage->set_pixel(c, r, adjusted);
+            // double p = applied / (width_ * height_);
+            // ColorData adjusted = total + (bgc * (1 - p));
+            // newimage->set_pixel(c, r, adjusted);
+            // newimage->set_pixel(c,r, total);
             // std::cout << "Pixel at (" << r << "," << c << "): "
             // << total << std::endl;
         }
@@ -94,9 +97,9 @@ void Filter::AllocateKernal(int width, int height) {
     width_ = width;
     height_ = height;
     // TODO(tyler147): Make this faster by using a single new
-    kernal_ = new double*[height_];
+    kernal_ = new float*[height_];
     for (int h = 0; h < height_; h++)
-        kernal_[h] = new double[width_];
+        kernal_[h] = new float[width_]();
 }
 
 void Filter::DeallocateKernal() {

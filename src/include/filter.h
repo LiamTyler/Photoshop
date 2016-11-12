@@ -26,7 +26,7 @@ class Filter {
   virtual void CreateKernal(int width, int height);
   inline int get_width() { return width_; }
   inline int get_height() { return height_; }
-  inline double** get_kernal() { return kernal_; }
+  inline float** get_kernal() { return kernal_; }
   virtual std::string name(void) = 0;
 
  protected:
@@ -39,7 +39,7 @@ class Filter {
   Filter& operator=(const Filter &f) = delete;
   int width_;
   int height_;
-  double** kernal_;
+  float** kernal_;
 };
 
 #endif  // SRC_INCLUDE_FILTER_H_

@@ -221,6 +221,7 @@ void FlashPhotoApp::InitGlui(void) {
 }
 
 void FlashPhotoApp::GluiControl(int control_id) {
+    PixelBuffer* tmp;
     switch (control_id) {
         case UICtrl::UI_TOOLTYPE:
             cur_tool_ = tools_[cur_tool_index_];
@@ -275,7 +276,9 @@ void FlashPhotoApp::GluiControl(int control_id) {
             break;
         case UICtrl::UI_APPLY_BLUR:
             filter_manager_.ApplyBlur(display_buffer_, scratch_buffer_);
+            tmp = display_buffer_;
             display_buffer_ = scratch_buffer_;
+            scratch_buffer_ = tmp;
             break;
         case UICtrl::UI_APPLY_SHARP:
             filter_manager_.ApplySharpen();
@@ -285,7 +288,9 @@ void FlashPhotoApp::GluiControl(int control_id) {
             break;
         case UICtrl::UI_APPLY_EDGE:
             filter_manager_.ApplyEdgeDetect(display_buffer_, scratch_buffer_);
-			display_buffer_ = scratch_buffer_;
+            tmp = display_buffer_;
+            display_buffer_ = scratch_buffer_;
+            scratch_buffer_ = tmp;
             break;
         case UICtrl::UI_APPLY_THRESHOLD:
             filter_manager_.ApplyThreshold();

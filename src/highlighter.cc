@@ -41,7 +41,7 @@ void THighlighter::ApplyTool(PixelBuffer* buff, ColorData current_color,
     int mid_y = height / 2;
     int screen_h = buff->height();
     int screen_w = buff->width();
-    double** cur_mask = this->get_mask();
+    float** cur_mask = this->get_mask();
 
     /* Check the current mask appliation with previous
     mask application to avoid intense opacity */

@@ -21,9 +21,9 @@ Tool::Tool(int width, int height) : width_(width),
                                     height_(height),
                                     mask_(nullptr) {
     // Allocate the memory for the 2d mask with height rows and width columns
-    mask_ = new double*[height];
+    mask_ = new float*[height];
     for (int i = 0; i < height; i++) {
-         mask_[i] = new double[width]();
+         mask_[i] = new float[width]();
     }
 }
 
@@ -52,7 +52,7 @@ void Tool::ApplyTool(PixelBuffer* buff, ColorData current_color,
             int cur_y = screen_h - (y + step_y - mid_y);
             if (cur_x >= 0 && cur_x < screen_w &&
                 cur_y >= 0 && cur_y < screen_h) {
-                    double intensity = mask_[step_y][step_x];
+                    float intensity = mask_[step_y][step_x];
                     // copy constructor
                     buff->set_pixel(cur_x, cur_y, current_color * intensity +
                             buff->get_pixel(cur_x, cur_y) * (1.0 - intensity));
@@ -69,6 +69,6 @@ int Tool::get_height() {
     return height_;
 }
 
-double** Tool::get_mask() {
+float** Tool::get_mask() {
     return mask_;
 }

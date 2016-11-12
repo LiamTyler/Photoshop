@@ -23,7 +23,7 @@ TPen::TPen(int width, int height) : Tool(width, height) {
     tool_utilities::CreateCircle(this->get_mask(),
                                 height,
                                 width,
-                                static_cast<double>(width) / 2);
+                                static_cast<float>(width) / 2);
 }
 
 TPen::TPen() : TPen(3, 3) {}

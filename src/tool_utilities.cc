@@ -16,7 +16,7 @@ namespace tool_utilities {
 
     /* CreateCircle takes a square mask and a radius and sets all pixels
     within that radius to 1.0 */ 
-    void CreateCircle(double** mask, int height, int width, double radius) {
+    void CreateCircle(float** mask, int height, int width, float radius) {
         int cent_x = width / 2;
         int cent_y = height / 2;
         for (int h = 0; h < height; h++) {
@@ -33,7 +33,7 @@ namespace tool_utilities {
         }
     }
 
-    void FillMask(double** mask, int height, int width, double opacity) {
+    void FillMask(float** mask, int height, int width, float opacity) {
         for (int h = 0; h < height; h++) {
             for (int w = 0; w < width; w++) {
                 mask[h][w] = opacity;
