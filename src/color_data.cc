@@ -38,15 +38,15 @@ float ColorData::luminance(void) const {
         static_cast<float>(0.0722)*blue_;
 }
 
-ColorData ColorData::clamped_color(void) const {
-        float clamped_red = ColorData::clamp_value(this->red(), 0.f, 1.f);
-        float clamped_green = ColorData::clamp_value(this->green(), 0.f, 1.f);
-        float clamped_blue = ColorData::clamp_value(this->blue(), 0.f, 1.f);
-        float clamped_alpha = ColorData::clamp_value(this->alpha(), 0.f, 1.f);
-
-        return ColorData(clamped_red, clamped_green,
-                         clamped_blue, clamped_alpha);
-}
+//ColorData ColorData::clamped_color(void) const {
+//        float clamped_red = ColorData::clamp_value(this->red(), 0.f, 1.f);
+//        float clamped_green = ColorData::clamp_value(this->green(), 0.f, 1.f);
+//        float clamped_blue = ColorData::clamp_value(this->blue(), 0.f, 1.f);
+//        float clamped_alpha = ColorData::clamp_value(this->alpha(), 0.f, 1.f);
+//
+//        return ColorData(clamped_red, clamped_green,
+//                         clamped_blue, clamped_alpha);
+//}
 
 // Apply component-wise arithmatic operations
 ColorData operator* (const ColorData& a, float f) {

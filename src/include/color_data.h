@@ -52,7 +52,15 @@ class ColorData {
    * @brief Return a clamped version of a ColorData instance
    * All colors and the alpha value are restricted to [0.0,1.0]
    */
-  inline ColorData clamped_color(void) const;
+  inline ColorData clamped_color(void) const {
+        float clamped_red = ColorData::clamp_value(this->red(), 0.f, 1.f);
+        float clamped_green = ColorData::clamp_value(this->green(), 0.f, 1.f);
+        float clamped_blue = ColorData::clamp_value(this->blue(), 0.f, 1.f);
+        float clamped_alpha = ColorData::clamp_value(this->alpha(), 0.f, 1.f);
+
+        return ColorData(clamped_red, clamped_green,
+                         clamped_blue, clamped_alpha);
+  }
 
   /*
    * Arithmetic operators (friends so that non-member functions can access

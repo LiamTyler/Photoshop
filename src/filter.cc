@@ -55,12 +55,12 @@ void Filter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
     ColorData bgc = oldimage->background_color();
     int kern_mid_x = width_ / 2;
     int kern_mid_y = height_ / 2;
-    double applied;
+    //double applied;
 
     for (int r = 0; r < buff_height; r++) {
         for (int c = 0; c < buff_width; c++) {
             total = ColorData(0, 0, 0);
-            applied = 0;
+            //applied = 0;
             // Center the kernal over the pixel, and apply it by
             // getting the running total of pixel * intensity
             for (int kr = 0; kr < height_; kr++) {
@@ -69,7 +69,7 @@ void Filter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
                     int cur_y = r - kern_mid_y + kr;
                     if (0 <= cur_x && cur_x < buff_width &&
                         0 <= cur_y && cur_y < buff_height) {
-                            applied += 1;
+                        //applied += 1;
                         total = total + (oldimage->get_pixel(cur_x, cur_y)
                                         * kernal_[kr][kc]);
                     } else {
@@ -81,9 +81,9 @@ void Filter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
             // double p = applied / (width_ * height_);
             // ColorData adjusted = total + (bgc * (1 - p));
             // newimage->set_pixel(c, r, adjusted);
-            // newimage->set_pixel(c,r, total);
+            newimage->set_pixel(c, r, total.clamped_color());
             // std::cout << "Pixel at (" << r << "," << c << "): "
-            // << total << std::endl;
+            // << total.clamped_color() << std::endl;
         }
     }
 }
