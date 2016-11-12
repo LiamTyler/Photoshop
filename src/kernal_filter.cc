@@ -75,7 +75,7 @@ void KernalFilter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
             }
             newimage->set_pixel(c, r, total);
             // std::cout << "Pixel at (" << r << "," << c << "): "
-            // << total << std::endl;
+            // << total.clamped_color() << std::endl;
         }
     }
 }
