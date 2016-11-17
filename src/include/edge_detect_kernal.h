@@ -18,7 +18,7 @@
 
 using image_tools::PixelBuffer;
 
-class EdgeDetectKernal : Kernal {
+class EdgeDetectKernal : public Kernal {
  public:
   EdgeDetectKernal()
 

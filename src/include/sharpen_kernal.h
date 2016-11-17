@@ -18,7 +18,7 @@
 
 using image_tools::PixelBuffer;
 
-class SharpenKernal : Kernal {
+class SharpenKernal : public Kernal {
  public:
   SharpenKernal();
 
