@@ -42,7 +42,8 @@ class ToolFactory {
     TOOL_CALLIGRAPHYPEN = 3,
     TOOL_HIGHLIGHTER = 4,
     TOOL_RAINBOW = 5,
-    NUMTOOLS = 6
+    TOOL_BLUR = 6,
+    NUMTOOLS = 7
   };
 
   /**
