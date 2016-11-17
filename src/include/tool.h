@@ -23,6 +23,7 @@ class Tool {
   virtual ~Tool();
   virtual void ApplyTool(image_tools::PixelBuffer* buff,
     image_tools::ColorData current_color, int x, int y, int last_x, int last_y);
+  virtual void UpdateTool(int width, int height) {}
   int get_width();
   int get_height();
   float** get_mask();

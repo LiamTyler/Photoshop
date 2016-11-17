@@ -61,10 +61,7 @@ TBlur::TBlur(int radius) : Tool(2 * radius + 1, 2 * radius + 1),
     }
 
     // Allocate the scratch buffer to place our partially blurred
-    // work onto
-    scratch_ = new ColorData*[diameter];
-    for (int i = 0; i < diameter; i++)
-        scratch_[i] = new ColorData[diameter];
+    scratch_ = new PixelBuffer(diameter, diameter, ColorData());
 
     for (int h = 0; h < diameter; h++) {
         for (int w = 0; w < diameter; w++) {
@@ -78,10 +75,7 @@ TBlur::TBlur() : TBlur(7) {}
 
 TBlur::~TBlur() {
     // Free the scratch buffer
-    int diameter = 2 * radius_ + 1;
-    for (int h = 0; h < diameter; h++)
-        delete scratch_[h];
-    delete[] scratch_;
+    delete scratch_;
 }
 
 /*
