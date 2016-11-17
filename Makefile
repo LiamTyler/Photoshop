@@ -32,7 +32,7 @@
 # config/   - Directory for all autoconf/configure/automake inputs/output
 BUILDDIR        = ./build
 SRCDIR          = ./src
-BINDIR          = $(BUILDDIR)/bin
+BINDIR          = bin
 OBJDIR          = $(BUILDDIR)/obj
 EXTDIR          = ./ext
 GLUIDIR         = $(EXTDIR)/glui
