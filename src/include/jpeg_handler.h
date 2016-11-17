@@ -1,8 +1,10 @@
 #ifndef JPEGHANDLER_H
 #define JPEGHANDLER_H
 
-class ColorData;
-class PixelBuffer;
+using image_tools::PixelBuffer;
+
+//class ColorData;
+//class PixelBuffer;
 class FlashPhoto;
 class BaseGfxApp;
 

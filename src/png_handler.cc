@@ -2,11 +2,11 @@
 #include <png.h>
 #include <setjmp.h>
 #include <zlib.h>
-#include "PixelBuffer.h"
-#include "FlashPhotoApp.h"
-#include "ColorData.h"
-#include "BaseGfxApp.h"
-#include "PngHandler.h"
+#include "include/pixel_buffer.h"
+#include "include/flashphoto_app.h"
+#include "include/color_data.h"
+#include "include/base_gfx_app.h"
+#include "include/png_handler.h"
 #include <iostream>
 #include <cstdlib>
 #include "jconfig.h"
@@ -15,6 +15,8 @@
 #include <stddef.h>
 #include <stdlib.h>
 
+using image_tools::PixelBuffer;
+using image_tools::ColorData;
 
 PixelBuffer* PngHandler::read_PNG_file (char* name, PixelBuffer* buffer)
 {
@@ -85,7 +87,7 @@ PixelBuffer* PngHandler::read_PNG_file (char* name, PixelBuffer* buffer)
   	       float B = (float)row_pointers[y][(x*4)+2]/255.0;  //get blue color value
   	       float A = (float)row_pointers[y][(x*4)+3]/255.0;  //get alpha color value
   	       //apply the color by multiple the alpha value
-  	       m_new_displayBuffer->setPixel(x, height - y -1 , buffer->getPixel(x, height - y -1)*(1-A) + ColorData(R,G,B,A)*A);
+  	       m_new_displayBuffer->set_pixel(x, height - y -1 , buffer->get_pixel(x, height - y -1)*(1-A) + ColorData(R,G,B,A)*A);
   	     }
   	 }
      delete buffer;
@@ -105,8 +107,8 @@ void PngHandler::write_PNG_file (char* name, PixelBuffer* buffer)
     png_structp png_ptr = NULL;
     png_infop info_ptr = NULL;
     png_bytep *row_pointers;
-    int m_width =  buffer->getWidth();
-    int m_height = buffer->getHeight();
+    int m_width =  buffer->width();
+    int m_height = buffer->height();
     output = fopen(name, "wb");
     if (output == NULL) {
       fprintf(stderr, "Could not open file for writing");
@@ -158,12 +160,12 @@ void PngHandler::write_PNG_file (char* name, PixelBuffer* buffer)
 
    for (y=0 ; y< m_height ; y++) {
       for (x=0 ; x< m_width ; x++) {
-         ColorData pixelinfo = buffer->getPixel(x, m_height - y -1);
-         pixelinfo = pixelinfo.clampedColor();
-         row_pointers[y][(x*4)+0] = (png_byte)(pixelinfo.getRed()*255.0);
-         row_pointers[y][(x*4)+1] = (png_byte)(pixelinfo.getGreen()*255.0);
-         row_pointers[y][(x*4)+2] = (png_byte)(pixelinfo.getBlue()*255.0);
-         row_pointers[y][(x*4)+3] = (png_byte)(pixelinfo.getAlpha()*255.0);
+         ColorData pixelinfo = buffer->get_pixel(x, m_height - y -1);
+         pixelinfo = pixelinfo.clamped_color();
+         row_pointers[y][(x*4)+0] = (png_byte)(pixelinfo.red()*255.0);
+         row_pointers[y][(x*4)+1] = (png_byte)(pixelinfo.green()*255.0);
+         row_pointers[y][(x*4)+2] = (png_byte)(pixelinfo.blue()*255.0);
+         row_pointers[y][(x*4)+3] = (png_byte)(pixelinfo.alpha()*255.0);
       }
    }
 

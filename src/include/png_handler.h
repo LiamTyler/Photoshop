@@ -2,8 +2,10 @@
 #ifndef PNGHANDLER_H
 #define PNGHANDLER_H
 
-class ColorData;
-class PixelBuffer;
+using image_tools::PixelBuffer;
+
+//class ColorData;
+//class PixelBuffer;
 class FlashPhoto;
 class BaseGfxApp;
 

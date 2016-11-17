@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include "jpeglib.h"
 #include <setjmp.h>
-#include "PixelBuffer.h"
-#include "FlashPhotoApp.h"
-#include "ColorData.h"
-#include "BaseGfxApp.h"
-#include "JpegHandler.h"
+#include "include/pixel_buffer.h"
+#include "include/flashphoto_app.h"
+#include "include/color_data.h"
+#include "include/base_gfx_app.h"
+#include "include/jpeg_handler.h"
 #include <iostream>
 #include <cstdlib>
 #include "jconfig.h"
@@ -13,6 +13,9 @@
 #include <string.h>
 #include <stddef.h>
 #include <stdlib.h>
+
+using image_tools::PixelBuffer;
+using image_tools::ColorData;
 
 PixelBuffer* JpegHandler::read_JPEG_file (char* name, PixelBuffer* buffer)
 {
@@ -82,7 +85,7 @@ PixelBuffer* JpegHandler::read_JPEG_file (char* name, PixelBuffer* buffer)
             float B = (float)raw_image[(i*cinfo.image_width*3)+(j*3)+2]/255.0; // Blue Pixel
             int row_offset = 0;
             //apply the each pixel to the new buffer
-            m_new_displayBuffer->setPixel(j,cinfo.image_height - i -1 , ColorData(R,G,B));
+            m_new_displayBuffer->set_pixel(j,cinfo.image_height - i -1 , ColorData(R,G,B));
         }
     }
 
@@ -120,8 +123,8 @@ void JpegHandler::write_JPEG_file (char* name, PixelBuffer* buffer)
     }
     jpeg_stdio_dest(&cinfo, outfile);
 
-    cinfo.image_width = buffer->getWidth(); 	/* image width and height, in pixels */
-    cinfo.image_height = buffer->getHeight();
+    cinfo.image_width = buffer->width(); 	/* image width and height, in pixels */
+    cinfo.image_height = buffer->height();
     cinfo.input_components = 3;		/* # of color components per pixel */
     cinfo.in_color_space = JCS_RGB; 	/* colorspace of input image */
 
@@ -136,11 +139,11 @@ void JpegHandler::write_JPEG_file (char* name, PixelBuffer* buffer)
     for (int y=0; y < cinfo.image_height; y++){
         for (int x=0; x < cinfo.image_width; x++){
             offset = (y * cinfo.image_width * 3) + (x * 3);
-            pixelinfo = buffer->getPixel(x, cinfo.image_height - y -1);
-            pixelinfo = pixelinfo.clampedColor();
-            raw_image[offset+0] = (pixelinfo.getRed()*255.0);
-            raw_image[offset+1] = (pixelinfo.getGreen()*255.0);
-            raw_image[offset+2] = (pixelinfo.getBlue()*255.0);
+            pixelinfo = buffer->get_pixel(x, cinfo.image_height - y -1);
+            pixelinfo = pixelinfo.clamped_color();
+            raw_image[offset+0] = (pixelinfo.red()*255.0);
+            raw_image[offset+1] = (pixelinfo.green()*255.0);
+            raw_image[offset+2] = (pixelinfo.blue()*255.0);
         }
     }
     while( cinfo.next_scanline < cinfo.image_height )
