@@ -40,8 +40,7 @@ void Kernal::Resize(int width, int height) {
     InitializeKernal();
 }
 
-void Kernal::ApplyKernal(PixelBuffer* oldimage, PixelBuffer* newimage,
-                               int start_x, int start_y) {
+ColorData Kernal::ApplyKernal(PixelBuffer* oldimage, int start_x, int start_y) {
     int buff_width = oldimage->width();
     int buff_height = oldimage->height();
     int kern_mid_x = width_ / 2;
@@ -69,7 +68,7 @@ void Kernal::ApplyKernal(PixelBuffer* oldimage, PixelBuffer* newimage,
         }
     }
     // total = total* (height_ * width_ / applied);
-    newimage->set_pixel(start_x, start_y, total.clamped_color() );
+    return total.clamped_color();
     // std::cout << "Pixel at (" << r << "," << c << "): "
     // << total.clamped_color() << std::endl;
 }
@@ -124,4 +123,19 @@ Kernal& Kernal::operator=(const Kernal& k) {
         for (int w = 0; w < width_; w++)
             kernal_[h][w] = k.kernal_[h][w];
     return *this;
+}
+
+void Kernal::print(std::ostream& out) const {
+    out << std::setprecision(3);
+    for (int h = 0; h < height_; h++) {
+        for (int w = 0; w < width_; w++) {
+            out << std::setw(7) << kernal_[h][w] << " ";
+        }
+        out << std::endl;
+    }
+}
+
+std::ostream& operator<<(std::ostream& out, const Kernal& k) {
+    k.print(out);
+    return out;
 }

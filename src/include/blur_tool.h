@@ -24,11 +24,9 @@ class TBlur : public Tool {
   explicit TBlur(int radius);
   TBlur();
   ~TBlur();
-  /*
   void ApplyTool(image_tools::PixelBuffer* buff,
                  image_tools::ColorData current_color,
                  int x, int y, int last_x, int last_y);
-  */
   std::string name(void) { return "Blur"; }
 
  private:
