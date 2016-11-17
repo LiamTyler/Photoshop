@@ -15,32 +15,23 @@
 #include <string>
 #include "include/filter.h"
 #include "include/pixel_buffer.h"
+#include "include/kernal.h"
 
 using image_tools::PixelBuffer;
 
 class KernalFilter : public Filter {
  public:
   KernalFilter();
-  KernalFilter(int width, int height);
+  explicit KernalFilter(Kernal* kernal);
   virtual ~KernalFilter();
   virtual void ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage);
-  virtual void CreateKernal(int width, int height);
-  inline int get_width() { return width_; }
-  inline int get_height() { return height_; }
-  inline float** get_kernal() { return kernal_; }
   virtual std::string name(void) = 0;
 
- protected:
-  void AllocateKernal(int width, int height);
-  void DeallocateKernal();
-  virtual void InitializeKernal() = 0;
 
  private:
   KernalFilter(const KernalFilter &f) = delete;
   KernalFilter& operator=(const KernalFilter &f) = delete;
-  int width_;
-  int height_;
-  float** kernal_;
+  Kernal* kernal_;
 };
 
 #endif  // SRC_INCLUDE_KERNAL_FILTER_H_

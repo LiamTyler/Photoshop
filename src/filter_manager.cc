@@ -16,12 +16,13 @@
 #include <iostream>
 #include "include/ui_ctrl.h"
 #include "include/pixel_buffer.h"
-#include "include/blur_filter.h"
-#include "include/edge_detect_filter.h"
+// #include "include/blur_filter.h"
+// #include "include/edge_detect_filter.h"
+// #include "include/sharpen_filter.h"
+// #include "include/motion_blur_filter.h"
 #include "include/quantize_filter.h"
 #include "include/threshold_filter.h"
-#include "include/sharpen_filter.h"
-#include "include/motion_blur_filter.h"
+#include "include/channels_filter.h"
 
 /*******************************************************************************
  * Namespaces
@@ -52,6 +53,9 @@ void FilterManager::ApplyChannel(PixelBuffer* oldimage,
         << channel_color_red_
         << ", green = " << channel_color_green_
         << ", blue = " << channel_color_blue_ << std::endl;
+    ChannelsFilter c(channel_color_red_, channel_color_green_, \
+                    channel_color_blue_);
+    c.ApplyFilter(oldimage, newimage);
 }
 
 void FilterManager::ApplySaturate(PixelBuffer* oldimage,
@@ -64,15 +68,15 @@ void FilterManager::ApplyBlur(PixelBuffer* oldimage, PixelBuffer* newimage) {
     std::cout << "Apply has been clicked for Blur with amount = "
         << blur_amount_ << std::endl;
     // TODO(tyler147): Why does it tweak out if b = BlurFilter(blur_amount_);
-    BlurFilter b(blur_amount_);
-    b.ApplyFilter(oldimage, newimage);
+    // BlurFilter b(blur_amount_);
+    // b.ApplyFilter(oldimage, newimage);
 }
 
 void FilterManager::ApplySharpen(PixelBuffer* oldimage, PixelBuffer* newimage) {
     std::cout << "Apply has been clicked for Sharpen with amount = "
         << sharpen_amount_ << std::endl;
-    SharpenFilter s(sharpen_amount_);
-    s.ApplyFilter(oldimage, newimage);
+    // SharpenFilter s(sharpen_amount_);
+    // s.ApplyFilter(oldimage, newimage);
 }
 
 void FilterManager::ApplyMotionBlur(PixelBuffer* oldimage,
@@ -80,15 +84,15 @@ void FilterManager::ApplyMotionBlur(PixelBuffer* oldimage,
     std::cout << "Apply has been clicked for Sharpen with amount = "
         << motion_blur_amount_
         << " and direction " << motion_blur_direction_ << std::endl;
-    MotionBlurFilter m(motion_blur_amount_, motion_blur_direction_);
-    m.ApplyFilter(oldimage, newimage);
+    // MotionBlurFilter m(motion_blur_amount_, motion_blur_direction_);
+    // m.ApplyFilter(oldimage, newimage);
 }
 
 void FilterManager::ApplyEdgeDetect(PixelBuffer* oldimage,
                                     PixelBuffer* newimage) {
     std::cout << "Apply has been clicked for Edge Detect" << std::endl;
-    EdgeDetectFilter e;
-    e.ApplyFilter(oldimage, newimage);
+    // EdgeDetectFilter e;
+    // e.ApplyFilter(oldimage, newimage);
 }
 
 void FilterManager::ApplyQuantize(PixelBuffer* oldimage,

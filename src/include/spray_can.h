@@ -13,7 +13,7 @@
 #define SRC_INCLUDE_SPRAY_CAN_H_
 
 #include <string>
-#include "include/spray_can.h"
+#include "include/tool.h"
 
 class TSprayCan : public Tool {
  public:

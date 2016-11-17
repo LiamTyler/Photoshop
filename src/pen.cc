@@ -29,4 +29,3 @@ TPen::TPen(int width, int height) : Tool(width, height) {
 TPen::TPen() : TPen(3, 3) {}
 
 TPen::~TPen() {}
-
