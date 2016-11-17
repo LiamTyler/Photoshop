@@ -40,6 +40,8 @@ void Kernal::ApplyKernal(PixelBuffer* oldimage, PixelBuffer* newimage,
                                int start_x, int start_y) {
     int buff_width = oldimage->width();
     int buff_height = oldimage->height();
+    int kern_mid_x = width_ / 2;
+    int kern_mid_y = height_ / 2;
     ColorData total;
 
     total = ColorData(0, 0, 0);
@@ -47,8 +49,8 @@ void Kernal::ApplyKernal(PixelBuffer* oldimage, PixelBuffer* newimage,
     // getting the running total of pixel * intensity
     for (int kr = height_ - 1; kr >= 0; kr--) {
         for (int kc = 0; kc < width_; kc++) {
-            int cur_x = start_x + kc;
-            int cur_y = start_y + kr;
+            int cur_x = start_x + kc - kern_mid_x;
+            int cur_y = start_y + (height_ - 1) - kr - kern_mid_y;
             if (0 <= cur_x && cur_x < buff_width &&
                 0 <= cur_y && cur_y < buff_height) {
                 total = total + oldimage->get_pixel(cur_x, cur_y)
