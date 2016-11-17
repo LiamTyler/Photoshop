@@ -12,9 +12,10 @@
 #ifndef SRC_INCLUDE_BLUR_TOOL_H_
 #define SRC_INCLUDE_BLUR_TOOL_H_
 
+#include <vector>
 #include <string>
 #include "include/tool.h"
-#include "include/kernal.h"
+#include "include/blur_kernal.h"
 #include "include/color_data.h"
 
 class TBlur : public Tool {
@@ -28,7 +29,7 @@ class TBlur : public Tool {
   TBlur(const TBlur& b) = delete;
   TBlur& operator=(const TBlur& b) = delete;
   int radius_;
-  Kernal** kernals_;
+  std::vector<BlurKernal> kernals_;
   image_tools::ColorData** scratch_;
 };
 

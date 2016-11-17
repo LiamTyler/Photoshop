@@ -21,6 +21,7 @@ using image_tools::PixelBuffer;
 class SharpenKernal : public Kernal {
  public:
   explicit SharpenKernal(int amount);
+  SharpenKernal();
   int get_amount() { return amount_; }
 
  protected:

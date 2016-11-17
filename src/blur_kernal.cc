@@ -17,6 +17,9 @@ BlurKernal::BlurKernal(int amount) : Kernal(amount, amount),
     InitializeKernal();
 }
 
+BlurKernal::BlurKernal() : Kernal(),
+                           amount_(-1) {}
+
 void BlurKernal::InitializeKernal() {
     int width = get_width();
     int height = get_height();

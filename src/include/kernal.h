@@ -20,7 +20,10 @@ using image_tools::PixelBuffer;
 class Kernal {
  public:
   Kernal(int width, int height);
+  Kernal();
   virtual ~Kernal();
+  Kernal(const Kernal& k);
+  Kernal& operator=(const Kernal& k);
   void ApplyKernal(PixelBuffer* oldimage, PixelBuffer* newimage,
                            int start_x, int start_y);
   void Resize(int width, int height);
@@ -34,8 +37,6 @@ class Kernal {
   virtual void InitializeKernal() = 0;
 
  private:
-  Kernal(const Kernal& k) = delete;
-  Kernal& operator=(const Kernal& k) = delete;
   int width_;
   int height_;
   float** kernal_;

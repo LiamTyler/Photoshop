@@ -21,6 +21,7 @@ using image_tools::PixelBuffer;
 class MotionBlurKernal : public Kernal {
  public:
   MotionBlurKernal(int amount, int direction);
+  MotionBlurKernal();
   inline int get_amount() { return amount_; }
   inline int get_direction() { return direction_; }
 

@@ -160,7 +160,6 @@ void FlashPhotoApp::InitGlui(void) {
         for (int i = 0; i < ToolFactory::num_tools(); i++)
             new GLUI_RadioButton(radio, tools_[i]->name().c_str());
         new GLUI_RadioButton(radio, "Stamp");
-        new GLUI_RadioButton(radio, "Blur");
     }
 
     GLUI_Panel *color_panel = new GLUI_Panel(glui(), "Tool Color");
@@ -230,49 +229,41 @@ void FlashPhotoApp::GluiControl(int control_id) {
             cur_color_red_ = 1;
             cur_color_green_ = 0;
             cur_color_blue_ = 0;
-            update_colors();
             break;
         case UICtrl::UI_PRESET_ORANGE:
             cur_color_red_ = 1;
             cur_color_green_ = 0.5;
             cur_color_blue_ = 0;
-            update_colors();
             break;
         case UICtrl::UI_PRESET_YELLOW:
             cur_color_red_ = 1;
             cur_color_green_ = 1;
             cur_color_blue_ = 0;
-            update_colors();
             break;
         case UICtrl::UI_PRESET_GREEN:
             cur_color_red_ = 0;
             cur_color_green_ = 1;
             cur_color_blue_ = 0;
-            update_colors();
             break;
         case UICtrl::UI_PRESET_BLUE:
             cur_color_red_ = 0;
             cur_color_green_ = 0;
             cur_color_blue_ = 1;
-            update_colors();
             break;
         case UICtrl::UI_PRESET_PURPLE:
             cur_color_red_ = 0.5;
             cur_color_green_ = 0;
             cur_color_blue_ = 1;
-            update_colors();
             break;
         case UICtrl::UI_PRESET_WHITE:
             cur_color_red_ = 1;
             cur_color_green_ = 1;
             cur_color_blue_ = 1;
-            update_colors();
             break;
         case UICtrl::UI_PRESET_BLACK:
             cur_color_red_ = 0;
             cur_color_green_ = 0;
             cur_color_blue_ = 0;
-            update_colors();
             break;
         case UICtrl::UI_APPLY_BLUR:
             filter_manager_.ApplyBlur(display_buffer_, scratch_buffer_);
@@ -330,6 +321,8 @@ void FlashPhotoApp::GluiControl(int control_id) {
         default:
             break;
     }
+
+    update_colors();
 
     if (control_id >= UICtrl::UI_APPLY_BLUR &&
         control_id <= UICtrl::UI_APPLY_SPECIAL_FILTER) {

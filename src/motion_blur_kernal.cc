@@ -18,6 +18,9 @@ MotionBlurKernal::MotionBlurKernal(int amount, int direction) :
     InitializeKernal();
 }
 
+MotionBlurKernal::MotionBlurKernal() : amount_(-1),
+                                       direction_(-1) {}
+
 void MotionBlurKernal::InitializeKernal() {
     int width = get_width();
     int mid_w = width / 2;

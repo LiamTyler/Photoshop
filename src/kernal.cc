@@ -26,6 +26,10 @@ Kernal::Kernal(int width, int height) : width_(width),
     AllocateKernal(width, height);
 }
 
+Kernal::Kernal() : width_(0),
+                   height_(0),
+                   kernal_(nullptr) {}
+
 Kernal::~Kernal() {
     DeallocateKernal();
 }
@@ -78,10 +82,12 @@ void Kernal::AllocateKernal(int width, int height) {
     // Allocate new kernal
     width_ = width;
     height_ = height;
-    // TODO(tyler147): Make this faster by using a single new
-    kernal_ = new float*[height_];
-    for (int h = 0; h < height_; h++)
-        kernal_[h] = new float[width_]();
+    if (width != 0 && height != 0) {
+        // TODO(tyler147): Make this faster by using a single new
+        kernal_ = new float*[height_];
+        for (int h = 0; h < height_; h++)
+            kernal_[h] = new float[width_]();
+    }
 }
 
 void Kernal::DeallocateKernal() {
@@ -93,4 +99,29 @@ void Kernal::DeallocateKernal() {
     width_ = 0;
     height_ = 0;
     kernal_ = nullptr;
+}
+
+Kernal::Kernal(const Kernal& k) : width_(k.width_),
+                                  height_(k.height_),
+                                  kernal_(nullptr) {
+    kernal_ = new float*[height_];
+    for (int h = 0; h < height_; h++)
+        kernal_[h] = new float[width_];
+
+    for (int h = 0; h < height_; h++)
+        for (int w = 0; w < width_; w++)
+            kernal_[h][w] = k.kernal_[h][w];
+}
+
+Kernal& Kernal::operator=(const Kernal& k) {
+    width_ = k.width_;
+    height_ = k.height_;
+    kernal_ = new float*[height_];
+    for (int h = 0; h < height_; h++)
+        kernal_[h] = new float[width_];
+
+    for (int h = 0; h < height_; h++)
+        for (int w = 0; w < width_; w++)
+            kernal_[h][w] = k.kernal_[h][w];
+    return *this;
 }
