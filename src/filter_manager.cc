@@ -68,7 +68,7 @@ void FilterManager::ApplyBlur(PixelBuffer* oldimage, PixelBuffer* newimage) {
     std::cout << "Apply has been clicked for Blur with amount = "
         << blur_amount_ << std::endl;
     // TODO(tyler147): Why does it tweak out if b = BlurFilter(blur_amount_);
-    BlurFilter b(blur_amount_);
+    BlurFilter b(static_cast<int>(blur_amount_));
     b.ApplyFilter(oldimage, newimage);
 }
 
