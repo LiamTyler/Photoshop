@@ -17,7 +17,7 @@
 #include "include/ui_ctrl.h"
 #include "include/pixel_buffer.h"
 #include "include/blur_filter.h"
-// #include "include/edge_detect_filter.h"
+#include "include/edge_detect_filter.h"
 // #include "include/sharpen_filter.h"
 // #include "include/motion_blur_filter.h"
 #include "include/quantize_filter.h"
@@ -91,8 +91,8 @@ void FilterManager::ApplyMotionBlur(PixelBuffer* oldimage,
 void FilterManager::ApplyEdgeDetect(PixelBuffer* oldimage,
                                     PixelBuffer* newimage) {
     std::cout << "Apply has been clicked for Edge Detect" << std::endl;
-    // EdgeDetectFilter e;
-    // e.ApplyFilter(oldimage, newimage);
+    EdgeDetectFilter e;
+    e.ApplyFilter(oldimage, newimage);
 }
 
 void FilterManager::ApplyQuantize(PixelBuffer* oldimage,

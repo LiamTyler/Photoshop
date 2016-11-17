@@ -20,7 +20,7 @@ using image_tools::PixelBuffer;
 
 class EdgeDetectKernal : public Kernal {
  public:
-  EdgeDetectKernal()
+  EdgeDetectKernal();
 
  protected:
   virtual void InitializeKernal();
