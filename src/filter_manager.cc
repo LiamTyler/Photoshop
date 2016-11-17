@@ -19,7 +19,7 @@
 #include "include/blur_filter.h"
 #include "include/edge_detect_filter.h"
 #include "include/sharpen_filter.h"
-// #include "include/motion_blur_filter.h"
+#include "include/motion_blur_filter.h"
 #include "include/quantize_filter.h"
 #include "include/threshold_filter.h"
 #include "include/channels_filter.h"
@@ -84,8 +84,8 @@ void FilterManager::ApplyMotionBlur(PixelBuffer* oldimage,
     std::cout << "Apply has been clicked for Sharpen with amount = "
         << motion_blur_amount_
         << " and direction " << motion_blur_direction_ << std::endl;
-    // MotionBlurFilter m(motion_blur_amount_, motion_blur_direction_);
-    // m.ApplyFilter(oldimage, newimage);
+    MotionBlurFilter m(motion_blur_amount_, motion_blur_direction_);
+    m.ApplyFilter(oldimage, newimage);
 }
 
 void FilterManager::ApplyEdgeDetect(PixelBuffer* oldimage,
