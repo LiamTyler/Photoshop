@@ -20,10 +20,14 @@ using image_tools::PixelBuffer;
 
 class SharpenKernal : public Kernal {
  public:
-  SharpenKernal();
+  explicit SharpenKernal(int amount);
+  int get_amount() { return amount_; }
 
  protected:
   virtual void InitializeKernal();
+
+ private:
+  int amount_;
 };
 
 #endif  // SRC_INCLUDE_SHARPEN_KERNAL_H_
