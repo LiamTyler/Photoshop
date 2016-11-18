@@ -104,13 +104,6 @@ Bits Please
                                        const ColorData& current) {
         float c;
         
-        if (amount_ == 0){
-            value = 0;
-        } else {
-            // Calculate amount of current color to be applied
-            value = 1.0/amount_;
-        }
-        
         if (color == "red")
             c = 1.0 - current.red();
         else if (color == "green")
@@ -127,7 +120,7 @@ Bits Please
 
 3. Third, we need to add the ApplyInvert method to the FilterManager class. In the filter_manager header file, add ApplyFilter as shown below.
 
-    ###### include/ui_ctrl.h
+    ###### include/filter_manager.h
       ```C++
 
     ...
@@ -157,7 +150,7 @@ Bits Please
     \TODO(Adding A New Filter): Add ApplyInvert method here
     void FilterManager::ApplyInvert(PixelBuffer* oldimage,
                                      PixelBuffer* newimage) {
-        std::cout << "Apply has been clicked for Special" << std::endl;
+        std::cout << "Apply has been clicked for Invert" << std::endl;
         InvertFilter i;
         i.ApplyFilter(oldimage, newimage);
     }
@@ -212,7 +205,7 @@ Bits Please
 
       ```
 
-7. In the include/ui_ctrl.h file, add UI_APPLY_INVERT to the Type enum as shown below.
+7. In the include/ui_ctrl.h file, add UI_APPLY_INVERT to the Type enum as shown below. UI_APPLY_INVERT must be placed after UI_APPLY_MOTION_BLUR but before UI_APPLY_SPECIAL_FILTER, since the buffers get switched for filters listed between those two filters, inclusively.
 
     ###### include/ui_ctrl.h
       ```C++
@@ -220,16 +213,16 @@ Bits Please
 
     ...
 
-  enum Type {
+    enum Type {
 
     ...
 
     UI_APPLY_CHANNEL,
     UI_APPLY_QUANTIZE,
     UI_APPLY_MOTION_BLUR,
-    UI_APPLY_SPECIAL_FILTER,
     \TODO(Adding A New Filter): Add UI_APPLY_INVERT_FILTER here
-    UI_APPLY_INVERT
+    UI_APPLY_INVERT,
+    UI_APPLY_SPECIAL_FILTER,
     UI_UNDO,
     UI_REDO,
     UI_QUIT
