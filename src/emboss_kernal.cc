@@ -34,12 +34,10 @@ void EmbossKernal::InitializeKernal() {
             }
         }
     }
-    
 //    for (int r = height - 1; r >= 0; r--) {
 //        for (int c = 0; c < width; c++) {
 //            std::cout << kern[r][c] << " ";
 //        }
 //        std::cout << "" << std::endl;
 //    }
-    
 }
