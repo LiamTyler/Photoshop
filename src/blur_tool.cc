@@ -36,23 +36,7 @@ TBlur::TBlur(int radius) : Tool(2 * radius + 1, 2 * radius + 1),
                                    pow(w - center, 2))/radius_;
 
             if (intensity > 0) {
-                // Round to the nearst odd number
-                float ipart, fpart;
-                float tmp = radius_ * intensity;
-                cout << tmp << " ";
-                fpart = floor(tmp) / 2;
-                ipart = floor(fpart);
-                if (fpart - ipart  >= .5) {
-                    tmp = floor(tmp);
-                } else {
-                    if (tmp == ceil(tmp))
-                        tmp += 1;
-                    else
-                        tmp = ceil(tmp);
-                }
-
-                cout << tmp << endl;
-                mask[h][w] = static_cast<int>(tmp);
+                mask[h][w] = static_cast<int>(radius / 2 * intensity);
             } else {
                 mask[h][w] = 0.0;
             }
@@ -65,8 +49,7 @@ TBlur::TBlur(int radius) : Tool(2 * radius + 1, 2 * radius + 1),
     // of the BlurKernal that is going to be applied to that pixel.
     // The linear falloff makes it so that the middle pixel will be very
     // blurred, while the ones on the edges aren't so much
-    int filled[diameter + 1];
-    filled[diameter + 1] = {0};
+    std::vector<int> filled(diameter + 1);
 
     for (int h = 0; h < diameter; h++)
         for (int w = 0; w < diameter; w++)
@@ -83,7 +66,7 @@ TBlur::TBlur(int radius) : Tool(2 * radius + 1, 2 * radius + 1),
 
     // Allocate the scratch buffer to place our partially blurred
     scratch_ = new PixelBuffer(diameter, diameter, ColorData());
-
+ 
     for (int h = 0; h < diameter; h++) {
         for (int w = 0; w < diameter; w++) {
             cout << std::setw(4) << mask[h][w];
@@ -100,7 +83,7 @@ TBlur::TBlur(int radius) : Tool(2 * radius + 1, 2 * radius + 1),
     */
 }
 
-TBlur::TBlur() : TBlur(11) {}
+TBlur::TBlur() : TBlur(19) {}
 
 TBlur::~TBlur() {
     // Free the scratch buffer

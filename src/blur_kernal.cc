@@ -12,8 +12,8 @@
 #include "include/blur_kernal.h"
 #include "include/tool_utilities.h"
 
-BlurKernal::BlurKernal(int amount) : Kernal(amount, amount),
-                                     amount_(amount) {
+BlurKernal::BlurKernal(int amount) : Kernal(amount * 2 + 1, amount * 2 + 1),
+                                     amount_(amount * 2 + 1) {
     InitializeKernal();
 }
 
@@ -40,4 +40,13 @@ void BlurKernal::InitializeKernal() {
         for (int c = 0; c < width; c++)
             if (kern[r][c] > 0)
                 kern[r][c] = percent;
+    /*
+    for (int r = 0; r < height; r++) { 
+        for (int c = 0; c < width; c++) {
+            std::cout << kern[r][c] << " ";
+        }
+        std::cout << std::endl;
+    }
+    */
+
 }
