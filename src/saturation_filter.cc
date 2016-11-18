@@ -26,21 +26,13 @@ float SaturationFilter::ApplyToColor(std::string color,
     float c;
     float lum;
     lum = current.luminance();
-    float value;
-
-    if (amount_ == 0) {
-        value = 0;
-    } else {
-        // Calculate amount of current color to be applied
-        value = 1.0/amount_;
-    }
 
     if (color == "red")
-        c = (lum * value) + (current.red() * (1.0 - value));
+        c = (lum * (1.0 - amount_)) + (current.red() * amount_);
     else if (color == "green")
-        c = (lum * value) + (current.green() * (1.0 - value));
+        c = (lum * (1.0 - amount_)) + (current.green() * amount_);
     else if (color == "blue")
-        c = (lum * value) + (current.blue() * (1.0 - value));
+        c = (lum * (1.0 - amount_)) + (current.blue() * amount_);
     else
         std::cerr << "WRONG COLOR INPUT" << std::endl;
 
