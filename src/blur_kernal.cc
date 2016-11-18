@@ -48,5 +48,4 @@ void BlurKernal::InitializeKernal() {
         std::cout << std::endl;
     }
     */
-
 }

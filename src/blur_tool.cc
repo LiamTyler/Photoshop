@@ -26,6 +26,10 @@ TBlur::TBlur(int radius) : Tool(2 * radius + 1, 2 * radius + 1),
                            radius_(radius),
                            kernals_(std::vector<BlurKernal>()),
                            scratch_(nullptr) {
+    Init();
+}
+
+void TBlur::Init() {
     float** mask = get_mask();
     // TODO(tyler147): move all of this out of the constructor
     int center = radius_;
@@ -34,9 +38,8 @@ TBlur::TBlur(int radius) : Tool(2 * radius + 1, 2 * radius + 1),
         for (int w = 0; w < diameter; w++) {
             float intensity = 1.0 - sqrt(pow(h - center, 2) +
                                    pow(w - center, 2))/radius_;
-
             if (intensity > 0) {
-                mask[h][w] = static_cast<int>(radius / 2 * intensity);
+                mask[h][w] = static_cast<int>(radius_ / 2 * intensity);
             } else {
                 mask[h][w] = 0.0;
             }
@@ -66,13 +69,14 @@ TBlur::TBlur(int radius) : Tool(2 * radius + 1, 2 * radius + 1),
 
     // Allocate the scratch buffer to place our partially blurred
     scratch_ = new PixelBuffer(diameter, diameter, ColorData());
- 
+    /*
     for (int h = 0; h < diameter; h++) {
         for (int w = 0; w < diameter; w++) {
             cout << std::setw(4) << mask[h][w];
         }
         cout << endl;
     }
+    */
     /*
     cout << "Printing the kernals..." << endl;
     for (int i = 0; i < diameter + 1; i++) {
