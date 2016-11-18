@@ -57,7 +57,7 @@ Bits Please
 
 ### Programming Tutorial: Adding a New Invert Filter to FlashPhoto
 
-1. Begin by creating an Invert Filter header file called invert_filter.h and place it in the include folder. Since the Invert Filter does not need a kernal, Invert Filter will inherit from the Simple Filter class. Filters need a constructor, destructor, an ApplyToColor method, and a name, as shown below.
+1. Begin by creating an InvertFilter header file called invert_filter.h and place it in the include folder. Since the InvertFilter does not need a kernal, InvertFilter will inherit from the SimpleFilter class. Apart from the usual constructor and destructor, filters need an ApplyToColor method and a name, as shown below.
 
     ###### include/invert_filter.h
       ```C++
@@ -72,9 +72,9 @@ Bits Please
     using image_tools::PixelBuffer;
     using image_tools::ColorData;
 
-    class InvertFilter : public InvertFilter {
+    class InvertFilter : public SimpleFilter {
      public:
-      explicit InvertFilter();
+      InvertFilter();
       ~InvertFilter();
       float ApplyToColor(std::string, const ColorData& current);
       std::string name(void) { return "Invert"; }
@@ -84,7 +84,7 @@ Bits Please
 
       ```
 
-2. Next, create an Invert Filter C++ file called invert_filter.cc and place it in the src folder. Here we define the constructor and destructor. The ApplyToColor method needs to be defined in a way that will give us the desired affect from the filter. ApplyToColor gets applied to each color separately. We check which color got passed in to ApplyToColor, then adjust that color accordingly. In this case, for each color that gets passed in, we return 1.0 - the current color.
+2. Next, create an InvertFilter C++ file called invert_filter.cc and place it in the src folder. The ApplyToColor method needs to be defined in a way that will give us the desired affect from the filter. ApplyToColor gets applied to each color, red, green, and blue, separately. We check which color got passed in to ApplyToColor, then adjust that color accordingly. In this case, for each color that gets passed in, we return 1.0 - the current color.
 
     ###### invert_filter.cc
       ```C++
@@ -125,7 +125,23 @@ Bits Please
 
       ```
 
-3. Third, add the ApplyInvert method to the filter_manager.cc file in the src folder. Create an Invert Filter object and call the ApplyFilter method. This method is the same for all of the Simple Filters that don't require a kernal.
+3. Third, we need to add the ApplyInvert method to the FilterManager class. In the filter_manager header file, add ApplyFilter as shown below.
+
+    ###### include/ui_ctrl.h
+      ```C++
+
+    ...
+
+    void ApplySpecial(PixelBuffer* oldimage, PixelBuffer* newimage);
+
+    \TODO(Adding A New Filter): Add ApplyInvert here
+    void ApplyInvert(PixelBuffer* oldimage, PixelBuffer* newimage);
+
+    ...
+
+      ```
+
+4. Then, add the ApplyInvert method to the filter_manager.cc file in the src folder. Create an InvertFilter object and call the ApplyFilter method. This method is the same for all of the SimpleFilters.
 
     ###### filter_manager.cc
       ```C++
@@ -150,7 +166,7 @@ Bits Please
 
       ```
 
-4. Be sure to include the invert_filter.h file at the top of the filter_manager.cc file.
+5. Be sure to include the invert_filter.h file at the top of the filter_manager.cc file.
 
     ###### filter_manager.cc
       ```C++
@@ -168,4 +184,78 @@ Bits Please
 
       ```
 
+6. Next, you need to add the Filter to the User Interface. In filter_manager.cc, we need to add the InvertFilter panel and Apply button.  
 
+    ###### filter_manager.cc
+      ```C++
+
+    ...
+
+    GLUI_Panel *edge_det_panel =
+        new GLUI_Panel(filter_panel, "Edge Detect");
+
+    {
+        new GLUI_Button(edge_det_panel, "Apply",
+                UICtrl::UI_APPLY_EDGE, s_gluicallback);
+    }
+
+    \TODO(Adding A New Filter): Add InvertFilter panel and Apply button here
+    GLUI_Panel *invert_panel =
+        new GLUI_Panel(filter_panel, "Invert");
+
+    {
+        new GLUI_Button(invert_panel, "Apply",
+                UICtrl::UI_APPLY_INVERT, s_gluicallback);
+    }
+
+    ...
+
+      ```
+
+7. In the include/ui_ctrl.h file, add UI_APPLY_INVERT to the Type enum as shown below.
+
+    ###### include/ui_ctrl.h
+      ```C++
+
+
+    ...
+
+  enum Type {
+
+    ...
+
+    UI_APPLY_CHANNEL,
+    UI_APPLY_QUANTIZE,
+    UI_APPLY_MOTION_BLUR,
+    UI_APPLY_SPECIAL_FILTER,
+    \TODO(Adding A New Filter): Add UI_APPLY_INVERT_FILTER here
+    UI_APPLY_INVERT
+    UI_UNDO,
+    UI_REDO,
+    UI_QUIT
+
+    ...
+
+      ```
+
+8. Lastly, in flashphoto_app.cc, add the UICtrl::UI_APPLY_INVERT case to the GluiControl method.
+
+    ###### flashphoto_app.cc
+      ```C++
+
+    ...
+
+    case UICtrl::UI_APPLY_QUANTIZE:
+        filter_manager_.ApplyQuantize(display_buffer_, scratch_buffer_);
+        break;
+    case UICtrl::UI_APPLY_SPECIAL_FILTER:
+        filter_manager_.ApplySpecial(display_buffer_, scratch_buffer_);
+        break;
+    \TODO(Adding A New Filter): Add UICtrl::UI_APPLY_INVERT case here
+    case UICtrl::UI_APPLY_INVERT:
+        filter_manager_.ApplyInvert(display_buffer_, scratch_buffer_);
+        break;
+
+    ...
+
+      ```
