@@ -65,7 +65,8 @@ TBlur::TBlur(int radius) : Tool(2 * radius + 1, 2 * radius + 1),
     // of the BlurKernal that is going to be applied to that pixel.
     // The linear falloff makes it so that the middle pixel will be very
     // blurred, while the ones on the edges aren't so much
-    int filled[diameter + 1] = {0};
+    int filled[diameter + 1];
+    filled[diameter + 1] = {0};
 
     for (int h = 0; h < diameter; h++)
         for (int w = 0; w < diameter; w++)
