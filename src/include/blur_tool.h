@@ -32,6 +32,7 @@ class TBlur : public Tool {
  private:
   TBlur(const TBlur& b) = delete;
   TBlur& operator=(const TBlur& b) = delete;
+  void Init();
   int radius_;
   std::vector<BlurKernal> kernals_;
   image_tools::PixelBuffer *scratch_;
