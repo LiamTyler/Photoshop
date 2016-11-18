@@ -24,6 +24,7 @@
 #include "include/threshold_filter.h"
 #include "include/channels_filter.h"
 #include "include/emboss_filter.h"
+#include "include/saturation_filter.h"
 
 /*******************************************************************************
  * Namespaces
@@ -63,6 +64,8 @@ void FilterManager::ApplySaturate(PixelBuffer* oldimage,
                                   PixelBuffer* newimage) {
     std::cout << "Apply has been clicked for Saturate with amount = "
         << saturation_amount_ << std::endl;
+    SaturationFilter sat(saturation_amount_);
+    sat.ApplyFilter(oldimage, newimage);
 }
 
 void FilterManager::ApplyBlur(PixelBuffer* oldimage, PixelBuffer* newimage) {

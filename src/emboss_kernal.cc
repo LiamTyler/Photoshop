@@ -20,8 +20,6 @@ void EmbossKernal::InitializeKernal() {
     int width = get_width();
     int height = get_height();
     float** kern = get_kernal();
-    // int center_width = width/2;
-    // int center_height = height/2;
 
     for (int r = 0; r < height; r++) {
         for (int c = 0; c < width; c++) {

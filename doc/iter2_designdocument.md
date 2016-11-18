@@ -1,11 +1,11 @@
 # Design Justifications for FlashPhoto
 #### Group Name:
-<Group Name Here>
+Bits Please
 
 #### Members:
-- <Member 1>
-- <Member 2>
-- <Member 3>
+- Liam Tyler
+- Jessica Henderson
+- Shashank Yallamraju
 
 #### Instructions 
 > Respond to each of the design questions below.  Make your answers factual and compelling.  Where appropriate, reference alternative designs you considered, code snippets, and diagrams within your writing in order to be clear and back up your claims.  As we have discussed in class, when writing with reference to figures make sure to tell the reader what to look for in the diagram or what exactly you want the reader to notice in the code snippet.  Remember that the design of your project is worth 1/3 of the total project grade.  Also remember that when grading the design portion of the project, this design justification document is the only thing we will look at.  This document must stand on its own.  Rather than linking to your actual code, carefully pick the most important code snippets from your project to include here in order to provide convincing detail for your answers to the questions below.  
@@ -55,8 +55,117 @@
 > ```
 > Describe in the form of a tutorial (including code snippets) exactly what changes would need to be made to your program in order to fully integrate this new filter.
 
-### Programming Tutorial: Adding a New Pencil Tool to FlashPhoto
+### Programming Tutorial: Adding a New Invert Filter to FlashPhoto
 
-1. <Step 1>
-2. <Step 2>
-<etc>
+1. Begin by creating an Invert Filter header file called invert_filter.h and place it in the include folder. Since the Invert Filter does not need a kernal, Invert Filter will inherit from the Simple Filter class. Filters need a constructor, destructor, an ApplyToColor method, and a name, as shown below.
+
+###### include/invert_filter.h
+  ```C++
+#ifndef SRC_INCLUDE_INVERT_FILTER_H_
+#define SRC_INCLUDE_INVERT_FILTER_H_
+
+#include <string>
+#include "include/simple_filter.h"
+#include "include/color_data.h"
+#include "include/pixel_buffer.h"
+
+using image_tools::PixelBuffer;
+using image_tools::ColorData;
+
+class InvertFilter : public InvertFilter {
+ public:
+  explicit InvertFilter();
+  ~InvertFilter();
+  float ApplyToColor(std::string, const ColorData& current);
+  std::string name(void) { return "Invert"; }
+};
+
+#endif  // SRC_INCLUDE_INVERT_FILTER_H_
+
+  ```
+
+2. Next, create an Invert Filter C++ file called invert_filter.cc and place it in the src folder. Here we define the constructor and destructor. The ApplyToColor method needs to be defined in a way that will give us the desired affect. ApplyToColor gets applied to each color separately. We check which color got passed in to ApplyToColor, then adjust that color accordingly. In this case, for each color that gets passed in, we return 1.0 - the current color.
+
+###### invert_filter.cc
+  ```C++
+#include "include/invert_filter.h"
+#include <string>
+#include <iostream>
+#include <iomanip>
+#include "include/tool_utilities.h"
+
+using image_tools::ColorData;
+
+InvertFilter::InvertFilter() {}
+
+InvertFilter::~InvertFilter() {}
+
+float InvertFilter::ApplyToColor(std::string color,
+                                   const ColorData& current) {
+    float c;
+    
+    if (amount_ == 0){
+        value = 0;
+    } else {
+        // Calculate amount of current color to be applied
+        value = 1.0/amount_;
+    }
+    
+    if (color == "red")
+        c = 1.0 - current.red();
+    else if (color == "green")
+        c = 1.0 - current.green();
+    else if (color == "blue")
+        c = 1.0 - current.blue();
+    else
+        std::cerr << "WRONG COLOR INPUT" << std::endl;
+
+    return c;
+}
+
+  ```
+
+3. Third, add the ApplyInvert method to the filter_manager.cc file in the src folder. Create an Invert Filter object and call the ApplyFilter method. This method is the same for all filters. ????????
+
+###### filter_manager.cc
+  ```C++
+...
+
+void FilterManager::ApplySpecial(PixelBuffer* oldimage,
+                                 PixelBuffer* newimage) {
+    std::cout << "Apply has been clicked for Special" << std::endl;
+    EmbossFilter emb;
+    emb.ApplyFilter(oldimage, newimage);
+}
+
+\TODO(Adding A New Filter): Add ApplyInvert method here
+void FilterManager::ApplyInvert(PixelBuffer* oldimage,
+                                 PixelBuffer* newimage) {
+    std::cout << "Apply has been clicked for Special" << std::endl;
+    InvertFilter i;
+    i.ApplyFilter(oldimage, newimage);
+}
+
+...
+
+  ```
+
+4. Be sure to include the invert_filter.h file at the top of the filter_manager.cc file.
+
+###### filter_manager.cc
+  ```C++
+...
+
+#include "include/quantize_filter.h"
+#include "include/threshold_filter.h"
+#include "include/channels_filter.h"
+#include "include/emboss_filter.h"
+#include "include/saturation_filter.h"
+\TODO(Adding A New Filter): Add include header file here
+#include "include/invert_filter.h"
+
+...
+
+  ```
+
+
