@@ -22,7 +22,7 @@ using image_tools::ColorData;
 
 class ChannelsFilter : public SimpleFilter {
  public:
-  explicit ChannelsFilter(float red_channel, float green_channel,
+  ChannelsFilter(float red_channel, float green_channel,
                         float blue_channel);
   ~ChannelsFilter();
   float ApplyToColor(std::string, const ColorData& current);

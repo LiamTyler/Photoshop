@@ -32,6 +32,7 @@ class Tool {
  private:
   Tool(const Tool &t) = delete;
   Tool& operator=(const Tool &t) = delete;
+  void AllocateMask();
   int width_;
   int height_;
   float** mask_;

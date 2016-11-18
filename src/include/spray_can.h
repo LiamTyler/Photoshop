@@ -21,6 +21,8 @@ class TSprayCan : public Tool {
   TSprayCan();
   virtual ~TSprayCan();
   std::string name(void) { return "Spray Can"; }
+ private:
+  void Init();
 };
 
 #endif  // SRC_INCLUDE_SPRAY_CAN_H_
