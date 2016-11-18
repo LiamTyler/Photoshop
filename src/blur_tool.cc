@@ -66,7 +66,7 @@ TBlur::TBlur(int radius) : Tool(2 * radius + 1, 2 * radius + 1),
     // The linear falloff makes it so that the middle pixel will be very
     // blurred, while the ones on the edges aren't so much
     int filled[diameter + 1];
-    filled[diameter + 1] = {0};
+    std::fill_n(filled, diameter + 1, 0);
 
     for (int h = 0; h < diameter; h++)
         for (int w = 0; w < diameter; w++)
