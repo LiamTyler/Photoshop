@@ -18,6 +18,10 @@
 #include <string>
 #include "GL/glui.h"
 #include "include/ui_ctrl.h"
+#include "include/history_manager.h"
+#include "include/pixel_buffer.h"
+
+using image_tools::PixelBuffer;
 
 /*******************************************************************************
  * Namespaces
@@ -52,14 +56,14 @@ class StateManager {
    * can still be re-done later)
    *
    */
-  void UndoOperation(void);
+  PixelBuffer* UndoOperation(HistoryManager* history, PixelBuffer* display);
 
   /**
    * @brief Re-does the last un-done operation applied to the canvas (not
    * permanently; it can be undone again later)
    *
    */
-  void RedoOperation(void);
+  PixelBuffer* RedoOperation(HistoryManager* history, PixelBuffer* display);
 
  private:
   void redo_toggle(bool select) {

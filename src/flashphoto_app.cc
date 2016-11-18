@@ -38,6 +38,7 @@ FlashPhotoApp::FlashPhotoApp(int w, int h) : BaseGfxApp(w, h),
     glui_ctrl_hooks_(),
     display_buffer_(nullptr),
     scratch_buffer_(nullptr),
+    history_(nullptr),
     cur_tool_index_(0),
     cur_tool_(nullptr),
     tools_(),
@@ -94,6 +95,12 @@ FlashPhotoApp::~FlashPhotoApp(void) {
     if (display_buffer_) {
         delete display_buffer_;
     }
+    if (scratch_buffer_) {
+        delete scratch_buffer_;
+    }
+    if (history_) {
+        delete history_;
+    }
 }
 
 
@@ -138,12 +145,14 @@ void FlashPhotoApp::LeftMouseUp(int x, int y) {
     std::cout << "mouseReleased " << x << " " << y << std::endl;
     last_x_ = -1;
     last_y_ = -1;
+    history_->SaveCanvas(display_buffer_);
 }
 
 void FlashPhotoApp::InitializeBuffers(ColorData background_color,
         int w, int h) {
     display_buffer_ = new PixelBuffer(w, h, background_color);
     scratch_buffer_ = new PixelBuffer(w, h, background_color);
+    history_ = new HistoryManager(display_buffer_, 50);
 }
 
 void FlashPhotoApp::InitGlui(void) {
@@ -322,10 +331,12 @@ void FlashPhotoApp::GluiControl(int control_id) {
             io_manager_.set_image_file(io_manager_.file_name());
             break;
         case UICtrl::UI_UNDO:
-            state_manager_.UndoOperation();
+            display_buffer_ = state_manager_.UndoOperation(history_,
+                                                           display_buffer_);
             break;
         case UICtrl::UI_REDO:
-            state_manager_.RedoOperation();
+            display_buffer_ = state_manager_.RedoOperation(history_,
+                                                           display_buffer_);
             break;
         default:
             break;
@@ -336,6 +347,7 @@ void FlashPhotoApp::GluiControl(int control_id) {
         tmp = display_buffer_;
         display_buffer_ = scratch_buffer_;
         scratch_buffer_ = tmp;
+        history_->SaveCanvas(display_buffer_);
     }
 
     // Forces canvas to update changes made in this function

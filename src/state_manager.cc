@@ -35,19 +35,23 @@ void StateManager::InitGlui(const GLUI *const glui,
                             void (*s_gluicallback)(int)) {
   undo_btn_ = new GLUI_Button(const_cast<GLUI*>(glui), "Undo", UICtrl::UI_UNDO,
                               s_gluicallback);
-  undo_toggle(false);
+  undo_toggle(true);
 
   redo_btn_  = new GLUI_Button(const_cast<GLUI*>(glui), "Redo", UICtrl::UI_REDO,
                                s_gluicallback);
-  redo_toggle(false);
+  redo_toggle(true);
 }
 
-void StateManager::UndoOperation(void) {
+PixelBuffer* StateManager::UndoOperation(HistoryManager* history,
+                                         PixelBuffer* display) {
   std::cout << "Undoing..." << std::endl;
+  return history->Undo(display);
 }
 
-void StateManager::RedoOperation(void) {
+PixelBuffer* StateManager::RedoOperation(HistoryManager* history,
+                                         PixelBuffer* display) {
   std::cout << "Redoing..." << std::endl;
+  return history->Redo(display);
 }
 
 }  /* namespace image_tools */
