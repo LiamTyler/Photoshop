@@ -32,7 +32,7 @@
 # config/   - Directory for all autoconf/configure/automake inputs/output
 BUILDDIR        = ./build
 SRCDIR          = ./src
-BINDIR          = $(BUILDDIR)/bin
+BINDIR          = bin
 OBJDIR          = $(BUILDDIR)/obj
 EXTDIR          = ./ext
 GLUIDIR         = $(EXTDIR)/glui
@@ -81,7 +81,7 @@ endef
 # Specify the compiler flags to use when compiling. Note the use of fopenmp in
 # order to enable OpenMP pragmas in the code.
 define CXXFLAGS
-$(OPT) -g -W -Werror -Wall -Wextra -Weffc++ -Wshadow -Wfloat-equal \
+$(OPT) -g -W -Wall -Wextra -Weffc++ -Wshadow -Wfloat-equal \
 -Wold-style-cast -Wswitch-default -std=gnu++11 -Wno-unused-parameter $(CXXINCDIRS)
 endef
 

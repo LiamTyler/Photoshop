@@ -73,7 +73,7 @@ void FlashPhotoApp::Init(
         Tool* t = ToolFactory::CreateTool(i);
         assert(t);
         tools_.push_back(t);
-        std::cout << "tool " << i << " created" << std::endl;
+        // std::cout << "tool " << i << " created" << std::endl;
     }
     cur_tool_index_ = 0;
     cur_tool_ = tools_[0];

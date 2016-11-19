@@ -26,6 +26,8 @@ class HistoryManager {
   void Init(PixelBuffer* blankCanvas);
 
  private:
+  HistoryManager(const HistoryManager& h) = delete;
+  HistoryManager& operator=(const HistoryManager& h) = delete;
   PixelBuffer** saved_buffers_;
   PixelBuffer* ResizeAndCopy(PixelBuffer* display);
   int possible_saves_;
