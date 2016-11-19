@@ -26,6 +26,10 @@ Kernal::Kernal(int width, int height) : width_(width),
     AllocateKernal(width, height);
 }
 
+Kernal::Kernal() : width_(0),
+                   height_(0),
+                   kernal_(nullptr) {}
+
 Kernal::~Kernal() {
     DeallocateKernal();
 }
@@ -36,8 +40,7 @@ void Kernal::Resize(int width, int height) {
     InitializeKernal();
 }
 
-void Kernal::ApplyKernal(PixelBuffer* oldimage, PixelBuffer* newimage,
-                               int start_x, int start_y) {
+ColorData Kernal::ApplyKernal(PixelBuffer* oldimage, int start_x, int start_y) {
     int buff_width = oldimage->width();
     int buff_height = oldimage->height();
     int kern_mid_x = width_ / 2;
@@ -65,7 +68,7 @@ void Kernal::ApplyKernal(PixelBuffer* oldimage, PixelBuffer* newimage,
         }
     }
     // total = total* (height_ * width_ / applied);
-    newimage->set_pixel(start_x, start_y, total.clamped_color() );
+    return total.clamped_color();
     // std::cout << "Pixel at (" << r << "," << c << "): "
     // << total.clamped_color() << std::endl;
 }
@@ -78,10 +81,12 @@ void Kernal::AllocateKernal(int width, int height) {
     // Allocate new kernal
     width_ = width;
     height_ = height;
-    // TODO(tyler147): Make this faster by using a single new
-    kernal_ = new float*[height_];
-    for (int h = 0; h < height_; h++)
-        kernal_[h] = new float[width_]();
+    if (width != 0 && height != 0) {
+        // TODO(tyler147): Make this faster by using a single new
+        kernal_ = new float*[height_];
+        for (int h = 0; h < height_; h++)
+            kernal_[h] = new float[width_]();
+    }
 }
 
 void Kernal::DeallocateKernal() {
@@ -93,4 +98,44 @@ void Kernal::DeallocateKernal() {
     width_ = 0;
     height_ = 0;
     kernal_ = nullptr;
+}
+
+Kernal::Kernal(const Kernal& k) : width_(k.width_),
+                                  height_(k.height_),
+                                  kernal_(nullptr) {
+    kernal_ = new float*[height_];
+    for (int h = 0; h < height_; h++)
+        kernal_[h] = new float[width_];
+
+    for (int h = 0; h < height_; h++)
+        for (int w = 0; w < width_; w++)
+            kernal_[h][w] = k.kernal_[h][w];
+}
+
+Kernal& Kernal::operator=(const Kernal& k) {
+    width_ = k.width_;
+    height_ = k.height_;
+    kernal_ = new float*[height_];
+    for (int h = 0; h < height_; h++)
+        kernal_[h] = new float[width_];
+
+    for (int h = 0; h < height_; h++)
+        for (int w = 0; w < width_; w++)
+            kernal_[h][w] = k.kernal_[h][w];
+    return *this;
+}
+
+void Kernal::print(std::ostream& out) const {
+    out << std::setprecision(3);
+    for (int h = 0; h < height_; h++) {
+        for (int w = 0; w < width_; w++) {
+            out << std::setw(7) << kernal_[h][w] << " ";
+        }
+        out << std::endl;
+    }
+}
+
+std::ostream& operator<<(std::ostream& out, const Kernal& k) {
+    k.print(out);
+    return out;
 }

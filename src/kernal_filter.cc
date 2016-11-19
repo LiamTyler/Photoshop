@@ -33,5 +33,5 @@ void KernalFilter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
 
     for (int r = 0; r < buff_height; r++)
         for (int c = 0; c < buff_width; c++)
-            kernal_->ApplyKernal(oldimage, newimage, c, r);
+            newimage->set_pixel(c, r, kernal_->ApplyKernal(oldimage, c, r));
 }

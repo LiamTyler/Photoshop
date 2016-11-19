@@ -20,6 +20,7 @@
 #include "include/highlighter.h"
 #include "include/spray_can.h"
 #include "include/rainbow.h"
+#include "include/blur_tool.h"
 
 /*******************************************************************************
  *  * Namespaces
@@ -50,6 +51,9 @@ namespace image_tools {
                 break;
             case TOOL_RAINBOW:
                 tool = new TRainbow();
+                break;
+            case TOOL_BLUR:
+                tool = new TBlur();
                 break;
             default:
                 tool = nullptr;

@@ -20,11 +20,7 @@ using image_tools::ColorData;
 Tool::Tool(int width, int height) : width_(width),
                                     height_(height),
                                     mask_(nullptr) {
-    // Allocate the memory for the 2d mask with height rows and width columns
-    mask_ = new float*[height];
-    for (int i = 0; i < height; i++) {
-         mask_[i] = new float[width]();
-    }
+    AllocateMask();
 }
 
 Tool::Tool() : Tool(41, 41) {}
@@ -34,6 +30,14 @@ Tool::~Tool() {
         delete[] mask_[i];
     }
     delete[] mask_;
+}
+
+void Tool::AllocateMask() {
+    // Allocate the memory for the 2d mask with height rows and width columns
+    mask_ = new float*[height_];
+    for (int i = 0; i < height_; i++) {
+         mask_[i] = new float[width_]();
+    }
 }
 
 void Tool::ApplyTool(PixelBuffer* buff, ColorData current_color,

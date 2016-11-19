@@ -31,6 +31,8 @@
 *.out
 *.app
 build/
+bin/
+bin/*
 
 # Externals
 ext/
@@ -42,4 +44,5 @@ config/
 # Text editor tmp files
 .*.swp
 
-Makefile
+# Makefile
+ext/../Makefile
