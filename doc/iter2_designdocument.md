@@ -273,4 +273,4 @@ After comparing the two stack design and the ring buffer design, we decided that
 
       ```
 
-[HistoryManagerUML]: https://github.umn.edu/umn-csci-3081F16/repo-group-Bits-Please/blob/history_manager/doc/figures/tools.png
+[HistoryManagerUML]: https://github.umn.edu/umn-csci-3081F16/repo-group-Bits-Please/blob/history_manager/doc/figures/HistoryManager.png
