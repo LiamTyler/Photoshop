@@ -43,8 +43,23 @@ Bits Please
 
 ### 2.1 Design Description
 
+The design we developed in order to implement the undo/redo feature revolves around maintaining a ring buffer. When constructing the HistoryManager object, we create an array of pointers to PixelBuffers of size possible_saves_. If the array becomes full, we save the next PixelBuffer at position 0, which gives us the ring buffer structure.
+
+The HistoryManager class has a SaveCanvas method which gets called each time a filter is applied, an image gets loaded in as the canvas, and the mouse is released. If the next pointer in our ring buffer points to NULL or if the PixelBuffer it points to is the wrong size, we delete it and create a new PixelBuffer of the correct size. Then, we copy the PixelBuffer we want to save onto that PixelBuffer.
+
+For obvious reasons, we have Undo and Redo methods, which get called when the Undo and Redo buttons are pressed. If there is a canvas available at the position in the array before the current canvas being displayed, the user can use Undo, and that PixelBuffer gets copied, returned, and set as the display_buffer_. The only difference in Redo is that we copy the PixelBuffer pointed to by the next pointer in the ring buffer, if available.
+
+We keep track of three values that allow us to correctly allow or disallow the use of the Undo and Redo methods. These values are current_save_, oldest_save_, and newest_save_. We mod these values with possible_saves_ in order to wrap around our ring buffer. The current_save_ is the index of the array which contains the pointer to the current PixelBuffer being displayed. When SaveCanvas is called, we add 1 to current_save_ and set newest_save_ to the value of current_save_, since that save is now the newest. If current_save_ == oldest_save, we have wrapped around the entire ring buffer and need to add 1 to the oldest_save_. The previous oldest_save_ is lost, which is fine since, at most, we only need to be able to undo possible_save_ times. So, if current_save_ is equal to newest_save_, the user cannot Redo. Likewise, if current_save_ is equal to oldest_save_, the user cannot Undo.
+
 ### 2.2 Design Justification
 
+As a group, we decided that a ring buffer would be the best design for our HistoryManager class because it was the simplest design we came up with. An alternative we discussed involved using two stacks, rather than a ring buffer. We would have pushed PixelBuffers onto one stack as we saved them. When the user clicked Undo, we would pop a PixelBuffer off of one stack, and push it onto the other. Then, if a user clicked Redo, we would pop the PixelBuffer off of the second stack and push it back onto the first stack.
+
+We saw two challenges with the two stack design that were easily handled with our ring buffer design. The first was that we would have to somehow make sure there was always a blank PixelBuffer at the bottom of the first stack, even if a user clicked Undo all the way back to that PixelBuffer. In our ring buffer design, we have a blank PixelBuffer in the first position of our array, and it never changes. None of the PixelBuffers in our array get changed as we Undo and Redo. They simply get copied over to the display_buffer_.
+
+The second challenge we saw with the two stack design was that it would be more difficult to handle the case where the stack is full and we needed to save another PixelBuffer. In the two stack design, we would have to delete the PixelBuffer at the bottom of the stack and then push the newly saved PixelBuffer onto the top of the stack. In our ring buffer design, when our array is full, we automatically wrap around the ring buffer to position 0, since we mod (current_save_ +1) with possible_saves_.
+
+After comparing the two stack design and the ring buffer design, we decided that the ring buffer was simpler. We thought that the two stack design added unnecessary complexity and had more cons than the ring buffer design.
 
 ## 3  Design Question Three
 > A new developer on your team must add a new filter to FlashPhoto. This filter is called  _Invert._ This filter performs the following conversion to all pixels in the canvas:
