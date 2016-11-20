@@ -50,7 +50,7 @@ class Filter {
 Notice how all the methods are virtual, and two of them are pure virtual. This class defines the basic interface for all of our filters, but provides none of the details of how that is accomplished. The details of how the ApplyFilter() method is realized for the two types of filters: pixel-independent, and convolution-based, is handled by our abstract classes: SimpleFilter, and KernalFilter respectively. The class diagrams for these classes are depicted in Figure 2 below.
 
 ###### Figure 2: The UML class diagram for the Filters.
-![Filters UML diagram][FitlersUML]
+![Filters UML diagram][FiltersUML]
 
 In order to describe the KernalFilter, the class definition is depicted in Figure 3 below so that it can be referenced in following descriptions.
 
