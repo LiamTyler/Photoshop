@@ -43,6 +43,11 @@ Bits Please
 
 ### 2.1 Design Description
 
+Below is the UML Diagram that illustrates our HistoryManager design.
+
+###### UML diagram of HistoryManager
+![History Manager UML][HistoryManagerUML]
+
 The design we developed in order to implement the undo/redo feature revolves around maintaining a ring buffer. When constructing the HistoryManager object, we create an array of pointers to PixelBuffers of size possible_saves_. If the array becomes full, we save the next PixelBuffer at position 0, which gives us the ring buffer structure.
 
 The HistoryManager class has a SaveCanvas method which gets called each time a filter is applied, an image gets loaded in as the canvas, and the mouse is released. If the next pointer in our ring buffer points to NULL or if the PixelBuffer it points to is the wrong size, we delete it and create a new PixelBuffer of the correct size. Then, we copy the PixelBuffer we want to save onto that PixelBuffer.
@@ -267,3 +272,5 @@ After comparing the two stack design and the ring buffer design, we decided that
     ...
 
       ```
+
+[HistoryManagerUML]: https://github.umn.edu/umn-csci-3081F16/repo-group-Bits-Please/blob/history_manager/doc/figures/tools.png
