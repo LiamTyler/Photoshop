@@ -33,10 +33,10 @@ Bits Please
 > First, in the **Design Description** section below, describe the design you developed to address this challenge. We expect that you will include at least one figure showing the relationships of the classes affected by your design. Second, in the **Design Justification** section below present the most compelling argument you can for why this design is justified.  Note that our expectation is that you will need to discuss the pros (and maybe cons) of your final design as compared to alternative designs that you discussed in your group in order to make a strong case for justifying your design.
 
 ### 1.1 Design Description
-Our design at the highest level views all filters as the same-- something that takes in the current screen, and creates a new image to be displayed by applying the filter to the old image. To implement this, we created an abstract class as seen in Fig 1. for all filters to derive from.
+Our design at the highest level of abastraction views applying any filter as the same operation-- something that takes in the current screen, and creates a new image to be displayed by applying the filter to the old image. To implement this, we created an abstract class as seen in Fig 1. for all filters to derive from.
 
 
-###### include/invert_filter.h
+###### include/filter.h
 ```C++
 class Filter {
  public:
@@ -46,7 +46,7 @@ class Filter {
 };
 
 ```
-Notice how all the methods are virtual, and two of them are pure virtual. This class defines the basic interface for all of our filters, but provides none of the details of how that is accomplished. The details of how the "ApplyFilter" method is realized for the two types of filters: pixel-independent, and convolution-based, is handled by our abstract classes: SimpleFilter, and KernalFilter respectively. The class diagrams for these classes are depicted in Fig 2 below.
+Notice how all the methods are virtual, and two of them are pure virtual. This class defines the basic interface for all of our filters, but provides none of the details of how that is accomplished. The details of how the ApplyFilter() method is realized for the two types of filters: pixel-independent, and convolution-based, is handled by our abstract classes: SimpleFilter, and KernalFilter respectively. The class diagrams for these classes are depicted in Fig 2 below.
 
 #INSERT FILTER UML
 
@@ -140,7 +140,34 @@ ColorData Kernal::ApplyKernal(PixelBuffer* oldimage, int start_x, int start_y) {
 }
 ```
 
-Notice that this method takes in the location of the pixel we are currently processing. It then centers the kernal_ array over that location, and loops through each pixel, adding that pixel * corresponding value in our array, and adds it to a running total. This is the value that is returned. 
+Notice that this method takes in the location of the pixel we are currently processing. It then centers the kernal_ array over that location, and loops through each pixel, adding that pixel * corresponding value in our array, and adds it to a running total. This is the value that is returned, which will become the pixel on the newimage. The way we create the kernal array itself, is through the Kernal member function *InitializeKernal()*. Notice in Fig 4 how this function is pure virtual. Each filter that is convolution-based has its own kernal which defines the InitializeKernal method to give the filter it's appropriate functionality. To make this more clear, we can examine the BlurFilter.
+
+To blur a pixel, we average out all the colors within a certain radius of a pixel, and set that pixel equal to the average. Observe the implementation of BlurFilter in Figure 6 below.
+
+###### src/blur_kernal.cc
+```C++
+BlurFilter::BlurFilter(int amount) : KernalFilter(new BlurKernal(amount)) {}
+```
+
+Notice how the only thing needed to create the filter is passing a BlurKernal to the parent KernalFilter class. To apply the kernal itself, there is no definition needed because the parent KernalFilter class already defines the ApplyFilter method as follows in Figure 7:
+
+###### src/kernal_filter.cc
+```C++
+void KernalFilter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
+    int buff_height = oldimage->height();
+    int buff_width = oldimage->width();
+
+    for (int r = 0; r < buff_height; r++)
+        for (int c = 0; c < buff_width; c++)
+            newimage->set_pixel(c, r, kernal_->ApplyKernal(oldimage, c, r));
+}
+```
+
+For any filter class, the default method is just to loop through all the pixels and apply the kernal to each pixel. The BlurKernal only overrides the InitializeKernal method as stated before. If we were to create a BlurKernal with a radius of 2, the two dimensional array would be as follows in Figure 8:
+
+#INSERT KERNAL PIC
+
+Notice how there are 13 pixels within a radius of 2 from the center, so when we apply the kernal as seen in Figure 5, it will return the pixel that is the average of all the pixels within a radius of 2 of the center pixel.
 
 
 ### 1.2 Design Justification
@@ -373,7 +400,7 @@ After comparing the two stack design and the ring buffer design, we decided that
     case UICtrl::UI_APPLY_SPECIAL_FILTER:
         filter_manager_.ApplySpecial(display_buffer_, scratch_buffer_);
         break;
-    \TODO(Adding A New Filter): Add UICtrl::UI_APPLY_INVERT case here
+    // TODO(Adding A New Filter): Add UICtrl::UI_APPLY_INVERT case here
     case UICtrl::UI_APPLY_INVERT:
         filter_manager_.ApplyInvert(display_buffer_, scratch_buffer_);
         break;
