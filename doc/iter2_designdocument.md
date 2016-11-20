@@ -33,6 +33,115 @@ Bits Please
 > First, in the **Design Description** section below, describe the design you developed to address this challenge. We expect that you will include at least one figure showing the relationships of the classes affected by your design. Second, in the **Design Justification** section below present the most compelling argument you can for why this design is justified.  Note that our expectation is that you will need to discuss the pros (and maybe cons) of your final design as compared to alternative designs that you discussed in your group in order to make a strong case for justifying your design.
 
 ### 1.1 Design Description
+Our design at the highest level views all filters as the same-- something that takes in the current screen, and creates a new image to be displayed by applying the filter to the old image. To implement this, we created an abstract class as seen in Fig 1. for all filters to derive from.
+
+
+###### include/invert_filter.h
+```C++
+class Filter {
+ public:
+  virtual ~Filter() {}
+  virtual void ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) = 0;
+  virtual std::string name(void) = 0;
+};
+
+```
+Notice how all the methods are virtual, and two of them are pure virtual. This class defines the basic interface for all of our filters, but provides none of the details of how that is accomplished. The details of how the "ApplyFilter" method is realized for the two types of filters: pixel-independent, and convolution-based, is handled by our abstract classes: SimpleFilter, and KernalFilter respectively. The class diagrams for these classes are depicted in Fig 2 below.
+
+#INSERT FILTER UML
+
+In order to describe the KernalFilter, the class definition is depicted in Fig 3 below.
+
+###### include/kernal_filter.h
+```C++
+class KernalFilter : public Filter {
+ public:
+  explicit KernalFilter(Kernal* kernal);
+  virtual ~KernalFilter();
+  virtual void ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage);
+  virtual std::string name(void) = 0;
+
+
+ private:
+  KernalFilter(const KernalFilter &f) = delete;
+  KernalFilter& operator=(const KernalFilter &f) = delete;
+  Kernal* kernal_;
+};
+
+```
+ 
+The main goal of the KernalFilter is to achieve the convolution-based functionality. We approached the problem in the following way, "For each pixel in our display, the new pixel will be composed of its neighboring pixels. We wish to know which neighboring pixels, and how much of each of them to compose our new pixel with." To accomplish this, notice how the KernalFilter class has a Kernal object, which is shown in Fig 4.
+
+
+###### include/kernal.h
+```C++
+class Kernal {
+ public:
+  Kernal(int width, int height);
+  Kernal();
+  virtual ~Kernal();
+  Kernal(const Kernal& k);
+  Kernal& operator=(const Kernal& k);
+  ColorData ApplyKernal(PixelBuffer* oldimage, int start_x, int start_y);
+  void Resize(int width, int height);
+  inline int get_width() { return width_; }
+  inline int get_height() { return height_; }
+  inline float** get_kernal() { return kernal_; }
+  void print(std::ostream& out) const;
+
+ protected:
+  void AllocateKernal(int width, int height);
+  void DeallocateKernal();
+  virtual void InitializeKernal() = 0;
+
+ private:
+  int width_;
+  int height_;
+  float** kernal_;
+};
+
+```
+
+The Kernal object is a similar to the Mask of Tools in iteration 1. It is composed of a two dimensional array of floats, which is pointed to by the kernal_ variable. Each element in the array is the percentage of that pixel we want for our final pixel. To better see this, observe the ApplyKernal method shown in Fig 5 below.
+
+
+###### kernal.cc
+```C++
+ColorData Kernal::ApplyKernal(PixelBuffer* oldimage, int start_x, int start_y) {
+    int buff_width = oldimage->width();
+    int buff_height = oldimage->height();
+    int kern_mid_x = width_ / 2;
+    int kern_mid_y = height_ / 2;
+    ColorData total;
+
+    total = ColorData(0, 0, 0);
+    // Center the kernal over the pixel, and apply it by
+    // getting the running total of pixel * intensity
+    for (int kr = height_ - 1; kr >= 0; kr--) {
+        for (int kc = 0; kc < width_; kc++) {
+            int cur_x = start_x + kc - kern_mid_x;
+            int cur_y = start_y + (height_ - 1) - kr - kern_mid_y;
+            if (0 <= cur_x && cur_x < buff_width &&
+                0 <= cur_y && cur_y < buff_height) {
+                total = total + oldimage->get_pixel(cur_x, cur_y)
+                                * kernal_[kr][kc];
+            } else {
+                // If the pixel is off the screen,
+                // then use the nearest valid pixel
+                total = total +
+                        oldimage->get_pixel(
+                        std::min(buff_width - 1, std::max(0, cur_x)),
+                        std::min(buff_height - 1, std::max(0, cur_y)))
+                        * kernal_[kr][kc];
+            }
+        }
+    }
+    return total.clamped_color();
+}
+```
+
+Notice that this method takes in the location of the pixel we are currently processing. It then centers the kernal_ array over that location, and loops through each pixel, adding that pixel * corresponding value in our array, and adds it to a running total. This is the value that is returned. 
+
 
 ### 1.2 Design Justification
 
