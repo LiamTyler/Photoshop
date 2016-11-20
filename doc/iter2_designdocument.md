@@ -170,6 +170,30 @@ For any filter class, the default method is just to loop through all the pixels 
 Notice how there are 13 pixels within a radius of 2 from the center, so when we apply the kernal as seen in Figure 5, it will return the pixel that is the average of all the pixels within a radius of 2 of the center pixel.
 
 
+Now, going back to the pixel-indepenedent filters, we designed them so that each filter derives from a SimpleFilter class depicted in the UML diagram in Figure 2. Notice how the ApplyFilter method is not pure virtual, but the ApplyToColor is. We designed it so that each filter has the same default ApplyFilter method as seen below in Figure 9.
+
+###### src/simple_filter.cc
+```C++
+void SimpleFilter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
+    int buff_height = oldimage->height();
+    int buff_width = oldimage->width();
+    ColorData current;
+    ColorData newColor;
+
+    for (int r = 0; r < buff_height; r++) {
+        for (int c = 0; c < buff_width; c++) {
+            current = oldimage->get_pixel(c, r);
+            newColor.red(ApplyToColor("red", current));
+            newColor.green(ApplyToColor("green", current));
+            newColor.blue(ApplyToColor("blue", current));
+            newimage->set_pixel(c, r, newColor);
+        }
+    }
+}
+```
+
+As seen in the implementation, pixel-independent filters loop through each pixel in the image, and create the new corresponding pixel by performing the ApplyToColor method for each color. Each subclass of SimpleFilter implements that function as needed to return the appropriate value of the color requested.
+
 ### 1.2 Design Justification
 
 
