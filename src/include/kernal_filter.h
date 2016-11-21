@@ -21,7 +21,6 @@ using image_tools::PixelBuffer;
 
 class KernalFilter : public Filter {
  public:
-  KernalFilter();
   explicit KernalFilter(Kernal* kernal);
   virtual ~KernalFilter();
   virtual void ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage);

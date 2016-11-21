@@ -46,24 +46,27 @@ namespace image_tools {
 class StateManager {
  public:
   StateManager();
-  ~StateManager() {}
+  ~StateManager();
 
   void InitGlui(const GLUI *const glui,
-                void (*s_gluicallback)(int));
+                void (*s_gluicallback)(int),
+                PixelBuffer* display);
+
+  void Save(PixelBuffer* display);
 
   /**
    * @brief Undoes the last operation applied to the canvas (not permanently; it
    * can still be re-done later)
    *
    */
-  PixelBuffer* UndoOperation(HistoryManager* history, PixelBuffer* display);
+  PixelBuffer* UndoOperation(PixelBuffer* display);
 
   /**
    * @brief Re-does the last un-done operation applied to the canvas (not
    * permanently; it can be undone again later)
    *
    */
-  PixelBuffer* RedoOperation(HistoryManager* history, PixelBuffer* display);
+  PixelBuffer* RedoOperation(PixelBuffer* display);
 
  private:
   void redo_toggle(bool select) {
@@ -79,6 +82,7 @@ class StateManager {
   StateManager& operator=(const StateManager &rhs) = delete;
 
   /* data members */
+  HistoryManager *history_;
   GLUI_Button *undo_btn_;
   GLUI_Button *redo_btn_;
 };

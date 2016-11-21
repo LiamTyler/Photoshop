@@ -108,3 +108,17 @@ PixelBuffer* HistoryManager::ResizeAndCopy(PixelBuffer* display) {
 
     return display;
 }
+
+bool HistoryManager::cant_undo() {
+    if (current_save_ == oldest_save_)
+        return true;
+
+    return false;
+}
+
+bool HistoryManager::cant_redo() {
+    if (current_save_ == newest_save_)
+        return true;
+
+    return false;
+}
