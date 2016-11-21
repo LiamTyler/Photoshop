@@ -90,6 +90,9 @@ PixelBuffer* HistoryManager::Undo(PixelBuffer* display) {
         return display;
 
     current_save_ = (current_save_ - 1) % possible_saves_;
+    if (current_save_ == -1)
+        current_save_ = possible_saves_ - 1;
+
     return ResizeAndCopy(display);
 }
 
@@ -128,4 +131,23 @@ bool HistoryManager::cant_redo() {
         return true;
 
     return false;
+}
+
+PixelBuffer* HistoryManager::GetUndoBuff() {
+    if (current_save_ != oldest_save_) {
+        int index = (current_save_ - 1) % possible_saves_;
+        if (index == -1)
+            index = possible_saves_ - 1;
+
+        return saved_buffers_[index];
+    }
+
+    return saved_buffers_[current_save_];
+}
+
+PixelBuffer* HistoryManager::GetRedoBuff() {
+    if (current_save_ != newest_save_)
+        return saved_buffers_[(current_save_ + 1) % possible_saves_];
+
+    return saved_buffers_[current_save_];
 }
