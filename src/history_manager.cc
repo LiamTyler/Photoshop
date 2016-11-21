@@ -31,7 +31,10 @@ HistoryManager::~HistoryManager() {
 }
 
 void HistoryManager::Init(PixelBuffer* buff) {
-    saved_buffers_ = new PixelBuffer*[possible_saves_]();
+    saved_buffers_ = new PixelBuffer*[possible_saves_];
+    for (int i = 0; i < possible_saves_; i++)
+        saved_buffers_[i] = nullptr;
+
     SaveCanvas(buff);
     oldest_save_ = 0;
 }
@@ -44,7 +47,7 @@ void HistoryManager::SaveCanvas(PixelBuffer* buff) {
         oldest_save_ = (oldest_save_ + 1) % possible_saves_;
 
     int width = buff->width();
-    int height = buff->width();
+    int height = buff->height();
     ColorData bg = buff->background_color();
     PixelBuffer* curr = saved_buffers_[current_save_];
     // Delete the current pixelbuffer in this spot if there is and old one,
@@ -60,11 +63,15 @@ void HistoryManager::SaveCanvas(PixelBuffer* buff) {
         curr = new PixelBuffer(width, height, bg);
     }
 
+    std::cout << "buff h: " << height << ", buff w: " << width <<
+    ", curr h: " << curr->height() << ", curr w: "
+    << curr->width() << std::endl;
+
     // Copy the actual pixels over into the buffer, now that it has the
     // correct size and bg color
     for (int r = 0; r < height; r++)
         for (int c = 0; c < width; c++)
-            curr->set_pixel(r, c, buff->get_pixel(r, c));
+            curr->set_pixel(c, r, buff->get_pixel(c, r));
     saved_buffers_[current_save_] = curr;
 }
 
@@ -104,7 +111,7 @@ PixelBuffer* HistoryManager::ResizeAndCopy(PixelBuffer* display) {
     // Now copy the saved buff into the display one
     for (int r = 0; r < c_height; r++)
         for (int c = 0; c < c_width; c++)
-            display->set_pixel(r, c, curr->get_pixel(r, c));
+            display->set_pixel(c, r, curr->get_pixel(c, r));
 
     return display;
 }

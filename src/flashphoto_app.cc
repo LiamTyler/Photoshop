@@ -324,6 +324,7 @@ void FlashPhotoApp::GluiControl(int control_id) {
         case UICtrl::UI_LOAD_CANVAS_BUTTON:
             io_manager_.LoadImageToCanvas();
             LoadImageToCanvas();
+            // state_manager_.Save(display_buffer_);
             break;
         case UICtrl::UI_LOAD_STAMP_BUTTON:
             io_manager_.LoadImageToStamp();

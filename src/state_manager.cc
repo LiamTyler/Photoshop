@@ -53,8 +53,8 @@ void StateManager::Save(PixelBuffer* display) {
     history_->SaveCanvas(display);
     if (history_->cant_redo())
         redo_toggle(false);
-    if (history_->cant_undo())
-        undo_toggle(false);
+    if (!history_->cant_undo())
+        undo_toggle(true);
 }
 
 PixelBuffer* StateManager::UndoOperation(PixelBuffer* display) {
