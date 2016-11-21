@@ -339,9 +339,13 @@ void FlashPhotoApp::GluiControl(int control_id) {
             break;
         case UICtrl::UI_UNDO:
             display_buffer_ = state_manager_.UndoOperation(display_buffer_);
+            BaseGfxApp::SetWindowDimensions(display_buffer_->width(),
+                                            display_buffer_->height());
             break;
         case UICtrl::UI_REDO:
             display_buffer_ = state_manager_.RedoOperation(display_buffer_);
+            BaseGfxApp::SetWindowDimensions(display_buffer_->width(),
+                                            display_buffer_->height());
             break;
         default:
             break;

@@ -63,10 +63,6 @@ void HistoryManager::SaveCanvas(PixelBuffer* buff) {
         curr = new PixelBuffer(width, height, bg);
     }
 
-    std::cout << "buff h: " << height << ", buff w: " << width <<
-    ", curr h: " << curr->height() << ", curr w: "
-    << curr->width() << std::endl;
-
     // Copy the actual pixels over into the buffer, now that it has the
     // correct size and bg color
     for (int r = 0; r < height; r++)
@@ -106,7 +102,7 @@ PixelBuffer* HistoryManager::ResizeAndCopy(PixelBuffer* display) {
 
     // Check to see if current display is the same dimensions
     // as the saved one. If so, no need to resize it.
-    if (c_width != d_width || c_height == d_height) {
+    if (c_width != d_width || c_height != d_height) {
         delete display;
         display = new PixelBuffer(c_width, c_height, bg);
     }
@@ -131,23 +127,4 @@ bool HistoryManager::cant_redo() {
         return true;
 
     return false;
-}
-
-PixelBuffer* HistoryManager::GetUndoBuff() {
-    if (current_save_ != oldest_save_) {
-        int index = (current_save_ - 1) % possible_saves_;
-        if (index == -1)
-            index = possible_saves_ - 1;
-
-        return saved_buffers_[index];
-    }
-
-    return saved_buffers_[current_save_];
-}
-
-PixelBuffer* HistoryManager::GetRedoBuff() {
-    if (current_save_ != newest_save_)
-        return saved_buffers_[(current_save_ + 1) % possible_saves_];
-
-    return saved_buffers_[current_save_];
 }
