@@ -26,8 +26,8 @@ PixelBuffer* IJPGHandler::loadImage(const std::string fileName) {
     struct my_error_mgr jerr;
 
     FILE * infile;
-    JSAMPARRAY buffer; //  output buffer
-    int row_stride; //  width of buffer
+    JSAMPARRAY buffer;  // output buffer
+    int row_stride;  // width of buffer
 
     // Open the file that was inputted
     if ((infile = fopen(fileName.c_str(), "rb")) == NULL) {
