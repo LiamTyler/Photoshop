@@ -247,6 +247,88 @@ Overall, we feel that our filter design is successful. It is extensible, underst
 > First, in the **Design Description** section below, describe the design you developed to address this challenge.  Second, in the **Design Justification** section below present the most compelling argument you can for why this design is justified.  Note that our expectation is that you will need to discuss the pros (and maybe cons) of your final design as compared to alternative designs that you discussed in your group in order to make a strong case for justifying your design.
 
 ### 2.1 Design Description
+> To address the challenge of redo/undo, we created a separate HistoryManager class. In this class we created an array to store each buffer that has been made.
+> First, we created a constructor in which we prepare a PixelBuffer* object to represent a buffer and an int called possible_saves_ to represent the maximum size of an array of buffers. possible_saves_ dictates how far back or how far forward one can undo/redo respectively. Also, there is saved_buffers_ which is the array in which the buffers will be saved into, current_save_ which keeps track of the index in which the current buffer is saved, newest_save_ which holds the index of the buffer which was most recently saved and oldest_save_ which keeps the index of the buffer that was least recently saved. To clarify, newest_save_ is not neccessarily the same as current_save_. For instance, if there are 10 buffers in saved_buffers_ and one decides to use the undo function 3 times, newest_save_ will be 9 while curent_save_ will be 6. These variables are used to keep track of the buffers in saved_buffers_. In addition, this is where we initialize the PixelBuffer* object which creates a new buffer array, but notice this is settled with the Init function.
+
+```C++
+HistoryManager::HistoryManager(PixelBuffer* buff, int possible_saves) :
+                                saved_buffers_(nullptr),
+                                possible_saves_(possible_saves),
+                                current_save_(-1),
+                                oldest_save_(0),
+                                newest_save_(0) {
+    Init(buff);
+}
+```
+> Second, we have a destructor that deletes all the buffers in saved_buffers_ and then proceeds to delete the array as well. This helps to free up resources and objects it may have acquired during its lifetime.
+> Then, we have an Init function which takes in no arguments and created saved_buffers_ of the size of possible_saves_, saves the current canvas into the first index of the array, and sets oldest_save_ to 0. This is used to clear saved_buffers_. Thus, actions such as Redo and Undo will have no effect. However, note that this does not produce a blank canvas, but rather keeps the existing buffer and places it into the first index of a newly created saved_buffers_. Hence the current buffer will be the oldest_save_.
+
+```C++
+void HistoryManager::Init(PixelBuffer* buff) {
+    saved_buffers_ = new PixelBuffer*[possible_saves_]();
+    SaveCanvas(buff);
+    oldest_save_ = 0;
+}
+```
+> Next, the SaveCanvas function is there to store the current buffer into saved_buffers_ and proceedingly update the values current_save_, oldest_save_, and newest_save_. Usually, for current_save_ and newest_save_, we would add 1 to thir current value and keep oldest_save as is. However, oldest_save_ does change if we reach the end of saved_buffers_, then we must store the buffer into the first index of saved_buffers_ and so then oldest_save_ would be incremented by 1. This, is just a for instance. Anytime the current_save_ is equal to the oldest_save_, we must update the value of oldest_save_ which is represented by the "if" statement below. However, for the case in which we reach the end of saved_buffers_, we must always loop back to the beginning in order to maintain the integrity of the buffer. We accomplish this through the use of modulus. For examples, if we have a possible_saves_ set to 10 and current_save_ becomes 10, we set the value of current_save_ to 0 since 10 mod 10 is equal to 0. This also effects Redo operation. If a new buffer is saved, there should be the ability to Redo since a change was added, not taken away. Thus we set newest_save_ to equal current_save_ so Redo won't work (This will be expanded upon when we describe the Redo function). Note that Undo will still be functional (This will be further discussed as we describe the Undo function).
+
+```C++
+    // Update the positions
+    current_save_ = (current_save_ + 1) % possible_saves_;
+    newest_save_ = current_save_;
+    if (current_save_ == oldest_save_)
+        oldest_save_ = (oldest_save_ + 1) % possible_saves_;
+```
+
+> When this happens, we reach a situation where we will have to replace the buffers currently in saved_buffers_ with the current buffer. Hence, we delete the old buffer, and insert the current buffer. This is accomplished by obtaining the height and width of the current buffer, the background color and the current buffer itself, and then copying the data into a new buffer in which we store in saved_buffers_. Underneath, you can see that we check if a replacement needs to occur and then copy it to a new buffer. This ensures we have the correct size and background color of the new buffer, and reduces the possibility of errors.
+
+```C++
+    // Delete the current pixelbuffer in this spot if there is and old one,
+    // and it is of different size than the new one
+    if (curr != nullptr) {
+        if (width != curr->width() || height != curr->height()) {
+            delete curr;
+            curr = new PixelBuffer(width, height, bg);
+        } else {
+            curr->set_background_color(bg);
+        }
+    } else {
+        curr = new PixelBuffer(width, height, bg);
+    }
+
+    // Copy the actual pixels over into the buffer, now that it has the
+    // correct size and bg color
+    for (int r = 0; r < height; r++)
+        for (int c = 0; c < width; c++)
+            curr->set_pixel(r, c, buff->get_pixel(r, c));
+    saved_buffers_[current_save_] = curr;
+```
+
+> After that, we have the Undo function which will change the current buffer to the previous buffer stored in saved_buffers_. We check to see if we can even Undo which means that there is more than 1 buffer in saved_buffers_. If we can Undo, we decrement the value of current_save_ and display the previous buffer throught the use of a funciton called ResizeAndCopy, which will be discussed later. If we cannot Undo, we return the current buffer. In the case that the current_save_ is at the beginning of saved_buffers_ and there is more than one buffer in saved_buffers_, we must ensure that current_save_ arrives at the end of saved_buffers_. Beneath we see how Undo() works.
+
+```C++
+    PixelBuffer* HistoryManager::Undo(PixelBuffer* display) {
+    // Check to see if we can even redo
+    if (current_save_ == oldest_save_)
+        return display;
+
+    current_save_ = (current_save_ - 1) % possible_saves_;
+    return ResizeAndCopy(display);
+}
+```
+
+> Along with that, we have the Redo function which reverses the functionality of Undo. To illustrate, if we have saved_buffers_ with 10 buffers in it and we Undo 2 times, we decremented current_save_ and idsplayed the according buffer. However, if we Redo 2 times, we increment current_save_ and we are back to where we have started. So, we first check if a Redo is possible and if so, we decrement current_save and use ResizeAndCopy to display the awarded buffer. If not, we reutrn the current buffer. Hoever, similar to Undo, there is a speicial case that needs to be addressed. If there is more than 1 buffer in saved_buffers_ and a Redo is possible and current_save is at the end of saved_buffers_, we must update current_save_ to correspond with beginning of saved_buffers_ and present the specified buffer. Another thing about the Redo function is that if one decided to undo and then make an action such as use the pen or a filter, the Redo function no longer is able the work. The code is quite similar to Undo except that it must increase the value of current_save_.
+> The final function we made is ResizeAndCopy. This functions determines whether the two buffers have the same dimensions and if they differ, one will be resized and then returned. We have two buffers; one is the current buffer and one is the buffer we wan to display. We start by retrieving the height and width of the display buffer and the height and width of the current buffer. If they are the same, there is no need to resize the current buffer. If not, we take the values of the display buffer and resize the current buffer as well as copy the current buffer into the display buffer all the while maintaing the background color of the current buffer. Down below we see the retrieval of data from both display buffer and current buffer.
+
+```C++
+    int d_height = display->height();
+    int d_width = display->width();
+    PixelBuffer* curr = saved_buffers_[current_save_];
+    int c_height = curr->height();
+    int c_width = curr->width();
+    ColorData bg = curr->background_color();
+```
+> Then we resize if needed and copy the saved buffer into the display buffer
 
 Below is the UML Diagram that illustrates our HistoryManager design.
 
@@ -262,6 +344,12 @@ For obvious reasons, we have Undo and Redo methods, which get called when the Un
 We keep track of three values that allow us to correctly allow or disallow the use of the Undo and Redo methods. These values are current_save_, oldest_save_, and newest_save_. We mod these values with possible_saves_ in order to wrap around our ring buffer. The current_save_ is the index of the array which contains the pointer to the current PixelBuffer being displayed. When SaveCanvas is called, we add 1 to current_save_ and set newest_save_ to the value of current_save_, since that save is now the newest. If current_save_ == oldest_save, we have wrapped around the entire ring buffer and need to add 1 to the oldest_save_. The previous oldest_save_ is lost, which is fine since, at most, we only need to be able to undo possible_save_ times. So, if current_save_ is equal to newest_save_, the user cannot Redo. Likewise, if current_save_ is equal to oldest_save_, the user cannot Undo.
 
 ### 2.2 Design Justification
+Shashanks version:
+
+> There were essentially two ways to implement Undo/Redo; with a separate class or have it lie in flash_photo_app.cc. We decided with the separate class since the functions in history_manager.cc have nothing to do with flash_photo_app.cc. All of the functions were made to impact only other functions in that class. This way also allowed for easier removal of the process without affecting other classes. From here we had to make another design decision in how we would keep track of the different actions. We decided the best way would be through an array that would store buffers of each consecutive action. The alterantive would have been to keep track of the individual strokes or actions made by the user. However, with the variablilty of the strokes, filters, etc., is it much simpler to save a copy of the PixelBuffer and store those into an array. The next decision we made was to create a separate function that initialized the objects rather than keeping it in the constructor. By creating a separate function we can easily see what objects we will be dealing with and the Init function clearly demonstrates that they will be initialized. In addition this allows for the use of Init outside of the countructor if one would chose to do so. The last decision made was the ResizeAndCopy function. This was the smarter choice than writing it individually within the Undo/Redo functions. If you venture above, you will see the code for Undo which is minimal and easy to understand. It would be muddled if ResizeAndCopy did not exist. Since having diferent dimension between multiple buffers is a possibility, we must check for it and act according. Thus, creating a separate function to handle such cases makes the code easiler to read and understand as well as creating less busy work in writing the code twice. In summation, having a separate class to deal with an array of PixelBuffers in which there is a separate function to ensure smooth buffer transitioning provided readable, easy-to-follow, and simpler code. 
+
+
+Jess's version:
 
 As a group, we decided that a ring buffer would be the best design for our HistoryManager class because it was the simplest design we came up with. An alternative we discussed involved using two stacks, rather than a ring buffer. We would have pushed PixelBuffers onto one stack as we saved them. When the user clicked Undo, we would pop a PixelBuffer off of one stack, and push it onto the other. Then, if a user clicked Redo, we would pop the PixelBuffer off of the second stack and push it back onto the first stack.
 

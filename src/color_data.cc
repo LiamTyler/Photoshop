@@ -38,6 +38,22 @@ float ColorData::luminance(void) const {
         static_cast<float>(0.0722)*blue_;
 }
 
+float ColorData::get_red() const {
+    return red_;
+}
+
+float ColorData::get_green() const {
+    return green_;
+}
+
+float ColorData::get_blue() const {
+    return blue_;
+}
+
+float ColorData::get_alpha() const {
+    return alpha_;
+}
+
 // ColorData ColorData::clamped_color(void) const {
 //        float clamped_red = ColorData::clamp_value(this->red(), 0.f, 1.f);
 //        float clamped_green = ColorData::clamp_value(this->green(), 0.f, 1.f);

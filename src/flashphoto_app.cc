@@ -22,6 +22,12 @@
 #include "include/pixel_buffer.h"
 #include "include/ui_ctrl.h"
 #include "include/tool_factory.h"
+#include "include/image_handler.h"
+#include "include/io_manager.h"
+
+using std::cout;
+using std::endl;
+using image_tools::IOManager;
 
 /*******************************************************************************
  * Namespaces
@@ -148,6 +154,22 @@ void FlashPhotoApp::InitializeBuffers(ColorData background_color,
         int w, int h) {
     display_buffer_ = new PixelBuffer(w, h, background_color);
     scratch_buffer_ = new PixelBuffer(w, h, background_color);
+}
+
+// Copies the image that will load into the current buffer
+// Also updates the window dimensions to fi the image
+void FlashPhotoApp::LoadImageToCanvas(void) {
+      PixelBuffer* copy =
+                ImageHandler::loadImage(io_manager_.file_browser()->get_file());
+      display_buffer_ = copy;
+      BaseGfxApp::SetWindowDimensions(display_buffer_->width(),
+                                      display_buffer_->height());
+}
+
+// Function that calls saveImage from ImageHandler
+void FlashPhotoApp::SaveCanvasToFile(void) {
+     ImageHandler::saveImage(io_manager_.file_browser()->get_file(),
+                                                               display_buffer_);
 }
 
 void FlashPhotoApp::InitGlui(void) {
@@ -301,6 +323,7 @@ void FlashPhotoApp::GluiControl(int control_id) {
             break;
         case UICtrl::UI_LOAD_CANVAS_BUTTON:
             io_manager_.LoadImageToCanvas();
+            LoadImageToCanvas();
             break;
         case UICtrl::UI_LOAD_STAMP_BUTTON:
             io_manager_.LoadImageToStamp();
