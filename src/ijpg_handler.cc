@@ -117,8 +117,8 @@ bool IJPGHandler::saveImage(const std::string fileName,
     jpeg_stdio_dest(&cinfo, outfile);
 
     // Set parameters from compression
-    cinfo.image_width = bufferToSave->get_width();
-    cinfo.image_height = bufferToSave->get_height();
+    cinfo.image_width = bufferToSave->width();
+    cinfo.image_height = bufferToSave->height();
     cinfo.input_components = 3;
     cinfo.in_color_space = JCS_RGB;
 
@@ -131,8 +131,8 @@ bool IJPGHandler::saveImage(const std::string fileName,
 
     // Use library function for counter
     row_stride = cinfo.image_width * 3;
-    const int width = bufferToSave->get_width();
-    const int height = bufferToSave->get_height();
+    const int width = bufferToSave->width();
+    const int height = bufferToSave->height();
     JSAMPLE* image_buffer = new JSAMPLE[row_stride*cinfo.image_height];
 
     // Obtain colors by amount of red, green, and blue within a pixel

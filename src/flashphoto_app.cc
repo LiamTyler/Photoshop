@@ -162,8 +162,8 @@ void FlashPhotoApp::LoadImageToCanvas(void) {
       PixelBuffer* copy =
                 ImageHandler::loadImage(io_manager_.file_browser()->get_file());
       display_buffer_ = copy;
-      BaseGfxApp::SetWindowDimensions(display_buffer_->get_width(),
-                                      display_buffer_->get_height());
+      BaseGfxApp::SetWindowDimensions(display_buffer_->width(),
+                                      display_buffer_->height());
 }
 
 // Function that calls saveImage from ImageHandler

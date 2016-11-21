@@ -65,7 +65,7 @@ void GLUI_FileBrowser::dir_list_callback(GLUI_Control *glui_object) {
   int this_item;
   const char *selected;
   this_item = list->get_current_item();
-  if (this_item > 0) { /* file or directory selected */
+  if (this_item >= 0) { /* file or directory selected */
     selected = list->get_item_ptr( this_item )->text.c_str();
     int len = strlen(selected);
     char last = selected[len-1];

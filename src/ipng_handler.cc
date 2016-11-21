@@ -57,8 +57,8 @@ bool IPNGHandler::saveImage(const std::string fileName,
     bool success = false;
     png_image image;
     memset(&image, 0, (sizeof image));
-    image.height = bufferToSave->get_height();
-    image.width = bufferToSave->get_width();
+    image.height = bufferToSave->height();
+    image.width = bufferToSave->width();
     image.version = PNG_IMAGE_VERSION;
     image.opaque = NULL;
     image.format = PNG_FORMAT_RGBA;
