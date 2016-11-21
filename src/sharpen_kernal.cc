@@ -26,10 +26,18 @@ void SharpenKernal::InitializeKernal() {
 
     for (int r = 0; r < height; r++) {
         for (int c = 0; c < width; c++) {
-            if (r == center_height && c == center_width) {
-                kern[r][c] = total;
+            if (amount_ != 0) {
+                if (r == center_height && c == center_width) {
+                    kern[r][c] = total;
+                } else {
+                    kern[r][c] = -1.0;
+                }
             } else {
-                kern[r][c] = -1.0;
+                if (r == center_height && c == center_width) {
+                    kern[r][c] = 1;
+                } else {
+                    kern[r][c] = 0;
+                }
             }
         }
     }
