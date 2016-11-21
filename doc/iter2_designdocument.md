@@ -209,7 +209,6 @@ class KernalFilter : public Filter {
 public:
  KernalFilter();
   KernalFilter(int width, int height);
-  explicit KernalFilter(Kernal* kernal);
   virtual ~KernalFilter();
   virtual void ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage);
   virtual void CreateKernal(int width, int height);
@@ -229,11 +228,18 @@ public:
   int width_;
   int height_;
   float** kernal_;
-  Kernal* kernal_;
 };
 ```
 
-Notice how this class simultaneously has methods for 
+Notice how this class simultaneously has methods like AllocateKernal and ApplyFitler. Despite writing most of the filters this way initially, we switched because this design presents two levels of abstraction in the same class. The kernal and the filter had very high coupling by putting them in the same class, and the code was not very understandable, because you constantly were doing tasks for two separate abstractions. By separating the filter and the kernal, our code became much more understandable, making it easier to modify and debug. In addition to that, our modularity increased. For any filter, we could just switch out its kernal for a new one. As the code is in Figure 10, you would have to rewrite the InitializeKernal function at a minimum, and can not just swap anything out since it is built into the filter. 
+
+Another alternative we considered was not having a kernal object at all and building the functionality of a filter directly into the ApplyFilter method. While this is possible, and you don't have to worry about kernal objects and more files which is always a positive, this design has high code duplication, worse efficiency, and low extensibility. For each new filter, you would have to redefine the ApplyFilter method, which in our design, the default definition works for all the KernalFilters. In addition to that, each method would at some level do the exact same thing: loop through all the pixels, applying some algorithm, and placing it on the new image. This design does not take advantage of that, and the code would be duplicated for every filter. Having the kernal also pre-computes many things needed to apply the filter (like finding the pixels within a certain radius). Not having that pre-computed would make the method call slower, which is undesirable since performance is a large concern for this project.
+
+Standing by itself, our final design has many advantages. Observe the BlurFilter definition presented earlier in Figure 6. It literally only took one line to create the BlurFilter. The simplicity of adding that is a large benefit. One could argue that we still had to create a whole BlurKernal class. While that is true, the base Kernal does most of the work in sizing and applying the kernal. To extend it to create a filter, only the InitializeKernal method needs to be defined, which is always going to have to be designed somewhere. Both the ApplyFilter and ApplyKernal methods are merely virtual. This allows for complex filters in the future to be defined, but for most filters, we don't have to write anything for those two methods, making it even more extensible. We felt that these advantages made our design a desirable one.
+
+The disadvantages of our design few. One is that there are many files to keep track of, and to add a filter, it's likely that 4 new files need to be created. This admittingly, is a large concern. We felt that this is lessened by the fact that each file is usually very small. As seen in the definition of BlurFitler in Figure 6, it was literally one line. The kernal object for it only had to define one method. Then there are just two header files to declare, which are usually small. This makes this disadvantage not as impactful, and still easy to add new filters. Another disadvantage is that in our design, everytime a fitler is clicked in the GUI, the corresponding filter object is created then. Since it's not pre-computed, this means we have lower efficiency. Our reasoning for this is that most of the time, the parameters needed for the filter are going to change anyways, so most of the work would have to be redone anyways. An example of that is the BlurFilter. If the blur amount changes from one call of it to the next, then the kernal would be remade anyways. By not having it resize or update, calling a new filter is merely two lines: construct the filter object, and apply it. This simplicity is desirable, and we did not notice a performance decrease. In addition to that, we actually do have the methods to implement this design already created, but we think our current design is desirable.
+
+Overall, we feel that our filter design is successful. It is extensible, understandable, and has high modularity, which is what we focused on. Other designs might be better, but ours did achieve what we wanted it to.
 
 
 ## 2  Design Question Two
