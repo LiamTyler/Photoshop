@@ -175,7 +175,7 @@ Notice how there are 13 pixels within a radius of 2 from the center, so when we 
 
 Now, going back to the pixel-indepenedent filters, we designed them so that each filter derives from a SimpleFilter class depicted in the UML diagram in Figure 2. Notice how the ApplyFilter method is not pure virtual, but the ApplyToColor is. We designed it so that each filter has the same default ApplyFilter method as seen below in Figure 9.
 
-###### src/simple_filter.cc
+###### Figure 9: ApplyFilter method definition for SimpleFilters (src/simple_filter.cc)
 ```C++
 void SimpleFilter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
     int buff_height = oldimage->height();
@@ -198,6 +198,42 @@ void SimpleFilter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
 As seen in the implementation, pixel-independent filters loop through each pixel in the image, and create the new corresponding pixel by performing the ApplyToColor method for each color. Each subclass of SimpleFilter implements that function as needed to return the appropriate value of the color requested.
 
 ### 1.2 Design Justification
+
+The design above was created with an emphasis on the following goals: extensibility, understandability, and modularity. We believe that while the design may not be the best, it does a good job at meeting those goals. This section describes the advantages and disadvantages to our design, and proposes a couple alternatives.
+
+The first design we actually used to implement most of the project initially was just having the 2D array for the kernal object be a part of the KernalFilter class. That way there was no need to have another class for each and every KernalFilter created. We quickly found however, that it was not easy to understand. Figure 10 depicts the declaration for the KernalFilter class we used to have.
+
+###### Figure 10: Alternative declaration for the KernalFiter class we initially used.
+```C++
+class KernalFilter : public Filter {
+public:
+ KernalFilter();
+  KernalFilter(int width, int height);
+  explicit KernalFilter(Kernal* kernal);
+  virtual ~KernalFilter();
+  virtual void ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage);
+  virtual void CreateKernal(int width, int height);
+  inline int get_width() { return width_; }
+  inline int get_height() { return height_; }
+  inline float** get_kernal() { return kernal_; }
+  virtual std::string name(void) = 0;
+
+ protected:
+  void AllocateKernal(int width, int height);
+  void DeallocateKernal();
+  virtual void InitializeKernal() = 0;
+
+ private:
+  KernalFilter(const KernalFilter &f) = delete;
+  KernalFilter& operator=(const KernalFilter &f) = delete;
+  int width_;
+  int height_;
+  float** kernal_;
+  Kernal* kernal_;
+};
+```
+
+Notice how this class simultaneously has methods for 
 
 
 ## 2  Design Question Two
