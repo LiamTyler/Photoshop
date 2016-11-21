@@ -72,7 +72,7 @@ void FlashPhotoApp::Init(
         Tool* t = ToolFactory::CreateTool(i);
         assert(t);
         tools_.push_back(t);
-        std::cout << "tool " << i << " created" << std::endl;
+        // std::cout << "tool " << i << " created" << std::endl;
     }
     cur_tool_index_ = 0;
     cur_tool_ = tools_[0];
@@ -93,6 +93,9 @@ void FlashPhotoApp::Display(void) {
 FlashPhotoApp::~FlashPhotoApp(void) {
     if (display_buffer_) {
         delete display_buffer_;
+    }
+    if (scratch_buffer_) {
+        delete scratch_buffer_;
     }
 }
 
@@ -138,6 +141,7 @@ void FlashPhotoApp::LeftMouseUp(int x, int y) {
     std::cout << "mouseReleased " << x << " " << y << std::endl;
     last_x_ = -1;
     last_y_ = -1;
+    state_manager_.Save(display_buffer_);
 }
 
 void FlashPhotoApp::InitializeBuffers(ColorData background_color,
@@ -160,7 +164,6 @@ void FlashPhotoApp::InitGlui(void) {
         for (int i = 0; i < ToolFactory::num_tools(); i++)
             new GLUI_RadioButton(radio, tools_[i]->name().c_str());
         new GLUI_RadioButton(radio, "Stamp");
-        new GLUI_RadioButton(radio, "Blur");
     }
 
     GLUI_Panel *color_panel = new GLUI_Panel(glui(), "Tool Color");
@@ -206,7 +209,7 @@ void FlashPhotoApp::InitGlui(void) {
     update_colors();
 
     /* Initialize state management (undo, redo, quit) */
-    state_manager_.InitGlui(glui(), s_gluicallback);
+    state_manager_.InitGlui(glui(), s_gluicallback, display_buffer_);
 
     new GLUI_Button(const_cast<GLUI*>(glui()),
             "Quit", UICtrl::UI_QUIT,
@@ -230,49 +233,41 @@ void FlashPhotoApp::GluiControl(int control_id) {
             cur_color_red_ = 1;
             cur_color_green_ = 0;
             cur_color_blue_ = 0;
-            update_colors();
             break;
         case UICtrl::UI_PRESET_ORANGE:
             cur_color_red_ = 1;
             cur_color_green_ = 0.5;
             cur_color_blue_ = 0;
-            update_colors();
             break;
         case UICtrl::UI_PRESET_YELLOW:
             cur_color_red_ = 1;
             cur_color_green_ = 1;
             cur_color_blue_ = 0;
-            update_colors();
             break;
         case UICtrl::UI_PRESET_GREEN:
             cur_color_red_ = 0;
             cur_color_green_ = 1;
             cur_color_blue_ = 0;
-            update_colors();
             break;
         case UICtrl::UI_PRESET_BLUE:
             cur_color_red_ = 0;
             cur_color_green_ = 0;
             cur_color_blue_ = 1;
-            update_colors();
             break;
         case UICtrl::UI_PRESET_PURPLE:
             cur_color_red_ = 0.5;
             cur_color_green_ = 0;
             cur_color_blue_ = 1;
-            update_colors();
             break;
         case UICtrl::UI_PRESET_WHITE:
             cur_color_red_ = 1;
             cur_color_green_ = 1;
             cur_color_blue_ = 1;
-            update_colors();
             break;
         case UICtrl::UI_PRESET_BLACK:
             cur_color_red_ = 0;
             cur_color_green_ = 0;
             cur_color_blue_ = 0;
-            update_colors();
             break;
         case UICtrl::UI_APPLY_BLUR:
             filter_manager_.ApplyBlur(display_buffer_, scratch_buffer_);
@@ -289,9 +284,6 @@ void FlashPhotoApp::GluiControl(int control_id) {
         case UICtrl::UI_APPLY_THRESHOLD:
             filter_manager_.ApplyThreshold(display_buffer_, scratch_buffer_);
             break;
-//        case UICtrl::UI_APPLY_DITHER:
-//            filter_manager_.ApplyThreshold(display_buffer_, scratch_buffer_);
-//            break;
         case UICtrl::UI_APPLY_SATURATE:
             filter_manager_.ApplySaturate(display_buffer_, scratch_buffer_);
             break;
@@ -322,20 +314,23 @@ void FlashPhotoApp::GluiControl(int control_id) {
             io_manager_.set_image_file(io_manager_.file_name());
             break;
         case UICtrl::UI_UNDO:
-            state_manager_.UndoOperation();
+            display_buffer_ = state_manager_.UndoOperation(display_buffer_);
             break;
         case UICtrl::UI_REDO:
-            state_manager_.RedoOperation();
+            display_buffer_ = state_manager_.RedoOperation(display_buffer_);
             break;
         default:
             break;
     }
+
+    update_colors();
 
     if (control_id >= UICtrl::UI_APPLY_BLUR &&
         control_id <= UICtrl::UI_APPLY_SPECIAL_FILTER) {
         tmp = display_buffer_;
         display_buffer_ = scratch_buffer_;
         scratch_buffer_ = tmp;
+        state_manager_.Save(display_buffer_);
     }
 
     // Forces canvas to update changes made in this function

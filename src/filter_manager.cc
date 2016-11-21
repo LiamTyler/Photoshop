@@ -23,6 +23,8 @@
 #include "include/quantize_filter.h"
 #include "include/threshold_filter.h"
 #include "include/channels_filter.h"
+#include "include/emboss_filter.h"
+#include "include/saturation_filter.h"
 
 /*******************************************************************************
  * Namespaces
@@ -62,6 +64,8 @@ void FilterManager::ApplySaturate(PixelBuffer* oldimage,
                                   PixelBuffer* newimage) {
     std::cout << "Apply has been clicked for Saturate with amount = "
         << saturation_amount_ << std::endl;
+    SaturationFilter sat(saturation_amount_);
+    sat.ApplyFilter(oldimage, newimage);
 }
 
 void FilterManager::ApplyBlur(PixelBuffer* oldimage, PixelBuffer* newimage) {
@@ -112,6 +116,8 @@ void FilterManager::ApplyThreshold(PixelBuffer* oldimage,
 void FilterManager::ApplySpecial(PixelBuffer* oldimage,
                                  PixelBuffer* newimage) {
     std::cout << "Apply has been clicked for Special" << std::endl;
+    EmbossFilter emb;
+    emb.ApplyFilter(oldimage, newimage);
 }
 
 void FilterManager::InitGlui(const GLUI *const glui,

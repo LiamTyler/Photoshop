@@ -20,8 +20,15 @@ using image_tools::PixelBuffer;
 using image_tools::ColorData;
 
 TSprayCan::TSprayCan(int width, int height) : Tool(width, height) {
+    Init();
+}
+
+void TSprayCan::Init() {
+    int width = get_width();
+    int height = get_height();
     float radius = static_cast<float>(width) / 2;
     float** mask = this->get_mask();
+
 
     /* Sets all pixels to some intensity between 0 and 0.2
     depending on its distance from the center */
@@ -44,6 +51,7 @@ TSprayCan::TSprayCan(int width, int height) : Tool(width, height) {
         }
     }
 }
+
 
 TSprayCan::TSprayCan() : TSprayCan(41, 41) {}
 

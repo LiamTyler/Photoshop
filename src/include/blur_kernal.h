@@ -21,6 +21,7 @@ using image_tools::PixelBuffer;
 class BlurKernal : public Kernal {
  public:
   explicit BlurKernal(int amount);
+  BlurKernal();
   int get_amount() { return amount_; }
 
  protected:

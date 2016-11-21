@@ -1,16 +1,16 @@
 /*******************************************************************************
- * Name            : sharpen_kernal.h
+ * Name            : emboss_kernal.h
  * Project         : FlashPhotoApp
- * Module          : Parent SharpenKernal class
- * Description     : Header of SharpenKernal
+ * Module          : Parent EmbossKernal class
+ * Description     : Header of EmbossKernal
  * Copyright       : Group Bits Please
- * Creation Date   : 11/16/16
+ * Creation Date   : 11/17/16
  * Original Author : Group Bits Please
  *
  ******************************************************************************/
 
-#ifndef SRC_INCLUDE_SHARPEN_KERNAL_H_
-#define SRC_INCLUDE_SHARPEN_KERNAL_H_
+#ifndef SRC_INCLUDE_EMBOSS_KERNAL_H_
+#define SRC_INCLUDE_EMBOSS_KERNAL_H_
 
 #include <string>
 #include "include/kernal.h"
@@ -18,17 +18,12 @@
 
 using image_tools::PixelBuffer;
 
-class SharpenKernal : public Kernal {
+class EmbossKernal : public Kernal {
  public:
-  explicit SharpenKernal(int amount);
-  SharpenKernal();
-  int get_amount() { return amount_; }
+  EmbossKernal();
 
  protected:
   virtual void InitializeKernal();
-
- private:
-  int amount_;
 };
 
-#endif  // SRC_INCLUDE_SHARPEN_KERNAL_H_
+#endif  // SRC_INCLUDE_EMBOSS_KERNAL_H_

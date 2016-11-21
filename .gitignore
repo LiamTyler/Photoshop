@@ -31,6 +31,8 @@
 *.out
 *.app
 build/
+bin/
+bin/FlashPhoto
 
 # Externals
 ext/
@@ -41,3 +43,6 @@ config/
 
 # Text editor tmp files
 .*.swp
+
+# Makefile
+ext/../Makefile

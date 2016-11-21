@@ -12,11 +12,15 @@
 #include "include/motion_blur_kernal.h"
 
 MotionBlurKernal::MotionBlurKernal(int amount, int direction) :
-                                   Kernal(amount, amount),
-                                   amount_(amount),
+                                   Kernal(amount / 2 * 2 + 1,
+                                          amount / 2 * 2 + 1),
+                                   amount_(amount / 2 * 2 + 1),
                                    direction_(direction) {
     InitializeKernal();
 }
+
+MotionBlurKernal::MotionBlurKernal() : amount_(-1),
+                                       direction_(-1) {}
 
 void MotionBlurKernal::InitializeKernal() {
     int width = get_width();

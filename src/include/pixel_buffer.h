@@ -56,6 +56,7 @@ class PixelBuffer {
    * @return The background color
    */
   const ColorData& background_color(void) const { return background_color_; }
+  void set_background_color(ColorData bg) { background_color_ = bg; }
 
   /**
    * @brief Get the color of a specific pixel
