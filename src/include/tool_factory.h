@@ -43,7 +43,8 @@ class ToolFactory {
     TOOL_HIGHLIGHTER = 4,
     TOOL_RAINBOW = 5,
     TOOL_BLUR = 6,
-    NUMTOOLS = 7
+    TOOL_STAMP = 7,
+    NUMTOOLS = 8
   };
 
   /**

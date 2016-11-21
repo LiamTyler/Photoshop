@@ -11,7 +11,7 @@
 
 #include "include/sharpen_kernal.h"
 
-SharpenKernal::SharpenKernal(int amount) : Kernal(amount, amount),
+SharpenKernal::SharpenKernal(int amount) : Kernal(3, 3),
                                            amount_(amount) {
     InitializeKernal();
 }

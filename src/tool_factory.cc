@@ -21,6 +21,7 @@
 #include "include/spray_can.h"
 #include "include/rainbow.h"
 #include "include/blur_tool.h"
+#include "include/stamp.h"
 
 /*******************************************************************************
  *  * Namespaces
@@ -54,6 +55,9 @@ namespace image_tools {
                 break;
             case TOOL_BLUR:
                 tool = new TBlur();
+                break;
+            case TOOL_STAMP:
+                tool = new TStamp(3, 3);
                 break;
             default:
                 tool = nullptr;
