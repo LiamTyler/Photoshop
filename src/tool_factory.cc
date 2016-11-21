@@ -55,6 +55,9 @@ namespace image_tools {
             case TOOL_BLUR:
                 tool = new TBlur();
                 break;
+            // case TOOL_STAMP:
+                // tool = new TStamp();
+                // break;
             default:
                 tool = nullptr;
                 break;

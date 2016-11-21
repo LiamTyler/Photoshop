@@ -185,7 +185,6 @@ void FlashPhotoApp::InitGlui(void) {
         // Create interface buttons for different tools:
         for (int i = 0; i < ToolFactory::num_tools(); i++)
             new GLUI_RadioButton(radio, tools_[i]->name().c_str());
-        new GLUI_RadioButton(radio, "Stamp");
     }
 
     GLUI_Panel *color_panel = new GLUI_Panel(glui(), "Tool Color");

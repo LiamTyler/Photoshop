@@ -41,8 +41,9 @@ class ToolFactory {
     TOOL_SPRAYCAN = 2,
     TOOL_CALLIGRAPHYPEN = 3,
     TOOL_HIGHLIGHTER = 4,
-    TOOL_RAINBOW = 5,
-    TOOL_BLUR = 6,
+    // TOOL_STAMP = 5,
+    TOOL_BLUR = 5,
+    TOOL_RAINBOW = 6,
     NUMTOOLS = 7
   };
 
@@ -60,4 +61,4 @@ class ToolFactory {
 
 }  /* namespace image_tools */
 
-#endif  /* SRC_INCLUDE_TOOL_FACTORY_H_ */
+#endif  // SRC_INCLUDE_TOOL_FACTORY_H_
