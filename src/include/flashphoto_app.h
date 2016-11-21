@@ -45,6 +45,7 @@ class FlashPhotoApp : public BaseGfxApp {
   void LeftMouseUp(int x, int y);
   void Display(void);
   void GluiControl(int control_id);
+  void loadImageToCanvas(void);
 
   /**
    * @brief Initialize the FlashPhotoApp
@@ -87,6 +88,13 @@ class FlashPhotoApp : public BaseGfxApp {
    */
   void InitializeBuffers(ColorData initial_color,
                          int width, int height);
+
+  /**
+   * @brief Initialize functions to load/save images
+   */
+  void LoadImageToCanvas(void);
+
+  void SaveCanvasToFile(void);
 
   /* Copy/move assignment/construction disallowed */
   FlashPhotoApp(const FlashPhotoApp &rhs) = delete;

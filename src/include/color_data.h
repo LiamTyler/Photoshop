@@ -62,6 +62,11 @@ class ColorData {
                          clamped_blue, clamped_alpha);
   }
 
+  float get_red() const;
+  float get_green() const;
+  float get_blue() const;
+  float get_alpha() const;
+
   /*
    * Arithmetic operators (friends so that non-member functions can access
    * private variables)
