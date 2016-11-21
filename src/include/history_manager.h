@@ -24,6 +24,8 @@ class HistoryManager {
   PixelBuffer* Undo(PixelBuffer* display);
   void SaveCanvas(PixelBuffer* buff);
   void Init(PixelBuffer* blankCanvas);
+  bool cant_undo();
+  bool cant_redo();
 
  private:
   HistoryManager(const HistoryManager& h) = delete;
