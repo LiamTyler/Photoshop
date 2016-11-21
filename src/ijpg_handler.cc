@@ -26,8 +26,8 @@ PixelBuffer* IJPGHandler::loadImage(const std::string fileName) {
     struct my_error_mgr jerr;
 
     FILE * infile;
-    JSAMPARRAY buffer; // output buffer
-    int row_stride; // width of buffer
+    JSAMPARRAY buffer; //  output buffer
+    int row_stride; //  width of buffer
 
     // Open the file that was inputted
     if ((infile = fopen(fileName.c_str(), "rb")) == NULL) {
@@ -110,7 +110,7 @@ bool IJPGHandler::saveImage(const std::string fileName,
 
     jpeg_create_compress(&cinfo);
 
-    //Use library function to send data to stdio
+    // Use library function to send data to stdio
     if ((outfile = fopen(fileName.c_str(), "wb")) == NULL) {
         exit(1);
     }
@@ -156,7 +156,7 @@ bool IJPGHandler::saveImage(const std::string fileName,
 
     delete[] image_buffer;
 
-    //End compression
+    // End compression
     jpeg_finish_compress(&cinfo);
 
     // Close file
