@@ -142,7 +142,7 @@ ColorData Kernal::ApplyKernal(PixelBuffer* oldimage, int start_x, int start_y) {
 }
 ```
 
-Notice that this method takes in the location of the pixel we are currently processing. It then centers the kernal\_ array over that location, and loops through each pixel, adding that pixel multiplied by the corresponding value in our array, and adds it to a running total. This is the value that is returned, which will become the pixel on the newimage. The way we create the kernal array itself, is through the Kernal member function *InitializeKernal()*. The pure virtual InitalizeKernal method is the last key aspect to notice in Fig 4. Each filter that is convolution-based has its own kernal which defines the InitializeKernal method to give the filter it's appropriate functionality. To make this more clear, we can examine the BlurFilter.
+Notice that this method takes in the location of the pixel we are currently processing. It then centers the kernal_ array over that location, and loops through each pixel, adding that pixel's ColorData multiplied by the corresponding value in our array, and adds it to a running total. This is the value that is returned, which will become the pixel's ColorData on the newimage. The way we create the kernal array itself, is through the Kernal member function *InitializeKernal()*. The pure virtual InitalizeKernal method is the last key aspect to notice in Fig 4. Each filter that is convolution-based has its own kernal which defines the InitializeKernal method to give the filter it's appropriate functionality. To make this more clear, we can examine the BlurFilter.
 
 To blur a pixel, we average out all the colors within a certain radius of a pixel, and set that pixel equal to the average. Observe the implementation of BlurFilter in Figure 6 below.
 
@@ -165,7 +165,7 @@ void KernalFilter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
 }
 ```
 
-For any filter class, the default method is just to loop through all the pixels and apply the kernal to each pixel. The BlurKernal only overrides the InitializeKernal method as stated before. If we were to create a BlurKernal with a radius of 2, the two dimensional array would be as follows in Figure 8:
+For any filter class, the default method is to simply loop through all the pixels and apply the kernal to each pixel. The BlurKernal only overrides the InitializeKernal method as stated before. If we were to create a BlurKernal with a radius of 2, the two dimensional array would be as follows in Figure 8:
 
 ###### Figure 8: Diagram of a BlurKernal with radius of 2.
 ![BlurKernal result from InitializeKernal with radius of 2][BlurKernal]
@@ -173,7 +173,7 @@ For any filter class, the default method is just to loop through all the pixels 
 Notice how there are 13 pixels within a radius of 2 from the center, so when we apply the kernal as seen in Figure 5, it will return the pixel that is the average of all the pixels within a radius of 2 of the center pixel.
 
 
-Now, going back to the pixel-indepenedent filters, we designed them so that each filter derives from a SimpleFilter class depicted in the UML diagram in Figure 2. Notice how the ApplyFilter method is not pure virtual, but the ApplyToColor is. We designed it so that each filter has the same default ApplyFilter method as seen below in Figure 9.
+In regards to the pixel-indepenedent filters, we designed them so that each filter derives from a SimpleFilter class depicted in the UML diagram in Figure 2. Notice how the ApplyFilter method is not pure virtual, but the ApplyToColor is. We designed it so that each filter has the same default ApplyFilter method as seen below in Figure 9.
 
 ###### Figure 9: ApplyFilter method definition for SimpleFilters (src/simple_filter.cc)
 ```C++
@@ -195,13 +195,13 @@ void SimpleFilter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
 }
 ```
 
-As seen in the implementation, pixel-independent filters loop through each pixel in the image, and create the new corresponding pixel by performing the ApplyToColor method for each color. Each subclass of SimpleFilter implements that function as needed to return the appropriate value of the color requested.
+As seen in the implementation, pixel-independent filters loop through each pixel in the image and create the new corresponding pixel by performing the ApplyToColor method for each color. Each subclass of SimpleFilter implements that function as needed to return the appropriate value of the color requested.
 
 ### 1.2 Design Justification
 
 The design above was created with an emphasis on the following goals: extensibility, understandability, and modularity. We believe that while the design may not be the best, it does a good job at meeting those goals. This section describes the advantages and disadvantages to our design, and proposes a couple alternatives.
 
-The first design we actually used to implement most of the project initially was just having the 2D array for the kernal object be a part of the KernalFilter class. That way there was no need to have another class for each and every KernalFilter created. We quickly found however, that it was not easy to understand. Figure 10 depicts the declaration for the KernalFilter class we used to have.
+The first design we actually used to implement most of the project initially involved having the 2D array for the kernal object be a part of the KernalFilter class. That way there was no need to have another class for each and every KernalFilter created. We quickly found however, that it was not easy to understand. Figure 10 depicts the declaration for the KernalFilter class we had previously.
 
 ###### Figure 10: Alternative declaration for the KernalFiter class we initially used.
 ```C++
@@ -233,13 +233,13 @@ public:
 
 Notice how this class simultaneously has methods like AllocateKernal and ApplyFitler. Despite writing most of the filters this way initially, we switched because this design presents two levels of abstraction in the same class. The kernal and the filter had very high coupling by putting them in the same class, and the code was not very understandable, because you constantly were doing tasks for two separate abstractions. By separating the filter and the kernal, our code became much more understandable, making it easier to modify and debug. In addition to that, our modularity increased. For any filter, we could just switch out its kernal for a new one. As the code is in Figure 10, you would have to rewrite the InitializeKernal function at a minimum, and can not just swap anything out since it is built into the filter. 
 
-Another alternative we considered was not having a kernal object at all and building the functionality of a filter directly into the ApplyFilter method. While this is possible, and you don't have to worry about kernal objects and more files which is always a positive, this design has high code duplication, worse efficiency, and low extensibility. For each new filter, you would have to redefine the ApplyFilter method, which in our design, the default definition works for all the KernalFilters. In addition to that, each method would at some level do the exact same thing: loop through all the pixels, applying some algorithm, and placing it on the new image. This design does not take advantage of that, and the code would be duplicated for every filter. Having the kernal also pre-computes many things needed to apply the filter (like finding the pixels within a certain radius). Not having that pre-computed would make the method call slower, which is undesirable since performance is a large concern for this project.
+Another alternative we considered was not having a kernal object at all and building the functionality of a filter directly into the ApplyFilter method. While this is possible, and you don't have to worry about kernal objects and more files which is a positive, this design has high code duplication, worse efficiency, and low extensibility. For each new filter, you would have to redefine the ApplyFilter method, which in our design, the default definition works for all the KernalFilters. In addition to that, each method would at some level do the exact same thing: loop through all the pixels, applying some algorithm, and placing it on the new image. This design does not take advantage of that, and the code would be duplicated for every filter. Having the kernal also pre-computes many things needed to apply the filter (like finding the pixels within a certain radius). Not having that pre-computed would make the method call slower, which is undesirable since performance is a large concern for this project.
 
-Standing by itself, our final design has many advantages. Observe the BlurFilter definition presented earlier in Figure 6. It literally only took one line to create the BlurFilter. The simplicity of adding that is a large benefit. One could argue that we still had to create a whole BlurKernal class. While that is true, the base Kernal does most of the work in sizing and applying the kernal. To extend it to create a filter, only the InitializeKernal method needs to be defined, which is always going to have to be designed somewhere. Both the ApplyFilter and ApplyKernal methods are merely virtual. This allows for complex filters in the future to be defined, but for most filters, we don't have to write anything for those two methods, making it even more extensible. We felt that these advantages made our design a desirable one.
+Standing by itself, our final design has many advantages. Observe the BlurFilter definition presented earlier in Figure 6. It took only one line to create the BlurFilter. The simplicity of adding that is a large benefit. One could argue that we still had to create a whole BlurKernal class. While that is true, the base Kernal does most of the work in sizing and applying the kernal. To extend it to create a filter, only the InitializeKernal method needs to be defined, which is always going to have to be designed somewhere. Both the ApplyFilter and ApplyKernal methods are merely virtual. This allows for complex filters in the future to be defined, but for most filters, we don't have to write anything for those two methods, making it even more extensible. We felt that these advantages made our design a desirable one.
 
-The disadvantages of our design few. One is that there are many files to keep track of, and to add a filter, it's likely that 4 new files need to be created. This admittingly, is a large concern. We felt that this is lessened by the fact that each file is usually very small. As seen in the definition of BlurFitler in Figure 6, it was literally one line. The kernal object for it only had to define one method. Then there are just two header files to declare, which are usually small. This makes this disadvantage not as impactful, and still easy to add new filters. Another disadvantage is that in our design, everytime a fitler is clicked in the GUI, the corresponding filter object is created then. Since it's not pre-computed, this means we have lower efficiency. Our reasoning for this is that most of the time, the parameters needed for the filter are going to change anyways, so most of the work would have to be redone anyways. An example of that is the BlurFilter. If the blur amount changes from one call of it to the next, then the kernal would be remade anyways. By not having it resize or update, calling a new filter is merely two lines: construct the filter object, and apply it. This simplicity is desirable, and we did not notice a performance decrease. In addition to that, we actually do have the methods to implement this design already created, but we think our current design is desirable.
+The disadvantages of our design few. One is that there are many files to keep track of, and to add a convolution-based filter, it's likely that 4 new files need to be created. This admittingly, is a large concern. We felt that this is lessened by the fact that each file is usually very small. As seen in the definition of BlurFitler in Figure 6, it was literally one line. The kernal object for the filter only had to define one method. Then there are just two header files to declare, which are usually small. This makes this disadvantage not as impactful, and still easy to add new filters. Another disadvantage is that in our design, everytime a fitler is clicked in the GUI, the corresponding filter object is created at that time. Since it's not pre-computed, this means we have lower efficiency. Our reasoning for this is that most of the time, the parameters needed for the filter are going to change, so most of the work would have to be redone anyways. An example of that is the BlurFilter. If the blur amount changes from one call of it to the next, then the kernal would be remade anyways. By not having it resize or update, calling a new filter is merely two lines: construct the filter object, and apply it. This simplicity is desirable, and we did not notice a performance decrease. We actually do have the methods to implement this design already created, but we think our current design is desirable.
 
-Overall, we feel that our filter design is successful. It is extensible, understandable, and has high modularity, which is what we focused on. Other designs might be better, but ours did achieve what we wanted it to.
+Overall, we feel that our filter design is successful. It is extensible, understandable, and has high modularity, which is what we focused on. There may be a better design, but ours did achieve what we wanted it to.
 
 
 ## 2  Design Question Two
@@ -247,6 +247,9 @@ Overall, we feel that our filter design is successful. It is extensible, underst
 > First, in the **Design Description** section below, describe the design you developed to address this challenge.  Second, in the **Design Justification** section below present the most compelling argument you can for why this design is justified.  Note that our expectation is that you will need to discuss the pros (and maybe cons) of your final design as compared to alternative designs that you discussed in your group in order to make a strong case for justifying your design.
 
 ### 2.1 Design Description
+
+Shashank:
+
 > To address the challenge of redo/undo, we created a separate HistoryManager class. In this class we created an array to store each buffer that has been made.
 > First, we created a constructor in which we prepare a PixelBuffer* object to represent a buffer and an int called possible_saves_ to represent the maximum size of an array of buffers. possible_saves_ dictates how far back or how far forward one can undo/redo respectively. Also, there is saved_buffers_ which is the array in which the buffers will be saved into, current_save_ which keeps track of the index in which the current buffer is saved, newest_save_ which holds the index of the buffer which was most recently saved and oldest_save_ which keeps the index of the buffer that was least recently saved. To clarify, newest_save_ is not neccessarily the same as current_save_. For instance, if there are 10 buffers in saved_buffers_ and one decides to use the undo function 3 times, newest_save_ will be 9 while curent_save_ will be 6. These variables are used to keep track of the buffers in saved_buffers_. In addition, this is where we initialize the PixelBuffer* object which creates a new buffer array, but notice this is settled with the Init function.
 
@@ -330,34 +333,160 @@ void HistoryManager::Init(PixelBuffer* buff) {
 ```
 > Then we resize if needed and copy the saved buffer into the display buffer
 
+Jess/Shashank version:
+
 Below is the UML Diagram that illustrates our HistoryManager design.
 
-###### UML diagram of HistoryManager
+###### Figure 2.1: UML diagram of HistoryManager
 ![History Manager UML][HistoryManagerUML]
 
-The design we developed in order to implement the undo/redo feature revolves around maintaining a ring buffer. When constructing the HistoryManager object, we create an array of pointers to PixelBuffers of size possible_saves_. If the array becomes full, we save the next PixelBuffer at position 0, which gives us the ring buffer structure.
+The design we developed in order to implement the undo/redo feature revolves around maintaining a ring buffer. As you can see in Figure 2.2, when constructing the HistoryManager object, in our Init function, we create an array of pointers to PixelBuffers of size possible_saves_. possible_saves_ dictates how far back or how far forward one can undo or redo respectively. We also save the current, blank canvas to the first position in our array. If the array becomes full, we save the next PixelBuffer at position 0, which gives us the ring buffer structure. 
 
-The HistoryManager class has a SaveCanvas method which gets called each time a filter is applied, an image gets loaded in as the canvas, and the mouse is released. If the next pointer in our ring buffer points to NULL or if the PixelBuffer it points to is the wrong size, we delete it and create a new PixelBuffer of the correct size. Then, we copy the PixelBuffer we want to save onto that PixelBuffer.
+###### Figure 2.2: Init function in History Manager (src/history_manager.cc)
+  ```C++
+void HistoryManager::Init(PixelBuffer* buff) {
+    saved_buffers_ = new PixelBuffer*[possible_saves_]();
+    SaveCanvas(buff);
+    oldest_save_ = 0;
+}
 
-For obvious reasons, we have Undo and Redo methods, which get called when the Undo and Redo buttons are pressed. If there is a canvas available at the position in the array before the current canvas being displayed, the user can use Undo, and that PixelBuffer gets copied, returned, and set as the display_buffer_. The only difference in Redo is that we copy the PixelBuffer pointed to by the next pointer in the ring buffer, if available.
+  ```
 
-We keep track of three values that allow us to correctly allow or disallow the use of the Undo and Redo methods. These values are current_save_, oldest_save_, and newest_save_. We mod these values with possible_saves_ in order to wrap around our ring buffer. The current_save_ is the index of the array which contains the pointer to the current PixelBuffer being displayed. When SaveCanvas is called, we add 1 to current_save_ and set newest_save_ to the value of current_save_, since that save is now the newest. If current_save_ == oldest_save, we have wrapped around the entire ring buffer and need to add 1 to the oldest_save_. The previous oldest_save_ is lost, which is fine since, at most, we only need to be able to undo possible_save_ times. So, if current_save_ is equal to newest_save_, the user cannot Redo. Likewise, if current_save_ is equal to oldest_save_, the user cannot Undo.
+The HistoryManager class has a SaveCanvas method, as seen in Figure 2.3, which gets called each time a filter is applied, an image gets loaded in as the canvas, and the mouse is released. If the next pointer in our ring buffer points to NULL or if the PixelBuffer it points to is the wrong size, we delete it and create a new PixelBuffer of the correct size. Then, we copy the PixelBuffer we want to save onto that PixelBuffer.
+
+###### Figure 2.3: SaveCanvas method in History Manager (src/history_manager.cc)
+  ```C++
+void HistoryManager::SaveCanvas(PixelBuffer* buff) {
+    
+    ...
+
+    int width = buff->width();
+    int height = buff->width();
+    ColorData bg = buff->background_color();
+    PixelBuffer* curr = saved_buffers_[current_save_];
+    // Delete the current pixelbuffer in this spot if there is and old one,
+    // and it is of different size than the new one
+    if (curr != nullptr) {
+        if (width != curr->width() || height != curr->height()) {
+            delete curr;
+            curr = new PixelBuffer(width, height, bg);
+        } else {
+            curr->set_background_color(bg);
+        }
+    } else {
+        curr = new PixelBuffer(width, height, bg);
+    }
+
+    // Copy the actual pixels over into the buffer, now that it has the
+    // correct size and bg color
+    for (int r = 0; r < height; r++)
+        for (int c = 0; c < width; c++)
+            curr->set_pixel(r, c, buff->get_pixel(r, c));
+    saved_buffers_[current_save_] = curr;
+}
+
+  ```
+
+For obvious reasons, we have Undo and Redo methods, shown in Figure 2.4, which get called when the Undo and Redo buttons are pressed. If there is a canvas available at the position in the array before the current canvas being displayed, the user can use Undo, and that PixelBuffer gets copied, returned, and set as the display_buffer_. The only difference in Redo is that we copy the PixelBuffer pointed to by the next pointer in the ring buffer, if available.
+
+###### Figure 2.4: Undo and Redo methods in History Manager (src/history_manager.cc)
+  ```C++
+PixelBuffer* HistoryManager::Undo(PixelBuffer* display) {
+    // Check to see if we can even redo
+    if (current_save_ == oldest_save_)
+        return display;
+
+    current_save_ = (current_save_ - 1) % possible_saves_;
+    return ResizeAndCopy(display);
+}
+
+PixelBuffer* HistoryManager::Redo(PixelBuffer* display) {
+    // Check to see if we can even redo
+    if (current_save_ == newest_save_)
+        return display;
+
+    current_save_ = (current_save_ + 1) % possible_saves_;
+    return ResizeAndCopy(display);
+}
+
+  ```
+
+We keep track of three values that allow us to correctly allow or disallow the use of the Undo and Redo methods. These values are current_save_, oldest_save_, and newest_save_. We mod these values with possible_saves_ in order to wrap around our ring buffer. The current_save_ is the index of the array which contains the pointer to the current PixelBuffer being displayed. When SaveCanvas is called, we add 1 to current_save_ and set newest_save_ to the value of current_save_, as seen in Figure 2.5, since that save is now the newest. To clarify, newest_save_ is not always the same as current_save_. For instance, if there are 10 PixelBuffers in saved_buffers_ and one decides to use the undo function 3 times, newest_save_ will be 9 while curent_save_ will be 6. If current_save_ == oldest_save, we have wrapped around the entire ring buffer and need to add 1 to the oldest_save_, as shown in Figure 2.5. For examples, if we have possible_saves_ set to 10 and current_save_ becomes 10, we set the value of current_save_ to 0 since 10 mod 10 is equal to 0. If oldest_save_ was also 0, we must now add 1, so oldest_save_ is now 1. The previous oldest_save_ is lost, which is fine since, at most, we only need to be able to undo or redo possible_saves_ times.
+
+###### Figure 2.5: Another part of SaveCanvas method in History Manager (src/history_manager.cc)
+  ```C++
+void HistoryManager::SaveCanvas(PixelBuffer* buff) {
+    // Update the positions
+    current_save_ = (current_save_ + 1) % possible_saves_;
+    newest_save_ = current_save_;
+    if (current_save_ == oldest_save_)
+        oldest_save_ = (oldest_save_ + 1) % possible_saves_;
+
+    ...
+    
+}
+
+
+  ```
+  
+If current_save_ is equal to newest_save_, the user cannot Redo, which can be seen above, in Figure 2.4. Likewise, if current_save_ is equal to oldest_save_, the user cannot Undo. An important thing to note is that if a user clicks Undo, and then performs an action, like drawing a line, the canvas gets saved and newest_save_ gets set to current_save_. This means that Redo is now disabled and the user can never get back to the initial canvas that he clicked Undo from.
+
+One additional function we made is ResizeAndCopy, which can be seen in Figure 2.6, below. This functions determines whether a saved PixelBuffer and the PixelBuffer we want to display have the same dimensions. If they differ, one will be created in the correct size. Then, we copy the saved PixelBuffer onto the PixelBuffer we are going to return and display.
+
+###### Figure 2.6: ResizeAndCopy function in History Manager (src/history_manager.cc)
+  ```C++
+PixelBuffer* HistoryManager::ResizeAndCopy(PixelBuffer* display) {
+    int d_height = display->height();
+    int d_width = display->width();
+    PixelBuffer* curr = saved_buffers_[current_save_];
+    int c_height = curr->height();
+    int c_width = curr->width();
+    ColorData bg = curr->background_color();
+
+    // Check to see if current display is the same dimensions
+    // as the saved one. If so, no need to resize it.
+    if (c_width != d_width || c_height == d_height) {
+        delete display;
+        display = new PixelBuffer(c_width, c_height, bg);
+    }
+
+    // Now copy the saved buff into the display one
+    for (int r = 0; r < c_height; r++)
+        for (int c = 0; c < c_width; c++)
+            display->set_pixel(r, c, curr->get_pixel(r, c));
+
+    return display;
+}
+
+
+
+  ```
 
 ### 2.2 Design Justification
 Shashanks version:
 
-> There were essentially two ways to implement Undo/Redo; with a separate class or have it lie in flash_photo_app.cc. We decided with the separate class since the functions in history_manager.cc have nothing to do with flash_photo_app.cc. All of the functions were made to impact only other functions in that class. This way also allowed for easier removal of the process without affecting other classes. From here we had to make another design decision in how we would keep track of the different actions. We decided the best way would be through an array that would store buffers of each consecutive action. The alterantive would have been to keep track of the individual strokes or actions made by the user. However, with the variablilty of the strokes, filters, etc., is it much simpler to save a copy of the PixelBuffer and store those into an array. The next decision we made was to create a separate function that initialized the objects rather than keeping it in the constructor. By creating a separate function we can easily see what objects we will be dealing with and the Init function clearly demonstrates that they will be initialized. In addition this allows for the use of Init outside of the countructor if one would chose to do so. The last decision made was the ResizeAndCopy function. This was the smarter choice than writing it individually within the Undo/Redo functions. If you venture above, you will see the code for Undo which is minimal and easy to understand. It would be muddled if ResizeAndCopy did not exist. Since having diferent dimension between multiple buffers is a possibility, we must check for it and act according. Thus, creating a separate function to handle such cases makes the code easiler to read and understand as well as creating less busy work in writing the code twice. In summation, having a separate class to deal with an array of PixelBuffers in which there is a separate function to ensure smooth buffer transitioning provided readable, easy-to-follow, and simpler code. 
+> There were essentially two ways to implement Undo/Redo; with a separate class or have it lie in flash_photo_app.cc. We decided with the separate class since the functions in history_manager.cc have nothing to do with flash_photo_app.cc. All of the functions were made to impact only other functions in that class. This way also allowed for easier removal of the process without affecting other classes.
+
+From here we had to make another design decision in how we would keep track of the different actions. We decided the best way would be through an array that would store buffers of each consecutive action. The alterantive would have been to keep track of the individual strokes or actions made by the user. However, with the variablilty of the strokes, filters, etc., is it much simpler to save a copy of the PixelBuffer and store those into an array. 
+
+The next decision we made was to create a separate function that initialized the objects rather than keeping it in the constructor. By creating a separate function we can easily see what objects we will be dealing with and the Init function clearly demonstrates that they will be initialized. In addition this allows for the use of Init outside of the countructor if one would chose to do so. 
+
+The last decision made was the ResizeAndCopy function. This was the smarter choice than writing it individually within the Undo/Redo functions. If you venture above, you will see the code for Undo which is minimal and easy to understand. It would be muddled if ResizeAndCopy did not exist. Since having diferent dimension between multiple buffers is a possibility, we must check for it and act according. Thus, creating a separate function to handle such cases makes the code easiler to read and understand as well as creating less busy work in writing the code twice. In summation, having a separate class to deal with an array of PixelBuffers in which there is a separate function to ensure smooth buffer transitioning provided readable, easy-to-follow, and simpler code. 
 
 
-Jess's version:
+Jess/Shashank version:
+
+One decision we had to make was what to save. We decided it would be best to store entire PixelBuffers in an array rather than attempt to save a certain action, like a drawn line.  With the variablilty of the strokes, filters, etc., it is much simpler to save a copy of the PixelBuffer and store it in an array. PixelBuffers are small enough that we can store many instances of them. 
 
 As a group, we decided that a ring buffer would be the best design for our HistoryManager class because it was the simplest design we came up with. An alternative we discussed involved using two stacks, rather than a ring buffer. We would have pushed PixelBuffers onto one stack as we saved them. When the user clicked Undo, we would pop a PixelBuffer off of one stack, and push it onto the other. Then, if a user clicked Redo, we would pop the PixelBuffer off of the second stack and push it back onto the first stack.
 
-We saw two challenges with the two stack design that were easily handled with our ring buffer design. The first was that we would have to somehow make sure there was always a blank PixelBuffer at the bottom of the first stack, even if a user clicked Undo all the way back to that PixelBuffer. In our ring buffer design, we have a blank PixelBuffer in the first position of our array, and it never changes. None of the PixelBuffers in our array get changed as we Undo and Redo. They simply get copied over to the display_buffer_.
+We saw two challenges with the two stack design that were easily handled with our ring buffer design. The first was that we would have to somehow make sure there was always a blank PixelBuffer at the bottom of the first stack, even if a user clicked Undo all the way back to that PixelBuffer. In our ring buffer design, we have a blank PixelBuffer in the first position of our array, and it never changes. None of the PixelBuffers in our array get changed as we Undo and Redo because they simply get copied over to the display_buffer_.
 
 The second challenge we saw with the two stack design was that it would be more difficult to handle the case where the stack is full and we needed to save another PixelBuffer. In the two stack design, we would have to delete the PixelBuffer at the bottom of the stack and then push the newly saved PixelBuffer onto the top of the stack. In our ring buffer design, when our array is full, we automatically wrap around the ring buffer to position 0, since we mod (current_save_ +1) with possible_saves_.
 
 After comparing the two stack design and the ring buffer design, we decided that the ring buffer was simpler. We thought that the two stack design added unnecessary complexity and had more cons than the ring buffer design.
+
+Lastly, we decided to create a ResizeAndCopy method because we noticed that the Undo and Redo methods are exactly the same except for which PixelBuffer gets chosen to be copied. Therefore, we created the ResizeAndCopy method to make the code easier to read and understand as well as avoid writing the code twice.
 
 ## 3  Design Question Three
 > A new developer on your team must add a new filter to FlashPhoto. This filter is called  _Invert._ This filter performs the following conversion to all pixels in the canvas:
@@ -372,7 +501,7 @@ After comparing the two stack design and the ring buffer design, we decided that
 
 1. Begin by creating an InvertFilter header file called invert_filter.h and place it in the include folder. Since the InvertFilter does not need a kernal, InvertFilter will inherit from the SimpleFilter class. Apart from the usual constructor and destructor, filters need an ApplyToColor method and a name, as shown below.
 
-    ###### include/invert_filter.h
+    ###### src/include/invert_filter.h
       ```C++
     #ifndef SRC_INCLUDE_INVERT_FILTER_H_
     #define SRC_INCLUDE_INVERT_FILTER_H_
@@ -380,9 +509,7 @@ After comparing the two stack design and the ring buffer design, we decided that
     #include <string>
     #include "include/simple_filter.h"
     #include "include/color_data.h"
-    #include "include/pixel_buffer.h"
 
-    using image_tools::PixelBuffer;
     using image_tools::ColorData;
 
     class InvertFilter : public SimpleFilter {
@@ -399,15 +526,10 @@ After comparing the two stack design and the ring buffer design, we decided that
 
 2. Next, create an InvertFilter C++ file called invert_filter.cc and place it in the src folder. The ApplyToColor method needs to be defined in a way that will give us the desired affect from the filter. ApplyToColor gets applied to each color, red, green, and blue, separately. We check which color got passed in to ApplyToColor, then adjust that color accordingly. In this case, for each color that gets passed in, we return 1.0 - the current color.
 
-    ###### invert_filter.cc
+    ###### src/invert_filter.cc
       ```C++
     #include "include/invert_filter.h"
     #include <string>
-    #include <iostream>
-    #include <iomanip>
-    #include "include/tool_utilities.h"
-
-    using image_tools::ColorData;
 
     InvertFilter::InvertFilter() {}
 
@@ -433,7 +555,7 @@ After comparing the two stack design and the ring buffer design, we decided that
 
 3. Third, we need to add the ApplyInvert method to the FilterManager class. In the filter_manager header file, add ApplyFilter as shown below.
 
-    ###### include/filter_manager.h
+    ###### src/include/filter_manager.h
       ```C++
 
     ...
@@ -449,7 +571,7 @@ After comparing the two stack design and the ring buffer design, we decided that
 
 4. Then, add the ApplyInvert method to the filter_manager.cc file in the src folder. Create an InvertFilter object and call the ApplyFilter method. This method is the same for all of the SimpleFilters.
 
-    ###### filter_manager.cc
+    ###### src/filter_manager.cc
       ```C++
     ...
 
@@ -474,7 +596,7 @@ After comparing the two stack design and the ring buffer design, we decided that
 
 5. Be sure to include the invert_filter.h file at the top of the filter_manager.cc file.
 
-    ###### filter_manager.cc
+    ###### src/filter_manager.cc
       ```C++
     ...
 
@@ -492,7 +614,7 @@ After comparing the two stack design and the ring buffer design, we decided that
 
 6. Next, you need to add the Filter to the User Interface. In filter_manager.cc, we need to add the InvertFilter panel and Apply button.  
 
-    ###### filter_manager.cc
+    ###### src/filter_manager.cc
       ```C++
 
     ...
@@ -518,9 +640,9 @@ After comparing the two stack design and the ring buffer design, we decided that
 
       ```
 
-7. In the include/ui_ctrl.h file, add UI_APPLY_INVERT to the Type enum as shown below. UI_APPLY_INVERT must be placed after UI_APPLY_MOTION_BLUR but before UI_APPLY_SPECIAL_FILTER, since the buffers get switched for filters listed between those two filters, inclusively.
+7. In the ui_ctrl.h file, add UI_APPLY_INVERT to the Type enum as shown below. UI_APPLY_INVERT must be placed after UI_APPLY_MOTION_BLUR but before UI_APPLY_SPECIAL_FILTER, since the buffers get switched for filters listed between those two filters, inclusively.
 
-    ###### include/ui_ctrl.h
+    ###### src/include/ui_ctrl.h
       ```C++
 
 
@@ -546,7 +668,7 @@ After comparing the two stack design and the ring buffer design, we decided that
 
 8. Lastly, in flashphoto_app.cc, add the UICtrl::UI_APPLY_INVERT case to the GluiControl method.
 
-    ###### flashphoto_app.cc
+    ###### src/flashphoto_app.cc
       ```C++
 
     ...
@@ -566,6 +688,6 @@ After comparing the two stack design and the ring buffer design, we decided that
 
       ```
 
-[HistoryManagerUML]: https://github.umn.edu/umn-csci-3081F16/repo-group-Bits-Please/blob/history_manager/doc/figures/HistoryManager.png
-[FiltersUML]: https://github.umn.edu/umn-csci-3081F16/repo-group-Bits-Please/blob/history_manager/doc/figures/Filter_UML.png
-[BlurKernal]: https://github.umn.edu/umn-csci-3081F16/repo-group-Bits-Please/blob/history_manager/doc/figures/BlurKernal.png
+[HistoryManagerUML]: https://github.umn.edu/umn-csci-3081F16/repo-group-Bits-Please/blob/develop/doc/figures/HistoryManager.png
+[FiltersUML]: https://github.umn.edu/umn-csci-3081F16/repo-group-Bits-Please/blob/develop/doc/figures/Filter_UML.png
+[BlurKernal]: https://github.umn.edu/umn-csci-3081F16/repo-group-Bits-Please/blob/develop/doc/figures/BlurKernal.png
