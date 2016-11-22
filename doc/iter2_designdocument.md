@@ -250,7 +250,7 @@ void HistoryManager::Init(PixelBuffer* buff) {
 
   ```
 
-The HistoryManager class has a SaveCanvas method, as seen in Figure 2.3, which gets called each time a filter is applied, an image gets loaded in as the canvas, and the mouse is released. If the next pointer in our ring buffer points to a non-null PixelBuffer, we delete it, and allocate a new one. We then resize the PixelBuffer if it was just allocated, or resize if the size does not match the display (buff) size. Then, we copy the current display PixelBuffer we want to save into that PixelBuffer in our ringed buffer.
+The HistoryManager class has a SaveCanvas method, as seen in Figure 2.3, which gets called each time a filter is applied, an image gets loaded in as the canvas, and the mouse is released. If the next pointer in our ring buffer points to a non-null PixelBuffer, and it's width and height do not match the display (buff) that we are saving, then we delete it, and allocate a new one to the correct size. We also allocate a new PixelBuffer to the according size if the ring buffer currently points to a null value. Then, we copy the current display PixelBuffer we want to save into that PixelBuffer in our ringed buffer.
 
 ###### Figure 2.3: SaveCanvas method in History Manager (src/history_manager.cc)
   ```C++
@@ -361,20 +361,8 @@ PixelBuffer* HistoryManager::ResizeAndCopy(PixelBuffer* display) {
   ```
 
 ### 2.2 Design Justification
-Shashanks version:
 
-> There were essentially two ways to implement Undo/Redo; with a separate class or have it lie in flash_photo_app.cc. We decided with the separate class since the functions in history_manager.cc have nothing to do with flash_photo_app.cc. All of the functions were made to impact only other functions in that class. This way also allowed for easier removal of the process without affecting other classes.
-
-From here we had to make another design decision in how we would keep track of the different actions. We decided the best way would be through an array that would store buffers of each consecutive action. The alterantive would have been to keep track of the individual strokes or actions made by the user. However, with the variablilty of the strokes, filters, etc., is it much simpler to save a copy of the PixelBuffer and store those into an array. 
-
-The next decision we made was to create a separate function that initialized the objects rather than keeping it in the constructor. By creating a separate function we can easily see what objects we will be dealing with and the Init function clearly demonstrates that they will be initialized. In addition this allows for the use of Init outside of the countructor if one would chose to do so. 
-
-The last decision made was the ResizeAndCopy function. This was the smarter choice than writing it individually within the Undo/Redo functions. If you venture above, you will see the code for Undo which is minimal and easy to understand. It would be muddled if ResizeAndCopy did not exist. Since having diferent dimension between multiple buffers is a possibility, we must check for it and act according. Thus, creating a separate function to handle such cases makes the code easiler to read and understand as well as creating less busy work in writing the code twice. In summation, having a separate class to deal with an array of PixelBuffers in which there is a separate function to ensure smooth buffer transitioning provided readable, easy-to-follow, and simpler code. 
-
-
-Jess/Shashank version:
-
-One decision we had to make was what to save. We decided it would be best to store entire PixelBuffers in an array rather than attempt to save a certain action, like a drawn line.  With the variablilty of the strokes, filters, etc., it is much simpler to save a copy of the PixelBuffer and store it in an array. PixelBuffers are small enough that we can store many instances of them. 
+One decision we had to make was what to save. We decided it would be best to store entire PixelBuffers in an array rather than attempt to save a certain action, like a drawn line.  With the variablilty of the strokes, filters, etc., it is much simpler to save a copy of the PixelBuffer and store it in an array. PixelBuffers are small enough that we can store many instances of them in memory. 
 
 As a group, we decided that a ring buffer would be the best design for our HistoryManager class because it was the simplest design we came up with. An alternative we discussed involved using two stacks, rather than a ring buffer. We would have pushed PixelBuffers onto one stack as we saved them. When the user clicked Undo, we would pop a PixelBuffer off of one stack, and push it onto the other. Then, if a user clicked Redo, we would pop the PixelBuffer off of the second stack and push it back onto the first stack.
 
