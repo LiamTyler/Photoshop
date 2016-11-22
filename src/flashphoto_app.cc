@@ -170,7 +170,7 @@ void FlashPhotoApp::InitializeBuffers(ColorData background_color,
 // Also updates the window dimensions to fi the image
 void FlashPhotoApp::LoadImageToCanvas(void) {
     delete display_buffer_;
-    display_buffer_ = ImageHandler::loadImage(
+    display_buffer_ = ImageHandler::LoadImage(
             io_manager_.file_browser()->get_file());
     UpdateScratch();
     // std::cout << "DB w: " << display_buffer_->width() << ", DB h: " << DB
@@ -180,7 +180,7 @@ void FlashPhotoApp::LoadImageToCanvas(void) {
 
 // Function that calls saveImage from ImageHandler
 void FlashPhotoApp::SaveCanvasToFile(void) {
-     ImageHandler::saveImage(io_manager_.file_browser()->get_file(),
+     ImageHandler::SaveImage(io_manager_.file_browser()->get_file(),
                              display_buffer_);
 }
 
@@ -346,7 +346,7 @@ void FlashPhotoApp::GluiControl(int control_id) {
                 io_manager_.LoadImageToStamp();
                 TStamp* t = dynamic_cast<TStamp*>(
                         tools_[ToolFactory::TOOLS::TOOL_STAMP]);
-                t->LoadImage(ImageHandler::loadImage(
+                t->LoadImage(ImageHandler::LoadImage(
                             io_manager_.file_browser()->get_file()));
             }
             break;

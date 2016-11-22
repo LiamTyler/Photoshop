@@ -22,28 +22,28 @@ using image_tools::PixelBuffer;
 
 // Decides whether the file is PNG or JPEG. Sends to appropriate handler.
 // Returns new image if successful or error message if failed
-PixelBuffer* ImageHandler::loadImage(const std::string & fileName) {
-    IMAGE_TYPE imageType = getImageType(fileName);
-    PixelBuffer* loadedImage = NULL;
-    if (imageType == PNG_IMAGE) {
-        loadedImage = IPNGHandler::loadImage(fileName);
-    } else if (imageType == JPG_IMAGE) {
-        loadedImage = IJPGHandler::loadImage(fileName);
+PixelBuffer* ImageHandler::LoadImage(const std::string & file_name) {
+    IMAGE_TYPE image_type = GetImageType(file_name);
+    PixelBuffer* loaded_image = NULL;
+    if (image_type == PNG_IMAGE) {
+        loaded_image = IPNGHandler::LoadImage(file_name);
+    } else if (image_type == JPG_IMAGE) {
+        loaded_image = IJPGHandler::LoadImage(file_name);
     }  else {
         fprintf(stderr, "invalid entry\n");
     }
-    return loadedImage;
+    return loaded_image;
 }
 
 // Decides whether the file is PNG or JPEG. Sends to appropriate handler.
-bool ImageHandler::saveImage(const std::string & fileName,
-                             const PixelBuffer* bufferToSave) {
-    IMAGE_TYPE imageType = getImageType(fileName);
+bool ImageHandler::SaveImage(const std::string & file_name,
+                             const PixelBuffer* buffer_to_save) {
+    IMAGE_TYPE imageType = GetImageType(file_name);
     bool success = false;
     if (imageType == PNG_IMAGE) {
-        success = IPNGHandler::saveImage(fileName, bufferToSave);
+        success = IPNGHandler::SaveImage(file_name, buffer_to_save);
     } else if (imageType == JPG_IMAGE) {
-        success = IJPGHandler::saveImage(fileName, bufferToSave);
+        success = IJPGHandler::SaveImage(file_name, buffer_to_save);
     }  else {
         fprintf(stderr, "invalid entry\n");
     }
@@ -52,11 +52,13 @@ bool ImageHandler::saveImage(const std::string & fileName,
 
 // Decides file type via suffix
 ImageHandler::IMAGE_TYPE
-                      ImageHandler::getImageType(const std::string & fileName) {
-    if (fileName.find(".png", fileName.size()-5) != std::string::npos) {
+    ImageHandler::GetImageType(const std::string & file_name) {
+    if (file_name.find(".png", file_name.size()-5) != std::string::npos) {
         return PNG_IMAGE;
-    } else if (fileName.find(".jpg", fileName.size()-5) != std::string::npos ||
-              fileName.find(".jpeg", fileName.size()-6) != std::string::npos) {
+    } else if (file_name.find(".jpg", file_name.size()-5)
+                                        != std::string::npos ||
+              file_name.find(".jpeg", file_name.size()-6)
+                                        != std::string::npos) {
         return JPG_IMAGE;
     } else {
         return UNKNOWN_IMAGE;

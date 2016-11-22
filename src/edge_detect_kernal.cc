@@ -23,6 +23,10 @@ void EdgeDetectKernal::InitializeKernal() {
     int center_height = height/2;
     float total = static_cast<float>((width * height) - 1);
 
+
+    // Set all outer positions of the kernal to -1, set the
+    // center to the value that will make all values in the
+    // kernal add to 0
     for (int r = 0; r < height; r++) {
         for (int c = 0; c < width; c++) {
             if (r == center_height && c == center_width) {
