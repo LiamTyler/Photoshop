@@ -19,14 +19,14 @@ using image_tools::ColorData;
 using image_tools::PixelBuffer;
 
 // Load desired image to current buffer
-PixelBuffer* IPNGHandler::loadImage(const std::string fileName) {
-    PixelBuffer* loadedImageBuffer = NULL;
+PixelBuffer* IPNGHandler::LoadImage(const std::string file_name) {
+    PixelBuffer* loaded_image_buffer = NULL;
     png_image image;
     memset(&image, 0, (sizeof image));
     image.version = PNG_IMAGE_VERSION;
     // Create empty buffer with width and height of desired image
-    if (png_image_begin_read_from_file(&image, fileName.c_str())) {
-        loadedImageBuffer = new PixelBuffer(image.width, image.height,
+    if (png_image_begin_read_from_file(&image, file_name.c_str())) {
+        loaded_image_buffer = new PixelBuffer(image.width, image.height,
                                                       ColorData(0.0, 0.0, 0.0));
         png_bytep buffer;
         image.format = PNG_FORMAT_RGBA;
@@ -41,24 +41,24 @@ PixelBuffer* IPNGHandler::loadImage(const std::string fileName) {
                     g = static_cast<int>(buffer[(y*image.width*4)+(x*4)+1]);
                     b = static_cast<int>(buffer[(y*image.width*4)+(x*4)+2]);
                     a = static_cast<int>(buffer[(y*image.width*4)+(x*4)+3]);
-                    loadedImageBuffer->set_pixel(x, image.height-(y+1),
+                    loaded_image_buffer->set_pixel(x, image.height-(y+1),
                             ColorData(r/255.0f, g/255.0f, b/255.0f, a/255.0f));
                 }
             }
         }
         delete[] buffer;
     }
-    return loadedImageBuffer;
+    return loaded_image_buffer;
 }
 
 // Saves desired image into a buffer
-bool IPNGHandler::saveImage(const std::string fileName,
-                            const PixelBuffer* bufferToSave) {
+bool IPNGHandler::SaveImage(const std::string file_name,
+                            const PixelBuffer* buffer_to_save) {
     bool success = false;
     png_image image;
     memset(&image, 0, (sizeof image));
-    image.height = bufferToSave->height();
-    image.width = bufferToSave->width();
+    image.height = buffer_to_save->height();
+    image.width = buffer_to_save->width();
     image.version = PNG_IMAGE_VERSION;
     image.opaque = NULL;
     image.format = PNG_FORMAT_RGBA;
@@ -67,7 +67,7 @@ bool IPNGHandler::saveImage(const std::string fileName,
     // Pixel by pixel, saving
     for (int y = image.height-1; y >= 0; y--) {
         for (int x = 0; x < static_cast<int>(image.width); x++) {
-            ColorData currentPixel = bufferToSave->get_pixel(x, y);
+            ColorData currentPixel = buffer_to_save->get_pixel(x, y);
             buffer[((image.height-(y+1))*image.width+x)*4] =
                           static_cast<png_byte>(currentPixel.get_red()*255.0);
             buffer[((image.height-(y+1))*image.width+x)*4+1] =
@@ -80,7 +80,7 @@ bool IPNGHandler::saveImage(const std::string fileName,
     }
 
     if (png_image_write_to_file(&image,
-                                   fileName.c_str(), 0, buffer, 0, NULL) != 0) {
+                            file_name.c_str(), 0, buffer, 0, NULL) != 0) {
         success = true;
     } else {
         success = false;

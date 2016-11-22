@@ -20,9 +20,9 @@ using image_tools::PixelBuffer;
 
 class IPNGHandler : public ImageHandler {
  public:
-  static PixelBuffer* loadImage(const std::string fileName);
-  static bool saveImage(const std::string fileName,
-    const PixelBuffer* bufferToSave);
+  static PixelBuffer* LoadImage(const std::string file_name);
+  static bool SaveImage(const std::string file_name,
+    const PixelBuffer* buffer_to_save);
 };
 
 #endif  // SRC_INCLUDE_IPNG_HANDLER_H_

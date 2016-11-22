@@ -25,11 +25,11 @@ class ImageHandler {
     UNKNOWN_IMAGE
   };
 
-  static PixelBuffer* loadImage(const std::string & fileName);
-  static bool saveImage(const std::string & fileName,
+  static PixelBuffer* LoadImage(const std::string & file_name);
+  static bool SaveImage(const std::string & file_name,
                         const PixelBuffer* bufferToSave);
  private:
-  static IMAGE_TYPE getImageType(const std::string & fileName);
+  static IMAGE_TYPE GetImageType(const std::string & file_name);
 };
 
 #endif  // SRC_INCLUDE_IMAGE_HANDLER_H_

@@ -22,9 +22,9 @@ using image_tools::PixelBuffer;
 
 class IJPGHandler : public ImageHandler {
  public:
-  static PixelBuffer* loadImage(const std::string fileName);
-  static bool saveImage(const std::string fileName,
-                        const PixelBuffer* bufferToSave);
+  static PixelBuffer* LoadImage(const std::string file_name);
+  static bool SaveImage(const std::string file_name,
+                        const PixelBuffer* buffer_to_save);
  private:
   struct my_error_mgr {
     jpeg_error_mgr pub;  /* "public" fields */

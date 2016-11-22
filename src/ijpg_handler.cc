@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Name            : IHPGHandler.cc
+ * Name            : IJPGHandler.cc
  * Project         : FlashPhoto
  * Module          : image_tools
  * Description     : Implementation of IJPGHandler class
@@ -18,8 +18,8 @@
 using image_tools::ColorData;
 using image_tools::PixelBuffer;
 
-PixelBuffer* IJPGHandler::loadImage(const std::string fileName) {
-    PixelBuffer* loadedImageBuffer = NULL;
+PixelBuffer* IJPGHandler::LoadImage(const std::string file_name) {
+    PixelBuffer* loaded_image_buffer = NULL;
 
     // Contains parameters of JPEG decompression
     struct jpeg_decompress_struct cinfo;
@@ -30,8 +30,8 @@ PixelBuffer* IJPGHandler::loadImage(const std::string fileName) {
     int row_stride;  // width of buffer
 
     // Open the file that was inputted
-    if ((infile = fopen(fileName.c_str(), "rb")) == NULL) {
-        fprintf(stderr, "can't open %s\n", fileName.c_str());
+    if ((infile = fopen(file_name.c_str(), "rb")) == NULL) {
+        fprintf(stderr, "can't open %s\n", file_name.c_str());
         std::cout << "ERROR: CANNOT READ JPG" << std::endl;
         exit(1);
     }
@@ -57,7 +57,7 @@ PixelBuffer* IJPGHandler::loadImage(const std::string fileName) {
     std::cout << "loading width: " << cinfo.output_width <<
         ", loading height: " << cinfo.output_height << std::endl;
 
-    loadedImageBuffer = new PixelBuffer(cinfo.output_width,
+    loaded_image_buffer = new PixelBuffer(cinfo.output_width,
                                         cinfo.output_height,
                                         ColorData(0.0, 0.0, 0.0));
 
@@ -80,7 +80,7 @@ PixelBuffer* IJPGHandler::loadImage(const std::string fileName) {
             g = static_cast<int>(*(buffer[0]+(x*3)+1));
             b = static_cast<int>(*(buffer[0]+(x*3)+2));
             a = 255;
-            loadedImageBuffer->set_pixel(x, cinfo.output_height-(y+1),
+            loaded_image_buffer->set_pixel(x, cinfo.output_height-(y+1),
                         ColorData(r/255.0f, g/255.0f, b/255.0f, a/255.0f));
         }
         y+=1;
@@ -95,11 +95,11 @@ PixelBuffer* IJPGHandler::loadImage(const std::string fileName) {
     // close file
     fclose(infile);
 
-    return loadedImageBuffer;
+    return loaded_image_buffer;
 }
 
-bool IJPGHandler::saveImage(const std::string fileName,
-                            const PixelBuffer* bufferToSave) {
+bool IJPGHandler::SaveImage(const std::string file_name,
+                            const PixelBuffer* buffer_to_save) {
     struct jpeg_compress_struct cinfo;
 
     // set up error handling helper variables
@@ -114,14 +114,14 @@ bool IJPGHandler::saveImage(const std::string fileName,
     jpeg_create_compress(&cinfo);
 
     // Use library function to send data to stdio
-    if ((outfile = fopen(fileName.c_str(), "wb")) == NULL) {
+    if ((outfile = fopen(file_name.c_str(), "wb")) == NULL) {
         exit(1);
     }
     jpeg_stdio_dest(&cinfo, outfile);
 
     // Set parameters from compression
-    cinfo.image_width = bufferToSave->width();
-    cinfo.image_height = bufferToSave->height();
+    cinfo.image_width = buffer_to_save->width();
+    cinfo.image_height = buffer_to_save->height();
     cinfo.input_components = 3;
     cinfo.in_color_space = JCS_RGB;
 
@@ -134,14 +134,14 @@ bool IJPGHandler::saveImage(const std::string fileName,
 
     // Use library function for counter
     row_stride = cinfo.image_width * 3;
-    const int width = bufferToSave->width();
-    const int height = bufferToSave->height();
+    const int width = buffer_to_save->width();
+    const int height = buffer_to_save->height();
     JSAMPLE* image_buffer = new JSAMPLE[row_stride*cinfo.image_height];
 
     // Obtain colors by amount of red, green, and blue within a pixel
     for (int y = 0; y < height; y++) {
         for (int x = 0; x < width; x++) {
-            ColorData currentPixel = bufferToSave->get_pixel(x, y);
+            ColorData currentPixel = buffer_to_save->get_pixel(x, y);
             image_buffer[((height-(y+1))*width+x)*3] =
                              static_cast<JSAMPLE>(currentPixel.get_red()*255.0);
             image_buffer[((height-(y+1))*width+x)*3+1] =
