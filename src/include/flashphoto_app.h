@@ -96,6 +96,8 @@ class FlashPhotoApp : public BaseGfxApp {
 
   void SaveCanvasToFile(void);
 
+  void UpdateScratch(void);
+
   /* Copy/move assignment/construction disallowed */
   FlashPhotoApp(const FlashPhotoApp &rhs) = delete;
   FlashPhotoApp& operator=(const FlashPhotoApp &rhs) = delete;

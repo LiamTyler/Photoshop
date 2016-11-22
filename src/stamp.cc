@@ -30,7 +30,26 @@ void TStamp::ApplyTool(PixelBuffer* buff, ColorData current_color,
     if (image_ == nullptr || last_x != -1 || last_y != -1)
         return;
 
-    CopyPixelBuffer(image_, buff, x, buff->height() - y);
+    // CopyPixelBuffer(image_, buff, x, buff->height() - y);
+
+    int f_w = image_->width();
+    int f_half_w = f_w / 2;
+    int f_h = image_->height();
+    int f_half_h = f_h / 2;
+    int t_width = buff->width();
+    int t_height = buff->height();
+
+    // Copy the actual pixels over into the buffer, now that it has the
+    // correct size and bg color
+    for (int r = 0; r < f_h; r++) {
+        for (int c = 0; c < f_w; c++) {
+            int nx = c + x - f_half_w;
+            int ny = r + t_height - y - f_half_h;
+            if (0 <= nx && nx < t_width && 0 <= ny && ny < t_height &&
+                    image_->get_pixel(c, r).get_alpha() != 0)
+                buff->set_pixel(nx, ny, image_->get_pixel(c, r));
+        }
+    }
 }
 
 void TStamp::LoadImage(PixelBuffer* l_img) {

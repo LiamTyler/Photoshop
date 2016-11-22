@@ -106,6 +106,15 @@ FlashPhotoApp::~FlashPhotoApp(void) {
     }
 }
 
+void FlashPhotoApp::UpdateScratch() {
+    PixelBuffer* d = display_buffer_;
+    if (d->width() != scratch_buffer_->width() &&
+        d->height() != scratch_buffer_->height()) {
+        delete scratch_buffer_;
+        scratch_buffer_ = new PixelBuffer(d->width(), d->height(),
+                                          d->background_color());
+    }
+}
 
 void FlashPhotoApp::MouseDragged(int x, int y) {
     if (last_x_ != -1) {
@@ -160,11 +169,12 @@ void FlashPhotoApp::InitializeBuffers(ColorData background_color,
 // Copies the image that will load into the current buffer
 // Also updates the window dimensions to fi the image
 void FlashPhotoApp::LoadImageToCanvas(void) {
-      PixelBuffer* copy =
-                ImageHandler::loadImage(io_manager_.file_browser()->get_file());
-      display_buffer_ = copy;
-      BaseGfxApp::SetWindowDimensions(display_buffer_->width(),
-                                      display_buffer_->height());
+    PixelBuffer* copy =
+            ImageHandler::loadImage(io_manager_.file_browser()->get_file());
+    display_buffer_ = copy;
+    UpdateScratch();
+    BaseGfxApp::SetWindowDimensions(display_buffer_->width(),
+                                  display_buffer_->height());
 }
 
 // Function that calls saveImage from ImageHandler
@@ -247,6 +257,9 @@ void FlashPhotoApp::InitGlui(void) {
 
 void FlashPhotoApp::GluiControl(int control_id) {
     PixelBuffer* tmp;
+    // std::cout << "db w: " << display_buffer_->width() << ", db h: " <<
+    //    display_buffer_->height() << ", sb w: " << scratch_buffer_->width()
+    //    << ", sb h: " << scratch_buffer_->height() << std::endl;
     switch (control_id) {
         case UICtrl::UI_TOOLTYPE:
             cur_tool_ = tools_[cur_tool_index_];
@@ -324,6 +337,7 @@ void FlashPhotoApp::GluiControl(int control_id) {
         case UICtrl::UI_LOAD_CANVAS_BUTTON:
             io_manager_.LoadImageToCanvas();
             LoadImageToCanvas();
+            UpdateScratch();
             state_manager_.Save(display_buffer_);
             break;
         case UICtrl::UI_LOAD_STAMP_BUTTON:
@@ -345,11 +359,13 @@ void FlashPhotoApp::GluiControl(int control_id) {
             break;
         case UICtrl::UI_UNDO:
             display_buffer_ = state_manager_.UndoOperation(display_buffer_);
+            UpdateScratch();
             BaseGfxApp::SetWindowDimensions(display_buffer_->width(),
                                             display_buffer_->height());
             break;
         case UICtrl::UI_REDO:
             display_buffer_ = state_manager_.RedoOperation(display_buffer_);
+            UpdateScratch();
             BaseGfxApp::SetWindowDimensions(display_buffer_->width(),
                                             display_buffer_->height());
             break;

@@ -39,7 +39,7 @@ StateManager::~StateManager(void) {
 void StateManager::InitGlui(const GLUI *const glui,
                             void (*s_gluicallback)(int),
                             PixelBuffer* display) {
-  history_ = new HistoryManager(display, 50);
+  history_ = new HistoryManager(display, 80);
   undo_btn_ = new GLUI_Button(const_cast<GLUI*>(glui), "Undo", UICtrl::UI_UNDO,
                               s_gluicallback);
   undo_toggle(false);
