@@ -33,10 +33,10 @@ Bits Please
 > First, in the **Design Description** section below, describe the design you developed to address this challenge. We expect that you will include at least one figure showing the relationships of the classes affected by your design. Second, in the **Design Justification** section below present the most compelling argument you can for why this design is justified.  Note that our expectation is that you will need to discuss the pros (and maybe cons) of your final design as compared to alternative designs that you discussed in your group in order to make a strong case for justifying your design.
 
 ### 1.1 Design Description
-Our design at the highest level of abstraction views applying any filter as the same operation-- an operation that takes in the current screen, and creates a new image to be displayed by applying the filter to the current screem. To implement this, we created an abstract class as seen in Figure 1 for all filters to derive from.
+Our design at the highest level of abstraction views applying any filter as the same operation-- an operation that takes in the current screen, and creates a new image to be displayed by applying the filter to the current screem. To implement this, we created an abstract class as seen in Figure 1.1 for all filters to derive from.
 
 
-###### Figure 1: Class declaration of the base Filter class (src/include/filter.h)
+###### Figure 1.1: Class declaration of the base Filter class (src/include/filter.h)
 ```C++
 class Filter {
  public:
@@ -47,15 +47,15 @@ class Filter {
 
 ```
 
-Notice how all the methods are virtual, and two of them are pure virtual. This class defines the basic interface for all of our filters, but provides none of the details of how that is accomplished. The details of how the ApplyFilter() method is realized for the two types of filters: pixel-independent, and convolution-based, is handled by our abstract classes: SimpleFilter, and KernalFilter respectively. The class diagrams for these classes are depicted in Figure 2 below.
+Notice how all the methods are virtual, and two of them are pure virtual. This class defines the basic interface for all of our filters, but provides none of the details of how that is accomplished. The details of how the ApplyFilter() method is realized for the two types of filters: pixel-independent, and convolution-based, is handled by our abstract classes: SimpleFilter, and KernalFilter respectively. The class diagrams for these classes are depicted in Figure 1.2 below.
 
-###### Figure 2: The UML class diagram for the Filters.
+###### Figure 1.2: The UML class diagram for the Filters.
 ![Filters UML diagram][FiltersUML]
 
-We will describe the KernalFilter first. The main goal of the KernalFilter is to achieve the convolution-based functionality. We approached the problem with the following mentality: "For each pixel in our display, the new pixel will be composed of its neighboring pixels. We wish to know which neighboring pixels, and how much of each of them to compose our new pixel with." To accomplish this, notice how the KernalFilter class has a Kernal object, whose class declaration is shown in Figure 3.
+We will describe the KernalFilter first. The main goal of the KernalFilter is to achieve the convolution-based functionality. We approached the problem with the following mentality: "For each pixel in our display, the new pixel will be composed of its neighboring pixels. We wish to know which neighboring pixels, and how much of each of them to compose our new pixel with." To accomplish this, notice how the KernalFilter class has a Kernal object, whose class declaration is shown in Figure 1.3.
 
 
-###### Figure 3: The Kernal class declaration (src/include/kernal.h)
+###### Figure 1.3: The Kernal class declaration (src/include/kernal.h)
 ```C++
 class Kernal {
  public:
@@ -84,10 +84,10 @@ class Kernal {
 
 ```
 
-This class seems to have a lot going on, but boils down to a few main components. The first key aspect of this class is the kernal_ member variable. The Kernal object is a similar to the Mask of Tools in iteration 1. It is composed of a two dimensional array of floats, which is pointed to by the kernal_ variable. Each element in the array is the percentage of that pixel we want for our final pixel. To better see this, observe the next key aspect of the Kernal class: the ApplyKernal method (shown in Figure 4 below).
+This class seems to have a lot going on, but boils down to a few main components. The first key aspect of this class is the kernal_ member variable. The Kernal object is a similar to the Mask of Tools in iteration 1. It is composed of a two dimensional array of floats, which is pointed to by the kernal_ variable. Each element in the array is the percentage of that pixel we want for our final pixel. To better see this, observe the next key aspect of the Kernal class: the ApplyKernal method (shown in Figure 1.4 below).
 
 
-###### Figure 4: The ApplyKernal method of the Kernal class (src/kernal.cc)
+###### Figure 1.4: The ApplyKernal method of the Kernal class (src/kernal.cc)
 ```C++
 ColorData Kernal::ApplyKernal(PixelBuffer* oldimage, int start_x, int start_y) {
     int buff_width = oldimage->width();
@@ -126,18 +126,18 @@ ColorData Kernal::ApplyKernal(PixelBuffer* oldimage, int start_x, int start_y) {
 
 ```
 
-Notice that this method takes in the location of the pixel we are currently processing. It then centers the kernal_ array over that location, and loops through each pixel, adding that pixel's ColorData multiplied by the corresponding value in our array, and adds it to a running total. This is the value that is returned, which will become the pixel's ColorData on the newimage. The way we create the kernal array itself, is through the Kernal member function InitializeKernal(). The pure virtual InitalizeKernal method is the last key aspect to notice in Fig 3. Each filter that is convolution-based has its own kernal which defines the InitializeKernal method to give the filter it's appropriate functionality. To make this more clear, we can examine the BlurFilter.
+Notice that this method takes in the location of the pixel we are currently processing. It then centers the kernal_ array over that location, and loops through each pixel, adding that pixel's ColorData multiplied by the corresponding value in our array, and adds it to a running total. This is the value that is returned, which will become the pixel's ColorData on the newimage. The way we create the kernal array itself, is through the Kernal member function InitializeKernal(). The pure virtual InitalizeKernal method is the last key aspect to notice in Fig 1.3. Each filter that is convolution-based has its own kernal which defines the InitializeKernal method to give the filter it's appropriate functionality. To make this more clear, we can examine the BlurFilter.
 
-To blur a pixel, we average out all the colors within a certain radius of a pixel, and set that pixel equal to the average. Observe the implementation of BlurFilter in Figure 5 below.
+To blur a pixel, we average out all the colors within a certain radius of a pixel, and set that pixel equal to the average. Observe the implementation of BlurFilter in Figure 1.5 below.
 
-###### Figure 5: BlurKernal class definition (src/blur_kernal.cc)
+###### Figure 1.5: BlurKernal class definition (src/blur_kernal.cc)
 ```C++
 BlurFilter::BlurFilter(int amount) : KernalFilter(new BlurKernal(amount)) {}
 ```
 
-Notice how the only thing needed to create the filter is passing a BlurKernal to the parent KernalFilter class. To apply the kernal itself, there is no definition needed because the parent KernalFilter class already defines the ApplyFilter method as follows in Figure 6:
+Notice how the only thing needed to create the filter is passing a BlurKernal to the parent KernalFilter class. To apply the kernal itself, there is no definition needed because the parent KernalFilter class already defines the ApplyFilter method as follows in Figure 1.6:
 
-###### Figure 6: Default ApplyFilter method for KernalFilters (src/kernal_filter.cc)
+###### Figure 1.6: Default ApplyFilter method for KernalFilters (src/kernal_filter.cc)
 ```C++
 void KernalFilter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
     int buff_height = oldimage->height();
@@ -149,17 +149,17 @@ void KernalFilter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
 }
 ```
 
-For any filter class, the default method is to simply loop through all the pixels and apply the kernal to each pixel. The BlurKernal only overrides the InitializeKernal method as stated before. If we were to create a BlurKernal with a radius of 2, the two dimensional array would be as follows in Figure 7:
+For any filter class, the default method is to simply loop through all the pixels and apply the kernal to each pixel. The BlurKernal only overrides the InitializeKernal method as stated before. If we were to create a BlurKernal with a radius of 2, the two dimensional array would be as follows in Figure 1.7:
 
-###### Figure 7: Diagram of a BlurKernal with radius of 2.
+###### Figure 1.7: Diagram of a BlurKernal with radius of 2.
 ![BlurKernal result from InitializeKernal with radius of 2][BlurKernal]
 
 Notice how there are 13 pixels within a radius of 2 from the center, so when we apply the kernal as seen in Figure 5, it will return the pixel that is the average of all the pixels within a radius of 2 of the center pixel.
 
 
-In regards to the pixel-indepenedent filters, we designed them so that each filter derives from a SimpleFilter class depicted in the UML diagram in Figure 2. Notice how the ApplyFilter method is not pure virtual, but the ApplyToColor is. We designed it so that each filter has the same default ApplyFilter method as seen below in Figure 8.
+In regards to the pixel-indepenedent filters, we designed them so that each filter derives from a SimpleFilter class depicted in the UML diagram in Figure 2. Notice how the ApplyFilter method is not pure virtual, but the ApplyToColor is. We designed it so that each filter has the same default ApplyFilter method as seen below in Figure 1.8.
 
-###### Figure 8: ApplyFilter method definition for SimpleFilters (src/simple_filter.cc)
+###### Figure 1.8: ApplyFilter method definition for SimpleFilters (src/simple_filter.cc)
 ```C++
 void SimpleFilter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
     int buff_height = oldimage->height();
@@ -186,9 +186,9 @@ As seen in the implementation, pixel-independent filters loop through each pixel
 
 The design above was created with an emphasis on the following goals: extensibility, understandability, and modularity. We believe that while the design may not be the best, it does a good job at meeting those goals. This section describes the advantages and disadvantages to our design, and proposes a couple alternatives.
 
-The first design we actually used to implement most of the project initially involved having the 2D array for the kernal object be a part of the KernalFilter class. That way there was no need to have another class for each and every KernalFilter created. We quickly found however, that it was not easy to understand. Figure 9 depicts the declaration for the KernalFilter class we had previously.
+The first design we actually used to implement most of the project initially involved having the 2D array for the kernal object be a part of the KernalFilter class. That way there was no need to have another class for each and every KernalFilter created. We quickly found however, that it was not easy to understand. Figure 1.9 depicts the declaration for the KernalFilter class we had previously.
 
-###### Figure 9: Alternative declaration for the KernalFiter class we initially used.
+###### Figure 1.9: Alternative declaration for the KernalFiter class we initially used.
 ```C++
 class KernalFilter : public Filter {
 public:
@@ -222,7 +222,7 @@ Another alternative we considered was not having a kernal object at all and buil
 
 Standing by itself, our final design has many advantages. Observe the BlurFilter definition presented earlier in Figure 6. It took only one line to create the BlurFilter. The simplicity of adding that is a large benefit. One could argue that we still had to create a whole BlurKernal class. While that is true, the base Kernal does most of the work in sizing and applying the kernal. To extend it to create a filter, only the InitializeKernal method needs to be defined, which is always going to have to be designed somewhere. Both the ApplyFilter and ApplyKernal methods are merely virtual. This allows for complex filters in the future to be defined, but for most filters, we don't have to write anything for those two methods, making it even more extensible. We felt that these advantages made our design a desirable one.
 
-The disadvantages of our design few. One is that there are many files to keep track of, and to add a convolution-based filter, it's likely that 4 new files need to be created. This admittingly, is a large concern. We felt that this is lessened by the fact that each file is usually very small. As seen in the definition of BlurFitler in Figure 5, it was literally one line. The kernal object for the filter only had to define one method. Then there are just two header files to declare, which are usually small. This makes this disadvantage not as impactful, and still easy to add new filters. Another disadvantage is that in our design, everytime a fitler is clicked in the GUI, the corresponding filter object is created at that time. Since it's not pre-computed, this means we have lower efficiency. Our reasoning for this is that most of the time, the parameters needed for the filter are going to change, so most of the work would have to be redone anyways. An example of that is the BlurFilter. If the blur amount changes from one call of it to the next, then the kernal would be remade anyways. By not having it resize or update, calling a new filter is merely two lines: construct the filter object, and apply it. This simplicity is desirable, and we did not notice a performance decrease. We actually do have the methods to implement this design already created, but we think our current design is desirable.
+The disadvantages of our design few. One is that there are many files to keep track of, and to add a convolution-based filter, it's likely that 4 new files need to be created. This admittingly, is a large concern. We felt that this is lessened by the fact that each file is usually very small. As seen in the definition of BlurFitler in Figure 1.5, it was literally one line. The kernal object for the filter only had to define one method. Then there are just two header files to declare, which are usually small. This makes this disadvantage not as impactful, and still easy to add new filters. Another disadvantage is that in our design, everytime a fitler is clicked in the GUI, the corresponding filter object is created at that time. Since it's not pre-computed, this means we have lower efficiency. Our reasoning for this is that most of the time, the parameters needed for the filter are going to change, so most of the work would have to be redone anyways. An example of that is the BlurFilter. If the blur amount changes from one call of it to the next, then the kernal would be remade anyways. By not having it resize or update, calling a new filter is merely two lines: construct the filter object, and apply it. This simplicity is desirable, and we did not notice a performance decrease. We actually do have the methods to implement this design already created, but we think our current design is desirable.
 
 Overall, we feel that our filter design is successful. It is extensible, understandable, and has high modularity, which is what we focused on. There may be a better design, but ours did achieve what we wanted it to.
 
@@ -232,93 +232,6 @@ Overall, we feel that our filter design is successful. It is extensible, underst
 > First, in the **Design Description** section below, describe the design you developed to address this challenge.  Second, in the **Design Justification** section below present the most compelling argument you can for why this design is justified.  Note that our expectation is that you will need to discuss the pros (and maybe cons) of your final design as compared to alternative designs that you discussed in your group in order to make a strong case for justifying your design.
 
 ### 2.1 Design Description
-
-Shashank:
-
-> To address the challenge of redo/undo, we created a separate HistoryManager class. In this class we created an array to store each buffer that has been made.
-> First, we created a constructor in which we prepare a PixelBuffer* object to represent a buffer and an int called possible_saves_ to represent the maximum size of an array of buffers. possible_saves_ dictates how far back or how far forward one can undo/redo respectively. Also, there is saved_buffers_ which is the array in which the buffers will be saved into, current_save_ which keeps track of the index in which the current buffer is saved, newest_save_ which holds the index of the buffer which was most recently saved and oldest_save_ which keeps the index of the buffer that was least recently saved. To clarify, newest_save_ is not neccessarily the same as current_save_. For instance, if there are 10 buffers in saved_buffers_ and one decides to use the undo function 3 times, newest_save_ will be 9 while curent_save_ will be 6. These variables are used to keep track of the buffers in saved_buffers_. In addition, this is where we initialize the PixelBuffer* object which creates a new buffer array, but notice this is settled with the Init function.
-
-```C++
-HistoryManager::HistoryManager(PixelBuffer* buff, int possible_saves) :
-                                saved_buffers_(nullptr),
-                                possible_saves_(possible_saves),
-                                current_save_(-1),
-                                oldest_save_(0),
-                                newest_save_(0) {
-    Init(buff);
-}
-```
-> Second, we have a destructor that deletes all the buffers in saved_buffers_ and then proceeds to delete the array as well. This helps to free up resources and objects it may have acquired during its lifetime.
-> Then, we have an Init function which takes in no arguments and created saved_buffers_ of the size of possible_saves_, saves the current canvas into the first index of the array, and sets oldest_save_ to 0. This is used to clear saved_buffers_. Thus, actions such as Redo and Undo will have no effect. However, note that this does not produce a blank canvas, but rather keeps the existing buffer and places it into the first index of a newly created saved_buffers_. Hence the current buffer will be the oldest_save_.
-
-```C++
-void HistoryManager::Init(PixelBuffer* buff) {
-    saved_buffers_ = new PixelBuffer*[possible_saves_]();
-    SaveCanvas(buff);
-    oldest_save_ = 0;
-}
-```
-> Next, the SaveCanvas function is there to store the current buffer into saved_buffers_ and proceedingly update the values current_save_, oldest_save_, and newest_save_. Usually, for current_save_ and newest_save_, we would add 1 to thir current value and keep oldest_save as is. However, oldest_save_ does change if we reach the end of saved_buffers_, then we must store the buffer into the first index of saved_buffers_ and so then oldest_save_ would be incremented by 1. This, is just a for instance. Anytime the current_save_ is equal to the oldest_save_, we must update the value of oldest_save_ which is represented by the "if" statement below. However, for the case in which we reach the end of saved_buffers_, we must always loop back to the beginning in order to maintain the integrity of the buffer. We accomplish this through the use of modulus. For examples, if we have a possible_saves_ set to 10 and current_save_ becomes 10, we set the value of current_save_ to 0 since 10 mod 10 is equal to 0. This also effects Redo operation. If a new buffer is saved, there should be the ability to Redo since a change was added, not taken away. Thus we set newest_save_ to equal current_save_ so Redo won't work (This will be expanded upon when we describe the Redo function). Note that Undo will still be functional (This will be further discussed as we describe the Undo function).
-
-```C++
-    // Update the positions
-    current_save_ = (current_save_ + 1) % possible_saves_;
-    newest_save_ = current_save_;
-    if (current_save_ == oldest_save_)
-        oldest_save_ = (oldest_save_ + 1) % possible_saves_;
-```
-
-> When this happens, we reach a situation where we will have to replace the buffers currently in saved_buffers_ with the current buffer. Hence, we delete the old buffer, and insert the current buffer. This is accomplished by obtaining the height and width of the current buffer, the background color and the current buffer itself, and then copying the data into a new buffer in which we store in saved_buffers_. Underneath, you can see that we check if a replacement needs to occur and then copy it to a new buffer. This ensures we have the correct size and background color of the new buffer, and reduces the possibility of errors.
-
-```C++
-    // Delete the current pixelbuffer in this spot if there is and old one,
-    // and it is of different size than the new one
-    if (curr != nullptr) {
-        if (width != curr->width() || height != curr->height()) {
-            delete curr;
-            curr = new PixelBuffer(width, height, bg);
-        } else {
-            curr->set_background_color(bg);
-        }
-    } else {
-        curr = new PixelBuffer(width, height, bg);
-    }
-
-    // Copy the actual pixels over into the buffer, now that it has the
-    // correct size and bg color
-    for (int r = 0; r < height; r++)
-        for (int c = 0; c < width; c++)
-            curr->set_pixel(r, c, buff->get_pixel(r, c));
-    saved_buffers_[current_save_] = curr;
-```
-
-> After that, we have the Undo function which will change the current buffer to the previous buffer stored in saved_buffers_. We check to see if we can even Undo which means that there is more than 1 buffer in saved_buffers_. If we can Undo, we decrement the value of current_save_ and display the previous buffer throught the use of a funciton called ResizeAndCopy, which will be discussed later. If we cannot Undo, we return the current buffer. In the case that the current_save_ is at the beginning of saved_buffers_ and there is more than one buffer in saved_buffers_, we must ensure that current_save_ arrives at the end of saved_buffers_. Beneath we see how Undo() works.
-
-```C++
-    PixelBuffer* HistoryManager::Undo(PixelBuffer* display) {
-    // Check to see if we can even redo
-    if (current_save_ == oldest_save_)
-        return display;
-
-    current_save_ = (current_save_ - 1) % possible_saves_;
-    return ResizeAndCopy(display);
-}
-```
-
-> Along with that, we have the Redo function which reverses the functionality of Undo. To illustrate, if we have saved_buffers_ with 10 buffers in it and we Undo 2 times, we decremented current_save_ and idsplayed the according buffer. However, if we Redo 2 times, we increment current_save_ and we are back to where we have started. So, we first check if a Redo is possible and if so, we decrement current_save and use ResizeAndCopy to display the awarded buffer. If not, we reutrn the current buffer. Hoever, similar to Undo, there is a speicial case that needs to be addressed. If there is more than 1 buffer in saved_buffers_ and a Redo is possible and current_save is at the end of saved_buffers_, we must update current_save_ to correspond with beginning of saved_buffers_ and present the specified buffer. Another thing about the Redo function is that if one decided to undo and then make an action such as use the pen or a filter, the Redo function no longer is able the work. The code is quite similar to Undo except that it must increase the value of current_save_.
-> The final function we made is ResizeAndCopy. This functions determines whether the two buffers have the same dimensions and if they differ, one will be resized and then returned. We have two buffers; one is the current buffer and one is the buffer we wan to display. We start by retrieving the height and width of the display buffer and the height and width of the current buffer. If they are the same, there is no need to resize the current buffer. If not, we take the values of the display buffer and resize the current buffer as well as copy the current buffer into the display buffer all the while maintaing the background color of the current buffer. Down below we see the retrieval of data from both display buffer and current buffer.
-
-```C++
-    int d_height = display->height();
-    int d_width = display->width();
-    PixelBuffer* curr = saved_buffers_[current_save_];
-    int c_height = curr->height();
-    int c_width = curr->width();
-    ColorData bg = curr->background_color();
-```
-> Then we resize if needed and copy the saved buffer into the display buffer
-
-Jess/Shashank version:
 
 Below is the UML Diagram that illustrates our HistoryManager design.
 
