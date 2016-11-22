@@ -108,7 +108,7 @@ FlashPhotoApp::~FlashPhotoApp(void) {
 
 void FlashPhotoApp::UpdateScratch() {
     PixelBuffer* d = display_buffer_;
-    if (d->width() != scratch_buffer_->width() &&
+    if (d->width() != scratch_buffer_->width() ||
         d->height() != scratch_buffer_->height()) {
         delete scratch_buffer_;
         scratch_buffer_ = new PixelBuffer(d->width(), d->height(),
@@ -169,10 +169,11 @@ void FlashPhotoApp::InitializeBuffers(ColorData background_color,
 // Copies the image that will load into the current buffer
 // Also updates the window dimensions to fi the image
 void FlashPhotoApp::LoadImageToCanvas(void) {
-    PixelBuffer* copy =
-            ImageHandler::loadImage(io_manager_.file_browser()->get_file());
-    display_buffer_ = copy;
+    delete display_buffer_;
+    display_buffer_ = ImageHandler::loadImage(
+            io_manager_.file_browser()->get_file());
     UpdateScratch();
+    // std::cout << "DB w: " << display_buffer_->width() << ", DB h: " << DB
     BaseGfxApp::SetWindowDimensions(display_buffer_->width(),
                                   display_buffer_->height());
 }
@@ -180,7 +181,7 @@ void FlashPhotoApp::LoadImageToCanvas(void) {
 // Function that calls saveImage from ImageHandler
 void FlashPhotoApp::SaveCanvasToFile(void) {
      ImageHandler::saveImage(io_manager_.file_browser()->get_file(),
-                                                               display_buffer_);
+                             display_buffer_);
 }
 
 void FlashPhotoApp::InitGlui(void) {
