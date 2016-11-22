@@ -236,6 +236,7 @@ Overall, we feel that our filter design is successful. It is extensible, underst
 Below is the UML Diagram that illustrates our HistoryManager design.
 
 ###### Figure 2.1: UML diagram of HistoryManager
+![HistoryManager UML][HistoryManagerUML]
 
 
 The design we developed in order to implement the undo/redo feature revolves around maintaining a ring buffer. As you can see in Figure 2.2, when constructing the HistoryManager object, in our Init function, we create an array of pointers to PixelBuffers of size possible_saves_. possible_saves_ dictates how far back or how far forward one can undo or redo respectively. We also save the current, blank canvas to the first position in our array. If the array becomes full, we save the next PixelBuffer at position 0, which gives us the ring buffer structure. 
