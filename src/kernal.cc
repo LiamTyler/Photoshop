@@ -47,7 +47,7 @@ ColorData Kernal::ApplyKernal(PixelBuffer* oldimage, int start_x, int start_y) {
     int kern_mid_y = height_ / 2;
     ColorData total;
 
-    total = ColorData(0, 0, 0);
+    total = ColorData(0, 0, 0, 0);
     // Center the kernal over the pixel, and apply it by
     // getting the running total of pixel * intensity
     for (int kr = height_ - 1; kr >= 0; kr--) {
