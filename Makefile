@@ -81,7 +81,7 @@ endef
 # Specify the compiler flags to use when compiling. Note the use of fopenmp in
 # order to enable OpenMP pragmas in the code.
 define CXXFLAGS
-$(OPT) -g -W -Wall -Wextra -Weffc++ -Wshadow \
+$(OPT) -g -W -Werror -Wall -Wextra -Weffc++ -Wshadow \
 -Wold-style-cast -Wswitch-default -std=gnu++11 -Wno-unused-parameter $(CXXINCDIRS)
 endef
 

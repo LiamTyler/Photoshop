@@ -2,53 +2,61 @@
  * Name            : stamp.cc
  * Project         : BrushWork
  * Module          : tools
- * Description     : CC file for the stamp
+ * Description     : CC file for the TStamp
  * Copyright       : 2016 CSCI3081W Group Bits Please
  * Creation Date   : 11/20/16
  * Original Author : Group Bits Please
  *
  ******************************************************************************/
 
-#include <iostream>
-#include <iomanip>
-#include <cmath>
-#include "include/tool.h"
+#include "include/stamp_tool.h"
 #include "include/tool_utilities.h"
-#include "include/stamp.h"
 
 using image_tools::PixelBuffer;
 using image_tools::ColorData;
+using tool_utilities::CopyPixelBuffer;
 
-TStamp::TStamp(int width, int height) : Tool(width, height) {
-    tool_utilities::FillMask(this->get_mask(), height, width, 1.0);
+TStamp::TStamp() : Tool(1, 1),
+                   image_(nullptr) {}
+
+TStamp::~TStamp() {
+    if (image_)
+        delete image_;
 }
 
-TStamp::~TStamp() {}
 
 void TStamp::ApplyTool(PixelBuffer* buff, ColorData current_color,
                         int x, int y, int last_x, int last_y) {
-    PixelBuffer* image = image_;
-    int width = this->get_width();
-    int height = this->get_height();
+    if (image_ == nullptr || last_x != -1 || last_y != -1)
+        return;
 
-    int mid_x = width / 2;
-    int mid_y = height / 2;
-    int screen_h = buff->height();
-    int screen_w = buff->width();
+    // CopyPixelBuffer(image_, buff, x, buff->height() - y);
 
-    for (int step_y = 0; step_y < height; step_y++) {
-        for (int step_x = 0; step_x < width; step_x++) {
-            int cur_x = x + step_x - mid_x;
-            int cur_y = screen_h - (y + step_y - mid_y);
+    int f_w = image_->width();
+    int f_half_w = f_w / 2;
+    int f_h = image_->height();
+    int f_half_h = f_h / 2;
+    int t_width = buff->width();
+    int t_height = buff->height();
 
-            /* Check whether pixel will fit on the screen and
-            the alpha value of the pixel of the image being stamped */
-            if (cur_x >= 0 && cur_x < screen_w &&
-                cur_y >= 0 && cur_y < screen_h &&
-                image->get_pixel(step_x, step_y).alpha() == 1) {
-                    buff->set_pixel(cur_x, cur_y,
-                    image->get_pixel(step_x, step_y));
-            }
+    // Copy the actual pixels over into the buffer, now that it has the
+    // correct size and bg color
+    for (int r = 0; r < f_h; r++) {
+        for (int c = 0; c < f_w; c++) {
+            int nx = c + x - f_half_w;
+            int ny = r + t_height - y - f_half_h;
+            if (0 <= nx && nx < t_width && 0 <= ny && ny < t_height &&
+                    image_->get_pixel(c, r).get_alpha() != 0)
+                buff->set_pixel(nx, ny, image_->get_pixel(c, r));
         }
     }
+}
+
+void TStamp::LoadImage(PixelBuffer* l_img) {
+    if (image_ != nullptr)
+        delete image_;
+
+    image_ = l_img;
+    set_height(image_->height());
+    set_width(image_->width());
 }

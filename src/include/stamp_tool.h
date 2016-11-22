@@ -1,30 +1,34 @@
 /*******************************************************************************
- * Name            : stamp.h
- * Project         : BrushWork
+ * Name            : stamp_tool.h
+ * Project         : FlashPhoto
  * Module          : App
- * Description     : Header of stamp
- * Copyright       : 2016 CSCI3081W Team Bits Please. All rights reserved.
+ * Description     : Header of TStamp
+ * Copyright       : Group Bits Please
  * Creation Date   : 11/20/16
  * Original Author : Group Bits Please
  *
  ******************************************************************************/
 
-#ifndef SRC_INCLUDE_STAMP_H_
-#define SRC_INCLUDE_STAMP_H_
+#ifndef SRC_INCLUDE_STAMP_TOOL_H_
+#define SRC_INCLUDE_STAMP_TOOL_H_
 
 #include <string>
 #include "include/tool.h"
 
+using image_tools::PixelBuffer;
+
 class TStamp : public Tool {
  public:
-  TStamp(int width, int height);
+  TStamp();
   virtual ~TStamp();
-  void ApplyTool(image_tools::PixelBuffer* buff,
+  void LoadImage(PixelBuffer* l_img);
+  void ApplyTool(PixelBuffer* buff,
     image_tools::ColorData current_color, int x, int y, int last_x, int last_y);
   std::string name(void) { return "Stamp"; }
  private:
-  image_tools::PixelBuffer* image_;
-  void Init();
+  TStamp(const TStamp& t) = delete;
+  TStamp& operator=(const TStamp& t) = delete;
+  PixelBuffer* image_;
 };
 
-#endif  // SRC_INCLUDE_STAMP_H_
+#endif  // SRC_INCLUDE_STAMP_TOOL_H_
