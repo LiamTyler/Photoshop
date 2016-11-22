@@ -52,30 +52,10 @@ Notice how all the methods are virtual, and two of them are pure virtual. This c
 ###### Figure 2: The UML class diagram for the Filters.
 ![Filters UML diagram][FiltersUML]
 
-In order to describe the KernalFilter, the class definition is depicted in Figure 3 below so that it can be referenced in following descriptions.
-
-###### Figure 3: The KernalFilter class declaration (src/include/kernal_filter.h)
-```C++
-class KernalFilter : public Filter {
- public:
-  explicit KernalFilter(Kernal* kernal);
-  virtual ~KernalFilter();
-  virtual void ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage);
-  virtual std::string name(void) = 0;
+We will describe the KernalFilter first. The main goal of the KernalFilter is to achieve the convolution-based functionality. We approached the problem with the following mentality: "For each pixel in our display, the new pixel will be composed of its neighboring pixels. We wish to know which neighboring pixels, and how much of each of them to compose our new pixel with." To accomplish this, notice how the KernalFilter class has a Kernal object, whose class declaration is shown in Figure 3.
 
 
- private:
-  KernalFilter(const KernalFilter &f) = delete;
-  KernalFilter& operator=(const KernalFilter &f) = delete;
-  Kernal* kernal_;
-};
-
-```
- 
-The main goal of the KernalFilter is to achieve the convolution-based functionality. We approached the problem in the following way, "For each pixel in our display, the new pixel will be composed of its neighboring pixels. We wish to know which neighboring pixels, and how much of each of them to compose our new pixel with." To accomplish this, notice how the KernalFilter class has a Kernal object, which is shown in Figure 4.
-
-
-###### Figure 4: The Kernal class declaration (src/include/kernal.h)
+###### Figure 3: The Kernal class declaration (src/include/kernal.h)
 ```C++
 class Kernal {
  public:
@@ -104,56 +84,60 @@ class Kernal {
 
 ```
 
-The first key aspect of this class is the kernal_ member variable. The Kernal object is a similar to the Mask of Tools in iteration 1. It is composed of a two dimensional array of floats, which is pointed to by the kernal_ variable. Each element in the array is the percentage of that pixel we want for our final pixel. To better see this, observe the next key aspect of the Kernal class: the ApplyKernal method (shown in Figure 5 below).
+This class seems to have a lot going on, but boils down to a few main components. The first key aspect of this class is the kernal_ member variable. The Kernal object is a similar to the Mask of Tools in iteration 1. It is composed of a two dimensional array of floats, which is pointed to by the kernal_ variable. Each element in the array is the percentage of that pixel we want for our final pixel. To better see this, observe the next key aspect of the Kernal class: the ApplyKernal method (shown in Figure 4 below).
 
 
-###### Figure 5: The ApplyKernal method of the Kernal class (src/kernal.cc)
+###### Figure 4: The ApplyKernal method of the Kernal class (src/kernal.cc)
 ```C++
 ColorData Kernal::ApplyKernal(PixelBuffer* oldimage, int start_x, int start_y) {
     int buff_width = oldimage->width();
     int buff_height = oldimage->height();
     int kern_mid_x = width_ / 2;
     int kern_mid_y = height_ / 2;
-    ColorData total;
+    ColorData total, tmp;
 
-    total = ColorData(0, 0, 0);
-    // Center the kernal over the pixel, and apply it by
-    // getting the running total of pixel * intensity
+    total = ColorData(0, 0, 0, 0);
+    float max_alpha = 0;
     for (int kr = height_ - 1; kr >= 0; kr--) {
         for (int kc = 0; kc < width_; kc++) {
             int cur_x = start_x + kc - kern_mid_x;
             int cur_y = start_y + (height_ - 1) - kr - kern_mid_y;
             if (0 <= cur_x && cur_x < buff_width &&
                 0 <= cur_y && cur_y < buff_height) {
-                total = total + oldimage->get_pixel(cur_x, cur_y)
-                                * kernal_[kr][kc];
+                tmp = oldimage->get_pixel(cur_x, cur_y);
+                if (tmp.get_alpha() > max_alpha) {
+                    max_alpha = tmp.get_alpha();
+                }
+                total = total + tmp * kernal_[kr][kc];
             } else {
-                // If the pixel is off the screen,
-                // then use the nearest valid pixel
-                total = total +
-                        oldimage->get_pixel(
+                tmp = oldimage->get_pixel(
                         std::min(buff_width - 1, std::max(0, cur_x)),
-                        std::min(buff_height - 1, std::max(0, cur_y)))
-                        * kernal_[kr][kc];
+                        std::min(buff_height - 1, std::max(0, cur_y)));
+                if (tmp.get_alpha() > max_alpha)
+                    max_alpha = tmp.get_alpha();
+                total = total + tmp * kernal_[kr][kc];
             }
         }
     }
-    return total.clamped_color();
+    ColorData t = total.clamped_color();
+    t.alpha(max_alpha);
+    return t;
 }
+
 ```
 
-Notice that this method takes in the location of the pixel we are currently processing. It then centers the kernal_ array over that location, and loops through each pixel, adding that pixel's ColorData multiplied by the corresponding value in our array, and adds it to a running total. This is the value that is returned, which will become the pixel's ColorData on the newimage. The way we create the kernal array itself, is through the Kernal member function *InitializeKernal()*. The pure virtual InitalizeKernal method is the last key aspect to notice in Fig 4. Each filter that is convolution-based has its own kernal which defines the InitializeKernal method to give the filter it's appropriate functionality. To make this more clear, we can examine the BlurFilter.
+Notice that this method takes in the location of the pixel we are currently processing. It then centers the kernal_ array over that location, and loops through each pixel, adding that pixel's ColorData multiplied by the corresponding value in our array, and adds it to a running total. This is the value that is returned, which will become the pixel's ColorData on the newimage. The way we create the kernal array itself, is through the Kernal member function InitializeKernal(). The pure virtual InitalizeKernal method is the last key aspect to notice in Fig 3. Each filter that is convolution-based has its own kernal which defines the InitializeKernal method to give the filter it's appropriate functionality. To make this more clear, we can examine the BlurFilter.
 
-To blur a pixel, we average out all the colors within a certain radius of a pixel, and set that pixel equal to the average. Observe the implementation of BlurFilter in Figure 6 below.
+To blur a pixel, we average out all the colors within a certain radius of a pixel, and set that pixel equal to the average. Observe the implementation of BlurFilter in Figure 5 below.
 
-###### Figure 6: BlurKernal class definition (src/blur_kernal.cc)
+###### Figure 5: BlurKernal class definition (src/blur_kernal.cc)
 ```C++
 BlurFilter::BlurFilter(int amount) : KernalFilter(new BlurKernal(amount)) {}
 ```
 
-Notice how the only thing needed to create the filter is passing a BlurKernal to the parent KernalFilter class. To apply the kernal itself, there is no definition needed because the parent KernalFilter class already defines the ApplyFilter method as follows in Figure 7:
+Notice how the only thing needed to create the filter is passing a BlurKernal to the parent KernalFilter class. To apply the kernal itself, there is no definition needed because the parent KernalFilter class already defines the ApplyFilter method as follows in Figure 6:
 
-###### Figure 7: Default ApplyFilter method for KernalFilters (src/kernal_filter.cc)
+###### Figure 6: Default ApplyFilter method for KernalFilters (src/kernal_filter.cc)
 ```C++
 void KernalFilter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
     int buff_height = oldimage->height();
@@ -165,17 +149,17 @@ void KernalFilter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
 }
 ```
 
-For any filter class, the default method is to simply loop through all the pixels and apply the kernal to each pixel. The BlurKernal only overrides the InitializeKernal method as stated before. If we were to create a BlurKernal with a radius of 2, the two dimensional array would be as follows in Figure 8:
+For any filter class, the default method is to simply loop through all the pixels and apply the kernal to each pixel. The BlurKernal only overrides the InitializeKernal method as stated before. If we were to create a BlurKernal with a radius of 2, the two dimensional array would be as follows in Figure 7:
 
-###### Figure 8: Diagram of a BlurKernal with radius of 2.
+###### Figure 7: Diagram of a BlurKernal with radius of 2.
 ![BlurKernal result from InitializeKernal with radius of 2][BlurKernal]
 
 Notice how there are 13 pixels within a radius of 2 from the center, so when we apply the kernal as seen in Figure 5, it will return the pixel that is the average of all the pixels within a radius of 2 of the center pixel.
 
 
-In regards to the pixel-indepenedent filters, we designed them so that each filter derives from a SimpleFilter class depicted in the UML diagram in Figure 2. Notice how the ApplyFilter method is not pure virtual, but the ApplyToColor is. We designed it so that each filter has the same default ApplyFilter method as seen below in Figure 9.
+In regards to the pixel-indepenedent filters, we designed them so that each filter derives from a SimpleFilter class depicted in the UML diagram in Figure 2. Notice how the ApplyFilter method is not pure virtual, but the ApplyToColor is. We designed it so that each filter has the same default ApplyFilter method as seen below in Figure 8.
 
-###### Figure 9: ApplyFilter method definition for SimpleFilters (src/simple_filter.cc)
+###### Figure 8: ApplyFilter method definition for SimpleFilters (src/simple_filter.cc)
 ```C++
 void SimpleFilter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
     int buff_height = oldimage->height();
@@ -189,6 +173,7 @@ void SimpleFilter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
             newColor.red(ApplyToColor("red", current));
             newColor.green(ApplyToColor("green", current));
             newColor.blue(ApplyToColor("blue", current));
+            newColor.alpha(current.get_alpha());
             newimage->set_pixel(c, r, newColor);
         }
     }
@@ -201,9 +186,9 @@ As seen in the implementation, pixel-independent filters loop through each pixel
 
 The design above was created with an emphasis on the following goals: extensibility, understandability, and modularity. We believe that while the design may not be the best, it does a good job at meeting those goals. This section describes the advantages and disadvantages to our design, and proposes a couple alternatives.
 
-The first design we actually used to implement most of the project initially involved having the 2D array for the kernal object be a part of the KernalFilter class. That way there was no need to have another class for each and every KernalFilter created. We quickly found however, that it was not easy to understand. Figure 10 depicts the declaration for the KernalFilter class we had previously.
+The first design we actually used to implement most of the project initially involved having the 2D array for the kernal object be a part of the KernalFilter class. That way there was no need to have another class for each and every KernalFilter created. We quickly found however, that it was not easy to understand. Figure 9 depicts the declaration for the KernalFilter class we had previously.
 
-###### Figure 10: Alternative declaration for the KernalFiter class we initially used.
+###### Figure 9: Alternative declaration for the KernalFiter class we initially used.
 ```C++
 class KernalFilter : public Filter {
 public:
@@ -237,7 +222,7 @@ Another alternative we considered was not having a kernal object at all and buil
 
 Standing by itself, our final design has many advantages. Observe the BlurFilter definition presented earlier in Figure 6. It took only one line to create the BlurFilter. The simplicity of adding that is a large benefit. One could argue that we still had to create a whole BlurKernal class. While that is true, the base Kernal does most of the work in sizing and applying the kernal. To extend it to create a filter, only the InitializeKernal method needs to be defined, which is always going to have to be designed somewhere. Both the ApplyFilter and ApplyKernal methods are merely virtual. This allows for complex filters in the future to be defined, but for most filters, we don't have to write anything for those two methods, making it even more extensible. We felt that these advantages made our design a desirable one.
 
-The disadvantages of our design few. One is that there are many files to keep track of, and to add a convolution-based filter, it's likely that 4 new files need to be created. This admittingly, is a large concern. We felt that this is lessened by the fact that each file is usually very small. As seen in the definition of BlurFitler in Figure 6, it was literally one line. The kernal object for the filter only had to define one method. Then there are just two header files to declare, which are usually small. This makes this disadvantage not as impactful, and still easy to add new filters. Another disadvantage is that in our design, everytime a fitler is clicked in the GUI, the corresponding filter object is created at that time. Since it's not pre-computed, this means we have lower efficiency. Our reasoning for this is that most of the time, the parameters needed for the filter are going to change, so most of the work would have to be redone anyways. An example of that is the BlurFilter. If the blur amount changes from one call of it to the next, then the kernal would be remade anyways. By not having it resize or update, calling a new filter is merely two lines: construct the filter object, and apply it. This simplicity is desirable, and we did not notice a performance decrease. We actually do have the methods to implement this design already created, but we think our current design is desirable.
+The disadvantages of our design few. One is that there are many files to keep track of, and to add a convolution-based filter, it's likely that 4 new files need to be created. This admittingly, is a large concern. We felt that this is lessened by the fact that each file is usually very small. As seen in the definition of BlurFitler in Figure 5, it was literally one line. The kernal object for the filter only had to define one method. Then there are just two header files to declare, which are usually small. This makes this disadvantage not as impactful, and still easy to add new filters. Another disadvantage is that in our design, everytime a fitler is clicked in the GUI, the corresponding filter object is created at that time. Since it's not pre-computed, this means we have lower efficiency. Our reasoning for this is that most of the time, the parameters needed for the filter are going to change, so most of the work would have to be redone anyways. An example of that is the BlurFilter. If the blur amount changes from one call of it to the next, then the kernal would be remade anyways. By not having it resize or update, calling a new filter is merely two lines: construct the filter object, and apply it. This simplicity is desirable, and we did not notice a performance decrease. We actually do have the methods to implement this design already created, but we think our current design is desirable.
 
 Overall, we feel that our filter design is successful. It is extensible, understandable, and has high modularity, which is what we focused on. There may be a better design, but ours did achieve what we wanted it to.
 
