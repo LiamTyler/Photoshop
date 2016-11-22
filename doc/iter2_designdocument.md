@@ -565,6 +565,6 @@ Lastly, we decided to create a ResizeAndCopy method because we noticed that the 
 
       ```
 
-[HistoryManagerUML]: https://github.umn.edu/umn-csci-3081F16/repo-group-Bits-Please/blob/develop/doc/figures/HistoryManager.png
+[HistoryManagerUML]: https://github.umn.edu/umn-csci-3081F16/repo-group-Bits-Please/blob/develop/doc/figures/HistoryManagerNew.png
 [FiltersUML]: https://github.umn.edu/umn-csci-3081F16/repo-group-Bits-Please/blob/develop/doc/figures/Filter_UML.png
 [BlurKernal]: https://github.umn.edu/umn-csci-3081F16/repo-group-Bits-Please/blob/develop/doc/figures/BlurKernal.png

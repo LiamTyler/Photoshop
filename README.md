@@ -1,5 +1,9 @@
 # FlashPhoto
 
+# Special Filter:
+
+We made an emboss filter as our special filter.
+
 ## Coding guidelines
 In any large software project with multiple people contributing, having a
 consistent coding style throughout is vital to minimize miscommunications
