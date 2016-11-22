@@ -42,19 +42,23 @@ void FillMask(float** mask, int height, int width, float opacity) {
 }
 
 // Copy all of the pixels in the "from" buffer into the "to" buffer
-// at an optional positional offset
-void CopyPixelBuffer(PixelBuffer* from, PixelBuffer* to, int dx, int dy) {
-    int width = from->width();
-    int height = from->height();
+// also passing in the coordinates of where the "from" should be centered
+void CopyPixelBuffer(PixelBuffer* from, PixelBuffer* to, int x, int y) {
+    int f_w = from->width();
+    int f_half_w = f_w / 2;
+    int f_h = from->height();
+    int f_half_h = f_h / 2;
     int t_width = to->width();
     int t_height = to->height();
 
     // Copy the actual pixels over into the buffer, now that it has the
     // correct size and bg color
-    for (int r = 0; r < height; r++) {
-        for (int c = 0; c < width; c++) {
-            if (c < t_width && r < t_height)
-                to->set_pixel(c + dx, r + dy, from->get_pixel(c, r));
+    for (int r = 0; r < f_h; r++) {
+        for (int c = 0; c < f_w; c++) {
+            int nx = c + x - f_half_w;
+            int ny = r + y - f_half_h;
+            if (0 <= nx && nx < t_width && 0 <= ny && ny < t_height)
+                to->set_pixel(nx, ny, from->get_pixel(c, r));
         }
     }
 }

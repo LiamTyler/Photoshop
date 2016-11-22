@@ -65,7 +65,7 @@ void HistoryManager::SaveCanvas(PixelBuffer* buff) {
         curr = new PixelBuffer(width, height, bg);
     }
 
-    CopyPixelBuffer(buff, curr, 0, 0);
+    CopyPixelBuffer(buff, curr, width / 2, height / 2);
 
     saved_buffers_[current_save_] = curr;
 }
@@ -106,7 +106,7 @@ PixelBuffer* HistoryManager::ResizeAndCopy(PixelBuffer* display) {
         display = new PixelBuffer(c_width, c_height, bg);
     }
 
-    CopyPixelBuffer(curr, display, 0, 0);
+    CopyPixelBuffer(curr, display, c_width / 2, c_height / 2);
 
     return display;
 }

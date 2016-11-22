@@ -30,9 +30,7 @@ void TStamp::ApplyTool(PixelBuffer* buff, ColorData current_color,
     if (image_ == nullptr || last_x != -1 || last_y != -1)
         return;
 
-    int half_w = image_->width() / 2;
-    int half_h = image_->height() / 2;
-    CopyPixelBuffer(image_, buff, x - half_w, buff->height() - y - half_h);
+    CopyPixelBuffer(image_, buff, x, buff->height() - y);
 }
 
 void TStamp::LoadImage(PixelBuffer* l_img) {
