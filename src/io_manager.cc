@@ -160,6 +160,8 @@ void IOManager::SaveCanvasToFile(const PixelBuffer* bufferToSave) {
     // Decides whether the file is PNG or JPEG. Sends to appropriate handler.
     if (has_suffix(file_name_, ".jpg")) {
         IJPGHandler::SaveImage(file_name_, bufferToSave);
+    } else if (has_suffix(file_name_, ".jpeg")) {
+        IJPGHandler::SaveImage(file_name_, bufferToSave);
     } else if (has_suffix(file_name_, ".png")) {
         IPNGHandler::SaveImage(file_name_, bufferToSave);
     }

@@ -45,9 +45,10 @@ ColorData Kernal::ApplyKernal(PixelBuffer* oldimage, int start_x, int start_y) {
     int buff_height = oldimage->height();
     int kern_mid_x = width_ / 2;
     int kern_mid_y = height_ / 2;
-    ColorData total;
+    ColorData total, tmp;
 
     total = ColorData(0, 0, 0, 0);
+    float max_alpha = 0;
     // Center the kernal over the pixel, and apply it by
     // getting the running total of pixel * intensity
     for (int kr = height_ - 1; kr >= 0; kr--) {
@@ -56,18 +57,25 @@ ColorData Kernal::ApplyKernal(PixelBuffer* oldimage, int start_x, int start_y) {
             int cur_y = start_y + (height_ - 1) - kr - kern_mid_y;
             if (0 <= cur_x && cur_x < buff_width &&
                 0 <= cur_y && cur_y < buff_height) {
-                total = total + oldimage->get_pixel(cur_x, cur_y)
-                                * kernal_[kr][kc];
+                tmp = oldimage->get_pixel(cur_x, cur_y) * kernal_[kr][kc];
+                if (tmp.get_alpha() > max_alpha) {
+                    max_alpha = tmp.get_alpha();
+                }
+                total = total + tmp;
+
             } else {
-                total = total +
-                        oldimage->get_pixel(
+                tmp = oldimage->get_pixel(
                         std::min(buff_width - 1, std::max(0, cur_x)),
                         std::min(buff_height - 1, std::max(0, cur_y)))
                         * kernal_[kr][kc];
+                if (tmp.get_alpha() > max_alpha)
+                    max_alpha = tmp.get_alpha();
+                total = total + tmp;
             }
         }
     }
     // total = total* (height_ * width_ / applied);
+    total.alpha(max_alpha);
     return total.clamped_color();
     // std::cout << "Pixel at (" << r << "," << c << "): "
     // << total.clamped_color() << std::endl;
