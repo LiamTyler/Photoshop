@@ -247,8 +247,7 @@ void HistoryManager::Init(PixelBuffer* buff) {
     SaveCanvas(buff);
     oldest_save_ = 0;
 }
-
-  ```
+```
 
 The HistoryManager class has a SaveCanvas method, as seen in Figure 2.3, which gets called each time a filter is applied, an image gets loaded in as the canvas, and the mouse is released. If the next pointer in our ring buffer points to a non-null PixelBuffer, and it's width and height do not match the display (buff) that we are saving, then we delete it, and allocate a new one to the correct size. We also allocate a new PixelBuffer to the according size if the ring buffer currently points to a null value. Then, we copy the current display PixelBuffer we want to save into that PixelBuffer in our ringed buffer.
 
@@ -275,15 +274,11 @@ void HistoryManager::SaveCanvas(PixelBuffer* buff) {
         curr = new PixelBuffer(width, height, bg);
     }
 
-    // Copy the actual pixels over into the buffer, now that it has the
-    // correct size and bg color
-    for (int r = 0; r < height; r++)
-        for (int c = 0; c < width; c++)
-            curr->set_pixel(r, c, buff->get_pixel(r, c));
+    CopyPixelBuffer(buff, curr, width / 2, height / 2);
+
     saved_buffers_[current_save_] = curr;
 }
-
-  ```
+```
 
 For obvious reasons, we have Undo and Redo methods, shown in Figure 2.4, which get called when the Undo and Redo buttons are pressed. If there is a canvas available at the position in the array before the current canvas being displayed, the user can use Undo, and that PixelBuffer gets copied, returned, and set as the display_buffer_. The only difference in Redo is that we copy the PixelBuffer pointed to by the next pointer in the ring buffer, if available.
 
@@ -295,6 +290,9 @@ PixelBuffer* HistoryManager::Undo(PixelBuffer* display) {
         return display;
 
     current_save_ = (current_save_ - 1) % possible_saves_;
+    if (current_save_ == -1)
+        current_save_ = possible_saves_ - 1;
+    
     return ResizeAndCopy(display);
 }
 
@@ -306,8 +304,7 @@ PixelBuffer* HistoryManager::Redo(PixelBuffer* display) {
     current_save_ = (current_save_ + 1) % possible_saves_;
     return ResizeAndCopy(display);
 }
-
-  ```
+```
 
 We keep track of three values that allow us to correctly allow or disallow the use of the Undo and Redo methods. These values are current_save_, oldest_save_, and newest_save_. We mod these values with possible_saves_ in order to wrap around our ring buffer. The current_save_ is the index of the array which contains the pointer to the current PixelBuffer being displayed. When SaveCanvas is called, we add 1 to current_save_ and set newest_save_ to the value of current_save_, as seen in Figure 2.5, since that save is now the newest. To clarify, newest_save_ is not always the same as current_save_. For instance, if there are 10 PixelBuffers in saved_buffers_ and one decides to use the undo function 3 times, newest_save_ will be 9 while curent_save_ will be 6. If current_save_ == oldest_save, we have wrapped around the entire ring buffer and need to add 1 to the oldest_save_, as shown in Figure 2.5. For examples, if we have possible_saves_ set to 10 and current_save_ becomes 10, we set the value of current_save_ to 0 since 10 mod 10 is equal to 0. If oldest_save_ was also 0, we must now add 1, so oldest_save_ is now 1. The previous oldest_save_ is lost, which is fine since, at most, we only need to be able to undo or redo possible_saves_ times.
 
@@ -323,13 +320,11 @@ void HistoryManager::SaveCanvas(PixelBuffer* buff) {
     ...
     
 }
-
-
-  ```
+```
   
-If current_save_ is equal to newest_save_, the user cannot Redo, which can be seen above, in Figure 2.4. Likewise, if current_save_ is equal to oldest_save_, the user cannot Undo. An important thing to note is that if a user clicks Undo, and then performs an action, like drawing a line, the canvas gets saved and newest_save_ gets set to current_save_. This means that Redo is now disabled and the user can never get back to the initial canvas that he clicked Undo from.
+If current_save_ is equal to newest_save_, the user cannot Redo, which can be seen above, in Figure 2.4. Likewise, if current_save_ is equal to oldest_save_, the user cannot Undo. An important thing to note is that if a user clicks Undo, and then performs an action, like drawing a line, the canvas gets saved and newest_save_ gets set to current_save_. This means that Redo is now disabled and the user can never get back to the initial canvas that he clicked Undo from. The actual disabling of the button to undo / redo is outside the scope of HistoryManager, and we implemented it in state_manager.cc
 
-One additional function we made is ResizeAndCopy, which can be seen in Figure 2.6, below. This functions determines whether a saved PixelBuffer and the PixelBuffer we want to display have the same dimensions. If they differ, one will be created in the correct size. Then, we copy the saved PixelBuffer onto the PixelBuffer we are going to return and display.
+One additional function we made is ResizeAndCopy, which can be seen in Figure 2.6, below. This functions determines whether a saved PixelBuffer and the PixelBuffer we want to display have the same dimensions. If they differ, one will be created in the correct size. Then, we then center the PixelBuffer onto the PixelBuffer we are going to return, and copy it over via a CopyPixelBuffer function implemented separately.
 
 ###### Figure 2.6: ResizeAndCopy function in History Manager (src/history_manager.cc)
   ```C++
@@ -343,28 +338,24 @@ PixelBuffer* HistoryManager::ResizeAndCopy(PixelBuffer* display) {
 
     // Check to see if current display is the same dimensions
     // as the saved one. If so, no need to resize it.
-    if (c_width != d_width || c_height == d_height) {
+    if (c_width != d_width || c_height != d_height) {
         delete display;
         display = new PixelBuffer(c_width, c_height, bg);
     }
 
-    // Now copy the saved buff into the display one
-    for (int r = 0; r < c_height; r++)
-        for (int c = 0; c < c_width; c++)
-            display->set_pixel(r, c, curr->get_pixel(r, c));
+    CopyPixelBuffer(curr, display, c_width / 2, c_height / 2);
 
     return display;
 }
-
-
-
-  ```
+```
 
 ### 2.2 Design Justification
 
 One decision we had to make was what to save. We decided it would be best to store entire PixelBuffers in an array rather than attempt to save a certain action, like a drawn line.  With the variablilty of the strokes, filters, etc., it is much simpler to save a copy of the PixelBuffer and store it in an array. PixelBuffers are small enough that we can store many instances of them in memory. 
 
-As a group, we decided that a ring buffer would be the best design for our HistoryManager class because it was the simplest design we came up with. An alternative we discussed involved using two stacks, rather than a ring buffer. We would have pushed PixelBuffers onto one stack as we saved them. When the user clicked Undo, we would pop a PixelBuffer off of one stack, and push it onto the other. Then, if a user clicked Redo, we would pop the PixelBuffer off of the second stack and push it back onto the first stack.
+As a group, we decided that a ring buffer would be the best design for our HistoryManager class because it was the simplest design we came up with. This is the biggest advantage to our design. All we had to use was an array, and 3 integers. As seen in Figure 2.4, undo and redo are merely an if statement and a return. No need to think about stacks, or any complicated data structures. Simplicity always has high value, and we felt that this design is the easiest to read and understand.
+
+An alternative we discussed involved using two stacks, rather than a ring buffer. We would have pushed PixelBuffers onto one stack as we saved them. When the user clicked Undo, we would pop a PixelBuffer off of one stack, and push it onto the other. Then, if a user clicked Redo, we would pop the PixelBuffer off of the second stack and push it back onto the first stack.
 
 We saw two challenges with the two stack design that were easily handled with our ring buffer design. The first was that we would have to somehow make sure there was always a blank PixelBuffer at the bottom of the first stack, even if a user clicked Undo all the way back to that PixelBuffer. In our ring buffer design, we have a blank PixelBuffer in the first position of our array, and it never changes. None of the PixelBuffers in our array get changed as we Undo and Redo because they simply get copied over to the display_buffer_.
 
