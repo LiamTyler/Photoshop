@@ -33,7 +33,7 @@ Bits Please
 > First, in the **Design Description** section below, describe the design you developed to address this challenge. We expect that you will include at least one figure showing the relationships of the classes affected by your design. Second, in the **Design Justification** section below present the most compelling argument you can for why this design is justified.  Note that our expectation is that you will need to discuss the pros (and maybe cons) of your final design as compared to alternative designs that you discussed in your group in order to make a strong case for justifying your design.
 
 ### 1.1 Design Description
-Our design at the highest level of abastraction views applying any filter as the same operation-- something that takes in the current screen, and creates a new image to be displayed by applying the filter to the old image. To implement this, we created an abstract class as seen in Figure 1 for all filters to derive from.
+Our design at the highest level of abstraction views applying any filter as the same operation-- an operation that takes in the current screen, and creates a new image to be displayed by applying the filter to the current screem. To implement this, we created an abstract class as seen in Figure 1 for all filters to derive from.
 
 
 ###### Figure 1: Class declaration of the base Filter class (src/include/filter.h)
