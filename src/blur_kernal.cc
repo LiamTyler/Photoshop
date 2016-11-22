@@ -12,8 +12,9 @@
 #include "include/blur_kernal.h"
 #include "include/tool_utilities.h"
 
-BlurKernal::BlurKernal(int amount) : Kernal(amount * 2 + 1, amount * 2 + 1),
-                                     amount_(amount * 2 + 1) {
+BlurKernal::BlurKernal(int amount) : Kernal(amount / 2 * 2 + 1,
+                                            amount / 2 * 2 + 1),
+                                     amount_(amount / 2 * 2 + 1) {
     InitializeKernal();
 }
 
