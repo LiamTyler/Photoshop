@@ -18,6 +18,9 @@
 #include <string>
 #include "GL/glui.h"
 #include "include/ui_ctrl.h"
+#include "include/pixel_buffer.h"
+
+using image_tools::PixelBuffer;
 
 /*******************************************************************************
  * Namespaces
@@ -85,7 +88,7 @@ class IOManager {
    * @brief Save the current state of the canvas to a file
    *
    */
-  void SaveCanvasToFile(void);
+  void SaveCanvasToFile(const PixelBuffer* buff);
 
  private:
   /* Copy/move assignment/construction disallowed */

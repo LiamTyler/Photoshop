@@ -15,6 +15,7 @@
 
 #include "include/ipng_handler.h"
 #include "include/ijpg_handler.h"
+#include "include/io_manager.h"
 
 using image_tools::ColorData;
 using image_tools::PixelBuffer;

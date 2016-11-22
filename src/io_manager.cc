@@ -15,6 +15,8 @@
 #include "include/io_manager.h"
 #include <iostream>
 #include "include/ui_ctrl.h"
+#include "include/ipng_handler.h"
+#include "include/ijpg_handler.h"
 
 /*******************************************************************************
  * Namespaces
@@ -150,9 +152,18 @@ void IOManager::LoadImageToStamp(void) {
       file_name_ << std::endl;
 }
 
-void IOManager::SaveCanvasToFile(void) {
-  std::cout << "Save Canvas been clicked for file " <<
-      file_name_ << std::endl;
+void IOManager::SaveCanvasToFile(const PixelBuffer* bufferToSave) {
+    std::cout << "Save Canvas been clicked for file " <<
+    file_name_ << std::endl;
+
+
+    // Decides whether the file is PNG or JPEG. Sends to appropriate handler.
+    if (has_suffix(file_name_, ".jpg")) {
+        IJPGHandler::saveImage(file_name_, bufferToSave);
+    } else if (has_suffix(file_name_, ".png")) {
+        IPNGHandler::saveImage(file_name_, bufferToSave);
+    }
 }
+
 
 }  /* namespace image_tools */

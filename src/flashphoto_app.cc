@@ -351,8 +351,9 @@ void FlashPhotoApp::GluiControl(int control_id) {
             }
             break;
         case UICtrl::UI_SAVE_CANVAS_BUTTON:
-            io_manager_.SaveCanvasToFile();
+            io_manager_.SaveCanvasToFile(display_buffer_);
             // Reload the current directory:
+            // SaveCanvasToFile();
             io_manager_.file_browser()->fbreaddir(".");
             break;
         case UICtrl::UI_FILE_NAME:
