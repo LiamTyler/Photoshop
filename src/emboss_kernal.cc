@@ -21,21 +21,21 @@ void EmbossKernal::InitializeKernal() {
     int height = get_height();
     float** kern = get_kernal();
 
+    // Create a kernal that will give the image a shadowy, etched look
     for (int r = 0; r < height; r++) {
         for (int c = 0; c < width; c++) {
+            // Set values in the upper left corner of the kernal
+            // to -1
             if (c < r) {
                 kern[r][c] = -1.0;
+            // Set values in the lower right corner of the kernal
+            // to 1
             } else if (r < c) {
                 kern[r][c] = 1.0;
+            // Set values along the diagonal to 0
             } else {
                 kern[r][c] = 0;
             }
         }
     }
-//    for (int r = height - 1; r >= 0; r--) {
-//        for (int c = 0; c < width; c++) {
-//            std::cout << kern[r][c] << " ";
-//        }
-//        std::cout << "" << std::endl;
-//    }
 }

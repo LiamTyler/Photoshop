@@ -25,6 +25,8 @@ ChannelsFilter::~ChannelsFilter() {}
 float ChannelsFilter::ApplyToColor(std::string color,
                                    const ColorData& current) {
     float c;
+    // Multiply the current color by the value passed in for
+    // that color's channel
     if (color == "red")
         c = current.red() * red_channel_;
     else if (color == "green")

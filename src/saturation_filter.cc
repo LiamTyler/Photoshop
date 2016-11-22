@@ -27,6 +27,9 @@ float SaturationFilter::ApplyToColor(std::string color,
     float lum;
     lum = current.luminance();
 
+    // Find the luminance of the current color, set the new color
+    // to a combination of some amount of the luminance and some
+    // amount of the current color, based on amount_
     if (color == "red")
         c = (lum * (1.0 - amount_)) + (current.red() * amount_);
     else if (color == "green")
