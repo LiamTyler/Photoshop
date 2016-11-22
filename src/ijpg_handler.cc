@@ -8,10 +8,10 @@
  * Original Author : Group Bits Please
  *
  ******************************************************************************/
+
+#include "include/ijpg_handler.h"
 #include <iostream>
 #include <cstdlib>
-#include "include/ijpg_handler.h"
-
 #include "include/pixel_buffer.h"
 #include "include/color_data.h"
 
@@ -53,6 +53,9 @@ PixelBuffer* IJPGHandler::loadImage(const std::string fileName) {
     (void) jpeg_read_header(&cinfo, TRUE);
 
     (void) jpeg_start_decompress(&cinfo);
+
+    std::cout << "loading width: " << cinfo.output_width <<
+        ", loading height: " << cinfo.output_height << std::endl;
 
     loadedImageBuffer = new PixelBuffer(cinfo.output_width,
                                         cinfo.output_height,

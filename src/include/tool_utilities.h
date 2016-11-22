@@ -12,9 +12,14 @@
  *
  ******************************************************************************/
 
+#include "include/pixel_buffer.h"
+
+using image_tools::PixelBuffer;
+
 namespace tool_utilities {
     void CreateCircle(float** mask, int height, int width, float radius);
     void FillMask(float** mask, int height, int width, float opacity);
+    void CopyPixelBuffer(PixelBuffer* from, PixelBuffer* to, int dx, int dy);
 }
 
 #endif  // SRC_INCLUDE_TOOL_UTILITIES_H_

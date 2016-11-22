@@ -11,9 +11,11 @@
 
 #include "include/history_manager.h"
 #include "include/color_data.h"
+#include "include/tool_utilities.h"
 
 using image_tools::ColorData;
 using image_tools::PixelBuffer;
+using tool_utilities::CopyPixelBuffer;
 
 HistoryManager::HistoryManager(PixelBuffer* buff, int possible_saves) :
                                 saved_buffers_(nullptr),
@@ -31,7 +33,10 @@ HistoryManager::~HistoryManager() {
 }
 
 void HistoryManager::Init(PixelBuffer* buff) {
-    saved_buffers_ = new PixelBuffer*[possible_saves_]();
+    saved_buffers_ = new PixelBuffer*[possible_saves_];
+    for (int i = 0; i < possible_saves_; i++)
+        saved_buffers_[i] = nullptr;
+
     SaveCanvas(buff);
     oldest_save_ = 0;
 }
@@ -44,7 +49,7 @@ void HistoryManager::SaveCanvas(PixelBuffer* buff) {
         oldest_save_ = (oldest_save_ + 1) % possible_saves_;
 
     int width = buff->width();
-    int height = buff->width();
+    int height = buff->height();
     ColorData bg = buff->background_color();
     PixelBuffer* curr = saved_buffers_[current_save_];
     // Delete the current pixelbuffer in this spot if there is and old one,
@@ -60,11 +65,8 @@ void HistoryManager::SaveCanvas(PixelBuffer* buff) {
         curr = new PixelBuffer(width, height, bg);
     }
 
-    // Copy the actual pixels over into the buffer, now that it has the
-    // correct size and bg color
-    for (int r = 0; r < height; r++)
-        for (int c = 0; c < width; c++)
-            curr->set_pixel(r, c, buff->get_pixel(r, c));
+    CopyPixelBuffer(buff, curr, 0, 0);
+
     saved_buffers_[current_save_] = curr;
 }
 
@@ -83,6 +85,9 @@ PixelBuffer* HistoryManager::Undo(PixelBuffer* display) {
         return display;
 
     current_save_ = (current_save_ - 1) % possible_saves_;
+    if (current_save_ == -1)
+        current_save_ = possible_saves_ - 1;
+
     return ResizeAndCopy(display);
 }
 
@@ -96,15 +101,12 @@ PixelBuffer* HistoryManager::ResizeAndCopy(PixelBuffer* display) {
 
     // Check to see if current display is the same dimensions
     // as the saved one. If so, no need to resize it.
-    if (c_width != d_width || c_height == d_height) {
+    if (c_width != d_width || c_height != d_height) {
         delete display;
         display = new PixelBuffer(c_width, c_height, bg);
     }
 
-    // Now copy the saved buff into the display one
-    for (int r = 0; r < c_height; r++)
-        for (int c = 0; c < c_width; c++)
-            display->set_pixel(r, c, curr->get_pixel(r, c));
+    CopyPixelBuffer(curr, display, 0, 0);
 
     return display;
 }

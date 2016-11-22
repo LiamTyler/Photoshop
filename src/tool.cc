@@ -64,15 +64,3 @@ void Tool::ApplyTool(PixelBuffer* buff, ColorData current_color,
         }
     }
 }
-
-int Tool::get_width() {
-    return width_;
-}
-
-int Tool::get_height() {
-    return height_;
-}
-
-float** Tool::get_mask() {
-    return mask_;
-}

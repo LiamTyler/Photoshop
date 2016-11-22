@@ -42,19 +42,19 @@ void StateManager::InitGlui(const GLUI *const glui,
   history_ = new HistoryManager(display, 50);
   undo_btn_ = new GLUI_Button(const_cast<GLUI*>(glui), "Undo", UICtrl::UI_UNDO,
                               s_gluicallback);
-  undo_toggle(true);
+  undo_toggle(false);
 
   redo_btn_  = new GLUI_Button(const_cast<GLUI*>(glui), "Redo", UICtrl::UI_REDO,
                                s_gluicallback);
-  redo_toggle(true);
+  redo_toggle(false);
 }
 
 void StateManager::Save(PixelBuffer* display) {
     history_->SaveCanvas(display);
     if (history_->cant_redo())
         redo_toggle(false);
-    if (history_->cant_undo())
-        undo_toggle(false);
+    if (!history_->cant_undo())
+        undo_toggle(true);
 }
 
 PixelBuffer* StateManager::UndoOperation(PixelBuffer* display) {

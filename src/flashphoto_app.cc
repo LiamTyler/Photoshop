@@ -24,6 +24,7 @@
 #include "include/tool_factory.h"
 #include "include/image_handler.h"
 #include "include/io_manager.h"
+#include "include/stamp_tool.h"
 
 using std::cout;
 using std::endl;
@@ -185,7 +186,6 @@ void FlashPhotoApp::InitGlui(void) {
         // Create interface buttons for different tools:
         for (int i = 0; i < ToolFactory::num_tools(); i++)
             new GLUI_RadioButton(radio, tools_[i]->name().c_str());
-        // new GLUI_RadioButton(radio, "Stamp");
     }
 
     GLUI_Panel *color_panel = new GLUI_Panel(glui(), "Tool Color");
@@ -324,9 +324,16 @@ void FlashPhotoApp::GluiControl(int control_id) {
         case UICtrl::UI_LOAD_CANVAS_BUTTON:
             io_manager_.LoadImageToCanvas();
             LoadImageToCanvas();
+            state_manager_.Save(display_buffer_);
             break;
         case UICtrl::UI_LOAD_STAMP_BUTTON:
-            io_manager_.LoadImageToStamp();
+            {
+                io_manager_.LoadImageToStamp();
+                TStamp* t = dynamic_cast<TStamp*>(
+                        tools_[ToolFactory::TOOLS::TOOL_STAMP]);
+                t->LoadImage(ImageHandler::loadImage(
+                            io_manager_.file_browser()->get_file()));
+            }
             break;
         case UICtrl::UI_SAVE_CANVAS_BUTTON:
             io_manager_.SaveCanvasToFile();
@@ -338,9 +345,13 @@ void FlashPhotoApp::GluiControl(int control_id) {
             break;
         case UICtrl::UI_UNDO:
             display_buffer_ = state_manager_.UndoOperation(display_buffer_);
+            BaseGfxApp::SetWindowDimensions(display_buffer_->width(),
+                                            display_buffer_->height());
             break;
         case UICtrl::UI_REDO:
             display_buffer_ = state_manager_.RedoOperation(display_buffer_);
+            BaseGfxApp::SetWindowDimensions(display_buffer_->width(),
+                                            display_buffer_->height());
             break;
         default:
             break;
