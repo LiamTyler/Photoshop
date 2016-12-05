@@ -18,7 +18,7 @@
 #include <string>
 #include "GL/glui.h"
 /* FIXME: ADDITIONAL INCLUDES AS NECESSARY HERE :-) */
-#include "app/MIA/src/include/ui_ctrl.h"
+#include "lib/libimgtools/src/include/ui_ctrl.h"
 
 
 /*******************************************************************************

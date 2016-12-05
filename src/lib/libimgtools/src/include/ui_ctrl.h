@@ -9,8 +9,8 @@
  *
  ******************************************************************************/
 
-#ifndef SRC_INCLUDE_UI_CTRL_H_
-#define SRC_INCLUDE_UI_CTRL_H_
+#ifndef COMMON_FILES_PUT_THESE_SOMEWHERE_INCLUDE_UI_CTRL_H_
+#define COMMON_FILES_PUT_THESE_SOMEWHERE_INCLUDE_UI_CTRL_H_
 
 /*******************************************************************************
  * Includes
@@ -61,7 +61,9 @@ class UICtrl {
     UI_APPLY_SPECIAL_FILTER,
     UI_UNDO,
     UI_REDO,
-    UI_QUIT
+    UI_QUIT,
+    UI_NEXT_IMAGE_BUTTON,
+    UI_PREV_IMAGE_BUTTON
   };
   /**
    * @brief The available directions for motion blurring.
@@ -77,4 +79,4 @@ class UICtrl {
 
 }  /* namespace image_tools */
 
-#endif  /* SRC_INCLUDE_UI_CTRL_H_ */
+#endif  /* COMMON_FILES_PUT_THESE_SOMEWHERE_INCLUDE_UI_CTRL_H_ */

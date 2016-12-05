@@ -98,7 +98,7 @@ void MIAApp::InitGlui(void) {
   }
 
   /* Initialize state management (undo, redo, quit) */
-  state_manager_.InitGlui(glui(), s_gluicallback);
+  state_manager_.InitGlui(glui(), s_gluicallback, display_buffer_);
 
   new GLUI_Button(const_cast<GLUI*>(glui()),
                   "Quit", UICtrl::UI_QUIT,
@@ -162,10 +162,10 @@ void MIAApp::GluiControl(int control_id) {
       io_manager_.set_image_file(io_manager_.file_name());
       break;
     case UICtrl::UI_UNDO:
-      state_manager_.UndoOperation();
+      state_manager_.UndoOperation(display_buffer_);
       break;
     case UICtrl::UI_REDO:
-      state_manager_.RedoOperation();
+      state_manager_.RedoOperation(display_buffer_);
       break;
     default:
       break;
