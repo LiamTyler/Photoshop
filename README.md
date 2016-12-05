@@ -1,8 +1,4 @@
-# FlashPhoto
-
-# Special Filter:
-
-We made an emboss filter as our special filter.
+# Image Processing Suite
 
 ## Coding guidelines
 In any large software project with multiple people contributing, having a
@@ -48,128 +44,80 @@ for things like:
 This is not an exhaustive list of what we will be checking for, so please read
 the Google C++ style guide!
 
-## Documenting your code
-Students, you do not need to worry about documenting the code with doxygen style
-comments until iteration 3. However, I would encourage you to document as you
-go, to avoid having to document EVERYTHING all at once for iteration 3.
+## Documentation Task
+For this iteration you will need to document your code using doxygen style
+comments for the following elements:
 
-This does NOT mean that you can submit code without any comments for iteration 1
-and 2. We will be expecting reasonable class, function, variable, and
-algorithmic comments. If you have questions on the level we are expecting, look
-at the iteration 1/iteration 2 base code. If you still have questions, see John.
+- Class declarations .h files
+- Function declarations (not definitions) in .h files
+- Function definitions (if defined in .h file)
+- Member variable declarations
+- Enum declarations
+- Struct declarations
 
-## Configuring your project
-Configuration (via autotools or some other framework) is how a large project
-bootstraps itself; that is, figures out how to build itself on a given
-platform. For us, this means figuring out how to build the external libraries on
-your machine. Configuration only happens once, after you checkout something from git.
+Hopefully you have been commenting your code in the above ways as you have been
+going along, and you just need to convert it to the doxygen format. If not, this
+is a good exercise in writing for computer science, in that how to explain a
+large and/or complex class in a few succinct sentences is a very valuable
+skill. Plus, it will enhance your own understanding of what you have created.
 
-In the config folder, we have given you a configuration script that takes care
-of configuring FlashPhoto, libpng, and libjpeg. To configure the project you do:
+For examples of the doxygen comment format you can either google it, or look at
+any of the support code we have provided you for iteration 1, 2, or 3 (all 3
+have doxygen style comments).
+
+To generate documentation under `doc/`, do the following:
+
+    make documentation
+
+## Application Task
+
+You will need to use your refactored libraries to bring FlashPhoto to life once
+again, and to also power a new application, MIA.
+
+## Build Process Task
+We have given you the directory structure for libapp, libimgtools, and the
+FlashPhoto and MIA applications, as well as Makefiles to build them. However, in
+the case of libimgtools and libapp, you will need to fill in the Makefile target
+for creating a static (.a library). This is a 1 line change but a very important
+one!
+
+*You should not need to modify the build process (i.e. the Makefiles) at all
+other than this (if you follow conventions discussed in class for organizing
+source code), but if you do, make sure we can still type 'make' after
+configuration and the project will build.*
+
+*IMPORTANT*
+
+To build iteration 3 using our build process, you will need to do the following
+(assuming you have filled in the library targets):
 
     cd config
     ./configure --enable-shared=no --prefix=`realpath ../ext`
+    cd ..
+    mkdir build
 
-Those lines do the following:
+If you forget the last step, the build process will fail with very strange
+errors. If successful, you will get a set of subdirectories under `build`:
 
-1. Configure FlashPhoto project to build. This does nothing, because
-   FlashPhoto does not require any platform-specific configuration.
-2. Configure the PNG and JPEG libraries so that they can be built on the current
-   platform.
-3. Configure the PNG and JPEG libraries so they can be installed to where your
-   Makefile will look for them. (we chose ../ext via the --prefix argument),
-   though it can be anywhere.
+- libimgtools
 
-You should *not* have to modify anything in the config/ directory in order to have
-a successfully working configuration/build process. However, if you would like
-to augment the configuration process in some way, take care, as it is MUCH
-trickier than using make. So if you have questions, please ask John.
+- FlashPhoto
 
-However, you do not need to use the script we provide you; it is perfectly
-acceptable for your configuration process to consist of going to each external
-library directory and running ./configure. However, whatever your configuration
-process is, you *MUST* document it in your README. Documentation of both the
-configuration and the build process is a vital part of any project, so if we
-cannot configure your project based on what is in your README, you will receive
-a zero for this part of the grade.
+- MIA
 
-Generally speaking, configuration is a separate step from building, so the
-configuration process should never be part of the Makefile. Just like
-separatation of functionality when building classes, we will be checking that
-you do not call the configuration script anywhere in your Makefile.
+Each containing an `obj` directory with all the object files used to build them,
+and either a `lib` directory containing the compiled library, or a `bin`
+directory containing the compiled executable.
 
-## Makefile hints
+To get things to appear under `build/bin`, instead of
+`build/MIA/bin/MIA`, for example, you will need to also run the following
+command:
 
-In order be able to compile the .cc files that include header files from the
-external libraries, you will need to add the following to your compiler flags
-(assuming all libraries live under ./ext):
+    make install
 
-    -isystem./ext/glui/include -isystem./ext/jpeg-9a -isystem./ext/libpng-1.6.16
-
-Note that the -isystem flag suppresses all compiler warnings from any includes
-found in any of the specified directories. This is OK, as these are external
-libraries which you will never modify.
-
-When compiling our support/base code, you must pass the following compiler flag:
-
-    -std=c++11
-
-so that certain C++11 definitions are allowed by the compiler. C++11 is
-available on g++ 4.9, which is available on all lab computers.
-
-In addition, we suggest you use the following set of compile flags in your
-Makefile:
-
-    -W -Wall -Wextra -Weffc++ -std=c++11
-
-Compiling with all compiler warnings enabled as above will help reduce the
-amount of headaches you have to endure for overlooking something simple in the
-code (especially the -Weffc++ one). If you want to be hardcore, add the
-following flags:
-
-    -pedantic -Werror -Wswitch-default -Wfloat-equal -Wold-style-cast
-
-You will need to link with a number of libraries, so add this to the END of your
-linker command-line invocation.
-
-    -lglut -lGL -lGLU -lglui -lpng -ljpeg -lz
-
-Note: The order in which the libraries are ordered, in addition to where they
-appear on the command line linker invocation MATTERS, so take care when creating
-this part of the Makefile.
-
-In addition to passing the libraries to link with, you will need to pass the
-external library directory, so the linker knows where to look for libglui.a,
-libpng.a and libjpeg.a:
-
-    -L./ext/lib
-
-For this to work, you need to build not only the "all" target for libglui,
-libpng, and libjpeg, but also the "install" target, which will copy the
-libraries to ./ext/lib (remember that's where we said we wanted things to be
-installed in the configuration step). Something like:
-
-    $(MAKE) -C./ext/jpeg-9a all install
-
-will need to be included in the recipe for each external library target.
-
-## Makefile target rules
-
-All submitted makefiles must build the main target when invoked exactly as
-follows from the root directory of your project:
-
-    make
-
-This is what is expected in the wild if you download something from github;
-users do not expect to have to go hunting through your Makefile to figure out
-how to build your main target. As such, the build process should produce an
-executable called FlashPhoto in the bin/ directory.
-
-## Invocation rules
-Your FlashPhoto executable must not take any arguments, and be invoked exactly as
-follows:
-
-    bin/FlashPhoto
+This will create symbolic links from the compiled items to pre-specified
+locations under `build`. *You should not need to modify the install targets for
+any of the provided Makefiles :-).*
 
 ## git commit message guidelines
 - There should only ever be ONE scope/module affected per commit message.
@@ -190,6 +138,7 @@ These are examples of the quality of the commit messages we will be expecting.
   - batchLogbatchLog -> batchLog
   - start periodic checking
   - missing brace
+
 
 Furthermore, if you want to pair/group program, your git commit messages should
 reflect this, so that all members receive participation credit for doing it, not
