@@ -12,7 +12,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "app/FlashPhoto/src/flashphoto_app.h"
+#include "app/FlashPhoto/src/include/flashphoto_app.h"
 #include "lib/libimgtools/src/include/color_data.h"
 
 /*******************************************************************************
