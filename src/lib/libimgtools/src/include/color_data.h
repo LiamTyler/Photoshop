@@ -9,8 +9,8 @@
  *
  ******************************************************************************/
 
-#ifndef SRC_INCLUDE_COLOR_DATA_H_
-#define SRC_INCLUDE_COLOR_DATA_H_
+#ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_COLOR_DATA_H_
+#define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_COLOR_DATA_H_
 
 #include <iostream>
 
@@ -88,4 +88,4 @@ class ColorData {
 
 }  /* namespace image_tools */
 
-#endif  /* SRC_INCLUDE_COLOR_DATA_H_ */
+#endif  /* SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_COLOR_DATA_H_ */

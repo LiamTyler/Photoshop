@@ -9,8 +9,8 @@
  *
  ******************************************************************************/
 
-#ifndef SRC_INCLUDE_CHANNELS_FILTER_H_
-#define SRC_INCLUDE_CHANNELS_FILTER_H_
+#ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_CHANNELS_FILTER_H_
+#define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_CHANNELS_FILTER_H_
 
 #include <string>
 #include "lib/libimgtools/src/include/simple_filter.h"
@@ -34,4 +34,4 @@ class ChannelsFilter : public SimpleFilter {
   float blue_channel_;
 };
 
-#endif  // SRC_INCLUDE_CHANNELS_FILTER_H_
+#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_CHANNELS_FILTER_H_

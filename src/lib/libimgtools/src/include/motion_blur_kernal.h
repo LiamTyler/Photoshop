@@ -9,8 +9,8 @@
  *
  ******************************************************************************/
 
-#ifndef SRC_INCLUDE_MOTION_BLUR_KERNAL_H_
-#define SRC_INCLUDE_MOTION_BLUR_KERNAL_H_
+#ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_MOTION_BLUR_KERNAL_H_
+#define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_MOTION_BLUR_KERNAL_H_
 
 #include <string>
 #include "lib/libimgtools/src/include/kernal.h"
@@ -33,4 +33,4 @@ class MotionBlurKernal : public Kernal {
   int direction_;
 };
 
-#endif  // SRC_INCLUDE_MOTION_BLUR_KERNAL_H_
+#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_MOTION_BLUR_KERNAL_H_

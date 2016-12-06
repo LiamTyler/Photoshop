@@ -9,8 +9,8 @@
  *
  ******************************************************************************/
 
-#ifndef SRC_INCLUDE_BLUR_TOOL_H_
-#define SRC_INCLUDE_BLUR_TOOL_H_
+#ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_BLUR_TOOL_H_
+#define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_BLUR_TOOL_H_
 
 #include <vector>
 #include <string>
@@ -38,4 +38,4 @@ class TBlur : public Tool {
   image_tools::PixelBuffer *scratch_;
 };
 
-#endif  // SRC_INCLUDE_BLUR_TOOL_H_
+#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_BLUR_TOOL_H_

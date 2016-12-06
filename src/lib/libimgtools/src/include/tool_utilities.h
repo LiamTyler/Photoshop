@@ -1,5 +1,5 @@
-#ifndef SRC_INCLUDE_TOOL_UTILITIES_H_
-#define SRC_INCLUDE_TOOL_UTILITIES_H_
+#ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_TOOL_UTILITIES_H_
+#define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_TOOL_UTILITIES_H_
 
 /*******************************************************************************
  * Name            : tool_utilities.h
@@ -22,4 +22,4 @@ namespace tool_utilities {
     void CopyPixelBuffer(PixelBuffer* from, PixelBuffer* to, int dx, int dy);
 }
 
-#endif  // SRC_INCLUDE_TOOL_UTILITIES_H_
+#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_TOOL_UTILITIES_H_

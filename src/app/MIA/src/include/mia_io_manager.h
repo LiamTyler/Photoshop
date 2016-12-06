@@ -9,8 +9,8 @@
  *
  ******************************************************************************/
 
-#ifndef SRC_APP_MIA_SRC_MIA_IO_MANAGER_H_
-#define SRC_APP_MIA_SRC_MIA_IO_MANAGER_H_
+#ifndef SRC_APP_MIA_SRC_INCLUDE_MIA_IO_MANAGER_H_
+#define SRC_APP_MIA_SRC_INCLUDE_MIA_IO_MANAGER_H_
 
 /*******************************************************************************
  * Includes
@@ -79,4 +79,4 @@ class MIAIOManager : public IOManager {
 
 }  /* namespace image_tools */
 
-#endif  /* SRC_APP_MIA_SRC_MIA_IO_MANAGER_H_ */
+#endif  /* SRC_APP_MIA_SRC_INCLUDE_MIA_IO_MANAGER_H_ */

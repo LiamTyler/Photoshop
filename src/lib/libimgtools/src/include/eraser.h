@@ -9,8 +9,8 @@
  *
  ******************************************************************************/
 
-#ifndef SRC_INCLUDE_ERASER_H_
-#define SRC_INCLUDE_ERASER_H_
+#ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_ERASER_H_
+#define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_ERASER_H_
 
 #include <string>
 #include "lib/libimgtools/src/include/eraser.h"
@@ -25,4 +25,4 @@ class TEraser : public Tool {
                 int x, int y, int last_x, int last_y);
   std::string name(void) { return "Eraser"; }
 };
-#endif  // SRC_INCLUDE_ERASER_H_
+#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_ERASER_H_

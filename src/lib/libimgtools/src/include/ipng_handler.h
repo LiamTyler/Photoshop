@@ -9,8 +9,8 @@
  *
  ******************************************************************************/
 
-#ifndef SRC_INCLUDE_IPNG_HANDLER_H_
-#define SRC_INCLUDE_IPNG_HANDLER_H_
+#ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_IPNG_HANDLER_H_
+#define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_IPNG_HANDLER_H_
 
 #include <string>
 #include "lib/libimgtools/src/include/image_handler.h"
@@ -25,4 +25,4 @@ class IPNGHandler : public ImageHandler {
     const PixelBuffer* buffer_to_save);
 };
 
-#endif  // SRC_INCLUDE_IPNG_HANDLER_H_
+#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_IPNG_HANDLER_H_

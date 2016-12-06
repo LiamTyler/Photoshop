@@ -13,7 +13,7 @@
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "app/FlashPhoto/src/flashphoto_app.h"
+#include "app/FlashPhoto/src/include/flashphoto_app.h"
 #include <assert.h>
 #include <cmath>
 #include <iostream>

@@ -9,8 +9,8 @@
  *
  ******************************************************************************/
 
-#ifndef SRC_INCLUDE_HISTORY_MANAGER_H_
-#define SRC_INCLUDE_HISTORY_MANAGER_H_
+#ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_HISTORY_MANAGER_H_
+#define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_HISTORY_MANAGER_H_
 
 #include "lib/libimgtools/src/include/pixel_buffer.h"
 
@@ -38,4 +38,4 @@ class HistoryManager {
   int newest_save_;
 };
 
-#endif  // SRC_INCLUDE_HISTORY_MANAGER_H_
+#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_HISTORY_MANAGER_H_

@@ -9,8 +9,8 @@
  *
  ******************************************************************************/
 
-#ifndef SRC_INCLUDE_BLUR_KERNAL_H_
-#define SRC_INCLUDE_BLUR_KERNAL_H_
+#ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_BLUR_KERNAL_H_
+#define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_BLUR_KERNAL_H_
 
 #include <string>
 #include "lib/libimgtools/src/include/kernal.h"
@@ -31,4 +31,4 @@ class BlurKernal : public Kernal {
   int amount_;
 };
 
-#endif  // SRC_INCLUDE_BLUR_KERNAL_H_
+#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_BLUR_KERNAL_H_

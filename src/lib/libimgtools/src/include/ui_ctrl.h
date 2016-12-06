@@ -9,8 +9,8 @@
  *
  ******************************************************************************/
 
-#ifndef COMMON_FILES_PUT_THESE_SOMEWHERE_INCLUDE_UI_CTRL_H_
-#define COMMON_FILES_PUT_THESE_SOMEWHERE_INCLUDE_UI_CTRL_H_
+#ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_UI_CTRL_H_
+#define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_UI_CTRL_H_
 
 /*******************************************************************************
  * Includes
@@ -79,4 +79,4 @@ class UICtrl {
 
 }  /* namespace image_tools */
 
-#endif  /* COMMON_FILES_PUT_THESE_SOMEWHERE_INCLUDE_UI_CTRL_H_ */
+#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_UI_CTRL_H_

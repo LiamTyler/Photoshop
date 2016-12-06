@@ -8,8 +8,8 @@
  * Original Author : Group Bits Please
  *
  ******************************************************************************/
-#ifndef SRC_INCLUDE_IJPG_HANDLER_H_
-#define SRC_INCLUDE_IJPG_HANDLER_H_
+#ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_IJPG_HANDLER_H_
+#define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_IJPG_HANDLER_H_
 
 #include <stdio.h>
 #include <jpeglib.h>
@@ -32,4 +32,4 @@ class IJPGHandler : public ImageHandler {
   };
 };
 
-#endif  // SRC_INCLUDE_IJPG_HANDLER_H_
+#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_IJPG_HANDLER_H_

@@ -9,8 +9,8 @@
  *
  ******************************************************************************/
 
-#ifndef SRC_INCLUDE_STAMP_TOOL_H_
-#define SRC_INCLUDE_STAMP_TOOL_H_
+#ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_STAMP_TOOL_H_
+#define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_STAMP_TOOL_H_
 
 #include <string>
 #include "lib/libimgtools/src/include/tool.h"
@@ -31,4 +31,4 @@ class TStamp : public Tool {
   PixelBuffer* image_;
 };
 
-#endif  // SRC_INCLUDE_STAMP_TOOL_H_
+#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_STAMP_TOOL_H_

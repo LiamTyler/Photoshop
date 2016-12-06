@@ -9,8 +9,8 @@
  *
  ******************************************************************************/
 
-#ifndef SRC_INCLUDE_KERNAL_FILTER_H_
-#define SRC_INCLUDE_KERNAL_FILTER_H_
+#ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_KERNAL_FILTER_H_
+#define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_KERNAL_FILTER_H_
 
 #include <string>
 #include "lib/libimgtools/src/include/filter.h"
@@ -33,4 +33,4 @@ class KernalFilter : public Filter {
   Kernal* kernal_;
 };
 
-#endif  // SRC_INCLUDE_KERNAL_FILTER_H_
+#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_KERNAL_FILTER_H_

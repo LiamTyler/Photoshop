@@ -9,8 +9,8 @@
  *
  ******************************************************************************/
 
-#ifndef SRC_APP_MIA_SRC_MIA_APP_H_
-#define SRC_APP_MIA_SRC_MIA_APP_H_
+#ifndef SRC_APP_MIA_SRC_INCLUDE_MIA_APP_H_
+#define SRC_APP_MIA_SRC_INCLUDE_MIA_APP_H_
 
 /*******************************************************************************
  * Includes
@@ -103,4 +103,4 @@ class MIAApp : public BaseGfxApp {
 
 }  /* namespace image_tools */
 
-#endif  // SRC_APP_MIA_SRC_MIA_APP_H_
+#endif  // SRC_APP_MIA_SRC_INCLUDE_MIA_APP_H_

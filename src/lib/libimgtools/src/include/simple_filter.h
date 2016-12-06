@@ -9,8 +9,8 @@
  *
  ******************************************************************************/
 
-#ifndef SRC_INCLUDE_SIMPLE_FILTER_H_
-#define SRC_INCLUDE_SIMPLE_FILTER_H_
+#ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_SIMPLE_FILTER_H_
+#define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_SIMPLE_FILTER_H_
 
 #include <string>
 #include "lib/libimgtools/src/include/filter.h"
@@ -28,4 +28,4 @@ class SimpleFilter {
   virtual std::string name(void) = 0;
 };
 
-#endif  // SRC_INCLUDE_SIMPLE_FILTER_H_
+#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_SIMPLE_FILTER_H_
