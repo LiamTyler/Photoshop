@@ -33,7 +33,7 @@ PixelBuffer* IJPGHandler::LoadImage(const std::string file_name) {
     if ((infile = fopen(file_name.c_str(), "rb")) == NULL) {
         fprintf(stderr, "can't open %s\n", file_name.c_str());
         std::cout << "ERROR: CANNOT READ JPG" << std::endl;
-        exit(1);
+        return nullptr;
     }
 
     // Now we can initialize the JPEG decompression object
@@ -115,7 +115,7 @@ bool IJPGHandler::SaveImage(const std::string file_name,
 
     // Use library function to send data to stdio
     if ((outfile = fopen(file_name.c_str(), "wb")) == NULL) {
-        exit(1);
+        return false;
     }
     jpeg_stdio_dest(&cinfo, outfile);
 

@@ -171,9 +171,9 @@ $(EXTDIR)/lib/libpng.a:
 $(EXTDIR)/lib/libjpeg.a:
 	$(MAKE) -C$(JPEGDIR) install
 
-FlashPhoto: $(EXTDIR)/lib/libglui.a $(EXTDIR)/lib/libpng.a $(EXTDIR)/lib/libjpeg.a libimgtools | $(BINDIR)
+FlashPhoto: libimgtools $(EXTDIR)/lib/libglui.a $(EXTDIR)/lib/libpng.a $(EXTDIR)/lib/libjpeg.a | $(BINDIR)
 	$(MAKE) -Csrc/app/FlashPhoto
-MIA: $(EXTDIR)/lib/libglui.a $(EXTDIR)/lib/libpng.a $(EXTDIR)/lib/libjpeg.a libimgtools | $(BINDIR)
+MIA: libimgtools $(EXTDIR)/lib/libglui.a $(EXTDIR)/lib/libpng.a $(EXTDIR)/lib/libjpeg.a | $(BINDIR)
 	$(MAKE) -Csrc/app/MIA
 
 # Bootstrap Bill. This creates all of the order-only prerequisites; that is,

@@ -16,15 +16,15 @@
 #include "lib/libimgtools/src/include/pixel_buffer.h"
 
 using image_tools::PixelBuffer;
-  
 
 class ImageHandler {
  public:
   enum IMAGE_TYPE {
-   PNG_IMAGE,
-   JPG_IMAGE,
-   UNKNOWN_IMAGE
+    PNG_IMAGE,
+    JPG_IMAGE,
+    UNKNOWN_IMAGE
   };
+
   static PixelBuffer* LoadImage(const std::string & file_name);
   static bool SaveImage(const std::string & file_name,
                         const PixelBuffer* bufferToSave);
