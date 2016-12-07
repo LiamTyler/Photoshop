@@ -137,7 +137,6 @@ int CmdLineHandler::RunCommands() {
                 imgtools::ApplyBlur(in_img_, out_img_, blur_amt_);
                 break;
             case CmdLineHandler::SATURATE:
-                // TODO(tyler147): SATURATE 0 FOR MIA
                 imgtools::ApplySaturate(in_img_, out_img_, saturate_amt_);
                 break;
             case CmdLineHandler::CHANNEL:
@@ -175,7 +174,7 @@ int CmdLineHandler::RunCommands() {
 }
 
 void CmdLineHandler::PrintInfo() {
-    cout << "Input image: " << input_file_ << endl;
+    // cout << "Input image: " << input_file_ << endl;
     cout << "Output image: " << output_file_ << endl;
     int invalids_size = invalids_.size();
     for (int i = 0; i < invalids_size; i++) {

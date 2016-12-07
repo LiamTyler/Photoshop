@@ -80,4 +80,22 @@ bool SaveImage(const std::string& file_name, const PixelBuffer* bufferToSave) {
     return ImageHandler::SaveImage(file_name, bufferToSave);
 }
 
+int CompareImages(const PixelBuffer* img1, const PixelBuffer* img2) {
+    int img1_w = img1->width();
+    int img1_h = img1->height();
+    int img2_h = img2->height();
+    int img2_w = img2->width();
+
+    if (img1_w != img2_w || img1_h != img2_h)
+        return 0;
+    for (int r = 0; r < img1_h; r++) {
+        for (int c = 0; c < img1_w; c++) {
+            if (img1->get_pixel(c, r) != img2->get_pixel(c, r))
+                return 0;
+        }
+    }
+
+    return 1;
+}
+
 }  /* namespace imgtools */

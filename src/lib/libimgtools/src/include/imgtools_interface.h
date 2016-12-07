@@ -47,6 +47,8 @@ image_tools::PixelBuffer* LoadImage(const std::string& file_name);
 bool SaveImage(const std::string& file_name,
                const image_tools::PixelBuffer* bufferToSave);
 
+int CompareImages(const PixelBuffer* img1, const PixelBuffer* img2);
+
 }  /* namespace imgtools */
 
 #endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_IMGTOOLS_INTERFACE_H_
