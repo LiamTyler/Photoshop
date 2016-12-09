@@ -19,6 +19,9 @@
 
 using image_tools::PixelBuffer;
 
+/**
+ * @brief Implements an Emboss Filter using an emboss kernal
+ */
 class EmbossFilter : public KernalFilter {
  public:
   EmbossFilter();

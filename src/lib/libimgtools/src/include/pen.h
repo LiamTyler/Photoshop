@@ -15,6 +15,11 @@
 #include <string>
 #include "lib/libimgtools/src/include/tool.h"
 
+/**
+ * @brief This tool simulates the usage of a Pen
+ * It has a constant mask of a circle (diameter of 3) and an
+ * opacity of 1.0
+ */
 class TPen : public Tool {
  public:
   TPen(int width, int height);

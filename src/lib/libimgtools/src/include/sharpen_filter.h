@@ -19,6 +19,10 @@
 
 using image_tools::PixelBuffer;
 
+/**
+ * @brief Implements a sharpening filter using a sharpening kernal
+ *
+ */
 class SharpenFilter : public KernalFilter {
  public:
   explicit SharpenFilter(int amount);

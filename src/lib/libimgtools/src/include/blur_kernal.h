@@ -18,6 +18,11 @@
 
 using image_tools::PixelBuffer;
 
+/**
+ * @brief A blur kernal
+ *
+ * This is used for general even blurring.
+ */
 class BlurKernal : public Kernal {
  public:
   explicit BlurKernal(int amount);
@@ -28,6 +33,9 @@ class BlurKernal : public Kernal {
   virtual void InitializeKernal();
 
  private:
+  /**
+   * @brief defines the diameter (to the nearest odd number) of the kernal
+   */
   int amount_;
 };
 

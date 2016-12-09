@@ -18,6 +18,12 @@
 
 using image_tools::PixelBuffer;
 
+/**
+ * @brief A directional motion blurring kernal
+ *
+ * Defines a kernal that blurs pixels along a straight line when applied
+ * on an image.
+ */
 class MotionBlurKernal : public Kernal {
  public:
   MotionBlurKernal(int amount, int direction);
@@ -29,8 +35,8 @@ class MotionBlurKernal : public Kernal {
   virtual void InitializeKernal();
 
  private:
-  int amount_;
-  int direction_;
+  int amount_;  /// The dimensions of the kernal
+  int direction_;  /// The direction of motion blur
 };
 
 #endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_MOTION_BLUR_KERNAL_H_
