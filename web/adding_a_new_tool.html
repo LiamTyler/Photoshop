@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta charset = "utf-8">
-	<title> Adding a New Tool </title> 
+	<title> Adding a New Tool </title>
 	<link class = "page" rel="stylesheet" type="text/css" href="stylesheet.css">
 
 </head>
@@ -20,13 +20,118 @@
 
 	<div class = "content">
 		<h1>Adding a New Tool</h1>
+		<h2>Adding a New Pencil to FlashPhoto</h2>
 
-	
+		<p>
+			In this tutorial we will walk through how to add a new tool to Brushwork.
+      We will accomplish this feat in four steps and use the tool of pencil as an example.
+		</p>
+		<p>
+			1) Create a mask of the tool in tool_utilities
+		</p>
+		<p>
+			To start, we first need to make a mask of the tool that we would want to create.
+      For the example of the pencil, we will just make it a single,
+      non-transparent pixel that completely replaces the existing colors on the canvas.
+      Since pencil has a similar shape mask to the caligraphy pen, all we need to do
+      is use that same function but tinker with the width and height.
+		</p>
+		<pre>
+void FillMask(double** mask, int height, int width, double opacity) {
+  for (int h = 0; h < height; h++) {
+    for (int w = 0; w < width; w++) {
+      mask[h][w] = opacity;
+    }
+  }
+}
+		</pre>
+		<p>
+				The snippet of code above makes a rectangular shape mask and sets the
+        opacity to any value we would like. The pencil mask fits this desription
+        which saves the hassle of making a specific mask just for pencil.
+        Something to note, we could just make a default constructor for the pencil
+        that sets the width and height both to one, but we choose to not have one
+        in order to have the freedom to change the size of the pencil mask if we wanted.
+		</p>
+		<p>
+				2) Create .h file for the tool in include
+		</p>
+		<p>
+				Next, we need to create a header file for the tool. The header file will
+        define the parameters that are needed by the tool. In the case of the
+        pencil tool, we will need the width and height.
+		</p>
+		<pre>
+#include "include/tool.h"
+
+class Pencil : public Tool {
+ public:
+  Pencil(int width, int height);
+  Pencil();
+  ~Pencil();
+};
+		</pre>
+		<p>
+				Since we already have tool.h which provides a basic outline of any tool,
+        we extended from tool.h to get the width and height as seen from the
+        snippet of code above.
+		</p>
+		<p>
+				3) Create .cc file for the tool in src
+		</p>
+		<p>
+				Now, we must create the .cc file for the tool. This is where we will set
+        the height and width of the tool along with any other variables that the
+        tool may need. This file will also call the function we created specifically
+        for the new tool. With the example of pencil, we will need to set the height
+        and width both to 1 and call the FillMask() fucntion that we made earlier.
+		</p>
+		<pre>
+Pencil::Pencil(int width, int height) : Tool(width, height) {
+  tool_utilities::FillMask(this->get_mask(), height, width, 1.0);
+}
+
+Pencil::Pencil() : Pencil(1, 1) {}
+		</pre>
+		<p>
+				There are a couple things to note from the snippet of code above. One:
+        to meet the requirments that the pencil be a single pixel, we set both
+        the height and width to 1, but this is where we can change the size of
+        the pencil if we want it to be different than a single pixel. Two: we
+        call FillMask() from tool_utilities in order to access the premade mask.
+		</p>
+		<p>
+				4) Add tool into the tool array in brushwork_app
+		</p>
+		<p>
+				Finally, the last step we need to complete is to add the new tool into
+        the array of current tools be used. The current tools being used are
+        stored in brushwork_app in an array called tool_select_. Here, the new
+        tool will be assigned a number and this number will be used to determine
+        the current tool being used.
+		</p>
+		<pre>
+tool_select_[0] = new Pen();
+tool_select_[1] = new Eraser();
+tool_select_[2] = new SprayCan();
+tool_select_[3] = new Caligraphy();
+tool_select_[4] = new Highlighter();
+tool_select_[5] = new Rainbow();
+tool_select_[6] = new Pencil();
+cur_tool_ = tool_select_[0];
+		</pre>
+		<p>
+				The portion of code from  brushwork_app above demonstrates that pencil
+        gets assigned a number 6 which is used to identify the tool. This is
+        how we keep track of the tools. Also, in burshwork.h we will need to
+        make the array one size larger to accommodate for the new tool.
+		</p>
+
 	</div>
 
 	<div class = "footer">
 		<!-- You can change the copyright! -->
-		<span class="copyright">&copy; 2016, CSCI 3081 Bits Please</span> 
+		<span class="copyright">&copy; 2016, CSCI 3081 Bits Please</span>
 	</div>
 
 
