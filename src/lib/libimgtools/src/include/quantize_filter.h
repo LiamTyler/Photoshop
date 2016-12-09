@@ -20,6 +20,13 @@
 using image_tools::PixelBuffer;
 using image_tools::ColorData;
 
+/**
+ * @brief Implements a quantization filter
+ *
+ * Reduce the amount of information compromising an image by sorting each
+ * pixel into one of N predefined bins that cover the full range of RGB
+ * (0 - 1.0)
+ */
 class QuantizeFilter : public SimpleFilter {
  public:
   explicit QuantizeFilter(int bins);
@@ -28,7 +35,7 @@ class QuantizeFilter : public SimpleFilter {
   std::string name(void) { return "Quantize"; }
 
  private:
-  int bins_;
+  int bins_;  /**< Number of bins to sort the colors into  */
 };
 
 #endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_QUANTIZE_FILTER_H_

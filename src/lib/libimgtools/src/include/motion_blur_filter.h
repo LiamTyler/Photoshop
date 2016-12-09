@@ -19,6 +19,12 @@
 
 using image_tools::PixelBuffer;
 
+/**
+ * @brief Implements a motion blur filter.
+ *
+ * Motion blur only blurs in one particular direction, unlike regular
+ * blur which blurs evenly in all directions.
+ */
 class MotionBlurFilter : public KernalFilter {
  public:
   MotionBlurFilter(int amount, int direction);

@@ -20,6 +20,10 @@
 using image_tools::PixelBuffer;
 using image_tools::ColorData;
 
+/**
+ * @brief Scale each of the RGB channels by a specified amount from the user.
+ *
+ */
 class ChannelsFilter : public SimpleFilter {
  public:
   ChannelsFilter(float red_channel, float green_channel,
@@ -29,9 +33,9 @@ class ChannelsFilter : public SimpleFilter {
   std::string name(void) { return "Channels"; }
 
  private:
-  float red_channel_;
-  float green_channel_;
-  float blue_channel_;
+  float red_channel_;  /**<Red scaling factor  */
+  float green_channel_;  /**<Green scaling factor  */
+  float blue_channel_;  /** Blue scaling factor  */
 };
 
 #endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_CHANNELS_FILTER_H_

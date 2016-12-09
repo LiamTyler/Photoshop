@@ -18,6 +18,12 @@
 
 using image_tools::PixelBuffer;
 
+/**
+ * @brief An edge detection kernal
+ *
+ * Defines a kernal that highlights edges between colors, and turns everything
+ * else to black.
+ */
 class EdgeDetectKernal : public Kernal {
  public:
   EdgeDetectKernal();

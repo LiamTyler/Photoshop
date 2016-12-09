@@ -16,10 +16,28 @@
 
 using image_tools::PixelBuffer;
 
+/**
+ * @brief Class for handling the undo / redo features
+ *
+ * By default it stores the PixelBuffers of the last 80 actions.
+ * It will not allow and redos past the most recent, no undos past the oldest
+ */
 class HistoryManager {
  public:
   HistoryManager(PixelBuffer* buff, int possible_saves);
   ~HistoryManager();
+  /**
+   * @brief Loads the next action saved into the specified PixelBuffer
+   *
+   * If there is a next action saved, it will load it into the specified
+   * buffer, resizing as needed. Given a series of undos, and then a new
+   * action, redo will not change anything because the "branch" of saved
+   * actions has been broken.
+   *
+   * @param[out] display The buffer to load the next action into
+   *
+   * @return The
+   */
   PixelBuffer* Redo(PixelBuffer* display);
   PixelBuffer* Undo(PixelBuffer* display);
   void SaveCanvas(PixelBuffer* buff);
