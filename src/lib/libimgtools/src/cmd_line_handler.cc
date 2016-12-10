@@ -85,7 +85,7 @@ CmdLineHandler::Command CmdLineHandler::get_index(const char* arg) {
 bool CmdLineHandler::ValidateArgs(int index, Command command) {
     // Find the expected number of arguments for the command
     int expected_args;
-    switch(command) {
+    switch (command) {
         case SHARPEN:
             expected_args = 1;
             break;
@@ -138,7 +138,7 @@ bool CmdLineHandler::ValidateArgs(int index, Command command) {
 }
 
 bool CmdLineHandler::is_number(const char* arg) {
-    std::regex e ("^-?\\d*\\.?\\d+");
+    std::regex e("^-?\\d*\\.?\\d+");
     if (std::regex_match(arg, e))
         return true;
     else
@@ -158,7 +158,7 @@ bool CmdLineHandler::ParseArguments() {
         cout << "made it past validate args" << endl;
 
         // Find if the arguments actually fall within the acceptable ranges
-        switch(index) {
+        switch (index) {
             case HELP:
                 break;
             case SHARPEN:
@@ -199,7 +199,7 @@ bool CmdLineHandler::ParseArguments() {
             case COMPARE:
                 break;
             case IMAGE:
-                if (current_arg_ == 1) 
+                if (current_arg_ == 1)
                     input_file_ = argv_[current_arg_];
                 else if (current_arg_ == argc_ - 1 && input_file_ != "")
                     output_file_ = argv_[current_arg_];
