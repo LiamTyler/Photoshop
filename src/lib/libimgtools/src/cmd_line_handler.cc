@@ -121,17 +121,25 @@ bool CmdLineHandler::ValidateArgs(int index, Command command) {
         return true;
 
     for (int arg = 0; arg < expected_args; arg++) {
+        cout << "arg " << arg << " = " << argv_[arg + index] << endl;
         // If there are no mare args to process, but we are expecting more,
         // signal error
-        if (index + arg >= argc_)
+        if (index + arg >= argc_) {
+            cout << "too many args" << endl;
             return false;
+        }
         // If we run into a new command before we are done processing
         // the expected number of args, signal error
-        if (get_index(argv_[index + arg]) != ARG)
+        Command tmp;
+        if ((tmp = get_index(argv_[index + arg])) != ARG) {
+            cout << "too few args, command = " << tmp << endl;
             return false;
+        }
         // If the arg is not a number, signal error
-        if (!is_number(argv_[index + arg]))
+        if (!is_number(argv_[index + arg])) {
+            cout << "arg is not a number" << endl;
             return false;
+        }
     }
 
     return true;
@@ -148,14 +156,17 @@ bool CmdLineHandler::is_number(const char* arg) {
 bool CmdLineHandler::ParseArguments() {
     for (; current_arg_ < argc_; current_arg_++) {
         Command index = get_index(argv_[current_arg_]);
-        cout << "curr index: " << index << endl;
-        if (index == ARG)
+        // cout << "curr index: " << index << endl;
+        if (index == ARG) {
+            cout << "index == arg, command = " << argv_[current_arg_] << endl;
             return false;
+        }
 
         // Test to see if the arguments exist and are numbers
-        if (!ValidateArgs(current_arg_ + 1, index))
+        if (!ValidateArgs(current_arg_ + 1, index)) {
+            cout << "Failed on validate args with command: " << index << endl;
             return false;
-        cout << "made it past validate args" << endl;
+        }
 
         // Find if the arguments actually fall within the acceptable ranges
         switch (index) {
