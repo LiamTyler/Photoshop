@@ -32,10 +32,9 @@ using std::endl;
  ******************************************************************************/
 int main(int argc, char* argv[]) {
     if (argc > 1) {
-        CmdLineHandler c;
-        c.ParseArguments(argc, argv);
+        CmdLineHandler c(argc, argv);
+        c.ProcessArguments();
         c.PrintInfo();
-        c.RunCommands();
     } else {
         image_tools::FlashPhotoApp *app =
             new image_tools::FlashPhotoApp(800, 800);
