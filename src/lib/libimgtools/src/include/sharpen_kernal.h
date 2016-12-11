@@ -18,6 +18,14 @@
 
 using image_tools::PixelBuffer;
 
+
+/**
+ * @brief A sharpening kernel
+ *
+ * Defines a kernel that filters the colors of surrounding pixels out of each
+ * pixel, resulting in a sharper image when convolved with an image.
+ * Can be thought of as a high-pass filter.
+ */
 class SharpenKernal : public Kernal {
  public:
   explicit SharpenKernal(int amount);
@@ -28,7 +36,7 @@ class SharpenKernal : public Kernal {
   virtual void InitializeKernal();
 
  private:
-  int amount_;
+  int amount_;  /// Amount to sharpen by. The higher the sharper.
 };
 
 #endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_SHARPEN_KERNAL_H_

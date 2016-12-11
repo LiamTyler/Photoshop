@@ -25,6 +25,8 @@ using image_tools::PixelBuffer;
 using std::cout;
 using std::endl;
 
+const bool debug = false;
+
 CmdLineHandler::CmdLineHandler(int argc, char** argv) :
     argc_(argc),
     argv_(argv),
@@ -121,23 +123,27 @@ bool CmdLineHandler::ValidateArgs(int index, Command command) {
         return true;
 
     for (int arg = 0; arg < expected_args; arg++) {
-        cout << "arg " << arg << " = " << argv_[arg + index] << endl;
+        if (debug)
+            cout << "arg " << arg << " = " << argv_[arg + index] << endl;
         // If there are no mare args to process, but we are expecting more,
         // signal error
         if (index + arg >= argc_) {
-            cout << "too many args" << endl;
+            if (debug)
+                cout << "too many args" << endl;
             return false;
         }
         // If we run into a new command before we are done processing
         // the expected number of args, signal error
         Command tmp;
         if ((tmp = get_index(argv_[index + arg])) != ARG) {
-            cout << "too few args, command = " << tmp << endl;
+            if (debug)
+                cout << "too few args, command = " << tmp << endl;
             return false;
         }
         // If the arg is not a number, signal error
         if (!is_number(argv_[index + arg])) {
-            cout << "arg is not a number" << endl;
+            if (debug)
+                cout << "arg is not a number" << endl;
             return false;
         }
     }
@@ -158,13 +164,17 @@ bool CmdLineHandler::ParseArguments() {
         Command index = get_index(argv_[current_arg_]);
         // cout << "curr index: " << index << endl;
         if (index == ARG) {
-            cout << "index == arg, command = " << argv_[current_arg_] << endl;
+            if (debug)
+                cout << "index == arg, command = " << argv_[current_arg_]
+                    << endl;
             return false;
         }
 
         // Test to see if the arguments exist and are numbers
         if (!ValidateArgs(current_arg_ + 1, index)) {
-            cout << "Failed on validate args with command: " << index << endl;
+            if (debug)
+                cout << "Failed on validate args with command: " <<
+                    index << endl;
             return false;
         }
 
@@ -226,6 +236,24 @@ bool CmdLineHandler::ParseArguments() {
     return true;
 }
 
+void CmdLineHandler::PrintHelp() {
+    cout << endl << "usage: MIA [input_image_name] [list of commands] "
+        << "[output_image_name]" << endl
+        << "Commands:" << endl
+        << "--------------------------------------------------------------\n"
+        << "-sharpen\tArguments: 1, type: float, valid inputs: [0, 100]\n"
+        << "-edge\t\tArguments: 0\n"
+        << "-threshold\tArguments: 1, type: float, valid inputs: [0, 1]\n"
+        << "-quantize\tArguments: 1, type: int, valid inputs: [2, 256]\n"
+        << "-blur\t\tArguments: 1, type: float, valid inputs: [0, 20]\n"
+        << "-saturate\tArguments: 1, type: float, valid inputs: [-10, 10]\n"
+        << "-channel\tArguments: 3, type: float float float,"
+            << "valid inputs: [0, 10] [0, 10] [0, 10]\n"
+        << "-compare\tArguments: 1 type: compare_image"
+            << "(instead of output image)\n"
+        << endl;
+}
+
 bool CmdLineHandler::RunCommands() {
     // Load up the input image first
     if (input_file_ != "") {
@@ -251,11 +279,7 @@ bool CmdLineHandler::RunCommands() {
         bool swap = true;
         switch (commands_[i]) {
             case HELP:
-                cout << "usage: MIA\t[input_image] [-sharpen float] [-edge]"
-                    << "\n\t\t[-threshold float] [-quantize int] [-blur float]"
-                    << "\n\t\t[-saturate float] [-channel float float float]\n"
-                    << "\t\t [-compare] [output / compare image]"
-                    << endl << endl;
+                PrintHelp();
                 swap = false;
                 break;
             case SHARPEN:
@@ -285,15 +309,18 @@ bool CmdLineHandler::RunCommands() {
                 {
                     delete out_img_;
                     out_img_ = imgtools::LoadImage(output_file_);
+                    if (out_img_ == nullptr)
+                        return false;
                     int ret = imgtools::CompareImages(in_img_, out_img_);
                     cout << ret << endl;
                     delete in_img_;
                     delete out_img_;
-                    return ret;
+                    return true;
                 }
             default:
                 swap = false;
-                cout << "unrecognized switch case" << endl;
+                if (debug)
+                    cout << "unrecognized switch case" << endl;
         }
         if (swap) {
             PixelBuffer* tmp = in_img_;
@@ -314,11 +341,15 @@ bool CmdLineHandler::RunCommands() {
 
 bool CmdLineHandler::ProcessArguments() {
     if (!ParseArguments()) {
-        cout << "parsing args failed" << endl;
+        if (debug)
+            cout << "parsing args failed" << endl;
+        PrintHelp();
         return false;
     }
     if (!RunCommands()) {
-        cout << "running commands failed" << endl;
+        if (debug)
+            cout << "running commands failed" << endl;
+        PrintHelp();
         return false;
     }
 

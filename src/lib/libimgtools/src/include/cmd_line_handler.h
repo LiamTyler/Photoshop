@@ -21,6 +21,7 @@ class CmdLineHandler {
   CmdLineHandler(int argc, char** argv);
   bool ProcessArguments();
   void PrintInfo();
+  void PrintHelp();
   enum Command {
     HELP,
     SHARPEN,

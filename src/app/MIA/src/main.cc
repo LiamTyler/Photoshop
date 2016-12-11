@@ -15,6 +15,7 @@
 /* FIXME: ADDITIONAL INCLUDES AS NECESSARY HERE :-) */
 #include "app/MIA/src/include/mia_app.h"
 #include "lib/libimgtools/src/include/color_data.h"
+#include "lib/libimgtools/src/include/cmd_line_handler.h"
 
 /*******************************************************************************
  * Non-Member Functions
@@ -30,7 +31,12 @@ int main(int argc, char** argv) {
     app->RunMainLoop();
     delete app;
   } else {
-    /* Create command line interface */
+    CmdLineHandler c(argc, argv);
+    if (c.ProcessArguments())
+        return 0;
+    else
+        return 1;
+    // c.PrintInfo();
   }
   return 0;
 } /* main() */

@@ -18,7 +18,9 @@
 #include "lib/libimgtools/src/include/pixel_buffer.h"
 
 using image_tools::PixelBuffer;
-
+/**
+ * @brief Implements an Edge Filter using an edge detect kernal
+ */
 class EdgeDetectFilter : public KernalFilter {
  public:
   EdgeDetectFilter();

@@ -54,8 +54,10 @@ PixelBuffer* IJPGHandler::LoadImage(const std::string file_name) {
 
     (void) jpeg_start_decompress(&cinfo);
 
+    /*
     std::cout << "loading width: " << cinfo.output_width <<
         ", loading height: " << cinfo.output_height << std::endl;
+    */
 
     loaded_image_buffer = new PixelBuffer(cinfo.output_width,
                                         cinfo.output_height,

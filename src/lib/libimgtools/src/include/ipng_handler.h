@@ -18,6 +18,10 @@
 
 using image_tools::PixelBuffer;
 
+/**
+ * @brief Class that handles with loading and saving png image types
+ *
+ */
 class IPNGHandler : public ImageHandler {
  public:
   static PixelBuffer* LoadImage(const std::string file_name);

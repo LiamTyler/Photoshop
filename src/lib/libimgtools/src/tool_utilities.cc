@@ -43,6 +43,7 @@ void FillMask(float** mask, int height, int width, float opacity) {
 
 // Copy all of the pixels in the "from" buffer into the "to" buffer
 // also passing in the coordinates of where the "from" should be centered
+// onto the "to" buffer
 void CopyPixelBuffer(PixelBuffer* from, PixelBuffer* to, int x, int y) {
     int f_w = from->width();
     int f_half_w = f_w / 2;

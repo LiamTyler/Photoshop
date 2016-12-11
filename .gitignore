@@ -43,6 +43,7 @@ config/
 
 # Text editor tmp files
 .*.swp
+*~
 
 # Makefile
 Makefile

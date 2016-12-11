@@ -15,6 +15,13 @@
 #include <string>
 #include "lib/libimgtools/src/include/tool.h"
 
+/**
+ * @brief Implements a spray can tool
+ *
+ * The spray can is a circular tool that has a linear falloff, so that there
+ * is more paint sprayed near the middle than the edges.
+ *
+ */
 class TSprayCan : public Tool {
  public:
   TSprayCan(int width, int height);

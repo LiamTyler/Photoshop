@@ -19,6 +19,13 @@
 
 using image_tools::PixelBuffer;
 
+/**
+ * @brief A threshold filter
+ *
+ * The effect of this filter is to set the RGB components of all pixels that
+ * it operates on to 1 if the RGB value is greater than the threshold, and 0
+ * otherwise
+ */
 class ThresholdFilter : public SimpleFilter {
  public:
   explicit ThresholdFilter(float level);

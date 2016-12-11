@@ -19,6 +19,10 @@
 
 using image_tools::PixelBuffer;
 
+/**
+ * @brief Implements a new blur filter using a kernal that blurs equally in
+ * all directions.
+ */
 class BlurFilter : public KernalFilter {
  public:
   explicit BlurFilter(int amount);
