@@ -13,7 +13,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <iostream>
-#include <regex>
 #include <iomanip>
 #include <string>
 #include "lib/libimgtools/src/include/color_data.h"
@@ -152,11 +151,12 @@ bool CmdLineHandler::ValidateArgs(int index, Command command) {
 }
 
 bool CmdLineHandler::is_number(const char* arg) {
-    std::regex e("^-?\\d*\\.?\\d+");
-    if (std::regex_match(arg, e))
-        return true;
-    else
+    char *p;
+    double d = strtod(arg, &p);
+    if (*p)
         return false;
+    else
+        return true;
 }
 
 bool CmdLineHandler::ParseArguments() {
@@ -247,7 +247,7 @@ void CmdLineHandler::PrintHelp() {
         << "-quantize\tArguments: 1, type: int, valid inputs: [2, 256]\n"
         << "-blur\t\tArguments: 1, type: float, valid inputs: [0, 20]\n"
         << "-saturate\tArguments: 1, type: float, valid inputs: [-10, 10]\n"
-        << "-channel\tArguments: 3, type: float float float,"
+        << "-channel\tArguments: 3, type: float float float, "
             << "valid inputs: [0, 10] [0, 10] [0, 10]\n"
         << "-compare\tArguments: 1 type: compare_image"
             << "(instead of output image)\n"
