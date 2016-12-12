@@ -33,10 +33,13 @@ using std::endl;
 int main(int argc, char* argv[]) {
     if (argc > 1) {
         CmdLineHandler c(argc, argv);
-        if (c.ProcessArguments())
+        if (c.ProcessArguments()) {
+            // cout << "succeeded" << endl;
             exit(0);
-        else
+        } else {
+            // cout << "failed" << endl;
             exit(1);
+        }
     } else {
         image_tools::FlashPhotoApp *app =
             new image_tools::FlashPhotoApp(800, 800);
