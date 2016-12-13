@@ -8,11 +8,10 @@
  * Original Author : Group Bits Please
  *
  ******************************************************************************/
-#include "lib/libimgtools/src/include/image_handler.h"
 
+#include "lib/libimgtools/src/include/image_handler.h"
 #include "lib/libimgtools/src/include/pixel_buffer.h"
 #include "lib/libimgtools/src/include/color_data.h"
-
 #include "lib/libimgtools/src/include/ipng_handler.h"
 #include "lib/libimgtools/src/include/ijpg_handler.h"
 #include "lib/libimgtools/src/include/io_manager.h"
@@ -24,7 +23,7 @@ using image_tools::PixelBuffer;
 // Returns new image if successful or error message if failed
 PixelBuffer* ImageHandler::LoadImage(const std::string & file_name) {
     IMAGE_TYPE image_type = GetImageType(file_name);
-    PixelBuffer* loaded_image = NULL;
+    PixelBuffer* loaded_image = nullptr;
     if (image_type == PNG_IMAGE) {
         loaded_image = IPNGHandler::LoadImage(file_name);
     } else if (image_type == JPG_IMAGE) {

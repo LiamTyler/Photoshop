@@ -46,7 +46,6 @@ class ImageHandler {
    */
   static bool SaveImage(const std::string & file_name,
                         const PixelBuffer* bufferToSave);
-
   /**
    * @brief Determines the image type of the file passed in
    *

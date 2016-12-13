@@ -13,6 +13,11 @@
  * Includes
  ******************************************************************************/
 #include "lib/libimgtools/src/include/color_data.h"
+#include <iostream>
+#include <iomanip>
+
+using std::cout;
+using std::endl;
 
 /*******************************************************************************
  * Namespaces
@@ -78,6 +83,26 @@ ColorData operator- (const ColorData& a, const ColorData& b) {
         return ColorData(a.red_ - b.red_, a.green_ - b.green_,
                          a.blue_ - b.blue_, a.alpha_ - b.alpha_);
 }
+
+bool operator== (const ColorData& a, const ColorData& b) {
+    return a.red_ == b.red_ && a.green_ == b.green_ &&
+           a.blue_ == b.blue_ && a.alpha_ == b.alpha_;
+}
+
+bool operator!= (const ColorData& a, const ColorData& b) {
+    bool t = !(a.red_ == b.red_ && a.green_ == b.green_ &&
+           a.blue_ == b.blue_ && a.alpha_ == b.alpha_);
+    /*
+    if (t) {
+        cout << "a red = " << a.red_ << ", b red = " << b.red_ << endl;
+        cout << "a green = " << a.green_ << ", b green = " << b.green_ << endl;
+        cout << "a blue = " << a.blue_ << ", b blue = " << b.blue_ << endl;
+        cout << "a alpha = " << a.alpha_ << ", b alpha = " << b.alpha_ << endl;
+    }
+    */
+    return t;
+}
+
 std::ostream& operator<<(std::ostream& out, const ColorData& b) {
     out << "(" << b.red_ << "," << b.green_ << "," << b.blue_ << ")";
     return out;

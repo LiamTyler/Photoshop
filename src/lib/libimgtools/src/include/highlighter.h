@@ -15,7 +15,14 @@
 #include <string>
 #include "lib/libimgtools/src/include/tool.h"
 
-// Inheirit width and height from tool
+
+/**
+ * @brief Implements a highlighter tool
+ *
+ * Tool with a vertical rectangular mask, so that horizontal strokes are
+ * fatter than vertical strokes.
+ *
+ */
 class THighlighter : public Tool {
  public:
   THighlighter(int width, int height);

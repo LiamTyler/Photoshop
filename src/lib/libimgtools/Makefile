@@ -104,7 +104,7 @@ $(addprefix $(OBJDIR)/, $(OBJECTS_CXX)): | $(OBJDIR)
 
 # The Target Library.
 $(TARGET): $(addprefix $(OBJDIR)/, $(OBJECTS_CXX)) | $(LIBDIR)
-	@ar rcs $@ $^
+	ar rcs $@ $^
 
 install: $(TARGET)
 	@rm -rf $(BUILDROOT)/lib/$(notdir $(shell pwd)).a
