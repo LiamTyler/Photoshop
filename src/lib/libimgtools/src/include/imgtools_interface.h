@@ -15,7 +15,7 @@
 #include <string>
 #include "lib/libimgtools/src/include/pixel_buffer.h"
 
-
+using image_tools::PixelBuffer;
 
 /*******************************************************************************
  * Namespaces
