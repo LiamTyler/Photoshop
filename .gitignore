@@ -47,3 +47,7 @@ config/
 
 # Makefile
 Makefile
+
+# Doxygen
+doc/html/
+doc/latex/
