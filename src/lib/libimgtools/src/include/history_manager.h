@@ -36,9 +36,22 @@ class HistoryManager {
    *
    * @param[out] display The buffer to load the next action into
    *
-   * @return The
+   * @return A pointer to the new PixelBuffer to display
    */
   PixelBuffer* Redo(PixelBuffer* display);
+
+  /**
+   * @brief Loads the previous action saved into the specified PixelBuffer
+   *
+   * If there is a previous action saved, it will load it into the specified
+   * buffer, resizing as needed. Undo is possible as long as you haven't
+   * Undo'ed all the way to the original image, or Undo'ed possible_saves - 1
+   * times already.
+   *
+   * @param[out] display The buffer to load the previous action into
+   *
+   * @return A pointer to the new PixelBuffer to display
+   */
   PixelBuffer* Undo(PixelBuffer* display);
   void SaveCanvas(PixelBuffer* buff);
   void Init(PixelBuffer* blankCanvas);
@@ -48,12 +61,12 @@ class HistoryManager {
  private:
   HistoryManager(const HistoryManager& h) = delete;
   HistoryManager& operator=(const HistoryManager& h) = delete;
-  PixelBuffer** saved_buffers_;
+  PixelBuffer** saved_buffers_;  //< The array that saves the PixelBuffer* 's
   PixelBuffer* ResizeAndCopy(PixelBuffer* display);
-  int possible_saves_;
-  int current_save_;
-  int oldest_save_;
-  int newest_save_;
+  int possible_saves_;  //< Maximum number of images that can be saved
+  int current_save_;  //< Index of the current save
+  int oldest_save_;  //< Index of the oldest save
+  int newest_save_;  //< Index of the newest save
 };
 
 #endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_HISTORY_MANAGER_H_
