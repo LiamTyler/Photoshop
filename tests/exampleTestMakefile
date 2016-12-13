@@ -7,7 +7,7 @@ channels: | one.txt zero.txt
 	@echo Channels 5 5 0 Test has started
 
 # Create the image we are going to test with
-	@./build/bin/FlashPhoto resources/test-images/brainColor.jpg -channel 5 5 0 tests/test-images/brainColorChan550Test.jpg
+	@./build/bin/FlashPhoto resources/test-images/brainColor.jpg -channel .5 .5 0 tests/test-images/brainColorChan550Test.jpg
 
 # First, run -compare. If it returns with a 1, we know the files were invalid, or that
 # something went wrong in the c++ code. If it returns 0, we still have to check to
@@ -18,8 +18,8 @@ channels: | one.txt zero.txt
 			echo "test failed" ;\
 		else\
 			# the > /dev/null is a trick to not print anything (idk if works on mac)\
-			diff output.txt one.txt > /dev/null ;\
-			if [ $$? != "" ] ; then\
+			diff output.txt one.txt ;\
+			if [ $$? -ne 0 ] ; then\
 				echo "test failed on compare" ;\
 			fi ;\
 		fi
