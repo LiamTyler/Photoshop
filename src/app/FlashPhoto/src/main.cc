@@ -6,25 +6,48 @@
  * Copyright       : 2016 CSCI3081W TAs. All rights reserved.
  * Creation Date   : 2/15/15
  * Original Author : Seth Johnson
+ * Modified Author : Liam Tyler
+ * Modified Date   : 12/5/16
  *
  ******************************************************************************/
 
-/*******************************************************************************
- * Includes
- ******************************************************************************/
+#include <stdlib.h>
+#include <iostream>
+#include <iomanip>
+#include <string>
 #include "app/FlashPhoto/src/include/flashphoto_app.h"
 #include "lib/libimgtools/src/include/color_data.h"
+#include "lib/libimgtools/src/include/pixel_buffer.h"
+#include "lib/libimgtools/src/include/imgtools_interface.h"
+#include "lib/libimgtools/src/include/cmd_line_handler.h"
+#include "lib/libimgtools/src/include/image_handler.h"
+
+using image_tools::PixelBuffer;
+using std::cout;
+using std::endl;
+
 
 /*******************************************************************************
  * Functions
  ******************************************************************************/
 int main(int argc, char* argv[]) {
-  image_tools::FlashPhotoApp *app = new image_tools::FlashPhotoApp(800, 800);
-  app->Init(argc, argv, 50, 50,
+    if (argc > 1) {
+        CmdLineHandler c(argc, argv);
+        if (c.ProcessArguments()) {
+            // cout << "succeeded" << endl;
+            exit(0);
+        } else {
+            // cout << "failed" << endl;
+            exit(1);
+        }
+    } else {
+        image_tools::FlashPhotoApp *app =
+            new image_tools::FlashPhotoApp(800, 800);
+        app->Init(argc, argv, 50, 50,
             image_tools::ColorData(1, 1, static_cast<float>(0.95)));
-
-    // runMainLoop returns when the user closes the graphics window.
-    app->RunMainLoop();
-    delete app;
+        // runMainLoop returns when the user closes the graphics window.
+        app->RunMainLoop();
+        delete app;
+    }
     exit(0);
 }

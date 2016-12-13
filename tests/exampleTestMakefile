@@ -1,0 +1,48 @@
+.PHONY: all clean channels
+
+all: channels | tests/test-images
+	-@rm -f output.txt one.txt zero.txt
+
+channels: | one.txt zero.txt
+	@echo Channels 5 5 0 Test has started
+
+# Create the image we are going to test with
+	@./build/bin/FlashPhoto resources/test-images/brainColor.jpg -channel .5 .5 0 tests/test-images/brainColorChan550Test.jpg
+
+# First, run -compare. If it returns with a 1, we know the files were invalid, or that
+# something went wrong in the c++ code. If it returns 0, we still have to check to
+# see what was printed out (saved in output.txt) to see if the images are the same
+# or not. That's what the diff does
+	@./build/bin/FlashPhoto tests/golden_images/brainColorChan550.jpg -compare tests/test-images/brainColorChan550Test.jpg > output.txt ;\
+		if [ $$? -eq 1 ] ; then\
+			echo "test failed" ;\
+		else\
+			# the > /dev/null is a trick to not print anything (idk if works on mac)\
+			diff output.txt one.txt ;\
+			if [ $$? -ne 0 ] ; then\
+				echo "test failed on compare" ;\
+			fi ;\
+		fi
+
+# Here is an example of how to test when you know the input is bad.
+# Obviously, you can and should change the output messages on all of these
+	@./build/bin/FlashPhoto resources/test-images/brainColor.jpg -channel 5 5 tests/test-images/brainColorChan550Test.jpg > output.txt ;\
+# Note: The > output.txt above is just to supress the help message that should appear, since\
+# we don't need to know what the output is like when we run compare\
+		if [ $$? -ne 1 ] ; then\
+			echo "Test did not fail as expected" ;\
+		else\
+			echo "Test failed as expected" ;\
+		fi
+
+one.txt:
+	@echo 1 > one.txt
+zero.txt:
+	@echo 0 > zero.txt
+
+tests/test-images:
+	@mkdir tests/test-images
+
+clean:
+	@rm -rf tests/test-images
+	@rm -f output.txt one.txt zero.txt

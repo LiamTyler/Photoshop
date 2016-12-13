@@ -74,6 +74,8 @@ class ColorData {
   friend ColorData operator* (const ColorData& a, float f);
   friend ColorData operator+ (const ColorData& a, const ColorData& b);
   friend ColorData operator- (const ColorData& a, const ColorData& b);
+  friend bool operator== (const ColorData& a, const ColorData& b);
+  friend bool operator!= (const ColorData& a, const ColorData& b);
   friend std::ostream& operator<<(std::ostream& out, const ColorData& c);
 
  private:

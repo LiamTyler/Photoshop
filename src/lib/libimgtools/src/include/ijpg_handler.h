@@ -20,12 +20,19 @@
 
 using image_tools::PixelBuffer;
 
+/**
+ * @brief Class that handles with loading and saving of jpg images
+ *
+ */
 class IJPGHandler : public ImageHandler {
  public:
   static PixelBuffer* LoadImage(const std::string file_name);
   static bool SaveImage(const std::string file_name,
                         const PixelBuffer* buffer_to_save);
  private:
+  /**
+   * @brief Internal struct used while processing the image
+   */
   struct my_error_mgr {
     jpeg_error_mgr pub;  /* "public" fields */
     jmp_buf setjmp_buffer;  /* for return to caller */

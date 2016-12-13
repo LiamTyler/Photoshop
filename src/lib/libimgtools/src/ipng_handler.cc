@@ -20,7 +20,7 @@ using image_tools::PixelBuffer;
 
 // Load desired image to current buffer
 PixelBuffer* IPNGHandler::LoadImage(const std::string file_name) {
-    PixelBuffer* loaded_image_buffer = NULL;
+    PixelBuffer* loaded_image_buffer = nullptr;
     png_image image;
     memset(&image, 0, (sizeof image));
     image.version = PNG_IMAGE_VERSION;
