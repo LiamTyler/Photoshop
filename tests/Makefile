@@ -15,6 +15,8 @@
 #
 ################################################################################
 
+.PHONY: all clean channels
+
 golden:
 	# Channels
 	./build/bin/MIA resources/test_images/brainColor.jpg -channel 5 5 0 tests/golden_images/brainColorChan550.jpg
@@ -74,20 +76,43 @@ golden:
 	./build/bin/MIA resources/test_images/peppers.png -blur 5 -quantize 4 tests/golden_images/peppersBlur5Quan4.png
 	./build/bin/MIA resources/test_images/snaily.jpg -edge -blur 7 tests/golden_images/snailyEdgeBlur7.png
 
-all: channels
+all: channels | tests/test-images
+	-@rm -f output.txt one.txt zero.txt
 
-channels:
-	@echo Channels 5 5 0 Test has started
-	./build/bin/MIA resources/test-images/brainColor.jpg -channel 5 5 0 tests/test_images/brainColorChan550Test.jpg
-	ifeq((./build/bin/MIA tests/golden_images/brainColorChan550.jpg -compare tests/test_images/brainColorChan550Test.jpg), 0)
-		@echo Channels 5 5 0 Test Failed
-	endif
+channels: | one.txt zero.txt
+	@echo Channels 0.5 0.5 0 Test has started
+
+# Create the image we are going to test with
+	@./build/bin/MIA resources/test-images/brainColor.jpg -channel 0.5 0.5 0 tests/test-images/brainColorChan550Test.jpg
+
+# First, run -compare. If it returns with a 1, we know the files were invalid, or that
+# something went wrong in the c++ code. If it returns 0, we still have to check to
+# see what was printed out (saved in output.txt) to see if the images are the same
+# or not. That's what the diff does
+	@./build/bin/MIA tests/golden_images/brainColorChan550.jpg -compare tests/test-images/brainColorChan550Test.jpg > output.txt ;\
+		if [ $$? -eq 1 ] ; then\
+			echo "test failed" ;\
+		else\
+			# the > /dev/null is a trick to not print anything (idk if works on mac)\
+			diff output.txt one.txt ;\
+			if [ $$? -ne 0 ] ; then\
+				echo "Channels 0.5 0.5 0 Test failed on compare" ;\
+			fi ;\
+		fi
 
 	@echo Channels 1 0.5 0.25 jpg to png Test has started
-	./build/bin/MIA resources/test-images/brainColor.jpg -channel 1 0.5 0.25 tests/test_images/brainColorChan1525Test.png
-	ifeq((./build/bin/MIA tests/golden_images/brainColorChan1525.png -compare tests/test_images/brainColorChan1525Test.png), 0)
-		@echo Channels 1 0.5 0.25 Test Failed
-	endif
+
+	@./build/bin/MIA resources/test-images/brainColor.jpg -channel 1 0.5 0.25 tests/test_images/brainColorChan1525Test.png
+
+	@./build/bin/MIA tests/golden_images/brainColorChan1525.png -compare tests/test-images/brainColorChan1525Test.png > output.txt ;\
+		if [ $$? -eq 1 ] ; then\
+			echo "test failed" ;\
+		else\
+			diff output.txt one.txt ;\
+			if [ $$? -ne 0 ] ; then\
+				echo "Channels 1 0.5 0.25 jpg to png Test failed on compare" ;\
+			fi ;\
+		fi
 
 	@echo Channels 10 10 10 Test has started
 	./build/bin/MIA resources/test-images/brainColor.jpg -channel 10 10 10 tests/test_images/brainColorChan101010Test.jpg
@@ -119,6 +144,17 @@ channels:
 		@echo Channels 1 1 1 Test Failed
 	endif
 
+# Here is an example of how to test when you know the input is bad.
+# Obviously, you can and should change the output messages on all of these
+	@./build/bin/FlashPhoto resources/test-images/brainColor.jpg -channel 5 5 tests/test-images/brainColorChan550Test.jpg > output.txt ;\
+# Note: The > output.txt above is just to supress the help message that should appear, since\
+# we don't need to know what the output is like when we run compare\
+		if [ $$? -ne 1 ] ; then\
+			echo "Test did not fail as expected" ;\
+		else\
+			echo "Test failed as expected" ;\
+		fi
+
 	@echo Channels -1 1 1 Test has started
 	./build/bin/MIA resources/test-images/graphWithoutAlpha.png -channel -1 1 1 tests/test_images/graphWithoutAlphaChanMinus111Test.png ; if [ $$? -eq 1 ] ; then @echo Channels -1 1 1 Test Failed ; fi
 
@@ -135,16 +171,14 @@ channels:
 	@echo Channels Test has started
 	./build/bin/MIA resources/test-images/graphWithoutAlpha.png -channel tests/test_images/graphWithoutAlphaChanTest.png ; if [ $$? -eq 1 ] ; then @echo Channels Test Failed ; fi
 
+one.txt:
+	@echo 1 > one.txt
+zero.txt:
+	@echo 0 > zero.txt
 
+tests/test-images:
+	@mkdir tests/test-images
 
-
-
-
-
-
-
-
-
-
-
-
+clean:
+	@rm -rf tests/test-images
+	@rm -f output.txt one.txt zero.txt
