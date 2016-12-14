@@ -1,21 +1,20 @@
 /*******************************************************************************
- * Name            : mia_filter_manager.h
- * Project         : MIA
+ * Name            : flashphoto_filter_manager.h
+ * Project         : FlashPhoto
  * Module          : filter_manager
- * Description     : Header for MIAFilterManager class
- * Copyright       : 2016 CSCI3081W TAs. All rights reserved.
- * Creation Date   : Wed Sep 21 18:40:20 2016
- * Original Author : jharwell
+ * Description     : Header for FlashPhotoFilterManager class
+ * Copyright       : 2016 Group Bits Please
+ * Creation Date   : 12/14/16
+ * Original Author : Liam Tyler
  *
  ******************************************************************************/
 
-#ifndef SRC_APP_MIA_SRC_INCLUDE_MIA_FILTER_MANAGER_H_
-#define SRC_APP_MIA_SRC_INCLUDE_MIA_FILTER_MANAGER_H_
+#ifndef SRC_APP_FLASHPHOTO_SRC_INCLUDE_FLASHPHOTO_FILTER_MANAGER_H_
+#define SRC_APP_FLASHPHOTO_SRC_INCLUDE_FLASHPHOTO_FILTER_MANAGER_H_
 
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-/* FIXME: ADDITIONAL INCLUDES AS NECESSARY HERE :-) */
 #include "lib/libimgtools/src/include/filter_manager.h"
 
 /*******************************************************************************
@@ -31,9 +30,9 @@ namespace image_tools {
  * initialization of GLUI control elements for filters, filter creation,
  * application, deletion.
  */
-class MIAFilterManager : public FilterManager {
+class FlashPhotoFilterManager : public FilterManager {
  public:
-  MIAFilterManager();
+  FlashPhotoFilterManager();
 
   GLUI_Panel* InitGlui(const GLUI *const glui,
                        void (*s_gluicallback)(int));
@@ -41,4 +40,4 @@ class MIAFilterManager : public FilterManager {
 
 }  /* namespace image_tools */
 
-#endif  /* SRC_APP_MIA_SRC_INCLUDE_MIA_FILTER_MANAGER_H_ */
+#endif  // SRC_APP_FLASHPHOTO_SRC_INCLUDE_FLASHPHOTO_FILTER_MANAGER_H_
