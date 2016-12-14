@@ -20,7 +20,15 @@
 
 	<div class = "content">
 		<h1>Project Design</h1>
-
+        <p>
+            The way we approached the design of this project was by creating the library libimgtools, which is a collection of all things that any of our apps might want to use. The job of each application is merely to specify the selection of items desired and integrate it all together. We believe that this design is beneficial because, if we ever need to implement a new app, almost all of the relevant code should already be in the library shared among the applications. This way, there will be no need to refactor for each new application, or copy any code. As a result, we put most things into the src/lib/libimgtools directory: the code for the filters, tools, image processing, history manager, command line processing, and other managers. This gives us the benefit that any changes we want to make to the core functionality only need to be made in one place.
+        </p>
+        <p>
+            Another important benefit of this design is related to the filter and io managers. FlashPhoto and MIA both inherit from the filter and io managers in libimgtools and merely select the buttons they want available. These managers in libimgtools contain code for setting up buttons to enact any filter and all the general io capabilities. This gives us the benefit that, if we ever wish to change the graphical user interface for these two applications, it would be very easy to do so. Once again, customizing the applications is only a matter of choosing which buttons to use, not actually creating them or the functionality (since that is already done in libimgtools).
+        </p>
+        <p>
+            We felt that the ability to move to previous and next images was specific enough to MIA with it’s image stacks, that the code for that is contained within the src folder of MIA. Other than that, the only thing contained in the src folders of the two applications is the actual class declarations and mains for the applications themselves.
+        </p>
 	
 	</div>
 
