@@ -20,7 +20,201 @@
 
 	<div class = "content">
 		<h1>Adding a New Filter</h1>
+		<h2>Adding a New Invert Filter to FlashPhoto</h2>
 
+		<p>
+			1. Begin by creating an InvertFilter header file called invert_filter.h and place it in the include folder. Since the InvertFilter does not need a kernal, InvertFilter will inherit from the SimpleFilter class. Apart from the usual constructor and destructor, filters need an ApplyToColor method and a name, as shown below.
+		</p>
+		<p>
+			<font color=”#808080″><b>src/include/invert_filter.h</b></font>
+		</p>
+		<pre>
+#ifndef SRC_INCLUDE_INVERT_FILTER_H_
+#define SRC_INCLUDE_INVERT_FILTER_H_
+
+#include <string>
+#include "include/simple_filter.h"
+#include "include/color_data.h"
+
+using image_tools::ColorData;
+
+class InvertFilter : public SimpleFilter {
+ public:
+  InvertFilter();
+  ~InvertFilter();
+  float ApplyToColor(std::string, const ColorData& current);
+  std::string name(void) { return "Invert"; }
+};
+
+#endif  // SRC_INCLUDE_INVERT_FILTER_H_
+		</pre>
+		<p>
+			2. Next, create an InvertFilter C++ file called invert_filter.cc and place it in the src folder. The ApplyToColor method needs to be defined in a way that will give us the desired affect from the filter. ApplyToColor gets applied to each color, red, green, and blue, separately. We check which color got passed in to ApplyToColor, then adjust that color accordingly. In this case, for each color that gets passed in, we return 1.0 - the current color.
+		</p>
+		<p>
+			<font color=”#808080″><b>src/invert_filter.cc</b></font>
+		</p>
+		<pre>
+#include "include/invert_filter.h"
+#include <string>
+
+InvertFilter::InvertFilter() {}
+
+InvertFilter::~InvertFilter() {}
+
+float InvertFilter::ApplyToColor(std::string color,
+                                   const ColorData& current) {
+    float c;
+    
+    if (color == "red")
+        c = 1.0 - current.red();
+    else if (color == "green")
+        c = 1.0 - current.green();
+    else if (color == "blue")
+        c = 1.0 - current.blue();
+    else
+        std::cerr << "WRONG COLOR INPUT" << std::endl;
+
+    return c;
+}
+		</pre>
+		<p>
+
+			3. Third, we need to add the ApplyInvert method to the FilterManager class. In the filter_manager header file, add ApplyFilter as shown below.
+		</p>
+		<p>
+			<font color=”#808080″><b>src/include/filter_manager.h</b></font>
+		</p>
+		<pre>
+...
+
+void ApplySpecial(PixelBuffer* oldimage, PixelBuffer* newimage);
+
+\TODO(Adding A New Filter): Add ApplyInvert here
+void ApplyInvert(PixelBuffer* oldimage, PixelBuffer* newimage);
+
+...
+		</pre>
+		<p>
+			4. Then, add the ApplyInvert method to the filter_manager.cc file in the src folder. Create an InvertFilter object and call the ApplyFilter method. This method is the same for all of the SimpleFilters.
+		</p>
+		<p>
+			<font color=”#808080″><b>src/filter_manager.cc</b></font>
+		</p>
+    	<pre>
+    ...
+
+void FilterManager::ApplySpecial(PixelBuffer* oldimage,
+                                 PixelBuffer* newimage) {
+    std::cout << "Apply has been clicked for Special" << std::endl;
+    EmbossFilter emb;
+    emb.ApplyFilter(oldimage, newimage);
+}
+
+\TODO(Adding A New Filter): Add ApplyInvert method here
+void FilterManager::ApplyInvert(PixelBuffer* oldimage,
+                                 PixelBuffer* newimage) {
+    std::cout << "Apply has been clicked for Invert" << std::endl;
+    InvertFilter i;
+    i.ApplyFilter(oldimage, newimage);
+}
+
+...
+		</pre>
+		<p>
+			5. Be sure to include the invert_filter.h file at the top of the filter_manager.cc file.
+		</p>
+		<p>
+			<font color=”#808080″><b>src/filter_manager.cc</b></font>
+		</p>
+		<pre>
+    ...
+
+    #include "include/quantize_filter.h"
+    #include "include/threshold_filter.h"
+    #include "include/channels_filter.h"
+    #include "include/emboss_filter.h"
+    #include "include/saturation_filter.h"
+    \TODO(Adding A New Filter): Add include header file here
+    #include "include/invert_filter.h"
+
+    ...
+ 		</pre>
+ 		<p>
+			6. Next, you need to add the Filter to the User Interface. In filter_manager.cc, we need to add the InvertFilter panel and Apply button.  
+		</p>
+		<p>
+			<font color=”#808080″><b>src/filter_manager.cc</b></font>
+		</p>
+		<pre>
+...
+
+GLUI_Panel *edge_det_panel =
+    new GLUI_Panel(filter_panel, "Edge Detect");
+
+{
+    new GLUI_Button(edge_det_panel, "Apply",
+            UICtrl::UI_APPLY_EDGE, s_gluicallback);
+}
+
+\TODO(Adding A New Filter): Add InvertFilter panel and Apply button here
+GLUI_Panel *invert_panel =
+    new GLUI_Panel(filter_panel, "Invert");
+
+{
+    new GLUI_Button(invert_panel, "Apply",
+            UICtrl::UI_APPLY_INVERT, s_gluicallback);
+}
+
+...
+		</pre>
+		<p>
+			7. In the ui_ctrl.h file, add UI_APPLY_INVERT to the Type enum as shown below. UI_APPLY_INVERT must be placed after UI_APPLY_MOTION_BLUR but before UI_APPLY_SPECIAL_FILTER, since the buffers get switched for filters listed between those two filters, inclusively.
+		</p>
+		<p>
+			<font color=”#808080″><b>src/include/ui_ctrl.h</b></font>
+		</p>
+		<pre>
+...
+
+enum Type {
+
+...
+
+UI_APPLY_CHANNEL,
+UI_APPLY_QUANTIZE,
+UI_APPLY_MOTION_BLUR,
+\TODO(Adding A New Filter): Add UI_APPLY_INVERT_FILTER here
+UI_APPLY_INVERT,
+UI_APPLY_SPECIAL_FILTER,
+UI_UNDO,
+UI_REDO,
+UI_QUIT
+
+...
+    	</pre>
+    	<p>
+			8. Lastly, in flashphoto_app.cc, add the UICtrl::UI_APPLY_INVERT case to the GluiControl method.
+		</p>
+		<p>
+			<font color=”#808080″><b>src/flashphoto_app.cc</b></font>
+		</p>
+		<pre>
+...
+
+case UICtrl::UI_APPLY_QUANTIZE:
+    filter_manager_.ApplyQuantize(display_buffer_, scratch_buffer_);
+    break;
+case UICtrl::UI_APPLY_SPECIAL_FILTER:
+    filter_manager_.ApplySpecial(display_buffer_, scratch_buffer_);
+    break;
+// TODO(Adding A New Filter): Add UICtrl::UI_APPLY_INVERT case here
+case UICtrl::UI_APPLY_INVERT:
+    filter_manager_.ApplyInvert(display_buffer_, scratch_buffer_);
+    break;
+
+...
+		</pre>
 	
 	</div>
 
