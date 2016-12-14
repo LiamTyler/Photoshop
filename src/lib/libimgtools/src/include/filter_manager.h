@@ -109,8 +109,27 @@ class FilterManager {
    * @param glui GLUI handle
    * @param s_gluicallback Callback to install
    */
-  void InitGlui(const GLUI *const glui,
-                void (*s_gluicallback)(int));
+  virtual GLUI_Panel* InitGlui(const GLUI *const glui,
+                               void (*s_gluicallback)(int));
+
+ protected:
+  void AddBlurToGLUI(GLUI_Panel *filter_panel, void (*s_gluicallback)(int));
+  void AddMotionBlurToGLUI(GLUI_Panel *filter_panel,
+                           void (*s_gluicallback)(int));
+  void AddSharpenToGLUI(GLUI_Panel *filter_panel,
+                        void (*s_gluicallback)(int));
+  void AddEdgeDetectToGLUI(GLUI_Panel *filter_panel,
+                           void (*s_gluicallback)(int));
+  void AddThresholdToGLUI(GLUI_Panel *filter_panel,
+                          void (*s_gluicallback)(int));
+  void AddSaturationToGLUI(GLUI_Panel *filter_panel,
+                           void (*s_gluicallback)(int));
+  void AddChannelToGLUI(GLUI_Panel *filter_panel,
+                        void (*s_gluicallback)(int));
+  void AddQuantizationToGLUI(GLUI_Panel *filter_panel,
+                             void (*s_gluicallback)(int));
+  void AddEmbossToGLUI(GLUI_Panel *filter_panel,
+                             void (*s_gluicallback)(int));
 
  private:
   float channel_color_red_;
@@ -126,4 +145,5 @@ class FilterManager {
 };
 
 }  /* namespace image_tools */
+
 #endif  /* SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_FILTER_MANAGER_H_ */

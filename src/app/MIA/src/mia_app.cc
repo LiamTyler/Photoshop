@@ -115,57 +115,57 @@ void MIAApp::InitGlui(void) {
 void MIAApp::GluiControl(int control_id) {
   switch (control_id) {
     case UICtrl::UI_APPLY_SHARP:
-      filter_manager_.ApplySharpen();
+      // filter_manager_.ApplySharpen();
       break;
     case UICtrl::UI_APPLY_MOTION_BLUR:
-      filter_manager_.ApplyMotionBlur();
+      // filter_manager_.ApplyMotionBlur();
       break;
     case UICtrl::UI_APPLY_EDGE:
-      filter_manager_.ApplyEdgeDetect();
+      // filter_manager_.ApplyEdgeDetect();
       break;
     case UICtrl::UI_APPLY_THRESHOLD:
-      filter_manager_.ApplyThreshold();
+      // filter_manager_.ApplyThreshold();
       break;
     case UICtrl::UI_APPLY_SATURATE:
-      filter_manager_.ApplySaturate();
+      // filter_manager_.ApplySaturate();
       break;
     case UICtrl::UI_APPLY_CHANNEL:
-      filter_manager_.ApplyChannel();
+      // filter_manager_.ApplyChannel();
       break;
     case UICtrl::UI_APPLY_QUANTIZE:
-      filter_manager_.ApplyQuantize();
+      // filter_manager_.ApplyQuantize();
       break;
     case UICtrl::UI_APPLY_BLUR:
-      filter_manager_.ApplyBlur();
+      // filter_manager_.ApplyBlur();
       break;
     case UICtrl::UI_FILE_BROWSER:
-      io_manager_.set_image_file(io_manager_.file_browser()->get_file());
+      // io_manager_.set_image_file(io_manager_.file_browser()->get_file());
       break;
     case UICtrl::UI_LOAD_CANVAS_BUTTON:
-      io_manager_.LoadImageToCanvas();
+      // io_manager_.LoadImageToCanvas();
       break;
     case UICtrl::UI_LOAD_STAMP_BUTTON:
-      io_manager_.LoadImageToStamp();
+      // io_manager_.LoadImageToStamp();
       break;
     case UICtrl::UI_SAVE_CANVAS_BUTTON:
       // Reload the current directory:
-      io_manager_.file_browser()->fbreaddir(".");
-      io_manager_.SaveCanvasToFile();
+      // io_manager_.file_browser()->fbreaddir(".");
+      // io_manager_.SaveCanvasToFile();
       break;
     case UICtrl::UI_NEXT_IMAGE_BUTTON:
-      io_manager_.LoadNextImage();
+      // io_manager_.LoadNextImage();
       break;
     case UICtrl::UI_PREV_IMAGE_BUTTON:
-      io_manager_.LoadPreviousImage();
+      // io_manager_.LoadPreviousImage();
       break;
     case UICtrl::UI_FILE_NAME:
-      io_manager_.set_image_file(io_manager_.file_name());
+      // io_manager_.set_image_file(io_manager_.file_name());
       break;
     case UICtrl::UI_UNDO:
-      state_manager_.UndoOperation(display_buffer_);
+      // state_manager_.UndoOperation(display_buffer_);
       break;
     case UICtrl::UI_REDO:
-      state_manager_.RedoOperation(display_buffer_);
+      // state_manager_.RedoOperation(display_buffer_);
       break;
     default:
       break;
