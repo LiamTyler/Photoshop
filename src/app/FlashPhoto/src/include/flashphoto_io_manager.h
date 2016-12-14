@@ -1,16 +1,16 @@
 /*******************************************************************************
- * Name            : mia_io_manager.h
- * Project         : MIO
+ * Name            : flashphoto_io_manager.h
+ * Project         : FlashPhoto
  * Module          : io_manager
- * Description     : Header for MIA IOManager class
- * Copyright       : 2016 CSCI3081W TAs. All rights reserved.
- * Creation Date   : Wed Sep 21 20:40:20 2016
- * Original Author : jharwell
+ * Description     : Header for FlashPhoto IOManager class
+ * Copyright       : 2016 Group Bits Please
+ * Creation Date   : 12/13/16
+ * Original Author : Liam Tyler
  *
  ******************************************************************************/
 
-#ifndef SRC_APP_MIA_SRC_INCLUDE_MIA_IO_MANAGER_H_
-#define SRC_APP_MIA_SRC_INCLUDE_MIA_IO_MANAGER_H_
+#ifndef SRC_APP_FLASHPHOTO_SRC_INCLUDE_FLASHPHOTO_IO_MANAGER_H_
+#define SRC_APP_FLASHPHOTO_SRC_INCLUDE_FLASHPHOTO_IO_MANAGER_H_
 
 /*******************************************************************************
  * Includes
@@ -33,10 +33,10 @@ namespace image_tools {
  * validating the image type and filesystem permissions before the load will
  * proceed. It also handles loading an image from a file to the stamp.
  */
-class MIAIOManager : public IOManager {
+class FlashPhotoIOManager : public IOManager {
  public:
-  MIAIOManager();
-  ~MIAIOManager() {}
+  FlashPhotoIOManager() : IOManager() {}
+  ~FlashPhotoIOManager() {}
 
   /**
    * @brief Initialize GLUI control elements for IO management
@@ -48,34 +48,12 @@ class MIAIOManager : public IOManager {
   GLUI_Panel* InitGlui(const GLUI *const glui,
                        void (*s_gluicallback)(int));
 
-  void LoadImageToCanvas(void);
-  void LoadNextImage(void);
-  void LoadPreviousImage(void);
-  void set_image_file(const std::string & fname_in);
-  std::string image_name_plus_seq_offset(const std::string& filename,
-                                         int offset);
-
  private:
-  const int kDigitCount = 3;
-
-  /* Copy/move assignment/construction disallowed */
-  MIAIOManager(const MIAIOManager &rhs) = delete;
-  MIAIOManager& operator=(const MIAIOManager &rhs) = delete;
-
-  void prev_image_toggle(bool enabled) {
-    UICtrl::button_toggle(prev_image_btn_, enabled);
-  }
-  void next_image_toggle(bool enabled) {
-    UICtrl::button_toggle(next_image_btn_, enabled);
-  }
-
-  /* data members */
-  GLUI_Button* next_image_btn_;
-  GLUI_Button* prev_image_btn_;
-  std::string prev_file_name_;
-  std::string next_file_name_;
+  /* Copy/move assignent/construction disallowed */
+  FlashPhotoIOManager(const FlashPhotoIOManager &rhs) = delete;
+  FlashPhotoIOManager& operator=(const FlashPhotoIOManager &rhs) = delete;
 };
 
 }  /* namespace image_tools */
 
-#endif  /* SRC_APP_MIA_SRC_INCLUDE_MIA_IO_MANAGER_H_ */
+#endif  // SRC_APP_FLASHPHOTO_SRC_INCLUDE_FLASHPHOTO_IO_MANAGER_H_

@@ -20,8 +20,8 @@
 #include "lib/libimgtools/src/include/base_gfx_app.h"
 #include "lib/libimgtools/src/include/color_data.h"
 #include "lib/libimgtools/src/include/pixel_buffer.h"
-#include "lib/libimgtools/src/include/filter_manager.h"
-#include "lib/libimgtools/src/include/io_manager.h"
+#include "app/FlashPhoto/src/include/flashphoto_filter_manager.h"
+#include "app/FlashPhoto/src/include/flashphoto_io_manager.h"
 #include "lib/libimgtools/src/include/ui_ctrl.h"
 #include "lib/libimgtools/src/include/state_manager.h"
 #include "lib/libimgtools/src/include/tool.h"
@@ -105,12 +105,12 @@ class FlashPhotoApp : public BaseGfxApp {
   /**
    * @brief Manager for all filter operations
    */
-  FilterManager filter_manager_;
+  FlashPhotoFilterManager filter_manager_;
 
   /**
    * @brief Manager for all I/O operations
    */
-  IOManager io_manager_;
+  FlashPhotoIOManager io_manager_;
 
   /**
    * @brief Manager for redo/undo stack
