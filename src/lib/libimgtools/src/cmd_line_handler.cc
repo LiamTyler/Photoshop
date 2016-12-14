@@ -235,7 +235,10 @@ bool CmdLineHandler::ParseArguments() {
         if (index != IMAGE)
             commands_.push_back(index);
     }
-    return true;
+    if (input_file_ == "" || output_file_ == "")
+        return false;
+    else
+        return true;
 }
 
 void CmdLineHandler::PrintHelp() {
@@ -262,6 +265,7 @@ bool CmdLineHandler::RunCommands() {
     std::vector<std::string> images;
 
     string s = input_file_;
+    // cout << "input_file_ = " << s << endl;
     string directory = "./";
     string fname = input_file_;
     DIR *d;
@@ -299,8 +303,11 @@ bool CmdLineHandler::RunCommands() {
 
     bool ret = true;
 
+    if (images.size() == 0)
+        return false;
     for (int image_index = 0; image_index < images.size(); image_index++) {
         string curr = images[image_index];
+        // cout << "curr = " << curr << endl;
         in_img_ = ImageHandler::LoadImage(curr);
         if (in_img_ == nullptr) {
             ret = false;

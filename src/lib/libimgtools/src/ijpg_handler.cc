@@ -31,8 +31,9 @@ PixelBuffer* IJPGHandler::LoadImage(const std::string file_name) {
 
     // Open the file that was inputted
     if ((infile = fopen(file_name.c_str(), "rb")) == NULL) {
-        fprintf(stderr, "can't open %s\n", file_name.c_str());
-        std::cout << "ERROR: CANNOT READ JPG" << std::endl;
+        std::cout << "SHIT" << std::endl;
+        // fprintf(stderr, "can't open %s\n", file_name.c_str());
+        // std::cout << "ERROR: CANNOT READ JPG" << std::endl;
         return nullptr;
     }
 
