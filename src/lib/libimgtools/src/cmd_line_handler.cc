@@ -164,7 +164,6 @@ bool CmdLineHandler::is_number(const char* arg) {
 bool CmdLineHandler::ParseArguments() {
     for (; current_arg_ < argc_; current_arg_++) {
         Command index = get_index(argv_[current_arg_]);
-        // cout << "curr index: " << index << endl;
         if (index == ARG) {
             if (debug)
                 cout << "index == arg, command = " << argv_[current_arg_]
@@ -209,6 +208,7 @@ bool CmdLineHandler::ParseArguments() {
             case SATURATE:
                 saturate_amt_ = atof(argv_[++current_arg_]);
                 if (!(-10.0 <= saturate_amt_ && saturate_amt_ <= 10.0))
+                    return false;
                 break;
             case CHANNEL:
                 channel_red_amt_ = atof(argv_[++current_arg_]);
@@ -411,7 +411,7 @@ bool CmdLineHandler::ProcessArguments() {
 }
 
 void CmdLineHandler::PrintInfo() {
-    // cout << "Input image: " << input_file_ << endl;
+    cout << "Input image: " << input_file_ << endl;
     cout << "Output image: " << output_file_ << endl;
     int commands_size = commands_.size();
     for (int i = 0; i < commands_size; i++) {
