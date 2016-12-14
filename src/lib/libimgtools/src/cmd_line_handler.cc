@@ -12,6 +12,7 @@
 #include "lib/libimgtools/src/include/cmd_line_handler.h"
 #include <stdlib.h>
 #include <string.h>
+#include <dirent.h>
 #include <iostream>
 #include <iomanip>
 #include <string>
@@ -21,6 +22,7 @@
 #include "lib/libimgtools/src/include/image_handler.h"
 
 using image_tools::PixelBuffer;
+using std::string;
 using std::cout;
 using std::endl;
 
@@ -162,7 +164,6 @@ bool CmdLineHandler::is_number(const char* arg) {
 bool CmdLineHandler::ParseArguments() {
     for (; current_arg_ < argc_; current_arg_++) {
         Command index = get_index(argv_[current_arg_]);
-        // cout << "curr index: " << index << endl;
         if (index == ARG) {
             if (debug)
                 cout << "index == arg, command = " << argv_[current_arg_]
@@ -207,6 +208,7 @@ bool CmdLineHandler::ParseArguments() {
             case SATURATE:
                 saturate_amt_ = atof(argv_[++current_arg_]);
                 if (!(-10.0 <= saturate_amt_ && saturate_amt_ <= 10.0))
+                    return false;
                 break;
             case CHANNEL:
                 channel_red_amt_ = atof(argv_[++current_arg_]);
@@ -233,7 +235,10 @@ bool CmdLineHandler::ParseArguments() {
         if (index != IMAGE)
             commands_.push_back(index);
     }
-    return true;
+    if (input_file_ == "" || output_file_ == "")
+        return false;
+    else
+        return true;
 }
 
 void CmdLineHandler::PrintHelp() {
@@ -255,86 +260,142 @@ void CmdLineHandler::PrintHelp() {
 }
 
 bool CmdLineHandler::RunCommands() {
-    // Load up the input image first
-    if (input_file_ != "") {
-        if (ImageHandler::GetImageType(input_file_) !=
-                ImageHandler::UNKNOWN_IMAGE) {
-            in_img_ = ImageHandler::LoadImage(input_file_);
-            if (in_img_ == nullptr) {
-                return false;
-            } else {
-                int w = in_img_->width();
-                int h = in_img_->height();
-                out_img_ = new PixelBuffer(w, h,
-                        in_img_->background_color());
+    // Create list of images to process (can be more than one if using
+    // ### to signify a 'stack' of images
+    std::vector<std::string> images;
+
+    string s = input_file_;
+    // cout << "input_file_ = " << s << endl;
+    string directory = "./";
+    string fname = input_file_;
+    DIR *d;
+    struct dirent *dir;
+    std::size_t found = s.find_last_of("/");
+    if (found != string::npos) {
+        directory = s.substr(0, found + 1);
+        fname = s.substr(found + 1);
+    }
+
+    d = opendir(directory.c_str());
+    if (!d) {
+        return false;
+    } else {
+        int len = fname.length();
+        while ((dir = readdir(d)) != NULL) {
+            if (dir->d_type == DT_REG) {
+                // cout << dir->d_name << endl;
+                if (len == strlen(dir->d_name)) {
+                    bool match = true;
+                    for (int i = 0; i < len; i++) {
+                        if (fname[i] != dir->d_name[i] && !(fname[i] == '#' &&
+                                    isdigit(dir->d_name[i])))
+                            match = false;
+                    }
+                    if (match) {
+                        string c = directory + dir->d_name;
+                        images.push_back(c);
+                    }
+                }
             }
         }
-    } else {
-        return false;
+        closedir(d);
     }
 
-    // Process commands one at a time in order of appearance
-    int commands_size = commands_.size();
-    for (int i = 0; i < commands_size; i++) {
-        bool swap = true;
-        switch (commands_[i]) {
-            case HELP:
-                PrintHelp();
-                swap = false;
-                break;
-            case SHARPEN:
-                imgtools::ApplySharpen(in_img_, out_img_, sharpen_amt_);
-                break;
-            case EDGE:
-                imgtools::ApplyEdgeDetect(in_img_, out_img_);
-                break;
-            case THRESHOLD:
-                imgtools::ApplyThreshold(in_img_, out_img_,
-                        threshold_amt_);
-                break;
-            case QUANTIZE:
-                imgtools::ApplyQuantize(in_img_, out_img_, quantize_amt_);
-                break;
-            case BLUR:
-                imgtools::ApplyBlur(in_img_, out_img_, blur_amt_);
-                break;
-            case SATURATE:
-                imgtools::ApplySaturate(in_img_, out_img_, saturate_amt_);
-                break;
-            case CHANNEL:
-                imgtools::ApplyChannel(in_img_, out_img_, channel_red_amt_,
-                        channel_green_amt_, channel_blue_amt_);
-                break;
-            case COMPARE:
-                {
-                    delete out_img_;
-                    out_img_ = imgtools::LoadImage(output_file_);
-                    if (out_img_ == nullptr)
-                        return false;
-                    int ret = imgtools::CompareImages(in_img_, out_img_);
-                    cout << ret << endl;
-                    delete in_img_;
-                    delete out_img_;
-                    return true;
-                }
-            default:
-                swap = false;
-                if (debug)
-                    cout << "unrecognized switch case" << endl;
-        }
-        if (swap) {
-            PixelBuffer* tmp = in_img_;
-            in_img_ = out_img_;
-            out_img_ = tmp;
-        }
-    }
-    // Output the image created
     bool ret = true;
-    if (!imgtools::SaveImage(output_file_, in_img_))
-        ret = false;
 
-    delete in_img_;
-    delete out_img_;
+    if (images.size() == 0)
+        return false;
+    for (int image_index = 0; image_index < images.size(); image_index++) {
+        string curr = images[image_index];
+        // cout << "curr = " << curr << endl;
+        in_img_ = ImageHandler::LoadImage(curr);
+        if (in_img_ == nullptr) {
+            ret = false;
+            continue;
+        } else {
+            int w = in_img_->width();
+            int h = in_img_->height();
+            out_img_ = new PixelBuffer(w, h,
+                    in_img_->background_color());
+        }
+        // cout << "directory = " << directory << endl;
+        // cout << "fname = " << fname << endl;
+
+        string modified_out = output_file_;
+        // Find the modified output file name if there are #'s in it
+        if (fname.find("###") != string::npos) {
+            string before = fname.substr(0, fname.find("###"));
+            before = curr.substr(0, curr.find(before)) + before;
+            string numbers = curr.substr(before.length(), 3);
+            before = output_file_.substr(0, output_file_.find("###"));
+            modified_out = before + numbers + output_file_.substr(
+                           before.length() + 3);
+        }
+        // cout << "modified = " << modified_out << endl;
+
+        // Process commands one at a time in order of appearance
+        int commands_size = commands_.size();
+        for (int i = 0; i < commands_size; i++) {
+            bool swap = true;
+            switch (commands_[i]) {
+                case HELP:
+                    PrintHelp();
+                    swap = false;
+                    break;
+                case SHARPEN:
+                    imgtools::ApplySharpen(in_img_, out_img_, sharpen_amt_);
+                    break;
+                case EDGE:
+                    imgtools::ApplyEdgeDetect(in_img_, out_img_);
+                    break;
+                case THRESHOLD:
+                    imgtools::ApplyThreshold(in_img_, out_img_,
+                            threshold_amt_);
+                    break;
+                case QUANTIZE:
+                    imgtools::ApplyQuantize(in_img_, out_img_, quantize_amt_);
+                    break;
+                case BLUR:
+                    imgtools::ApplyBlur(in_img_, out_img_, blur_amt_);
+                    break;
+                case SATURATE:
+                    imgtools::ApplySaturate(in_img_, out_img_, saturate_amt_);
+                    break;
+                case CHANNEL:
+                    imgtools::ApplyChannel(in_img_, out_img_, channel_red_amt_,
+                            channel_green_amt_, channel_blue_amt_);
+                    break;
+                case COMPARE:
+                    delete out_img_;
+                    out_img_ = imgtools::LoadImage(modified_out);
+                    if (out_img_ == nullptr) {
+                        ret = false;
+                        delete in_img_;
+                        break;
+                    }
+                    cout << imgtools::CompareImages(in_img_, out_img_) << endl;
+                    break;
+                default:
+                    swap = false;
+                    if (debug)
+                        cout << "unrecognized switch case" << endl;
+            }
+            if (!ret)
+                break;
+
+            if (swap) {
+                PixelBuffer* tmp = in_img_;
+                in_img_ = out_img_;
+                out_img_ = tmp;
+            }
+        }
+        // Output the image created
+        if (!imgtools::SaveImage(modified_out, in_img_))
+            ret = false;
+
+        delete in_img_;
+        delete out_img_;
+    }
 
     return ret;
 }
@@ -357,7 +418,7 @@ bool CmdLineHandler::ProcessArguments() {
 }
 
 void CmdLineHandler::PrintInfo() {
-    // cout << "Input image: " << input_file_ << endl;
+    cout << "Input image: " << input_file_ << endl;
     cout << "Output image: " << output_file_ << endl;
     int commands_size = commands_.size();
     for (int i = 0; i < commands_size; i++) {
