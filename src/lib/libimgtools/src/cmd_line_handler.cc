@@ -311,8 +311,8 @@ bool CmdLineHandler::RunCommands() {
             out_img_ = new PixelBuffer(w, h,
                     in_img_->background_color());
         }
-        cout << "directory = " << directory << endl;
-        cout << "fname = " << fname << endl;
+        // cout << "directory = " << directory << endl;
+        // cout << "fname = " << fname << endl;
 
         string modified_out = output_file_;
         // Find the modified output file name if there are #'s in it
@@ -324,7 +324,7 @@ bool CmdLineHandler::RunCommands() {
             modified_out = before + numbers + output_file_.substr(
                            before.length() + 3);
         }
-        cout << "modified = " << modified_out << endl;
+        // cout << "modified = " << modified_out << endl;
 
         // Process commands one at a time in order of appearance
         int commands_size = commands_.size();
