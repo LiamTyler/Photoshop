@@ -32,7 +32,7 @@ void SimpleFilter::ApplyFilter(PixelBuffer* oldimage, PixelBuffer* newimage) {
             newColor.green(ApplyToColor("green", current));
             newColor.blue(ApplyToColor("blue", current));
             newColor.alpha(current.get_alpha());
-            newimage->set_pixel(c, r, newColor);
+            newimage->set_pixel(c, r, newColor.clamped_color());
         }
     }
 }
