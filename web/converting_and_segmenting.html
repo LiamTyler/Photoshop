@@ -20,8 +20,53 @@
 
 	<div class = "content">
 		<h1>Converting and Segmenting a CT Scan Using MIA</h1>
-		
-		
+		<h2>Converting and Segmenting a CT Scan Using the MIA Application</h2>
+        <ol>
+        <li>
+            To save our segmented scans in a new directory, we must first create the directory. To create the directory, run the following command in your terminal.
+        </li>
+        <pre>
+.mkdir &ltdirectory name&gt
+        </pre>
+		<li>
+            Open the MIA application by running the following command in your terminal.
+        </li>
+        <pre>
+./build/bin/MIA
+        </pre>
+		<li>
+            Find the first image you want to segment in the Image I/O panel on the right side of the Controls window.
+        </li>
+		<li>
+            Double click on the image. The name of the image should be in the "Image:" box.
+        </li>
+		<li>
+            Click on Load Canvas. You should see your scan in the MIA window.
+        </li>
+		<li>
+            To reduce noise, Blur the image by changing the Blur Amount to 2 and clicking on the "Blur" button.
+        </li>
+        <li>
+            To segment the image, change the number of Bins to 4 and click on the "Quantize" button
+        </li>
+        <li>
+            Now, find the directory you created in the Image I/O panel and double click on it.
+        </li>
+        <li>
+            In the "Image:" box, enter a new name for your segmented image.
+        </li>
+        <li>
+            Click on Save Canvas. You should see your new image in the Image I/O panel.
+        </li>
+        <li>
+            Find the next image you want to segment in the Image I/O panel on the right side of the Controls window, and repeat steps 4-10 to segment the next image.
+        </li>
+        <h2>Converting and Segmenting a CT Scan Using the Terminal</h2>
+		<ol>
+        <li>
+
+        </li>
+        </ol>
 
 	</div>
 
