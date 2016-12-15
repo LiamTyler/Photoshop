@@ -1,0 +1,64 @@
+\hypertarget{classSharpenKernal}{}\section{Sharpen\+Kernal Class Reference}
+\label{classSharpenKernal}\index{Sharpen\+Kernal@{Sharpen\+Kernal}}
+
+
+A sharpening kernel.  
+
+
+
+
+{\ttfamily \#include $<$sharpen\+\_\+kernal.\+h$>$}
+
+
+
+Inherits \hyperlink{classKernal}{Kernal}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Sharpen\+Kernal} (int amount)\hypertarget{classSharpenKernal_ae024d6171020297791a6c2c30317e3e9}{}\label{classSharpenKernal_ae024d6171020297791a6c2c30317e3e9}
+
+\item 
+int {\bfseries get\+\_\+amount} ()\hypertarget{classSharpenKernal_a8814008974a51cc9b8b38aa3bfffb8e5}{}\label{classSharpenKernal_a8814008974a51cc9b8b38aa3bfffb8e5}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classSharpenKernal_ad6806183812745821914b253374e0173}{Initialize\+Kernal} ()
+\begin{DoxyCompactList}\small\item\em Give each element in the kernal it\textquotesingle{}s value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries amount\+\_\+}\hypertarget{classSharpenKernal_a70cbca2b72dfa222566474d92aee1c40}{}\label{classSharpenKernal_a70cbca2b72dfa222566474d92aee1c40}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A sharpening kernel. 
+
+Defines a kernel that filters the colors of surrounding pixels out of each pixel, resulting in a sharper image when convolved with an image. Can be thought of as a high-\/pass filter. 
+
+\subsection{Member Function Documentation}
+\index{Sharpen\+Kernal@{Sharpen\+Kernal}!Initialize\+Kernal@{Initialize\+Kernal}}
+\index{Initialize\+Kernal@{Initialize\+Kernal}!Sharpen\+Kernal@{Sharpen\+Kernal}}
+\subsubsection[{\texorpdfstring{Initialize\+Kernal()}{InitializeKernal()}}]{\setlength{\rightskip}{0pt plus 5cm}void Sharpen\+Kernal\+::\+Initialize\+Kernal (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classSharpenKernal_ad6806183812745821914b253374e0173}{}\label{classSharpenKernal_ad6806183812745821914b253374e0173}
+
+
+Give each element in the kernal it\textquotesingle{}s value. 
+
+This function is implemented by all the inherited kernal classes, and each define the values in the kernal. 
+
+Implements \hyperlink{classKernal_a487ef0e4a0d37cb827b5c46750330952}{Kernal}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/include/sharpen\+\_\+kernal.\+h\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/sharpen\+\_\+kernal.\+cc\end{DoxyCompactItemize}

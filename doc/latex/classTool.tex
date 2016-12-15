@@ -1,0 +1,177 @@
+\hypertarget{classTool}{}\section{Tool Class Reference}
+\label{classTool}\index{Tool@{Tool}}
+
+
+\hyperlink{classTool}{Tool} is the representation of a particular Brush\+Work tool. This baseclass is abstract and does not provide a default mask. Tools inherited from this class M\+U\+ST\+:~\newline
+(1) Provide a name~\newline
+(2) Define the mask. You will get an assert error if you do not.~\newline
+Inherited classes may optionally override the default color\+\_\+blend\+\_\+math().  
+
+
+
+
+{\ttfamily \#include $<$tool.\+h$>$}
+
+
+
+Inherited by \hyperlink{classTBlur}{T\+Blur}, \hyperlink{classTCalligraphy}{T\+Calligraphy}, \hyperlink{classTEraser}{T\+Eraser}, \hyperlink{classTHighlighter}{T\+Highlighter}, \hyperlink{classTPen}{T\+Pen}, \hyperlink{classTRainbow}{T\+Rainbow}, \hyperlink{classTSprayCan}{T\+Spray\+Can}, and \hyperlink{classTStamp}{T\+Stamp}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Tool} (int width, int height)\hypertarget{classTool_a23a56267df546dc35df1821b361edf3c}{}\label{classTool_a23a56267df546dc35df1821b361edf3c}
+
+\item 
+virtual void \hyperlink{classTool_a03fdae3fde745872d82613ef44d2b6db}{Apply\+Tool} (\hyperlink{classimage__tools_1_1PixelBuffer}{image\+\_\+tools\+::\+Pixel\+Buffer} $\ast$buff, \hyperlink{classimage__tools_1_1ColorData}{image\+\_\+tools\+::\+Color\+Data} current\+\_\+color, int x, int y, int last\+\_\+x, int last\+\_\+y)
+\begin{DoxyCompactList}\small\item\em Default implementation for applying the tool to the Pixel\+Buffer. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classTool_a75aa418e0f85de582186ae019a4fc25e}{Update\+Tool} (int width, int height)
+\begin{DoxyCompactList}\small\item\em A function that some child classes will use to update themselves. \end{DoxyCompactList}\item 
+int {\bfseries get\+\_\+width} ()\hypertarget{classTool_ab8ff946d69d860478ae6b004291b9ad8}{}\label{classTool_ab8ff946d69d860478ae6b004291b9ad8}
+
+\item 
+int {\bfseries get\+\_\+height} ()\hypertarget{classTool_add1a33fd6177bb51bdb9060a56dbf7f9}{}\label{classTool_add1a33fd6177bb51bdb9060a56dbf7f9}
+
+\item 
+void {\bfseries set\+\_\+width} (int w)\hypertarget{classTool_a9a717324220867ba4cd21203de0e4597}{}\label{classTool_a9a717324220867ba4cd21203de0e4597}
+
+\item 
+void {\bfseries set\+\_\+height} (int h)\hypertarget{classTool_a99f10783bede1edf7b8af5a59b859137}{}\label{classTool_a99f10783bede1edf7b8af5a59b859137}
+
+\item 
+float $\ast$$\ast$ \hyperlink{classTool_a68dabcbd50e627e058b139fc47026c6f}{get\+\_\+mask} ()
+\begin{DoxyCompactList}\small\item\em Get the mask associated with the tool. \end{DoxyCompactList}\item 
+virtual std\+::string \hyperlink{classTool_a89abd746706ed78911924a47928d6d06}{name} (void)=0
+\begin{DoxyCompactList}\small\item\em The name of the tool. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Tool} (const \hyperlink{classTool}{Tool} \&t)=delete\hypertarget{classTool_adc48ba7a9bde5b4abfd50f447091ef76}{}\label{classTool_adc48ba7a9bde5b4abfd50f447091ef76}
+
+\item 
+\hyperlink{classTool}{Tool} \& {\bfseries operator=} (const \hyperlink{classTool}{Tool} \&t)=delete\hypertarget{classTool_adb82056c2a3b58a750bb69d9c7fc195d}{}\label{classTool_adb82056c2a3b58a750bb69d9c7fc195d}
+
+\item 
+void {\bfseries Allocate\+Mask} ()\hypertarget{classTool_ac76940d0e81ca4aae001983efddc1df0}{}\label{classTool_ac76940d0e81ca4aae001983efddc1df0}
+
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries width\+\_\+}\hypertarget{classTool_ac1e9a2cc2b6c0b615dbe0b6bb5baf148}{}\label{classTool_ac1e9a2cc2b6c0b615dbe0b6bb5baf148}
+
+\item 
+int {\bfseries height\+\_\+}\hypertarget{classTool_a65dcbb7d3bff1259976563380b8ab805}{}\label{classTool_a65dcbb7d3bff1259976563380b8ab805}
+
+\item 
+float $\ast$$\ast$ \hyperlink{classTool_abfb4bad0e97863dd73ba855b39531eb8}{mask\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{classTool}{Tool} is the representation of a particular Brush\+Work tool. This baseclass is abstract and does not provide a default mask. Tools inherited from this class M\+U\+ST\+:~\newline
+(1) Provide a name~\newline
+(2) Define the mask. You will get an assert error if you do not.~\newline
+Inherited classes may optionally override the default color\+\_\+blend\+\_\+math(). 
+
+\subsection{Member Function Documentation}
+\index{Tool@{Tool}!Apply\+Tool@{Apply\+Tool}}
+\index{Apply\+Tool@{Apply\+Tool}!Tool@{Tool}}
+\subsubsection[{\texorpdfstring{Apply\+Tool(image\+\_\+tools\+::\+Pixel\+Buffer $\ast$buff, image\+\_\+tools\+::\+Color\+Data current\+\_\+color, int x, int y, int last\+\_\+x, int last\+\_\+y)}{ApplyTool(image_tools::PixelBuffer *buff, image_tools::ColorData current_color, int x, int y, int last_x, int last_y)}}]{\setlength{\rightskip}{0pt plus 5cm}void Tool\+::\+Apply\+Tool (
+\begin{DoxyParamCaption}
+\item[{{\bf image\+\_\+tools\+::\+Pixel\+Buffer} $\ast$}]{buff, }
+\item[{{\bf image\+\_\+tools\+::\+Color\+Data}}]{current\+\_\+color, }
+\item[{int}]{x, }
+\item[{int}]{y, }
+\item[{int}]{last\+\_\+x, }
+\item[{int}]{last\+\_\+y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classTool_a03fdae3fde745872d82613ef44d2b6db}{}\label{classTool_a03fdae3fde745872d82613ef44d2b6db}
+
+
+Default implementation for applying the tool to the Pixel\+Buffer. 
+
+Uses the current\+\_\+color and last position of the tool being applied (last\+\_\+x and last\+\_\+y) to determine how to apply the mask to the buffer.
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em buff} & The buffer of pixels to apply the tool to \\
+\hline
+\mbox{\tt in}  & {\em current\+\_\+color} & The current color of the tool \\
+\hline
+\mbox{\tt in}  & {\em x} & The x position of where to apply the tool to \\
+\hline
+\mbox{\tt in}  & {\em y} & The y position of where to apply the tool to \\
+\hline
+\mbox{\tt in}  & {\em last\+\_\+x} & The x position of the last time the tool was applied (only applicable while the mouse is being dragged) \\
+\hline
+\mbox{\tt in}  & {\em last\+\_\+y} & The y position of the last time the tool was applied (only applicable while the mouse is being dragged)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+
+
+Reimplemented in \hyperlink{classTStamp_a5588cdf156847144e8e66a5db00be7c2}{T\+Stamp}, \hyperlink{classTBlur_a5cbb567f1a5fae0c313f9fbf733aff3c}{T\+Blur}, \hyperlink{classTRainbow_a9a2122d932a8df785b715b3cafd3b3a7}{T\+Rainbow}, \hyperlink{classTHighlighter_a2fdc00984b60b7b26866888f2f9f766d}{T\+Highlighter}, and \hyperlink{classTEraser_af3c3f1cf42dcf566673388c8c5492d13}{T\+Eraser}.
+
+\index{Tool@{Tool}!get\+\_\+mask@{get\+\_\+mask}}
+\index{get\+\_\+mask@{get\+\_\+mask}!Tool@{Tool}}
+\subsubsection[{\texorpdfstring{get\+\_\+mask()}{get_mask()}}]{\setlength{\rightskip}{0pt plus 5cm}float$\ast$$\ast$ Tool\+::get\+\_\+mask (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classTool_a68dabcbd50e627e058b139fc47026c6f}{}\label{classTool_a68dabcbd50e627e058b139fc47026c6f}
+
+
+Get the mask associated with the tool. 
+
+\begin{DoxyReturn}{Returns}
+The mask 
+\end{DoxyReturn}
+\index{Tool@{Tool}!name@{name}}
+\index{name@{name}!Tool@{Tool}}
+\subsubsection[{\texorpdfstring{name(void)=0}{name(void)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual std\+::string Tool\+::name (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classTool_a89abd746706ed78911924a47928d6d06}{}\label{classTool_a89abd746706ed78911924a47928d6d06}
+
+
+The name of the tool. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classTRainbow_a1eef09ba9059714fcf02e1830988ad41}{T\+Rainbow}, \hyperlink{classTStamp_ac4a470327038c405b42bbf1c76119500}{T\+Stamp}, \hyperlink{classTBlur_a245f204d4009ae94a423e5eee09d6515}{T\+Blur}, \hyperlink{classTHighlighter_a60d8b5d4d24b73a06f052e9e3f1f4e90}{T\+Highlighter}, \hyperlink{classTEraser_a7d1739530674f8f7b82485dd4337ecc5}{T\+Eraser}, \hyperlink{classTSprayCan_a7261eb9cbaedf904ba8bc23ae40d39c1}{T\+Spray\+Can}, \hyperlink{classTCalligraphy_ae1bba24c76980119648e29ab9ca2ae22}{T\+Calligraphy}, and \hyperlink{classTPen_af8bc78169471d078bc90b60b687f47ff}{T\+Pen}.
+
+\index{Tool@{Tool}!Update\+Tool@{Update\+Tool}}
+\index{Update\+Tool@{Update\+Tool}!Tool@{Tool}}
+\subsubsection[{\texorpdfstring{Update\+Tool(int width, int height)}{UpdateTool(int width, int height)}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Tool\+::\+Update\+Tool (
+\begin{DoxyParamCaption}
+\item[{int}]{width, }
+\item[{int}]{height}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classTool_a75aa418e0f85de582186ae019a4fc25e}{}\label{classTool_a75aa418e0f85de582186ae019a4fc25e}
+
+
+A function that some child classes will use to update themselves. 
+
+Currently depricated.
+
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\index{Tool@{Tool}!mask\+\_\+@{mask\+\_\+}}
+\index{mask\+\_\+@{mask\+\_\+}!Tool@{Tool}}
+\subsubsection[{\texorpdfstring{mask\+\_\+}{mask_}}]{\setlength{\rightskip}{0pt plus 5cm}float$\ast$$\ast$ Tool\+::mask\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classTool_abfb4bad0e97863dd73ba855b39531eb8}{}\label{classTool_abfb4bad0e97863dd73ba855b39531eb8}
+2D array of floats representing the mask 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/include/tool.\+h\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/tool.\+cc\end{DoxyCompactItemize}

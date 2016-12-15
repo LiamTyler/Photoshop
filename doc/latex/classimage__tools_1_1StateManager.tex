@@ -1,0 +1,66 @@
+\hypertarget{classimage__tools_1_1StateManager}{}\section{image\+\_\+tools\+:\+:State\+Manager Class Reference}
+\label{classimage__tools_1_1StateManager}\index{image\+\_\+tools\+::\+State\+Manager@{image\+\_\+tools\+::\+State\+Manager}}
+
+
+The manager for simulation state in Flash\+Photo.  
+
+
+
+
+{\ttfamily \#include $<$state\+\_\+manager.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries Init\+Glui} (const G\+L\+UI $\ast$const glui, void($\ast$s\+\_\+gluicallback)(int), \hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$display)\hypertarget{classimage__tools_1_1StateManager_ae21d58ebf1d69077c1d9056a56e04e86}{}\label{classimage__tools_1_1StateManager_ae21d58ebf1d69077c1d9056a56e04e86}
+
+\item 
+void {\bfseries Save} (\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$display)\hypertarget{classimage__tools_1_1StateManager_a7cc038e0f4f66f5a3a876ffa341af59c}{}\label{classimage__tools_1_1StateManager_a7cc038e0f4f66f5a3a876ffa341af59c}
+
+\item 
+\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$ \hyperlink{classimage__tools_1_1StateManager_a369d6cf8cc21eba158be014c668d48e2}{Undo\+Operation} (\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$display)\hypertarget{classimage__tools_1_1StateManager_a369d6cf8cc21eba158be014c668d48e2}{}\label{classimage__tools_1_1StateManager_a369d6cf8cc21eba158be014c668d48e2}
+
+\begin{DoxyCompactList}\small\item\em Undoes the last operation applied to the canvas (not permanently; it can still be re-\/done later) \end{DoxyCompactList}\item 
+\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$ \hyperlink{classimage__tools_1_1StateManager_a1fddcb9b8336a20f1c89026d46f6cc9a}{Redo\+Operation} (\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$display)\hypertarget{classimage__tools_1_1StateManager_a1fddcb9b8336a20f1c89026d46f6cc9a}{}\label{classimage__tools_1_1StateManager_a1fddcb9b8336a20f1c89026d46f6cc9a}
+
+\begin{DoxyCompactList}\small\item\em Re-\/does the last un-\/done operation applied to the canvas (not permanently; it can be undone again later) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries redo\+\_\+toggle} (bool select)\hypertarget{classimage__tools_1_1StateManager_af5b298291a12460eb3ab6c7af9c16e70}{}\label{classimage__tools_1_1StateManager_af5b298291a12460eb3ab6c7af9c16e70}
+
+\item 
+void {\bfseries undo\+\_\+toggle} (bool select)\hypertarget{classimage__tools_1_1StateManager_ab617fd412a4fa0d757cd96f5bf836dd0}{}\label{classimage__tools_1_1StateManager_ab617fd412a4fa0d757cd96f5bf836dd0}
+
+\item 
+{\bfseries State\+Manager} (const \hyperlink{classimage__tools_1_1StateManager}{State\+Manager} \&rhs)=delete\hypertarget{classimage__tools_1_1StateManager_ab3202a4aaa1fbf6415597218f6182530}{}\label{classimage__tools_1_1StateManager_ab3202a4aaa1fbf6415597218f6182530}
+
+\item 
+\hyperlink{classimage__tools_1_1StateManager}{State\+Manager} \& {\bfseries operator=} (const \hyperlink{classimage__tools_1_1StateManager}{State\+Manager} \&rhs)=delete\hypertarget{classimage__tools_1_1StateManager_a84c8b7a722a9e41da3569ad1d3a05f21}{}\label{classimage__tools_1_1StateManager_a84c8b7a722a9e41da3569ad1d3a05f21}
+
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classHistoryManager}{History\+Manager} $\ast$ {\bfseries history\+\_\+}\hypertarget{classimage__tools_1_1StateManager_aaf8e111aae4675ad01dd318428f25cc2}{}\label{classimage__tools_1_1StateManager_aaf8e111aae4675ad01dd318428f25cc2}
+
+\item 
+G\+L\+U\+I\+\_\+\+Button $\ast$ {\bfseries undo\+\_\+btn\+\_\+}\hypertarget{classimage__tools_1_1StateManager_adbe2820d914eb5ba08de3dfcc61aa82d}{}\label{classimage__tools_1_1StateManager_adbe2820d914eb5ba08de3dfcc61aa82d}
+
+\item 
+G\+L\+U\+I\+\_\+\+Button $\ast$ {\bfseries redo\+\_\+btn\+\_\+}\hypertarget{classimage__tools_1_1StateManager_a6fd0aef5e8fc7b52cf6f9de416ac4825}{}\label{classimage__tools_1_1StateManager_a6fd0aef5e8fc7b52cf6f9de416ac4825}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The manager for simulation state in Flash\+Photo. 
+
+Simulation state is defined as the sequence of operations that comprises the current canvas. An operation is defined as what happens during 1 click/drag operation, or when 1 button on the control panel that affects the canvas is clicked.
+
+A sequence of undos followed by some edits, followed by more undos will F\+I\+R\+ST undo the new edits, until you get back to the state before you made the edits. You will not be able to go back any further. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/include/state\+\_\+manager.\+h\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/state\+\_\+manager.\+cc\end{DoxyCompactItemize}

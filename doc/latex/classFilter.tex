@@ -1,0 +1,64 @@
+\hypertarget{classFilter}{}\section{Filter Class Reference}
+\label{classFilter}\index{Filter@{Filter}}
+
+
+The base class for all filters.  
+
+
+
+
+{\ttfamily \#include $<$filter.\+h$>$}
+
+
+
+Inherited by \hyperlink{classKernalFilter}{Kernal\+Filter}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classFilter_ab005e437143fe1b8d075eb7891441e89}{Apply\+Filter} (\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$oldimage, \hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$newimage)=0
+\begin{DoxyCompactList}\small\item\em Apply the filter to a Pixel\+Buffer. \end{DoxyCompactList}\item 
+virtual std\+::string {\bfseries name} (void)=0\hypertarget{classFilter_afad856c097408e1342ed55a91c325572}{}\label{classFilter_afad856c097408e1342ed55a91c325572}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The base class for all filters. 
+
+A \hyperlink{classFilter}{Filter} describes how to produce a new image based on some algorithm of filtering on a current image. 
+
+\subsection{Member Function Documentation}
+\index{Filter@{Filter}!Apply\+Filter@{Apply\+Filter}}
+\index{Apply\+Filter@{Apply\+Filter}!Filter@{Filter}}
+\subsubsection[{\texorpdfstring{Apply\+Filter(\+Pixel\+Buffer $\ast$oldimage, Pixel\+Buffer $\ast$newimage)=0}{ApplyFilter(PixelBuffer *oldimage, PixelBuffer *newimage)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Filter\+::\+Apply\+Filter (
+\begin{DoxyParamCaption}
+\item[{{\bf Pixel\+Buffer} $\ast$}]{oldimage, }
+\item[{{\bf Pixel\+Buffer} $\ast$}]{newimage}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classFilter_ab005e437143fe1b8d075eb7891441e89}{}\label{classFilter_ab005e437143fe1b8d075eb7891441e89}
+
+
+Apply the filter to a Pixel\+Buffer. 
+
+This is the method that gets called by all sublcasses of filter to apply the filter on oldimage, setting the created image into newimage.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em oldimage} & The image to apply the filter to \\
+\hline
+\mbox{\tt out}  & {\em newimage} & The iamge that will be produced\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None (newimage is where the filtered image will be) 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classKernalFilter_a26e481e4042dcacd0ceb7e6c9416c127}{Kernal\+Filter}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/include/filter.\+h\end{DoxyCompactItemize}

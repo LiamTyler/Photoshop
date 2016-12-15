@@ -1,0 +1,77 @@
+\hypertarget{namespacetool__utilities}{}\section{tool\+\_\+utilities Namespace Reference}
+\label{namespacetool__utilities}\index{tool\+\_\+utilities@{tool\+\_\+utilities}}
+
+
+namespace that defines helper functions for mostly the tools, and also the history manager  
+
+
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{namespacetool__utilities_a9f54b46e90a47c7f7fb1af62ef7ae46e}{Create\+Circle} (float $\ast$$\ast$mask, int height, int width, float radius)
+\begin{DoxyCompactList}\small\item\em Creates a cirle inside a mask. \end{DoxyCompactList}\item 
+void \hyperlink{namespacetool__utilities_ad06418c23ea570d7f905ebd6accd97d5}{Fill\+Mask} (float $\ast$$\ast$mask, int height, int width, float opacity)
+\begin{DoxyCompactList}\small\item\em Sets all elements in the mask to opacity. \end{DoxyCompactList}\item 
+void \hyperlink{namespacetool__utilities_aae8a6ceb9b492384c8240670e165d8df}{Copy\+Pixel\+Buffer} (\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$from, \hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$to, int x, int y)
+\begin{DoxyCompactList}\small\item\em Copies one pixel buffer onto another. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+namespace that defines helper functions for mostly the tools, and also the history manager 
+
+\subsection{Function Documentation}
+\index{tool\+\_\+utilities@{tool\+\_\+utilities}!Copy\+Pixel\+Buffer@{Copy\+Pixel\+Buffer}}
+\index{Copy\+Pixel\+Buffer@{Copy\+Pixel\+Buffer}!tool\+\_\+utilities@{tool\+\_\+utilities}}
+\subsubsection[{\texorpdfstring{Copy\+Pixel\+Buffer(\+Pixel\+Buffer $\ast$from, Pixel\+Buffer $\ast$to, int x, int y)}{CopyPixelBuffer(PixelBuffer *from, PixelBuffer *to, int x, int y)}}]{\setlength{\rightskip}{0pt plus 5cm}void tool\+\_\+utilities\+::\+Copy\+Pixel\+Buffer (
+\begin{DoxyParamCaption}
+\item[{{\bf Pixel\+Buffer} $\ast$}]{from, }
+\item[{{\bf Pixel\+Buffer} $\ast$}]{to, }
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacetool__utilities_aae8a6ceb9b492384c8240670e165d8df}{}\label{namespacetool__utilities_aae8a6ceb9b492384c8240670e165d8df}
+
+
+Copies one pixel buffer onto another. 
+
+Centers the \char`\"{}from\char`\"{} buffer ontot the \char`\"{}to\char`\"{} buffer at the specified x and y coordinates on the \char`\"{}to\char`\"{} buffer, then copies each pixel that is within the \char`\"{}to\char`\"{} buffer\textquotesingle{}s boundaries, onto the \char`\"{}to\char`\"{} buffer.
+
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+\index{tool\+\_\+utilities@{tool\+\_\+utilities}!Create\+Circle@{Create\+Circle}}
+\index{Create\+Circle@{Create\+Circle}!tool\+\_\+utilities@{tool\+\_\+utilities}}
+\subsubsection[{\texorpdfstring{Create\+Circle(float $\ast$$\ast$mask, int height, int width, float radius)}{CreateCircle(float **mask, int height, int width, float radius)}}]{\setlength{\rightskip}{0pt plus 5cm}void tool\+\_\+utilities\+::\+Create\+Circle (
+\begin{DoxyParamCaption}
+\item[{float $\ast$$\ast$}]{mask, }
+\item[{int}]{height, }
+\item[{int}]{width, }
+\item[{float}]{radius}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacetool__utilities_a9f54b46e90a47c7f7fb1af62ef7ae46e}{}\label{namespacetool__utilities_a9f54b46e90a47c7f7fb1af62ef7ae46e}
+
+
+Creates a cirle inside a mask. 
+
+Creates a circle of 1\textquotesingle{}s from the center of the mask, with the rest being 0\textquotesingle{}s.
+
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+\index{tool\+\_\+utilities@{tool\+\_\+utilities}!Fill\+Mask@{Fill\+Mask}}
+\index{Fill\+Mask@{Fill\+Mask}!tool\+\_\+utilities@{tool\+\_\+utilities}}
+\subsubsection[{\texorpdfstring{Fill\+Mask(float $\ast$$\ast$mask, int height, int width, float opacity)}{FillMask(float **mask, int height, int width, float opacity)}}]{\setlength{\rightskip}{0pt plus 5cm}void tool\+\_\+utilities\+::\+Fill\+Mask (
+\begin{DoxyParamCaption}
+\item[{float $\ast$$\ast$}]{mask, }
+\item[{int}]{height, }
+\item[{int}]{width, }
+\item[{float}]{opacity}
+\end{DoxyParamCaption}
+)}\hypertarget{namespacetool__utilities_ad06418c23ea570d7f905ebd6accd97d5}{}\label{namespacetool__utilities_ad06418c23ea570d7f905ebd6accd97d5}
+
+
+Sets all elements in the mask to opacity. 
+
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}

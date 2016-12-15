@@ -1,0 +1,221 @@
+\hypertarget{classimage__tools_1_1MIAIOManager}{}\section{image\+\_\+tools\+:\+:M\+I\+A\+I\+O\+Manager Class Reference}
+\label{classimage__tools_1_1MIAIOManager}\index{image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager@{image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager}}
+
+
+The manager for I/O operations in M\+IA. This includes initializing G\+L\+UI control elements related to image loading/saving, as well as handling the load/save operations themselves. The load operation includes validating the image type and filesystem permissions before the load will proceed. It also handles loading an image from a file to the stamp.  
+
+
+
+
+{\ttfamily \#include $<$mia\+\_\+io\+\_\+manager.\+h$>$}
+
+
+
+Inherits \hyperlink{classimage__tools_1_1IOManager}{image\+\_\+tools\+::\+I\+O\+Manager}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+G\+L\+U\+I\+\_\+\+Panel $\ast$ \hyperlink{classimage__tools_1_1MIAIOManager_a02267caa7b3b9746d45e5f89138c1376}{Init\+Glui} (const G\+L\+UI $\ast$const glui, void($\ast$s\+\_\+gluicallback)(int))
+\begin{DoxyCompactList}\small\item\em Initialize G\+L\+UI control elements for IO management. \end{DoxyCompactList}\item 
+std\+::string {\bfseries Get\+File} (void)\hypertarget{classimage__tools_1_1MIAIOManager_afd9bf4031933ced4273132d1ffdf4d76}{}\label{classimage__tools_1_1MIAIOManager_afd9bf4031933ced4273132d1ffdf4d76}
+
+\item 
+\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$ \hyperlink{classimage__tools_1_1MIAIOManager_aff41de4c44ff8416fa55c01c5e8042d5}{Load\+Image\+To\+Canvas} (\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$buff)
+\begin{DoxyCompactList}\small\item\em Load the current image into the buffer. \end{DoxyCompactList}\item 
+\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$ \hyperlink{classimage__tools_1_1MIAIOManager_a9a3dc0e1ceea23aef0013a60299bd778}{Load\+Selected\+Image\+To\+Canvas} (\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$buff, const std\+::string \&fname)
+\begin{DoxyCompactList}\small\item\em Load the given image into the buffer. \end{DoxyCompactList}\item 
+\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$ \hyperlink{classimage__tools_1_1MIAIOManager_ad945d8a5be8a8052fbef9f700a9a6288}{Load\+Next\+Image} (\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$buff)
+\begin{DoxyCompactList}\small\item\em Load the next image into the canvas. \end{DoxyCompactList}\item 
+\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$ \hyperlink{classimage__tools_1_1MIAIOManager_a59a7fe6d6fe2ea9c42709a91ab172e93}{Load\+Previous\+Image} (\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$buff)
+\begin{DoxyCompactList}\small\item\em Load the previous image into the canvas. \end{DoxyCompactList}\item 
+void \hyperlink{classimage__tools_1_1MIAIOManager_aaabbc33103a9d4753423ecba75984842}{set\+\_\+next\+\_\+previous} (void)\hypertarget{classimage__tools_1_1MIAIOManager_aaabbc33103a9d4753423ecba75984842}{}\label{classimage__tools_1_1MIAIOManager_aaabbc33103a9d4753423ecba75984842}
+
+\begin{DoxyCompactList}\small\item\em Set the next and previous text for the glui. \end{DoxyCompactList}\item 
+void \hyperlink{classimage__tools_1_1MIAIOManager_a209180ddcfe3bf43d8fd7c6635391ea4}{set\+\_\+image\+\_\+file} (const std\+::string \&fname\+\_\+in)
+\begin{DoxyCompactList}\small\item\em Set the image file. If the file is valid, enable loading/saving. \end{DoxyCompactList}\item 
+std\+::string {\bfseries image\+\_\+name\+\_\+plus\+\_\+seq\+\_\+offset} (const std\+::string \&filename, int offset)\hypertarget{classimage__tools_1_1MIAIOManager_ada4fae71b72e3a28ba40ffbc24ef8683}{}\label{classimage__tools_1_1MIAIOManager_ada4fae71b72e3a28ba40ffbc24ef8683}
+
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries M\+I\+A\+I\+O\+Manager} (const \hyperlink{classimage__tools_1_1MIAIOManager}{M\+I\+A\+I\+O\+Manager} \&rhs)=delete\hypertarget{classimage__tools_1_1MIAIOManager_a4705d1544a60d8275803487ec9b17be8}{}\label{classimage__tools_1_1MIAIOManager_a4705d1544a60d8275803487ec9b17be8}
+
+\item 
+\hyperlink{classimage__tools_1_1MIAIOManager}{M\+I\+A\+I\+O\+Manager} \& {\bfseries operator=} (const \hyperlink{classimage__tools_1_1MIAIOManager}{M\+I\+A\+I\+O\+Manager} \&rhs)=delete\hypertarget{classimage__tools_1_1MIAIOManager_a9ab2095006589dda25bbf2a8d1aca39e}{}\label{classimage__tools_1_1MIAIOManager_a9ab2095006589dda25bbf2a8d1aca39e}
+
+\item 
+void {\bfseries prev\+\_\+image\+\_\+toggle} (bool enabled)\hypertarget{classimage__tools_1_1MIAIOManager_a87cd4108946bdf57ad6f2eedd545e30c}{}\label{classimage__tools_1_1MIAIOManager_a87cd4108946bdf57ad6f2eedd545e30c}
+
+\item 
+void {\bfseries next\+\_\+image\+\_\+toggle} (bool enabled)\hypertarget{classimage__tools_1_1MIAIOManager_a2b1effd6e28593276280f8665cd6c6b3}{}\label{classimage__tools_1_1MIAIOManager_a2b1effd6e28593276280f8665cd6c6b3}
+
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const int {\bfseries k\+Digit\+Count} = 3\hypertarget{classimage__tools_1_1MIAIOManager_ae23ff91257f13ceb716b3f6b42d1decc}{}\label{classimage__tools_1_1MIAIOManager_ae23ff91257f13ceb716b3f6b42d1decc}
+
+\item 
+G\+L\+U\+I\+\_\+\+Button $\ast$ {\bfseries next\+\_\+image\+\_\+btn\+\_\+}\hypertarget{classimage__tools_1_1MIAIOManager_ac460a985e354d6723c9994f67a242e58}{}\label{classimage__tools_1_1MIAIOManager_ac460a985e354d6723c9994f67a242e58}
+
+\item 
+G\+L\+U\+I\+\_\+\+Button $\ast$ {\bfseries prev\+\_\+image\+\_\+btn\+\_\+}\hypertarget{classimage__tools_1_1MIAIOManager_a5a5240d979e795fb3525a3c2b71dd162}{}\label{classimage__tools_1_1MIAIOManager_a5a5240d979e795fb3525a3c2b71dd162}
+
+\item 
+std\+::string {\bfseries prev\+\_\+file\+\_\+name\+\_\+}\hypertarget{classimage__tools_1_1MIAIOManager_a19135385f2e4f3b2cc1df586738672e8}{}\label{classimage__tools_1_1MIAIOManager_a19135385f2e4f3b2cc1df586738672e8}
+
+\item 
+std\+::string {\bfseries next\+\_\+file\+\_\+name\+\_\+}\hypertarget{classimage__tools_1_1MIAIOManager_a5d047c8bdf266f5e6f1b99b744f2bc9d}{}\label{classimage__tools_1_1MIAIOManager_a5d047c8bdf266f5e6f1b99b744f2bc9d}
+
+\item 
+std\+::string {\bfseries current\+\_\+file\+\_\+}\hypertarget{classimage__tools_1_1MIAIOManager_a4180b729e1a48281ccbae79d6f69e5c0}{}\label{classimage__tools_1_1MIAIOManager_a4180b729e1a48281ccbae79d6f69e5c0}
+
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+The manager for I/O operations in M\+IA. This includes initializing G\+L\+UI control elements related to image loading/saving, as well as handling the load/save operations themselves. The load operation includes validating the image type and filesystem permissions before the load will proceed. It also handles loading an image from a file to the stamp. 
+
+\subsection{Member Function Documentation}
+\index{image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager@{image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager}!Init\+Glui@{Init\+Glui}}
+\index{Init\+Glui@{Init\+Glui}!image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager@{image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager}}
+\subsubsection[{\texorpdfstring{Init\+Glui(const G\+L\+U\+I $\ast$const glui, void($\ast$s\+\_\+gluicallback)(int))}{InitGlui(const GLUI *const glui, void(*s_gluicallback)(int))}}]{\setlength{\rightskip}{0pt plus 5cm}G\+L\+U\+I\+\_\+\+Panel $\ast$ image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager\+::\+Init\+Glui (
+\begin{DoxyParamCaption}
+\item[{const G\+L\+UI $\ast$const}]{glui, }
+\item[{void($\ast$)(int)}]{s\+\_\+gluicallback}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classimage__tools_1_1MIAIOManager_a02267caa7b3b9746d45e5f89138c1376}{}\label{classimage__tools_1_1MIAIOManager_a02267caa7b3b9746d45e5f89138c1376}
+
+
+Initialize G\+L\+UI control elements for IO management. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em glui} & G\+L\+UI handle \\
+\hline
+{\em s\+\_\+gluicallback} & Callback to install \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The initialized IO panel handle 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classimage__tools_1_1IOManager_a5038100a2a640a3343c4715101eec120}{image\+\_\+tools\+::\+I\+O\+Manager}.
+
+\index{image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager@{image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager}!Load\+Image\+To\+Canvas@{Load\+Image\+To\+Canvas}}
+\index{Load\+Image\+To\+Canvas@{Load\+Image\+To\+Canvas}!image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager@{image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager}}
+\subsubsection[{\texorpdfstring{Load\+Image\+To\+Canvas(\+Pixel\+Buffer $\ast$buff)}{LoadImageToCanvas(PixelBuffer *buff)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Pixel\+Buffer} $\ast$ image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager\+::\+Load\+Image\+To\+Canvas (
+\begin{DoxyParamCaption}
+\item[{{\bf Pixel\+Buffer} $\ast$}]{buff}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classimage__tools_1_1MIAIOManager_aff41de4c44ff8416fa55c01c5e8042d5}{}\label{classimage__tools_1_1MIAIOManager_aff41de4c44ff8416fa55c01c5e8042d5}
+
+
+Load the current image into the buffer. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em buff} & The buffer to load the image into\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The new image 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classimage__tools_1_1IOManager_a20f5ccaeafbeb5e0ef7671dc2b61ce8c}{image\+\_\+tools\+::\+I\+O\+Manager}.
+
+\index{image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager@{image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager}!Load\+Next\+Image@{Load\+Next\+Image}}
+\index{Load\+Next\+Image@{Load\+Next\+Image}!image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager@{image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager}}
+\subsubsection[{\texorpdfstring{Load\+Next\+Image(\+Pixel\+Buffer $\ast$buff)}{LoadNextImage(PixelBuffer *buff)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Pixel\+Buffer} $\ast$ image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager\+::\+Load\+Next\+Image (
+\begin{DoxyParamCaption}
+\item[{{\bf Pixel\+Buffer} $\ast$}]{buff}
+\end{DoxyParamCaption}
+)}\hypertarget{classimage__tools_1_1MIAIOManager_ad945d8a5be8a8052fbef9f700a9a6288}{}\label{classimage__tools_1_1MIAIOManager_ad945d8a5be8a8052fbef9f700a9a6288}
+
+
+Load the next image into the canvas. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em buff} & The buffer to load the image into\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The next image 
+\end{DoxyReturn}
+\index{image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager@{image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager}!Load\+Previous\+Image@{Load\+Previous\+Image}}
+\index{Load\+Previous\+Image@{Load\+Previous\+Image}!image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager@{image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager}}
+\subsubsection[{\texorpdfstring{Load\+Previous\+Image(\+Pixel\+Buffer $\ast$buff)}{LoadPreviousImage(PixelBuffer *buff)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Pixel\+Buffer} $\ast$ image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager\+::\+Load\+Previous\+Image (
+\begin{DoxyParamCaption}
+\item[{{\bf Pixel\+Buffer} $\ast$}]{buff}
+\end{DoxyParamCaption}
+)}\hypertarget{classimage__tools_1_1MIAIOManager_a59a7fe6d6fe2ea9c42709a91ab172e93}{}\label{classimage__tools_1_1MIAIOManager_a59a7fe6d6fe2ea9c42709a91ab172e93}
+
+
+Load the previous image into the canvas. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em buff} & The buffer to load the image into\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The previous image 
+\end{DoxyReturn}
+\index{image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager@{image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager}!Load\+Selected\+Image\+To\+Canvas@{Load\+Selected\+Image\+To\+Canvas}}
+\index{Load\+Selected\+Image\+To\+Canvas@{Load\+Selected\+Image\+To\+Canvas}!image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager@{image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager}}
+\subsubsection[{\texorpdfstring{Load\+Selected\+Image\+To\+Canvas(\+Pixel\+Buffer $\ast$buff, const std\+::string \&fname)}{LoadSelectedImageToCanvas(PixelBuffer *buff, const std::string &fname)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Pixel\+Buffer} $\ast$ image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager\+::\+Load\+Selected\+Image\+To\+Canvas (
+\begin{DoxyParamCaption}
+\item[{{\bf Pixel\+Buffer} $\ast$}]{buff, }
+\item[{const std\+::string \&}]{fname}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classimage__tools_1_1MIAIOManager_a9a3dc0e1ceea23aef0013a60299bd778}{}\label{classimage__tools_1_1MIAIOManager_a9a3dc0e1ceea23aef0013a60299bd778}
+
+
+Load the given image into the buffer. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em buff} & The buffer to load the image into \\
+\hline
+\mbox{\tt in}  & {\em fname} & The name of the image to load\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The new image 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classimage__tools_1_1IOManager_a60acc367c91d9349b35f7f846d569418}{image\+\_\+tools\+::\+I\+O\+Manager}.
+
+\index{image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager@{image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager}!set\+\_\+image\+\_\+file@{set\+\_\+image\+\_\+file}}
+\index{set\+\_\+image\+\_\+file@{set\+\_\+image\+\_\+file}!image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager@{image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager}}
+\subsubsection[{\texorpdfstring{set\+\_\+image\+\_\+file(const std\+::string \&fname\+\_\+in)}{set_image_file(const std::string &fname_in)}}]{\setlength{\rightskip}{0pt plus 5cm}void image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager\+::set\+\_\+image\+\_\+file (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{filepath}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classimage__tools_1_1MIAIOManager_a209180ddcfe3bf43d8fd7c6635391ea4}{}\label{classimage__tools_1_1MIAIOManager_a209180ddcfe3bf43d8fd7c6635391ea4}
+
+
+Set the image file. If the file is valid, enable loading/saving. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filepath} & Pathname of the file \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \hyperlink{classimage__tools_1_1IOManager_a9ddac98843256d25442aba6c963e144a}{image\+\_\+tools\+::\+I\+O\+Manager}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/liam/\+Documents/\+School/3081/project/src/app/\+M\+I\+A/src/include/mia\+\_\+io\+\_\+manager.\+h\item 
+/home/liam/\+Documents/\+School/3081/project/src/app/\+M\+I\+A/src/mia\+\_\+io\+\_\+manager.\+cc\end{DoxyCompactItemize}

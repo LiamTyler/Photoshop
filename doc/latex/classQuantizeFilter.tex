@@ -1,0 +1,77 @@
+\hypertarget{classQuantizeFilter}{}\section{Quantize\+Filter Class Reference}
+\label{classQuantizeFilter}\index{Quantize\+Filter@{Quantize\+Filter}}
+
+
+Implements a quantization filter.  
+
+
+
+
+{\ttfamily \#include $<$quantize\+\_\+filter.\+h$>$}
+
+
+
+Inherits \hyperlink{classSimpleFilter}{Simple\+Filter}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Quantize\+Filter} (int bins)\hypertarget{classQuantizeFilter_a280a83e767ac5d3ca69136242f7219dd}{}\label{classQuantizeFilter_a280a83e767ac5d3ca69136242f7219dd}
+
+\item 
+float \hyperlink{classQuantizeFilter_ae76bd6744e50c5cb48a68f93dfb596fc}{Apply\+To\+Color} (std\+::string, const \hyperlink{classimage__tools_1_1ColorData}{Color\+Data} \&current)
+\begin{DoxyCompactList}\small\item\em Calculate the new value for the color that is passed in. \end{DoxyCompactList}\item 
+std\+::string {\bfseries name} (void)\hypertarget{classQuantizeFilter_a65150819e8a1b50aa1fae29069d0031f}{}\label{classQuantizeFilter_a65150819e8a1b50aa1fae29069d0031f}
+
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classQuantizeFilter_aaa5f146423a5263ec3690098917bd5dc}{bins\+\_\+}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implements a quantization filter. 
+
+Reduce the amount of information compromising an image by sorting each pixel into one of N predefined bins that cover the full range of R\+GB (0 -\/ 1.\+0) 
+
+\subsection{Member Function Documentation}
+\index{Quantize\+Filter@{Quantize\+Filter}!Apply\+To\+Color@{Apply\+To\+Color}}
+\index{Apply\+To\+Color@{Apply\+To\+Color}!Quantize\+Filter@{Quantize\+Filter}}
+\subsubsection[{\texorpdfstring{Apply\+To\+Color(std\+::string, const Color\+Data \&current)}{ApplyToColor(std::string, const ColorData &current)}}]{\setlength{\rightskip}{0pt plus 5cm}float Quantize\+Filter\+::\+Apply\+To\+Color (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{color, }
+\item[{const {\bf Color\+Data} \&}]{current}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classQuantizeFilter_ae76bd6744e50c5cb48a68f93dfb596fc}{}\label{classQuantizeFilter_ae76bd6744e50c5cb48a68f93dfb596fc}
+
+
+Calculate the new value for the color that is passed in. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em color} & The color to apply the algorithm to \\
+\hline
+\mbox{\tt in}  & {\em current} & The Color\+Data object of the pixel that is currently being recalculated\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The new value of the color requested 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classSimpleFilter_a4929140e4fa49ea630267e8562c4d0f1}{Simple\+Filter}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Quantize\+Filter@{Quantize\+Filter}!bins\+\_\+@{bins\+\_\+}}
+\index{bins\+\_\+@{bins\+\_\+}!Quantize\+Filter@{Quantize\+Filter}}
+\subsubsection[{\texorpdfstring{bins\+\_\+}{bins_}}]{\setlength{\rightskip}{0pt plus 5cm}int Quantize\+Filter\+::bins\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classQuantizeFilter_aaa5f146423a5263ec3690098917bd5dc}{}\label{classQuantizeFilter_aaa5f146423a5263ec3690098917bd5dc}
+Number of bins to sort the colors into 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/include/quantize\+\_\+filter.\+h\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/quantize\+\_\+filter.\+cc\end{DoxyCompactItemize}

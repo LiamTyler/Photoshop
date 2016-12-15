@@ -1,0 +1,241 @@
+\hypertarget{classimage__tools_1_1IOManager}{}\section{image\+\_\+tools\+:\+:I\+O\+Manager Class Reference}
+\label{classimage__tools_1_1IOManager}\index{image\+\_\+tools\+::\+I\+O\+Manager@{image\+\_\+tools\+::\+I\+O\+Manager}}
+
+
+The manager for I/O operations in Flash\+Photo. This includes initializing G\+L\+UI control elements related to image loading/saving, as well as handling the load/save operations themselves. The load operation includes validating the image type and filesystem permissions before the load will proceed. It also handles loading an image from a file to the stamp.  
+
+
+
+
+{\ttfamily \#include $<$io\+\_\+manager.\+h$>$}
+
+
+
+Inherited by \hyperlink{classimage__tools_1_1FlashPhotoIOManager}{image\+\_\+tools\+::\+Flash\+Photo\+I\+O\+Manager}, and \hyperlink{classimage__tools_1_1MIAIOManager}{image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual G\+L\+U\+I\+\_\+\+Panel $\ast$ \hyperlink{classimage__tools_1_1IOManager_a5038100a2a640a3343c4715101eec120}{Init\+Glui} (const G\+L\+UI $\ast$const glui, void($\ast$s\+\_\+gluicallback)(int))
+\begin{DoxyCompactList}\small\item\em Initialize G\+L\+UI control elements for IO management. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classimage__tools_1_1IOManager_a9ddac98843256d25442aba6c963e144a}{set\+\_\+image\+\_\+file} (const std\+::string \&filepath)
+\begin{DoxyCompactList}\small\item\em Set the image file. If the file is valid, enable loading/saving. \end{DoxyCompactList}\item 
+const std\+::string \& \hyperlink{classimage__tools_1_1IOManager_a667da573afc3fc0977408a0bf669f448}{file\+\_\+name} (void)
+\begin{DoxyCompactList}\small\item\em Get the current image file name. \end{DoxyCompactList}\item 
+G\+L\+U\+I\+\_\+\+File\+Browser $\ast$ \hyperlink{classimage__tools_1_1IOManager_ab58911faeeb831cc1f62aec390718469}{file\+\_\+browser} (void)
+\begin{DoxyCompactList}\small\item\em Get a handle on the G\+L\+UI file browser. \end{DoxyCompactList}\item 
+virtual \hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$ \hyperlink{classimage__tools_1_1IOManager_a20f5ccaeafbeb5e0ef7671dc2b61ce8c}{Load\+Image\+To\+Canvas} (\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$buff)\hypertarget{classimage__tools_1_1IOManager_a20f5ccaeafbeb5e0ef7671dc2b61ce8c}{}\label{classimage__tools_1_1IOManager_a20f5ccaeafbeb5e0ef7671dc2b61ce8c}
+
+\begin{DoxyCompactList}\small\item\em Load the current image in the file browser to the canvas. \end{DoxyCompactList}\item 
+virtual \hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$ \hyperlink{classimage__tools_1_1IOManager_a60acc367c91d9349b35f7f846d569418}{Load\+Selected\+Image\+To\+Canvas} (\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$buff, const std\+::string \&fname)\hypertarget{classimage__tools_1_1IOManager_a60acc367c91d9349b35f7f846d569418}{}\label{classimage__tools_1_1IOManager_a60acc367c91d9349b35f7f846d569418}
+
+\begin{DoxyCompactList}\small\item\em Load the selected image to the canvas. \end{DoxyCompactList}\item 
+void \hyperlink{classimage__tools_1_1IOManager_a0e22f92f4e0ede3033a8c67e7b10171a}{Load\+Image\+To\+Stamp} (\hyperlink{classTStamp}{T\+Stamp} $\ast$t)\hypertarget{classimage__tools_1_1IOManager_a0e22f92f4e0ede3033a8c67e7b10171a}{}\label{classimage__tools_1_1IOManager_a0e22f92f4e0ede3033a8c67e7b10171a}
+
+\begin{DoxyCompactList}\small\item\em Load the selected image file to the stamp. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classimage__tools_1_1IOManager_a6352ec41ae0eb30ad83e7a092577e6a1}{Save\+Canvas\+To\+File} (const \hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$buffer\+To\+Save)\hypertarget{classimage__tools_1_1IOManager_a6352ec41ae0eb30ad83e7a092577e6a1}{}\label{classimage__tools_1_1IOManager_a6352ec41ae0eb30ad83e7a092577e6a1}
+
+\begin{DoxyCompactList}\small\item\em Save the current state of the canvas to a file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries Add\+Save\+Canvas\+To\+G\+L\+UI} (G\+L\+U\+I\+\_\+\+Panel $\ast$image\+\_\+panel, void($\ast$s\+\_\+gluicallback)(int))\hypertarget{classimage__tools_1_1IOManager_a600cf7d9a1b1a86cbb2201fc7ec7b528}{}\label{classimage__tools_1_1IOManager_a600cf7d9a1b1a86cbb2201fc7ec7b528}
+
+\item 
+void {\bfseries Add\+Load\+Stamp\+To\+G\+L\+UI} (G\+L\+U\+I\+\_\+\+Panel $\ast$image\+\_\+panel, void($\ast$s\+\_\+gluicallback)(int))\hypertarget{classimage__tools_1_1IOManager_a39e6a658f7d97741e09c1cec9ad08396}{}\label{classimage__tools_1_1IOManager_a39e6a658f7d97741e09c1cec9ad08396}
+
+\item 
+void {\bfseries Add\+File\+Browser\+To\+G\+L\+UI} (G\+L\+U\+I\+\_\+\+Panel $\ast$image\+\_\+panel, void($\ast$s\+\_\+gluicallback)(int))\hypertarget{classimage__tools_1_1IOManager_a078d05c79a2a954c38050aa4f4985768}{}\label{classimage__tools_1_1IOManager_a078d05c79a2a954c38050aa4f4985768}
+
+\item 
+void {\bfseries save\+\_\+canvas\+\_\+toggle} (bool enabled)\hypertarget{classimage__tools_1_1IOManager_abeb5355f6d3e08847d715dc910a2236b}{}\label{classimage__tools_1_1IOManager_abeb5355f6d3e08847d715dc910a2236b}
+
+\item 
+void {\bfseries load\+\_\+stamp\+\_\+toggle} (bool enabled)\hypertarget{classimage__tools_1_1IOManager_a6d8268c033e7aee661d3a3d7ae39f13d}{}\label{classimage__tools_1_1IOManager_a6d8268c033e7aee661d3a3d7ae39f13d}
+
+\item 
+void {\bfseries load\+\_\+canvas\+\_\+toggle} (bool enabled)\hypertarget{classimage__tools_1_1IOManager_acefb393df8796d8d2f68a0aa7a67a1eb}{}\label{classimage__tools_1_1IOManager_acefb393df8796d8d2f68a0aa7a67a1eb}
+
+\item 
+bool \hyperlink{classimage__tools_1_1IOManager_ab8176a3f8684b1da88565a84c752494e}{has\+\_\+suffix} (const std\+::string \&str, const std\+::string \&suffix)
+\begin{DoxyCompactList}\small\item\em Determine if a file name contains a give suffix. \end{DoxyCompactList}\item 
+bool \hyperlink{classimage__tools_1_1IOManager_ac65d32aa03ea74c4c81d135a4e56f6fd}{is\+\_\+valid\+\_\+image\+\_\+file\+\_\+name} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Determine if a file has a valid name for an image file. \end{DoxyCompactList}\item 
+bool \hyperlink{classimage__tools_1_1IOManager_af5559c30af4a3b2d1a86c6081d840170}{is\+\_\+valid\+\_\+image\+\_\+file} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Determine if the image corresponding to a given file. \end{DoxyCompactList}\item 
+G\+L\+U\+I\+\_\+\+Static\+Text $\ast$ {\bfseries save\+\_\+file\+\_\+label} (void)\hypertarget{classimage__tools_1_1IOManager_a44ee0e7d400f05f1ebf992eb5faa6902}{}\label{classimage__tools_1_1IOManager_a44ee0e7d400f05f1ebf992eb5faa6902}
+
+\item 
+G\+L\+U\+I\+\_\+\+Static\+Text $\ast$ {\bfseries current\+\_\+file\+\_\+label} (void)\hypertarget{classimage__tools_1_1IOManager_a21fb95777da9b6b0059fe89bbac79666}{}\label{classimage__tools_1_1IOManager_a21fb95777da9b6b0059fe89bbac79666}
+
+\item 
+G\+L\+U\+I\+\_\+\+Edit\+Text $\ast$ {\bfseries file\+\_\+name\+\_\+box} (void)\hypertarget{classimage__tools_1_1IOManager_a1ffebca9d8453a19a051119f3d216784}{}\label{classimage__tools_1_1IOManager_a1ffebca9d8453a19a051119f3d216784}
+
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries I\+O\+Manager} (const \hyperlink{classimage__tools_1_1IOManager}{I\+O\+Manager} \&rhs)=delete\hypertarget{classimage__tools_1_1IOManager_a3d4afeda268cd5f55994c5c055dcb50f}{}\label{classimage__tools_1_1IOManager_a3d4afeda268cd5f55994c5c055dcb50f}
+
+\item 
+\hyperlink{classimage__tools_1_1IOManager}{I\+O\+Manager} \& {\bfseries operator=} (const \hyperlink{classimage__tools_1_1IOManager}{I\+O\+Manager} \&rhs)=delete\hypertarget{classimage__tools_1_1IOManager_ab51c42c7007e4fa4da32a943c4beed42}{}\label{classimage__tools_1_1IOManager_ab51c42c7007e4fa4da32a943c4beed42}
+
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+G\+L\+U\+I\+\_\+\+File\+Browser $\ast$ {\bfseries file\+\_\+browser\+\_\+}\hypertarget{classimage__tools_1_1IOManager_a72e92e6d9c11e749df068cf0e5bc2958}{}\label{classimage__tools_1_1IOManager_a72e92e6d9c11e749df068cf0e5bc2958}
+
+\item 
+G\+L\+U\+I\+\_\+\+Button $\ast$ {\bfseries load\+\_\+canvas\+\_\+btn\+\_\+}\hypertarget{classimage__tools_1_1IOManager_a8c84c5a52e68a8c0499ca84d897070aa}{}\label{classimage__tools_1_1IOManager_a8c84c5a52e68a8c0499ca84d897070aa}
+
+\item 
+G\+L\+U\+I\+\_\+\+Button $\ast$ {\bfseries load\+\_\+stamp\+\_\+btn\+\_\+}\hypertarget{classimage__tools_1_1IOManager_af463156e3874a8e7463164807e86f3bd}{}\label{classimage__tools_1_1IOManager_af463156e3874a8e7463164807e86f3bd}
+
+\item 
+G\+L\+U\+I\+\_\+\+Button $\ast$ {\bfseries save\+\_\+canvas\+\_\+btn\+\_\+}\hypertarget{classimage__tools_1_1IOManager_a3e2b26fee09619bb7e003436bc8d1b10}{}\label{classimage__tools_1_1IOManager_a3e2b26fee09619bb7e003436bc8d1b10}
+
+\item 
+G\+L\+U\+I\+\_\+\+Static\+Text $\ast$ {\bfseries current\+\_\+file\+\_\+label\+\_\+}\hypertarget{classimage__tools_1_1IOManager_adbf1995ce401afb02615426fcdac9a3c}{}\label{classimage__tools_1_1IOManager_adbf1995ce401afb02615426fcdac9a3c}
+
+\item 
+G\+L\+U\+I\+\_\+\+Edit\+Text $\ast$ {\bfseries file\+\_\+name\+\_\+box\+\_\+}\hypertarget{classimage__tools_1_1IOManager_a15ed84bb8c67d862453aa42b5f82c0e4}{}\label{classimage__tools_1_1IOManager_a15ed84bb8c67d862453aa42b5f82c0e4}
+
+\item 
+G\+L\+U\+I\+\_\+\+Static\+Text $\ast$ {\bfseries save\+\_\+file\+\_\+label\+\_\+}\hypertarget{classimage__tools_1_1IOManager_a9e3455f1b3a0b9b827787c2e18f9a396}{}\label{classimage__tools_1_1IOManager_a9e3455f1b3a0b9b827787c2e18f9a396}
+
+\item 
+std\+::string {\bfseries file\+\_\+name\+\_\+}\hypertarget{classimage__tools_1_1IOManager_a0d313490631f59d7fc0a97415b13cc5c}{}\label{classimage__tools_1_1IOManager_a0d313490631f59d7fc0a97415b13cc5c}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The manager for I/O operations in Flash\+Photo. This includes initializing G\+L\+UI control elements related to image loading/saving, as well as handling the load/save operations themselves. The load operation includes validating the image type and filesystem permissions before the load will proceed. It also handles loading an image from a file to the stamp. 
+
+\subsection{Member Function Documentation}
+\index{image\+\_\+tools\+::\+I\+O\+Manager@{image\+\_\+tools\+::\+I\+O\+Manager}!file\+\_\+browser@{file\+\_\+browser}}
+\index{file\+\_\+browser@{file\+\_\+browser}!image\+\_\+tools\+::\+I\+O\+Manager@{image\+\_\+tools\+::\+I\+O\+Manager}}
+\subsubsection[{\texorpdfstring{file\+\_\+browser(void)}{file_browser(void)}}]{\setlength{\rightskip}{0pt plus 5cm}G\+L\+U\+I\+\_\+\+File\+Browser$\ast$ image\+\_\+tools\+::\+I\+O\+Manager\+::file\+\_\+browser (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classimage__tools_1_1IOManager_ab58911faeeb831cc1f62aec390718469}{}\label{classimage__tools_1_1IOManager_ab58911faeeb831cc1f62aec390718469}
+
+
+Get a handle on the G\+L\+UI file browser. 
+
+\begin{DoxyReturn}{Returns}
+The handle 
+\end{DoxyReturn}
+\index{image\+\_\+tools\+::\+I\+O\+Manager@{image\+\_\+tools\+::\+I\+O\+Manager}!file\+\_\+name@{file\+\_\+name}}
+\index{file\+\_\+name@{file\+\_\+name}!image\+\_\+tools\+::\+I\+O\+Manager@{image\+\_\+tools\+::\+I\+O\+Manager}}
+\subsubsection[{\texorpdfstring{file\+\_\+name(void)}{file_name(void)}}]{\setlength{\rightskip}{0pt plus 5cm}const std\+::string\& image\+\_\+tools\+::\+I\+O\+Manager\+::file\+\_\+name (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classimage__tools_1_1IOManager_a667da573afc3fc0977408a0bf669f448}{}\label{classimage__tools_1_1IOManager_a667da573afc3fc0977408a0bf669f448}
+
+
+Get the current image file name. 
+
+\begin{DoxyReturn}{Returns}
+The current image file name 
+\end{DoxyReturn}
+\index{image\+\_\+tools\+::\+I\+O\+Manager@{image\+\_\+tools\+::\+I\+O\+Manager}!has\+\_\+suffix@{has\+\_\+suffix}}
+\index{has\+\_\+suffix@{has\+\_\+suffix}!image\+\_\+tools\+::\+I\+O\+Manager@{image\+\_\+tools\+::\+I\+O\+Manager}}
+\subsubsection[{\texorpdfstring{has\+\_\+suffix(const std\+::string \&str, const std\+::string \&suffix)}{has_suffix(const std::string &str, const std::string &suffix)}}]{\setlength{\rightskip}{0pt plus 5cm}bool image\+\_\+tools\+::\+I\+O\+Manager\+::has\+\_\+suffix (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{str, }
+\item[{const std\+::string \&}]{suffix}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\hypertarget{classimage__tools_1_1IOManager_ab8176a3f8684b1da88565a84c752494e}{}\label{classimage__tools_1_1IOManager_ab8176a3f8684b1da88565a84c752494e}
+
+
+Determine if a file name contains a give suffix. 
+
+\begin{DoxyReturn}{Returns}
+T\+R\+UE if yes, F\+A\+L\+SE otherwise 
+\end{DoxyReturn}
+\index{image\+\_\+tools\+::\+I\+O\+Manager@{image\+\_\+tools\+::\+I\+O\+Manager}!Init\+Glui@{Init\+Glui}}
+\index{Init\+Glui@{Init\+Glui}!image\+\_\+tools\+::\+I\+O\+Manager@{image\+\_\+tools\+::\+I\+O\+Manager}}
+\subsubsection[{\texorpdfstring{Init\+Glui(const G\+L\+U\+I $\ast$const glui, void($\ast$s\+\_\+gluicallback)(int))}{InitGlui(const GLUI *const glui, void(*s_gluicallback)(int))}}]{\setlength{\rightskip}{0pt plus 5cm}virtual G\+L\+U\+I\+\_\+\+Panel$\ast$ image\+\_\+tools\+::\+I\+O\+Manager\+::\+Init\+Glui (
+\begin{DoxyParamCaption}
+\item[{const G\+L\+UI $\ast$const}]{glui, }
+\item[{void($\ast$)(int)}]{s\+\_\+gluicallback}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classimage__tools_1_1IOManager_a5038100a2a640a3343c4715101eec120}{}\label{classimage__tools_1_1IOManager_a5038100a2a640a3343c4715101eec120}
+
+
+Initialize G\+L\+UI control elements for IO management. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em glui} & G\+L\+UI handle \\
+\hline
+{\em s\+\_\+gluicallback} & Callback to install \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The initialized IO panel handle 
+\end{DoxyReturn}
+
+
+Reimplemented in \hyperlink{classimage__tools_1_1FlashPhotoIOManager_a7acdb048b976e0efa9f4b65adf07faf8}{image\+\_\+tools\+::\+Flash\+Photo\+I\+O\+Manager}, and \hyperlink{classimage__tools_1_1MIAIOManager_a02267caa7b3b9746d45e5f89138c1376}{image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager}.
+
+\index{image\+\_\+tools\+::\+I\+O\+Manager@{image\+\_\+tools\+::\+I\+O\+Manager}!is\+\_\+valid\+\_\+image\+\_\+file@{is\+\_\+valid\+\_\+image\+\_\+file}}
+\index{is\+\_\+valid\+\_\+image\+\_\+file@{is\+\_\+valid\+\_\+image\+\_\+file}!image\+\_\+tools\+::\+I\+O\+Manager@{image\+\_\+tools\+::\+I\+O\+Manager}}
+\subsubsection[{\texorpdfstring{is\+\_\+valid\+\_\+image\+\_\+file(const std\+::string \&name)}{is_valid_image_file(const std::string &name)}}]{\setlength{\rightskip}{0pt plus 5cm}bool image\+\_\+tools\+::\+I\+O\+Manager\+::is\+\_\+valid\+\_\+image\+\_\+file (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classimage__tools_1_1IOManager_af5559c30af4a3b2d1a86c6081d840170}{}\label{classimage__tools_1_1IOManager_af5559c30af4a3b2d1a86c6081d840170}
+
+
+Determine if the image corresponding to a given file. 
+
+The file must exist, have a proper suffix, and be openable (i.\+e. the user has permission to open it).
+
+\begin{DoxyReturn}{Returns}
+T\+R\+UE if yes, F\+A\+L\+SE otherwise 
+\end{DoxyReturn}
+\index{image\+\_\+tools\+::\+I\+O\+Manager@{image\+\_\+tools\+::\+I\+O\+Manager}!is\+\_\+valid\+\_\+image\+\_\+file\+\_\+name@{is\+\_\+valid\+\_\+image\+\_\+file\+\_\+name}}
+\index{is\+\_\+valid\+\_\+image\+\_\+file\+\_\+name@{is\+\_\+valid\+\_\+image\+\_\+file\+\_\+name}!image\+\_\+tools\+::\+I\+O\+Manager@{image\+\_\+tools\+::\+I\+O\+Manager}}
+\subsubsection[{\texorpdfstring{is\+\_\+valid\+\_\+image\+\_\+file\+\_\+name(const std\+::string \&name)}{is_valid_image_file_name(const std::string &name)}}]{\setlength{\rightskip}{0pt plus 5cm}bool image\+\_\+tools\+::\+I\+O\+Manager\+::is\+\_\+valid\+\_\+image\+\_\+file\+\_\+name (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\hypertarget{classimage__tools_1_1IOManager_ac65d32aa03ea74c4c81d135a4e56f6fd}{}\label{classimage__tools_1_1IOManager_ac65d32aa03ea74c4c81d135a4e56f6fd}
+
+
+Determine if a file has a valid name for an image file. 
+
+\begin{DoxyReturn}{Returns}
+T\+R\+UE if yes, F\+A\+L\+SE otherwise 
+\end{DoxyReturn}
+\index{image\+\_\+tools\+::\+I\+O\+Manager@{image\+\_\+tools\+::\+I\+O\+Manager}!set\+\_\+image\+\_\+file@{set\+\_\+image\+\_\+file}}
+\index{set\+\_\+image\+\_\+file@{set\+\_\+image\+\_\+file}!image\+\_\+tools\+::\+I\+O\+Manager@{image\+\_\+tools\+::\+I\+O\+Manager}}
+\subsubsection[{\texorpdfstring{set\+\_\+image\+\_\+file(const std\+::string \&filepath)}{set_image_file(const std::string &filepath)}}]{\setlength{\rightskip}{0pt plus 5cm}void image\+\_\+tools\+::\+I\+O\+Manager\+::set\+\_\+image\+\_\+file (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{filepath}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classimage__tools_1_1IOManager_a9ddac98843256d25442aba6c963e144a}{}\label{classimage__tools_1_1IOManager_a9ddac98843256d25442aba6c963e144a}
+
+
+Set the image file. If the file is valid, enable loading/saving. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filepath} & Pathname of the file \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \hyperlink{classimage__tools_1_1MIAIOManager_a209180ddcfe3bf43d8fd7c6635391ea4}{image\+\_\+tools\+::\+M\+I\+A\+I\+O\+Manager}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/include/io\+\_\+manager.\+h\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/io\+\_\+manager.\+cc\end{DoxyCompactItemize}

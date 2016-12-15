@@ -1,0 +1,298 @@
+\hypertarget{classimage__tools_1_1FilterManager}{}\section{image\+\_\+tools\+:\+:Filter\+Manager Class Reference}
+\label{classimage__tools_1_1FilterManager}\index{image\+\_\+tools\+::\+Filter\+Manager@{image\+\_\+tools\+::\+Filter\+Manager}}
+
+
+Manager for all aspects of filters in Flash\+Photo, including initialization of G\+L\+UI control elements for filters, filter creation, application, deletion.  
+
+
+
+
+{\ttfamily \#include $<$filter\+\_\+manager.\+h$>$}
+
+
+
+Inherited by \hyperlink{classimage__tools_1_1FlashPhotoFilterManager}{image\+\_\+tools\+::\+Flash\+Photo\+Filter\+Manager}, and \hyperlink{classimage__tools_1_1MIAFilterManager}{image\+\_\+tools\+::\+M\+I\+A\+Filter\+Manager}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classimage__tools_1_1FilterManager_a8978ca9e14203c0013651262793ead17}{Apply\+Blur} (\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$oldimage, \hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$newimage)
+\begin{DoxyCompactList}\small\item\em Apply a blur filter to the buffer, blurring sharply defined edges. \end{DoxyCompactList}\item 
+void \hyperlink{classimage__tools_1_1FilterManager_a6fa9cea0e3d0bd01767fecae3bda5351}{Apply\+Sharpen} (\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$oldimage, \hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$newimage)
+\begin{DoxyCompactList}\small\item\em Apply a sharpening filter to the buffer, sharpening blurry/undefined edges. \end{DoxyCompactList}\item 
+void \hyperlink{classimage__tools_1_1FilterManager_a9de2f9c0b952c7904e4688b71149caa7}{Apply\+Motion\+Blur} (\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$oldimage, \hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$newimage)
+\begin{DoxyCompactList}\small\item\em Apply a motion blurring filter to the buffer. \end{DoxyCompactList}\item 
+void \hyperlink{classimage__tools_1_1FilterManager_ac7baa0fa177ca47dff742028d69364f6}{Apply\+Edge\+Detect} (\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$oldimage, \hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$newimage)
+\begin{DoxyCompactList}\small\item\em Apply an edge detection filter to the buffer. \end{DoxyCompactList}\item 
+void \hyperlink{classimage__tools_1_1FilterManager_a8551f73f07d78796fede226954f9c00f}{Apply\+Threshold} (\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$oldimage, \hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$newimage)
+\begin{DoxyCompactList}\small\item\em Apply a threshold detection filter to the buffer. \end{DoxyCompactList}\item 
+void \hyperlink{classimage__tools_1_1FilterManager_ac4b165a2af7fa7b02c6670471729f62e}{Apply\+Channel} (\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$oldimage, \hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$newimage)
+\begin{DoxyCompactList}\small\item\em Apply a channel filter to the buffer. \end{DoxyCompactList}\item 
+void \hyperlink{classimage__tools_1_1FilterManager_a71446251fcc00f4f8dce09de208f430f}{Apply\+Saturate} (\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$oldimage, \hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$newimage)
+\begin{DoxyCompactList}\small\item\em Apply a channel filter to the buffer. \end{DoxyCompactList}\item 
+void \hyperlink{classimage__tools_1_1FilterManager_a8d1bb7cde72a00fb1bcbd3819c0015af}{Apply\+Quantize} (\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$oldimage, \hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$newimage)
+\begin{DoxyCompactList}\small\item\em Apply a quantization filter to the buffer. \end{DoxyCompactList}\item 
+void \hyperlink{classimage__tools_1_1FilterManager_a7e2e1dcb6eb445bebcecb25b964817fc}{Apply\+Special} (\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$oldimage, \hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$newimage)
+\begin{DoxyCompactList}\small\item\em Apply a special filter to the buffer. \end{DoxyCompactList}\item 
+virtual G\+L\+U\+I\+\_\+\+Panel $\ast$ \hyperlink{classimage__tools_1_1FilterManager_a613964542f112cb163a530b542aaa66e}{Init\+Glui} (const G\+L\+UI $\ast$const glui, void($\ast$s\+\_\+gluicallback)(int))
+\begin{DoxyCompactList}\small\item\em Initialize the elements of the G\+L\+UI interface required by the \hyperlink{classimage__tools_1_1FilterManager}{Filter\+Manager}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries Add\+Blur\+To\+G\+L\+UI} (G\+L\+U\+I\+\_\+\+Panel $\ast$filter\+\_\+panel, void($\ast$s\+\_\+gluicallback)(int))\hypertarget{classimage__tools_1_1FilterManager_ae85ce9fc1146be4b403187064bb7cd97}{}\label{classimage__tools_1_1FilterManager_ae85ce9fc1146be4b403187064bb7cd97}
+
+\item 
+void {\bfseries Add\+Motion\+Blur\+To\+G\+L\+UI} (G\+L\+U\+I\+\_\+\+Panel $\ast$filter\+\_\+panel, void($\ast$s\+\_\+gluicallback)(int))\hypertarget{classimage__tools_1_1FilterManager_a023cb6f79a31c7635c73aed94ad8f684}{}\label{classimage__tools_1_1FilterManager_a023cb6f79a31c7635c73aed94ad8f684}
+
+\item 
+void {\bfseries Add\+Sharpen\+To\+G\+L\+UI} (G\+L\+U\+I\+\_\+\+Panel $\ast$filter\+\_\+panel, void($\ast$s\+\_\+gluicallback)(int))\hypertarget{classimage__tools_1_1FilterManager_aaeaa991e824af5651604240bf6841f4d}{}\label{classimage__tools_1_1FilterManager_aaeaa991e824af5651604240bf6841f4d}
+
+\item 
+void {\bfseries Add\+Edge\+Detect\+To\+G\+L\+UI} (G\+L\+U\+I\+\_\+\+Panel $\ast$filter\+\_\+panel, void($\ast$s\+\_\+gluicallback)(int))\hypertarget{classimage__tools_1_1FilterManager_a8ea1737814292a8248e87f68772bba84}{}\label{classimage__tools_1_1FilterManager_a8ea1737814292a8248e87f68772bba84}
+
+\item 
+void {\bfseries Add\+Threshold\+To\+G\+L\+UI} (G\+L\+U\+I\+\_\+\+Panel $\ast$filter\+\_\+panel, void($\ast$s\+\_\+gluicallback)(int))\hypertarget{classimage__tools_1_1FilterManager_a7886a22bba28b6a4d47e4da8dcf6e500}{}\label{classimage__tools_1_1FilterManager_a7886a22bba28b6a4d47e4da8dcf6e500}
+
+\item 
+void {\bfseries Add\+Saturation\+To\+G\+L\+UI} (G\+L\+U\+I\+\_\+\+Panel $\ast$filter\+\_\+panel, void($\ast$s\+\_\+gluicallback)(int))\hypertarget{classimage__tools_1_1FilterManager_a7d6d4cefdcf8cf23ae5467ed220d8ffe}{}\label{classimage__tools_1_1FilterManager_a7d6d4cefdcf8cf23ae5467ed220d8ffe}
+
+\item 
+void {\bfseries Add\+Channel\+To\+G\+L\+UI} (G\+L\+U\+I\+\_\+\+Panel $\ast$filter\+\_\+panel, void($\ast$s\+\_\+gluicallback)(int))\hypertarget{classimage__tools_1_1FilterManager_afe7ab6a2f6de62dc1b3b4c1d4350ddbe}{}\label{classimage__tools_1_1FilterManager_afe7ab6a2f6de62dc1b3b4c1d4350ddbe}
+
+\item 
+void {\bfseries Add\+Quantization\+To\+G\+L\+UI} (G\+L\+U\+I\+\_\+\+Panel $\ast$filter\+\_\+panel, void($\ast$s\+\_\+gluicallback)(int))\hypertarget{classimage__tools_1_1FilterManager_ae13d0c9858da16b283bdf71ee2b4ad8f}{}\label{classimage__tools_1_1FilterManager_ae13d0c9858da16b283bdf71ee2b4ad8f}
+
+\item 
+void {\bfseries Add\+Emboss\+To\+G\+L\+UI} (G\+L\+U\+I\+\_\+\+Panel $\ast$filter\+\_\+panel, void($\ast$s\+\_\+gluicallback)(int))\hypertarget{classimage__tools_1_1FilterManager_a810b6ba71bc888b34d4f7656c21f8e98}{}\label{classimage__tools_1_1FilterManager_a810b6ba71bc888b34d4f7656c21f8e98}
+
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Filter\+Manager} (const \hyperlink{classimage__tools_1_1FilterManager}{Filter\+Manager} \&rhs)=delete\hypertarget{classimage__tools_1_1FilterManager_a0ba8533dfc092d8a8329c60ba2691625}{}\label{classimage__tools_1_1FilterManager_a0ba8533dfc092d8a8329c60ba2691625}
+
+\item 
+\hyperlink{classimage__tools_1_1FilterManager}{Filter\+Manager} \& {\bfseries operator=} (const \hyperlink{classimage__tools_1_1FilterManager}{Filter\+Manager} \&rhs)=delete\hypertarget{classimage__tools_1_1FilterManager_a56e520b2bd12c3f7c46af9bb0381ade0}{}\label{classimage__tools_1_1FilterManager_a56e520b2bd12c3f7c46af9bb0381ade0}
+
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float {\bfseries channel\+\_\+color\+\_\+red\+\_\+}\hypertarget{classimage__tools_1_1FilterManager_a06fe9d3b259b97a07368c43052f9ec14}{}\label{classimage__tools_1_1FilterManager_a06fe9d3b259b97a07368c43052f9ec14}
+
+\item 
+float {\bfseries channel\+\_\+color\+\_\+green\+\_\+}\hypertarget{classimage__tools_1_1FilterManager_a85ddc9f6adef88a1993a66defdb6eeb9}{}\label{classimage__tools_1_1FilterManager_a85ddc9f6adef88a1993a66defdb6eeb9}
+
+\item 
+float {\bfseries channel\+\_\+color\+\_\+blue\+\_\+}\hypertarget{classimage__tools_1_1FilterManager_a9e4cf2ee605871b06fa235d8def00a58}{}\label{classimage__tools_1_1FilterManager_a9e4cf2ee605871b06fa235d8def00a58}
+
+\item 
+float {\bfseries saturation\+\_\+amount\+\_\+}\hypertarget{classimage__tools_1_1FilterManager_abd62d404c7c4956800094efb3b274821}{}\label{classimage__tools_1_1FilterManager_abd62d404c7c4956800094efb3b274821}
+
+\item 
+float {\bfseries threshold\+\_\+amount\+\_\+}\hypertarget{classimage__tools_1_1FilterManager_a20f7ea05699716b5b4a3e14193bc87e7}{}\label{classimage__tools_1_1FilterManager_a20f7ea05699716b5b4a3e14193bc87e7}
+
+\item 
+float {\bfseries blur\+\_\+amount\+\_\+}\hypertarget{classimage__tools_1_1FilterManager_ad4d6873f960dc8bfefa2c0b0646424cc}{}\label{classimage__tools_1_1FilterManager_ad4d6873f960dc8bfefa2c0b0646424cc}
+
+\item 
+float {\bfseries sharpen\+\_\+amount\+\_\+}\hypertarget{classimage__tools_1_1FilterManager_ac5d43a3c19e97050da7c7398fdad8d0c}{}\label{classimage__tools_1_1FilterManager_ac5d43a3c19e97050da7c7398fdad8d0c}
+
+\item 
+float {\bfseries motion\+\_\+blur\+\_\+amount\+\_\+}\hypertarget{classimage__tools_1_1FilterManager_aa4e2ba07745adae7c96611f6f26a6f62}{}\label{classimage__tools_1_1FilterManager_aa4e2ba07745adae7c96611f6f26a6f62}
+
+\item 
+enum \hyperlink{classimage__tools_1_1UICtrl_a56d4f68bf91302769d7bc453d8d57cee}{U\+I\+Ctrl\+::\+Motion\+Blur\+Direction} {\bfseries motion\+\_\+blur\+\_\+direction\+\_\+}\hypertarget{classimage__tools_1_1FilterManager_a30ca33244f4ded5d2a010aff29d029d5}{}\label{classimage__tools_1_1FilterManager_a30ca33244f4ded5d2a010aff29d029d5}
+
+\item 
+int {\bfseries quantize\+\_\+bins\+\_\+}\hypertarget{classimage__tools_1_1FilterManager_a22ded8b004ee7e8f40db72fd1ab95bf5}{}\label{classimage__tools_1_1FilterManager_a22ded8b004ee7e8f40db72fd1ab95bf5}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Manager for all aspects of filters in Flash\+Photo, including initialization of G\+L\+UI control elements for filters, filter creation, application, deletion. 
+
+\subsection{Member Function Documentation}
+\index{image\+\_\+tools\+::\+Filter\+Manager@{image\+\_\+tools\+::\+Filter\+Manager}!Apply\+Blur@{Apply\+Blur}}
+\index{Apply\+Blur@{Apply\+Blur}!image\+\_\+tools\+::\+Filter\+Manager@{image\+\_\+tools\+::\+Filter\+Manager}}
+\subsubsection[{\texorpdfstring{Apply\+Blur(\+Pixel\+Buffer $\ast$oldimage, Pixel\+Buffer $\ast$newimage)}{ApplyBlur(PixelBuffer *oldimage, PixelBuffer *newimage)}}]{\setlength{\rightskip}{0pt plus 5cm}void image\+\_\+tools\+::\+Filter\+Manager\+::\+Apply\+Blur (
+\begin{DoxyParamCaption}
+\item[{{\bf Pixel\+Buffer} $\ast$}]{oldimage, }
+\item[{{\bf Pixel\+Buffer} $\ast$}]{newimage}
+\end{DoxyParamCaption}
+)}\hypertarget{classimage__tools_1_1FilterManager_a8978ca9e14203c0013651262793ead17}{}\label{classimage__tools_1_1FilterManager_a8978ca9e14203c0013651262793ead17}
+
+
+Apply a blur filter to the buffer, blurring sharply defined edges. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & The buffer. Updated to point to a new filtered buffer. \\
+\hline
+\end{DoxyParams}
+\index{image\+\_\+tools\+::\+Filter\+Manager@{image\+\_\+tools\+::\+Filter\+Manager}!Apply\+Channel@{Apply\+Channel}}
+\index{Apply\+Channel@{Apply\+Channel}!image\+\_\+tools\+::\+Filter\+Manager@{image\+\_\+tools\+::\+Filter\+Manager}}
+\subsubsection[{\texorpdfstring{Apply\+Channel(\+Pixel\+Buffer $\ast$oldimage, Pixel\+Buffer $\ast$newimage)}{ApplyChannel(PixelBuffer *oldimage, PixelBuffer *newimage)}}]{\setlength{\rightskip}{0pt plus 5cm}void image\+\_\+tools\+::\+Filter\+Manager\+::\+Apply\+Channel (
+\begin{DoxyParamCaption}
+\item[{{\bf Pixel\+Buffer} $\ast$}]{oldimage, }
+\item[{{\bf Pixel\+Buffer} $\ast$}]{newimage}
+\end{DoxyParamCaption}
+)}\hypertarget{classimage__tools_1_1FilterManager_ac4b165a2af7fa7b02c6670471729f62e}{}\label{classimage__tools_1_1FilterManager_ac4b165a2af7fa7b02c6670471729f62e}
+
+
+Apply a channel filter to the buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & The buffer. Updated to point to a new filtered buffer. \\
+\hline
+\end{DoxyParams}
+\index{image\+\_\+tools\+::\+Filter\+Manager@{image\+\_\+tools\+::\+Filter\+Manager}!Apply\+Edge\+Detect@{Apply\+Edge\+Detect}}
+\index{Apply\+Edge\+Detect@{Apply\+Edge\+Detect}!image\+\_\+tools\+::\+Filter\+Manager@{image\+\_\+tools\+::\+Filter\+Manager}}
+\subsubsection[{\texorpdfstring{Apply\+Edge\+Detect(\+Pixel\+Buffer $\ast$oldimage, Pixel\+Buffer $\ast$newimage)}{ApplyEdgeDetect(PixelBuffer *oldimage, PixelBuffer *newimage)}}]{\setlength{\rightskip}{0pt plus 5cm}void image\+\_\+tools\+::\+Filter\+Manager\+::\+Apply\+Edge\+Detect (
+\begin{DoxyParamCaption}
+\item[{{\bf Pixel\+Buffer} $\ast$}]{oldimage, }
+\item[{{\bf Pixel\+Buffer} $\ast$}]{newimage}
+\end{DoxyParamCaption}
+)}\hypertarget{classimage__tools_1_1FilterManager_ac7baa0fa177ca47dff742028d69364f6}{}\label{classimage__tools_1_1FilterManager_ac7baa0fa177ca47dff742028d69364f6}
+
+
+Apply an edge detection filter to the buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & The buffer. Updated to point to a new filtered buffer. \\
+\hline
+\end{DoxyParams}
+\index{image\+\_\+tools\+::\+Filter\+Manager@{image\+\_\+tools\+::\+Filter\+Manager}!Apply\+Motion\+Blur@{Apply\+Motion\+Blur}}
+\index{Apply\+Motion\+Blur@{Apply\+Motion\+Blur}!image\+\_\+tools\+::\+Filter\+Manager@{image\+\_\+tools\+::\+Filter\+Manager}}
+\subsubsection[{\texorpdfstring{Apply\+Motion\+Blur(\+Pixel\+Buffer $\ast$oldimage, Pixel\+Buffer $\ast$newimage)}{ApplyMotionBlur(PixelBuffer *oldimage, PixelBuffer *newimage)}}]{\setlength{\rightskip}{0pt plus 5cm}void image\+\_\+tools\+::\+Filter\+Manager\+::\+Apply\+Motion\+Blur (
+\begin{DoxyParamCaption}
+\item[{{\bf Pixel\+Buffer} $\ast$}]{oldimage, }
+\item[{{\bf Pixel\+Buffer} $\ast$}]{newimage}
+\end{DoxyParamCaption}
+)}\hypertarget{classimage__tools_1_1FilterManager_a9de2f9c0b952c7904e4688b71149caa7}{}\label{classimage__tools_1_1FilterManager_a9de2f9c0b952c7904e4688b71149caa7}
+
+
+Apply a motion blurring filter to the buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & The buffer. Updated to point to a new filtered buffer. \\
+\hline
+\end{DoxyParams}
+\index{image\+\_\+tools\+::\+Filter\+Manager@{image\+\_\+tools\+::\+Filter\+Manager}!Apply\+Quantize@{Apply\+Quantize}}
+\index{Apply\+Quantize@{Apply\+Quantize}!image\+\_\+tools\+::\+Filter\+Manager@{image\+\_\+tools\+::\+Filter\+Manager}}
+\subsubsection[{\texorpdfstring{Apply\+Quantize(\+Pixel\+Buffer $\ast$oldimage, Pixel\+Buffer $\ast$newimage)}{ApplyQuantize(PixelBuffer *oldimage, PixelBuffer *newimage)}}]{\setlength{\rightskip}{0pt plus 5cm}void image\+\_\+tools\+::\+Filter\+Manager\+::\+Apply\+Quantize (
+\begin{DoxyParamCaption}
+\item[{{\bf Pixel\+Buffer} $\ast$}]{oldimage, }
+\item[{{\bf Pixel\+Buffer} $\ast$}]{newimage}
+\end{DoxyParamCaption}
+)}\hypertarget{classimage__tools_1_1FilterManager_a8d1bb7cde72a00fb1bcbd3819c0015af}{}\label{classimage__tools_1_1FilterManager_a8d1bb7cde72a00fb1bcbd3819c0015af}
+
+
+Apply a quantization filter to the buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & The buffer. Updated to point to a new filtered buffer. \\
+\hline
+\end{DoxyParams}
+\index{image\+\_\+tools\+::\+Filter\+Manager@{image\+\_\+tools\+::\+Filter\+Manager}!Apply\+Saturate@{Apply\+Saturate}}
+\index{Apply\+Saturate@{Apply\+Saturate}!image\+\_\+tools\+::\+Filter\+Manager@{image\+\_\+tools\+::\+Filter\+Manager}}
+\subsubsection[{\texorpdfstring{Apply\+Saturate(\+Pixel\+Buffer $\ast$oldimage, Pixel\+Buffer $\ast$newimage)}{ApplySaturate(PixelBuffer *oldimage, PixelBuffer *newimage)}}]{\setlength{\rightskip}{0pt plus 5cm}void image\+\_\+tools\+::\+Filter\+Manager\+::\+Apply\+Saturate (
+\begin{DoxyParamCaption}
+\item[{{\bf Pixel\+Buffer} $\ast$}]{oldimage, }
+\item[{{\bf Pixel\+Buffer} $\ast$}]{newimage}
+\end{DoxyParamCaption}
+)}\hypertarget{classimage__tools_1_1FilterManager_a71446251fcc00f4f8dce09de208f430f}{}\label{classimage__tools_1_1FilterManager_a71446251fcc00f4f8dce09de208f430f}
+
+
+Apply a channel filter to the buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & The buffer. Updated to point to a new filtered buffer. \\
+\hline
+\end{DoxyParams}
+\index{image\+\_\+tools\+::\+Filter\+Manager@{image\+\_\+tools\+::\+Filter\+Manager}!Apply\+Sharpen@{Apply\+Sharpen}}
+\index{Apply\+Sharpen@{Apply\+Sharpen}!image\+\_\+tools\+::\+Filter\+Manager@{image\+\_\+tools\+::\+Filter\+Manager}}
+\subsubsection[{\texorpdfstring{Apply\+Sharpen(\+Pixel\+Buffer $\ast$oldimage, Pixel\+Buffer $\ast$newimage)}{ApplySharpen(PixelBuffer *oldimage, PixelBuffer *newimage)}}]{\setlength{\rightskip}{0pt plus 5cm}void image\+\_\+tools\+::\+Filter\+Manager\+::\+Apply\+Sharpen (
+\begin{DoxyParamCaption}
+\item[{{\bf Pixel\+Buffer} $\ast$}]{oldimage, }
+\item[{{\bf Pixel\+Buffer} $\ast$}]{newimage}
+\end{DoxyParamCaption}
+)}\hypertarget{classimage__tools_1_1FilterManager_a6fa9cea0e3d0bd01767fecae3bda5351}{}\label{classimage__tools_1_1FilterManager_a6fa9cea0e3d0bd01767fecae3bda5351}
+
+
+Apply a sharpening filter to the buffer, sharpening blurry/undefined edges. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & The buffer. Updated to point to a new filtered buffer. \\
+\hline
+\end{DoxyParams}
+\index{image\+\_\+tools\+::\+Filter\+Manager@{image\+\_\+tools\+::\+Filter\+Manager}!Apply\+Special@{Apply\+Special}}
+\index{Apply\+Special@{Apply\+Special}!image\+\_\+tools\+::\+Filter\+Manager@{image\+\_\+tools\+::\+Filter\+Manager}}
+\subsubsection[{\texorpdfstring{Apply\+Special(\+Pixel\+Buffer $\ast$oldimage, Pixel\+Buffer $\ast$newimage)}{ApplySpecial(PixelBuffer *oldimage, PixelBuffer *newimage)}}]{\setlength{\rightskip}{0pt plus 5cm}void image\+\_\+tools\+::\+Filter\+Manager\+::\+Apply\+Special (
+\begin{DoxyParamCaption}
+\item[{{\bf Pixel\+Buffer} $\ast$}]{oldimage, }
+\item[{{\bf Pixel\+Buffer} $\ast$}]{newimage}
+\end{DoxyParamCaption}
+)}\hypertarget{classimage__tools_1_1FilterManager_a7e2e1dcb6eb445bebcecb25b964817fc}{}\label{classimage__tools_1_1FilterManager_a7e2e1dcb6eb445bebcecb25b964817fc}
+
+
+Apply a special filter to the buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & The buffer. Updated to point to a new filtered buffer. \\
+\hline
+\end{DoxyParams}
+\index{image\+\_\+tools\+::\+Filter\+Manager@{image\+\_\+tools\+::\+Filter\+Manager}!Apply\+Threshold@{Apply\+Threshold}}
+\index{Apply\+Threshold@{Apply\+Threshold}!image\+\_\+tools\+::\+Filter\+Manager@{image\+\_\+tools\+::\+Filter\+Manager}}
+\subsubsection[{\texorpdfstring{Apply\+Threshold(\+Pixel\+Buffer $\ast$oldimage, Pixel\+Buffer $\ast$newimage)}{ApplyThreshold(PixelBuffer *oldimage, PixelBuffer *newimage)}}]{\setlength{\rightskip}{0pt plus 5cm}void image\+\_\+tools\+::\+Filter\+Manager\+::\+Apply\+Threshold (
+\begin{DoxyParamCaption}
+\item[{{\bf Pixel\+Buffer} $\ast$}]{oldimage, }
+\item[{{\bf Pixel\+Buffer} $\ast$}]{newimage}
+\end{DoxyParamCaption}
+)}\hypertarget{classimage__tools_1_1FilterManager_a8551f73f07d78796fede226954f9c00f}{}\label{classimage__tools_1_1FilterManager_a8551f73f07d78796fede226954f9c00f}
+
+
+Apply a threshold detection filter to the buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & The buffer. Updated to point to a new filtered buffer. \\
+\hline
+\end{DoxyParams}
+\index{image\+\_\+tools\+::\+Filter\+Manager@{image\+\_\+tools\+::\+Filter\+Manager}!Init\+Glui@{Init\+Glui}}
+\index{Init\+Glui@{Init\+Glui}!image\+\_\+tools\+::\+Filter\+Manager@{image\+\_\+tools\+::\+Filter\+Manager}}
+\subsubsection[{\texorpdfstring{Init\+Glui(const G\+L\+U\+I $\ast$const glui, void($\ast$s\+\_\+gluicallback)(int))}{InitGlui(const GLUI *const glui, void(*s_gluicallback)(int))}}]{\setlength{\rightskip}{0pt plus 5cm}G\+L\+U\+I\+\_\+\+Panel $\ast$ image\+\_\+tools\+::\+Filter\+Manager\+::\+Init\+Glui (
+\begin{DoxyParamCaption}
+\item[{const G\+L\+UI $\ast$const}]{glui, }
+\item[{void($\ast$)(int)}]{s\+\_\+gluicallback}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classimage__tools_1_1FilterManager_a613964542f112cb163a530b542aaa66e}{}\label{classimage__tools_1_1FilterManager_a613964542f112cb163a530b542aaa66e}
+
+
+Initialize the elements of the G\+L\+UI interface required by the \hyperlink{classimage__tools_1_1FilterManager}{Filter\+Manager}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em glui} & G\+L\+UI handle \\
+\hline
+{\em s\+\_\+gluicallback} & Callback to install \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \hyperlink{classimage__tools_1_1MIAFilterManager_a9edb4c699c3349d444e59bdff820f731}{image\+\_\+tools\+::\+M\+I\+A\+Filter\+Manager}, and \hyperlink{classimage__tools_1_1FlashPhotoFilterManager_a4b9405a36d37d66dc2222d658bfceb98}{image\+\_\+tools\+::\+Flash\+Photo\+Filter\+Manager}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/include/filter\+\_\+manager.\+h\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/filter\+\_\+manager.\+cc\end{DoxyCompactItemize}

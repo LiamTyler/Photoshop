@@ -1,0 +1,96 @@
+\hypertarget{classimage__tools_1_1ToolFactory}{}\section{image\+\_\+tools\+:\+:Tool\+Factory Class Reference}
+\label{classimage__tools_1_1ToolFactory}\index{image\+\_\+tools\+::\+Tool\+Factory@{image\+\_\+tools\+::\+Tool\+Factory}}
+
+
+Implementation of factory pattern to handle tool creation.  
+
+
+
+
+{\ttfamily \#include $<$tool\+\_\+factory.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{classimage__tools_1_1ToolFactory_a75e9b7d0223f34953e6ea2c45612396f}{T\+O\+O\+LS} \{ \\*
+{\bfseries T\+O\+O\+L\+\_\+\+P\+EN} = 0, 
+{\bfseries T\+O\+O\+L\+\_\+\+E\+R\+A\+S\+ER} = 1, 
+{\bfseries T\+O\+O\+L\+\_\+\+S\+P\+R\+A\+Y\+C\+AN} = 2, 
+{\bfseries T\+O\+O\+L\+\_\+\+C\+A\+L\+L\+I\+G\+R\+A\+P\+H\+Y\+P\+EN} = 3, 
+\\*
+{\bfseries T\+O\+O\+L\+\_\+\+H\+I\+G\+H\+L\+I\+G\+H\+T\+ER} = 4, 
+{\bfseries T\+O\+O\+L\+\_\+\+S\+T\+A\+MP} = 5, 
+{\bfseries T\+O\+O\+L\+\_\+\+B\+L\+UR} = 6, 
+{\bfseries T\+O\+O\+L\+\_\+\+R\+A\+I\+N\+B\+OW} = 7, 
+\\*
+{\bfseries N\+U\+M\+T\+O\+O\+LS} = 8
+ \}\begin{DoxyCompactList}\small\item\em The list of tools that can be created by the factory and used by the. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \hyperlink{classimage__tools_1_1ToolFactory_a365cd7d26afa67a4d5b2e730f585df90}{num\+\_\+tools} (void)
+\begin{DoxyCompactList}\small\item\em Return the total \# of tools in the application. \end{DoxyCompactList}\item 
+static \hyperlink{classTool}{Tool} $\ast$ \hyperlink{classimage__tools_1_1ToolFactory_a2f5d6b0cc72bc3aff97e6eaba5182a00}{Create\+Tool} (int tool\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Create a tool from the list of defined tools. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implementation of factory pattern to handle tool creation. 
+
+
+\begin{DoxyItemize}
+\item $\ast$ This enables easy extension/addition of new tools. 
+\end{DoxyItemize}
+
+\subsection{Member Enumeration Documentation}
+\index{image\+\_\+tools\+::\+Tool\+Factory@{image\+\_\+tools\+::\+Tool\+Factory}!T\+O\+O\+LS@{T\+O\+O\+LS}}
+\index{T\+O\+O\+LS@{T\+O\+O\+LS}!image\+\_\+tools\+::\+Tool\+Factory@{image\+\_\+tools\+::\+Tool\+Factory}}
+\subsubsection[{\texorpdfstring{T\+O\+O\+LS}{TOOLS}}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf image\+\_\+tools\+::\+Tool\+Factory\+::\+T\+O\+O\+LS}}\hypertarget{classimage__tools_1_1ToolFactory_a75e9b7d0223f34953e6ea2c45612396f}{}\label{classimage__tools_1_1ToolFactory_a75e9b7d0223f34953e6ea2c45612396f}
+
+
+The list of tools that can be created by the factory and used by the. 
+
+
+\begin{DoxyItemize}
+\item $\ast$ application 
+\end{DoxyItemize}
+
+\subsection{Member Function Documentation}
+\index{image\+\_\+tools\+::\+Tool\+Factory@{image\+\_\+tools\+::\+Tool\+Factory}!Create\+Tool@{Create\+Tool}}
+\index{Create\+Tool@{Create\+Tool}!image\+\_\+tools\+::\+Tool\+Factory@{image\+\_\+tools\+::\+Tool\+Factory}}
+\subsubsection[{\texorpdfstring{Create\+Tool(int tool\+\_\+id)}{CreateTool(int tool_id)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Tool} $\ast$ image\+\_\+tools\+::\+Tool\+Factory\+::\+Create\+Tool (
+\begin{DoxyParamCaption}
+\item[{int}]{tool\+\_\+id}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classimage__tools_1_1ToolFactory_a2f5d6b0cc72bc3aff97e6eaba5182a00}{}\label{classimage__tools_1_1ToolFactory_a2f5d6b0cc72bc3aff97e6eaba5182a00}
+
+
+Create a tool from the list of defined tools. 
+
+
+\begin{DoxyItemize}
+\item $\ast$ \begin{DoxyReturn}{Returns}
+The initialized tool, or nullptr if an invalid index was passed 
+\end{DoxyReturn}
+
+\end{DoxyItemize}\index{image\+\_\+tools\+::\+Tool\+Factory@{image\+\_\+tools\+::\+Tool\+Factory}!num\+\_\+tools@{num\+\_\+tools}}
+\index{num\+\_\+tools@{num\+\_\+tools}!image\+\_\+tools\+::\+Tool\+Factory@{image\+\_\+tools\+::\+Tool\+Factory}}
+\subsubsection[{\texorpdfstring{num\+\_\+tools(void)}{num_tools(void)}}]{\setlength{\rightskip}{0pt plus 5cm}static int image\+\_\+tools\+::\+Tool\+Factory\+::num\+\_\+tools (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}\hypertarget{classimage__tools_1_1ToolFactory_a365cd7d26afa67a4d5b2e730f585df90}{}\label{classimage__tools_1_1ToolFactory_a365cd7d26afa67a4d5b2e730f585df90}
+
+
+Return the total \# of tools in the application. 
+
+
+\begin{DoxyItemize}
+\item 
+\end{DoxyItemize}
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/include/tool\+\_\+factory.\+h\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/tool\+\_\+factory.\+cc\end{DoxyCompactItemize}

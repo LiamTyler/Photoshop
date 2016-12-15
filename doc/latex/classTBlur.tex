@@ -1,0 +1,121 @@
+\hypertarget{classTBlur}{}\section{T\+Blur Class Reference}
+\label{classTBlur}\index{T\+Blur@{T\+Blur}}
+
+
+Implements a spray can tool.  
+
+
+
+
+{\ttfamily \#include $<$blur\+\_\+tool.\+h$>$}
+
+
+
+Inherits \hyperlink{classTool}{Tool}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries T\+Blur} (int radius)\hypertarget{classTBlur_a99a7509fd30c2a88477a133de2dea0cb}{}\label{classTBlur_a99a7509fd30c2a88477a133de2dea0cb}
+
+\item 
+void \hyperlink{classTBlur_a5cbb567f1a5fae0c313f9fbf733aff3c}{Apply\+Tool} (\hyperlink{classimage__tools_1_1PixelBuffer}{image\+\_\+tools\+::\+Pixel\+Buffer} $\ast$buff, \hyperlink{classimage__tools_1_1ColorData}{image\+\_\+tools\+::\+Color\+Data} current\+\_\+color, int x, int y, int last\+\_\+x, int last\+\_\+y)
+\begin{DoxyCompactList}\small\item\em Default implementation for applying the tool to the Pixel\+Buffer. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classTBlur_a245f204d4009ae94a423e5eee09d6515}{name} (void)
+\begin{DoxyCompactList}\small\item\em The name of the tool. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries T\+Blur} (const \hyperlink{classTBlur}{T\+Blur} \&b)=delete\hypertarget{classTBlur_a2e57cb49e407d876870c599c47ac648d}{}\label{classTBlur_a2e57cb49e407d876870c599c47ac648d}
+
+\item 
+\hyperlink{classTBlur}{T\+Blur} \& {\bfseries operator=} (const \hyperlink{classTBlur}{T\+Blur} \&b)=delete\hypertarget{classTBlur_ab2ac85f99ed307636bfc9b6c5e21c36d}{}\label{classTBlur_ab2ac85f99ed307636bfc9b6c5e21c36d}
+
+\item 
+void {\bfseries Init} ()\hypertarget{classTBlur_a16285b381c5981c9b7cbd39b47fc492c}{}\label{classTBlur_a16285b381c5981c9b7cbd39b47fc492c}
+
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries radius\+\_\+}\hypertarget{classTBlur_ac2c6a485c7413e68196637aad3b9e106}{}\label{classTBlur_ac2c6a485c7413e68196637aad3b9e106}
+
+\item 
+std\+::vector$<$ \hyperlink{classBlurKernal}{Blur\+Kernal} $>$ {\bfseries kernals\+\_\+}\hypertarget{classTBlur_ad91ab071887edc1588bf0c2153e18459}{}\label{classTBlur_ad91ab071887edc1588bf0c2153e18459}
+
+\item 
+\hyperlink{classimage__tools_1_1PixelBuffer}{image\+\_\+tools\+::\+Pixel\+Buffer} $\ast$ {\bfseries scratch\+\_\+}\hypertarget{classTBlur_a76c72c742aa0fb903c6fad67dec42d93}{}\label{classTBlur_a76c72c742aa0fb903c6fad67dec42d93}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implements a spray can tool. 
+
+The spray can is a circular tool that has a linear falloff, so that there is more paint sprayed near the middle than the edges. 
+
+\subsection{Member Function Documentation}
+\index{T\+Blur@{T\+Blur}!Apply\+Tool@{Apply\+Tool}}
+\index{Apply\+Tool@{Apply\+Tool}!T\+Blur@{T\+Blur}}
+\subsubsection[{\texorpdfstring{Apply\+Tool(image\+\_\+tools\+::\+Pixel\+Buffer $\ast$buff, image\+\_\+tools\+::\+Color\+Data current\+\_\+color, int x, int y, int last\+\_\+x, int last\+\_\+y)}{ApplyTool(image_tools::PixelBuffer *buff, image_tools::ColorData current_color, int x, int y, int last_x, int last_y)}}]{\setlength{\rightskip}{0pt plus 5cm}void T\+Blur\+::\+Apply\+Tool (
+\begin{DoxyParamCaption}
+\item[{{\bf image\+\_\+tools\+::\+Pixel\+Buffer} $\ast$}]{buff, }
+\item[{{\bf image\+\_\+tools\+::\+Color\+Data}}]{current\+\_\+color, }
+\item[{int}]{x, }
+\item[{int}]{y, }
+\item[{int}]{last\+\_\+x, }
+\item[{int}]{last\+\_\+y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classTBlur_a5cbb567f1a5fae0c313f9fbf733aff3c}{}\label{classTBlur_a5cbb567f1a5fae0c313f9fbf733aff3c}
+
+
+Default implementation for applying the tool to the Pixel\+Buffer. 
+
+Uses the current\+\_\+color and last position of the tool being applied (last\+\_\+x and last\+\_\+y) to determine how to apply the mask to the buffer.
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em buff} & The buffer of pixels to apply the tool to \\
+\hline
+\mbox{\tt in}  & {\em current\+\_\+color} & The current color of the tool \\
+\hline
+\mbox{\tt in}  & {\em x} & The x position of where to apply the tool to \\
+\hline
+\mbox{\tt in}  & {\em y} & The y position of where to apply the tool to \\
+\hline
+\mbox{\tt in}  & {\em last\+\_\+x} & The x position of the last time the tool was applied (only applicable while the mouse is being dragged) \\
+\hline
+\mbox{\tt in}  & {\em last\+\_\+y} & The y position of the last time the tool was applied (only applicable while the mouse is being dragged)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classTool_a03fdae3fde745872d82613ef44d2b6db}{Tool}.
+
+\index{T\+Blur@{T\+Blur}!name@{name}}
+\index{name@{name}!T\+Blur@{T\+Blur}}
+\subsubsection[{\texorpdfstring{name(void)}{name(void)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string T\+Blur\+::name (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classTBlur_a245f204d4009ae94a423e5eee09d6515}{}\label{classTBlur_a245f204d4009ae94a423e5eee09d6515}
+
+
+The name of the tool. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classTool_a89abd746706ed78911924a47928d6d06}{Tool}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/include/blur\+\_\+tool.\+h\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/blur\+\_\+tool.\+cc\end{DoxyCompactItemize}

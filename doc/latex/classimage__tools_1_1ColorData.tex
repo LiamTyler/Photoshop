@@ -1,0 +1,113 @@
+\hypertarget{classimage__tools_1_1ColorData}{}\section{image\+\_\+tools\+:\+:Color\+Data Class Reference}
+\label{classimage__tools_1_1ColorData}\index{image\+\_\+tools\+::\+Color\+Data@{image\+\_\+tools\+::\+Color\+Data}}
+
+
+This color data class stores color in floating point format. The Red, Green, Blue, and Alpha channels range from 0.\+0 to 1.\+0.  
+
+
+
+
+{\ttfamily \#include $<$color\+\_\+data.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Color\+Data} (float r, float g, float b)\hypertarget{classimage__tools_1_1ColorData_ad64a66f681d0e502c2416e0bfcb86d14}{}\label{classimage__tools_1_1ColorData_ad64a66f681d0e502c2416e0bfcb86d14}
+
+\item 
+{\bfseries Color\+Data} (float r, float g, float b, float a)\hypertarget{classimage__tools_1_1ColorData_a20782ba5f82e73e731b87311da1bcd56}{}\label{classimage__tools_1_1ColorData_a20782ba5f82e73e731b87311da1bcd56}
+
+\item 
+void {\bfseries red} (float r)\hypertarget{classimage__tools_1_1ColorData_a36d30e0a43563d120ec3533b878a7558}{}\label{classimage__tools_1_1ColorData_a36d30e0a43563d120ec3533b878a7558}
+
+\item 
+void {\bfseries green} (float g)\hypertarget{classimage__tools_1_1ColorData_aaea99320f199dbdb36b87c82b8b5697d}{}\label{classimage__tools_1_1ColorData_aaea99320f199dbdb36b87c82b8b5697d}
+
+\item 
+void {\bfseries blue} (float b)\hypertarget{classimage__tools_1_1ColorData_ab9a4b4f7d983967c1c4105f9df1a60a8}{}\label{classimage__tools_1_1ColorData_ab9a4b4f7d983967c1c4105f9df1a60a8}
+
+\item 
+void {\bfseries alpha} (float a)\hypertarget{classimage__tools_1_1ColorData_ad71793a20e4b2f654379ee79938b5ed2}{}\label{classimage__tools_1_1ColorData_ad71793a20e4b2f654379ee79938b5ed2}
+
+\item 
+float {\bfseries red} (void) const \hypertarget{classimage__tools_1_1ColorData_a04fece12dab6d561a8fe5ac12f1c410d}{}\label{classimage__tools_1_1ColorData_a04fece12dab6d561a8fe5ac12f1c410d}
+
+\item 
+float {\bfseries green} (void) const \hypertarget{classimage__tools_1_1ColorData_a2dcb46013051c45a25386383e6d97e94}{}\label{classimage__tools_1_1ColorData_a2dcb46013051c45a25386383e6d97e94}
+
+\item 
+float {\bfseries blue} (void) const \hypertarget{classimage__tools_1_1ColorData_a3b27c4b8e5cf45c388e348fc01c3eeaf}{}\label{classimage__tools_1_1ColorData_a3b27c4b8e5cf45c388e348fc01c3eeaf}
+
+\item 
+float {\bfseries alpha} (void) const \hypertarget{classimage__tools_1_1ColorData_a8ae370ebb683fcfab1ce7dfdac9f78a2}{}\label{classimage__tools_1_1ColorData_a8ae370ebb683fcfab1ce7dfdac9f78a2}
+
+\item 
+float \hyperlink{classimage__tools_1_1ColorData_a9bea35824e209d2c216739fdc8b9bf3f}{luminance} (void) const \hypertarget{classimage__tools_1_1ColorData_a9bea35824e209d2c216739fdc8b9bf3f}{}\label{classimage__tools_1_1ColorData_a9bea35824e209d2c216739fdc8b9bf3f}
+
+\begin{DoxyCompactList}\small\item\em Get the \char`\"{}brightness\char`\"{} of the color according to a perceptual metric that weights the red, green, and blue components of the color non-\/uniformly. \end{DoxyCompactList}\item 
+\hyperlink{classimage__tools_1_1ColorData}{Color\+Data} \hyperlink{classimage__tools_1_1ColorData_add7ac66b4e579f06f59f03c2206a0429}{clamped\+\_\+color} (void) const \hypertarget{classimage__tools_1_1ColorData_add7ac66b4e579f06f59f03c2206a0429}{}\label{classimage__tools_1_1ColorData_add7ac66b4e579f06f59f03c2206a0429}
+
+\begin{DoxyCompactList}\small\item\em Return a clamped version of a \hyperlink{classimage__tools_1_1ColorData}{Color\+Data} instance All colors and the alpha value are restricted to \mbox{[}0.\+0,1.\+0\mbox{]}. \end{DoxyCompactList}\item 
+float {\bfseries get\+\_\+red} () const \hypertarget{classimage__tools_1_1ColorData_af88bac2ff3c3e62efda953a9714589f3}{}\label{classimage__tools_1_1ColorData_af88bac2ff3c3e62efda953a9714589f3}
+
+\item 
+float {\bfseries get\+\_\+green} () const \hypertarget{classimage__tools_1_1ColorData_ac16f07bdc5bbedd02d2144ca3ce2c886}{}\label{classimage__tools_1_1ColorData_ac16f07bdc5bbedd02d2144ca3ce2c886}
+
+\item 
+float {\bfseries get\+\_\+blue} () const \hypertarget{classimage__tools_1_1ColorData_a880a3a0451a4e1a993b4f5c35874797c}{}\label{classimage__tools_1_1ColorData_a880a3a0451a4e1a993b4f5c35874797c}
+
+\item 
+float {\bfseries get\+\_\+alpha} () const \hypertarget{classimage__tools_1_1ColorData_ac3998b1e84bc22cf66bebce79aeb2295}{}\label{classimage__tools_1_1ColorData_ac3998b1e84bc22cf66bebce79aeb2295}
+
+\end{DoxyCompactItemize}
+\subsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static float {\bfseries clamp\+\_\+value} (float input, float a, float b)\hypertarget{classimage__tools_1_1ColorData_ac9c19726be7a97e13b6916ed26822740}{}\label{classimage__tools_1_1ColorData_ac9c19726be7a97e13b6916ed26822740}
+
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float {\bfseries red\+\_\+}\hypertarget{classimage__tools_1_1ColorData_a78160b930d95c4ece6913717de69d228}{}\label{classimage__tools_1_1ColorData_a78160b930d95c4ece6913717de69d228}
+
+\item 
+float {\bfseries green\+\_\+}\hypertarget{classimage__tools_1_1ColorData_aabfb09bb331483211b5b023a6870ea86}{}\label{classimage__tools_1_1ColorData_aabfb09bb331483211b5b023a6870ea86}
+
+\item 
+float {\bfseries blue\+\_\+}\hypertarget{classimage__tools_1_1ColorData_a8d44e8cd0701a5cd6fbee7fdb4d01309}{}\label{classimage__tools_1_1ColorData_a8d44e8cd0701a5cd6fbee7fdb4d01309}
+
+\item 
+float {\bfseries alpha\+\_\+}\hypertarget{classimage__tools_1_1ColorData_a7bc7d145ee17270baa2d17a03fa17c1e}{}\label{classimage__tools_1_1ColorData_a7bc7d145ee17270baa2d17a03fa17c1e}
+
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classimage__tools_1_1ColorData}{Color\+Data} {\bfseries operator$\ast$} (const \hyperlink{classimage__tools_1_1ColorData}{Color\+Data} \&a, float f)\hypertarget{classimage__tools_1_1ColorData_adf9a770243996e50282d248a4327f351}{}\label{classimage__tools_1_1ColorData_adf9a770243996e50282d248a4327f351}
+
+\item 
+\hyperlink{classimage__tools_1_1ColorData}{Color\+Data} {\bfseries operator+} (const \hyperlink{classimage__tools_1_1ColorData}{Color\+Data} \&a, const \hyperlink{classimage__tools_1_1ColorData}{Color\+Data} \&b)\hypertarget{classimage__tools_1_1ColorData_afee00faf26189979b72f3854a17200ae}{}\label{classimage__tools_1_1ColorData_afee00faf26189979b72f3854a17200ae}
+
+\item 
+\hyperlink{classimage__tools_1_1ColorData}{Color\+Data} {\bfseries operator-\/} (const \hyperlink{classimage__tools_1_1ColorData}{Color\+Data} \&a, const \hyperlink{classimage__tools_1_1ColorData}{Color\+Data} \&b)\hypertarget{classimage__tools_1_1ColorData_a799bd54f65a61569b5b968062ac0d37e}{}\label{classimage__tools_1_1ColorData_a799bd54f65a61569b5b968062ac0d37e}
+
+\item 
+bool {\bfseries operator==} (const \hyperlink{classimage__tools_1_1ColorData}{Color\+Data} \&a, const \hyperlink{classimage__tools_1_1ColorData}{Color\+Data} \&b)\hypertarget{classimage__tools_1_1ColorData_a9dae9e77610393d100312c9d248f09cc}{}\label{classimage__tools_1_1ColorData_a9dae9e77610393d100312c9d248f09cc}
+
+\item 
+bool {\bfseries operator!=} (const \hyperlink{classimage__tools_1_1ColorData}{Color\+Data} \&a, const \hyperlink{classimage__tools_1_1ColorData}{Color\+Data} \&b)\hypertarget{classimage__tools_1_1ColorData_a698ac263a286afe37e3b9ed0c5882c8c}{}\label{classimage__tools_1_1ColorData_a698ac263a286afe37e3b9ed0c5882c8c}
+
+\item 
+std\+::ostream \& {\bfseries operator$<$$<$} (std\+::ostream \&out, const \hyperlink{classimage__tools_1_1ColorData}{Color\+Data} \&c)\hypertarget{classimage__tools_1_1ColorData_aa45bd00a1836c5a180481dad96fd7ea3}{}\label{classimage__tools_1_1ColorData_aa45bd00a1836c5a180481dad96fd7ea3}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This color data class stores color in floating point format. The Red, Green, Blue, and Alpha channels range from 0.\+0 to 1.\+0. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/include/color\+\_\+data.\+h\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/color\+\_\+data.\+cc\end{DoxyCompactItemize}

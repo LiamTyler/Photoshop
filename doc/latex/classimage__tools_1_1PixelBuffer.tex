@@ -1,0 +1,107 @@
+\hypertarget{classimage__tools_1_1PixelBuffer}{}\section{image\+\_\+tools\+:\+:Pixel\+Buffer Class Reference}
+\label{classimage__tools_1_1PixelBuffer}\index{image\+\_\+tools\+::\+Pixel\+Buffer@{image\+\_\+tools\+::\+Pixel\+Buffer}}
+
+
+Stores an array of \hyperlink{classimage__tools_1_1ColorData}{Color\+Data}, such as an image that can be drawn to the screen. In this class, (0,0) is the top left corner of the screen/image, which is the not the same as the coordinate system defined by G\+L\+UT, where (0,0) is the bottom left corner of the screen. Your implementation will need to account for this.  
+
+
+
+
+{\ttfamily \#include $<$pixel\+\_\+buffer.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Pixel\+Buffer} (int w, int h, \hyperlink{classimage__tools_1_1ColorData}{Color\+Data} \hyperlink{classimage__tools_1_1PixelBuffer_a56ac2b6b21368d04a71d6a615eebdd33}{background\+\_\+color})\hypertarget{classimage__tools_1_1PixelBuffer_a4f5b5df93389946d70bc001acfebcedb}{}\label{classimage__tools_1_1PixelBuffer_a4f5b5df93389946d70bc001acfebcedb}
+
+\item 
+{\bfseries Pixel\+Buffer} (const \hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} \&rhs)\hypertarget{classimage__tools_1_1PixelBuffer_a25b0c7d5686807d187ee799a5fbb1121}{}\label{classimage__tools_1_1PixelBuffer_a25b0c7d5686807d187ee799a5fbb1121}
+
+\item 
+\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} \& {\bfseries operator=} (const \hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} \&rhs)\hypertarget{classimage__tools_1_1PixelBuffer_a95f63d0b72c4d0b371c556597cf77578}{}\label{classimage__tools_1_1PixelBuffer_a95f63d0b72c4d0b371c556597cf77578}
+
+\item 
+void \hyperlink{classimage__tools_1_1PixelBuffer_ac3559133504c49f3af9a00544411c3b8}{set\+\_\+pixel} (int x, int y, const \hyperlink{classimage__tools_1_1ColorData}{Color\+Data} \&color)\hypertarget{classimage__tools_1_1PixelBuffer_ac3559133504c49f3af9a00544411c3b8}{}\label{classimage__tools_1_1PixelBuffer_ac3559133504c49f3af9a00544411c3b8}
+
+\begin{DoxyCompactList}\small\item\em Set the value for a pixel within the buffer/on the screen. \end{DoxyCompactList}\item 
+\hyperlink{classimage__tools_1_1ColorData}{Color\+Data} const $\ast$ {\bfseries data} (void) const \hypertarget{classimage__tools_1_1PixelBuffer_a2450a6c464bbe620d9efec2ac6c82a9e}{}\label{classimage__tools_1_1PixelBuffer_a2450a6c464bbe620d9efec2ac6c82a9e}
+
+\item 
+int {\bfseries height} (void) const \hypertarget{classimage__tools_1_1PixelBuffer_a37fa2f4abc4c1d28a063c3c74b1faf9d}{}\label{classimage__tools_1_1PixelBuffer_a37fa2f4abc4c1d28a063c3c74b1faf9d}
+
+\item 
+int {\bfseries width} (void) const \hypertarget{classimage__tools_1_1PixelBuffer_a6143b06b081402013a5f346222b2ab5f}{}\label{classimage__tools_1_1PixelBuffer_a6143b06b081402013a5f346222b2ab5f}
+
+\item 
+const \hyperlink{classimage__tools_1_1ColorData}{Color\+Data} \& \hyperlink{classimage__tools_1_1PixelBuffer_a56ac2b6b21368d04a71d6a615eebdd33}{background\+\_\+color} (void) const 
+\begin{DoxyCompactList}\small\item\em Get the background color that was used to initialize the \hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer}. \end{DoxyCompactList}\item 
+void {\bfseries set\+\_\+background\+\_\+color} (\hyperlink{classimage__tools_1_1ColorData}{Color\+Data} bg)\hypertarget{classimage__tools_1_1PixelBuffer_acd1b843e6e91bd95f8386380c8def879}{}\label{classimage__tools_1_1PixelBuffer_acd1b843e6e91bd95f8386380c8def879}
+
+\item 
+\hyperlink{classimage__tools_1_1ColorData}{Color\+Data} \hyperlink{classimage__tools_1_1PixelBuffer_af1a9e6d73a1a1fde15e4dbeff335c376}{get\+\_\+pixel} (int x, int y) const 
+\begin{DoxyCompactList}\small\item\em Get the color of a specific pixel. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const int \hyperlink{classimage__tools_1_1PixelBuffer_ac67206a6b428c7b33bd7f90f65b8c171}{width\+\_\+}
+\item 
+const int \hyperlink{classimage__tools_1_1PixelBuffer_ae104466eae109324a4a0daa0bc14c980}{height\+\_\+}
+\item 
+std\+::vector$<$ \hyperlink{classimage__tools_1_1ColorData}{Color\+Data} $>$ \hyperlink{classimage__tools_1_1PixelBuffer_a0c52483e7e29f111acf98474105f2409}{pixels\+\_\+}
+\item 
+\hyperlink{classimage__tools_1_1ColorData}{Color\+Data} {\bfseries background\+\_\+color\+\_\+}\hypertarget{classimage__tools_1_1PixelBuffer_a67c70e090217b58856633ff35d499de2}{}\label{classimage__tools_1_1PixelBuffer_a67c70e090217b58856633ff35d499de2}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Stores an array of \hyperlink{classimage__tools_1_1ColorData}{Color\+Data}, such as an image that can be drawn to the screen. In this class, (0,0) is the top left corner of the screen/image, which is the not the same as the coordinate system defined by G\+L\+UT, where (0,0) is the bottom left corner of the screen. Your implementation will need to account for this. 
+
+\subsection{Member Function Documentation}
+\index{image\+\_\+tools\+::\+Pixel\+Buffer@{image\+\_\+tools\+::\+Pixel\+Buffer}!background\+\_\+color@{background\+\_\+color}}
+\index{background\+\_\+color@{background\+\_\+color}!image\+\_\+tools\+::\+Pixel\+Buffer@{image\+\_\+tools\+::\+Pixel\+Buffer}}
+\subsubsection[{\texorpdfstring{background\+\_\+color(void) const }{background_color(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Color\+Data}\& image\+\_\+tools\+::\+Pixel\+Buffer\+::background\+\_\+color (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classimage__tools_1_1PixelBuffer_a56ac2b6b21368d04a71d6a615eebdd33}{}\label{classimage__tools_1_1PixelBuffer_a56ac2b6b21368d04a71d6a615eebdd33}
+
+
+Get the background color that was used to initialize the \hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer}. 
+
+\begin{DoxyReturn}{Returns}
+The background color 
+\end{DoxyReturn}
+\index{image\+\_\+tools\+::\+Pixel\+Buffer@{image\+\_\+tools\+::\+Pixel\+Buffer}!get\+\_\+pixel@{get\+\_\+pixel}}
+\index{get\+\_\+pixel@{get\+\_\+pixel}!image\+\_\+tools\+::\+Pixel\+Buffer@{image\+\_\+tools\+::\+Pixel\+Buffer}}
+\subsubsection[{\texorpdfstring{get\+\_\+pixel(int x, int y) const }{get_pixel(int x, int y) const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Color\+Data} image\+\_\+tools\+::\+Pixel\+Buffer\+::get\+\_\+pixel (
+\begin{DoxyParamCaption}
+\item[{int}]{x, }
+\item[{int}]{y}
+\end{DoxyParamCaption}
+) const}\hypertarget{classimage__tools_1_1PixelBuffer_af1a9e6d73a1a1fde15e4dbeff335c376}{}\label{classimage__tools_1_1PixelBuffer_af1a9e6d73a1a1fde15e4dbeff335c376}
+
+
+Get the color of a specific pixel. 
+
+\begin{DoxyReturn}{Returns}
+The color associated with a specific pixel 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\index{image\+\_\+tools\+::\+Pixel\+Buffer@{image\+\_\+tools\+::\+Pixel\+Buffer}!height\+\_\+@{height\+\_\+}}
+\index{height\+\_\+@{height\+\_\+}!image\+\_\+tools\+::\+Pixel\+Buffer@{image\+\_\+tools\+::\+Pixel\+Buffer}}
+\subsubsection[{\texorpdfstring{height\+\_\+}{height_}}]{\setlength{\rightskip}{0pt plus 5cm}const int image\+\_\+tools\+::\+Pixel\+Buffer\+::height\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classimage__tools_1_1PixelBuffer_ae104466eae109324a4a0daa0bc14c980}{}\label{classimage__tools_1_1PixelBuffer_ae104466eae109324a4a0daa0bc14c980}
+Y dimension--cannot be changed \index{image\+\_\+tools\+::\+Pixel\+Buffer@{image\+\_\+tools\+::\+Pixel\+Buffer}!pixels\+\_\+@{pixels\+\_\+}}
+\index{pixels\+\_\+@{pixels\+\_\+}!image\+\_\+tools\+::\+Pixel\+Buffer@{image\+\_\+tools\+::\+Pixel\+Buffer}}
+\subsubsection[{\texorpdfstring{pixels\+\_\+}{pixels_}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<${\bf Color\+Data}$>$ image\+\_\+tools\+::\+Pixel\+Buffer\+::pixels\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classimage__tools_1_1PixelBuffer_a0c52483e7e29f111acf98474105f2409}{}\label{classimage__tools_1_1PixelBuffer_a0c52483e7e29f111acf98474105f2409}
+Raw pixel data \index{image\+\_\+tools\+::\+Pixel\+Buffer@{image\+\_\+tools\+::\+Pixel\+Buffer}!width\+\_\+@{width\+\_\+}}
+\index{width\+\_\+@{width\+\_\+}!image\+\_\+tools\+::\+Pixel\+Buffer@{image\+\_\+tools\+::\+Pixel\+Buffer}}
+\subsubsection[{\texorpdfstring{width\+\_\+}{width_}}]{\setlength{\rightskip}{0pt plus 5cm}const int image\+\_\+tools\+::\+Pixel\+Buffer\+::width\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classimage__tools_1_1PixelBuffer_ac67206a6b428c7b33bd7f90f65b8c171}{}\label{classimage__tools_1_1PixelBuffer_ac67206a6b428c7b33bd7f90f65b8c171}
+X dimension--cannot be changed 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/include/pixel\+\_\+buffer.\+h\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/pixel\+\_\+buffer.\+cc\end{DoxyCompactItemize}

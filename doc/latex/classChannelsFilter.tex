@@ -1,0 +1,83 @@
+\hypertarget{classChannelsFilter}{}\section{Channels\+Filter Class Reference}
+\label{classChannelsFilter}\index{Channels\+Filter@{Channels\+Filter}}
+
+
+Scale each of the R\+GB channels by a specified amount from the user.  
+
+
+
+
+{\ttfamily \#include $<$channels\+\_\+filter.\+h$>$}
+
+
+
+Inherits \hyperlink{classSimpleFilter}{Simple\+Filter}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Channels\+Filter} (float red\+\_\+channel, float green\+\_\+channel, float blue\+\_\+channel)\hypertarget{classChannelsFilter_a7385bf66016c0525eb3b60707d0736fd}{}\label{classChannelsFilter_a7385bf66016c0525eb3b60707d0736fd}
+
+\item 
+float \hyperlink{classChannelsFilter_a0eec6a503fa03e7ef9f0efc00ad0761c}{Apply\+To\+Color} (std\+::string, const \hyperlink{classimage__tools_1_1ColorData}{Color\+Data} \&current)
+\begin{DoxyCompactList}\small\item\em Calculate the new value for the color that is passed in. \end{DoxyCompactList}\item 
+std\+::string {\bfseries name} (void)\hypertarget{classChannelsFilter_acb94fe6537229551399ea4fccdc0fd1b}{}\label{classChannelsFilter_acb94fe6537229551399ea4fccdc0fd1b}
+
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{classChannelsFilter_ab844b335f0260f3b55b45be29da207a6}{red\+\_\+channel\+\_\+}
+\item 
+float \hyperlink{classChannelsFilter_adf3f927d85cd418b0e2d254e20c88381}{green\+\_\+channel\+\_\+}
+\item 
+float {\bfseries blue\+\_\+channel\+\_\+}\hypertarget{classChannelsFilter_a5ea1d1f6665c961c6ceb4bcc08b5dfc6}{}\label{classChannelsFilter_a5ea1d1f6665c961c6ceb4bcc08b5dfc6}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Scale each of the R\+GB channels by a specified amount from the user. 
+
+\subsection{Member Function Documentation}
+\index{Channels\+Filter@{Channels\+Filter}!Apply\+To\+Color@{Apply\+To\+Color}}
+\index{Apply\+To\+Color@{Apply\+To\+Color}!Channels\+Filter@{Channels\+Filter}}
+\subsubsection[{\texorpdfstring{Apply\+To\+Color(std\+::string, const Color\+Data \&current)}{ApplyToColor(std::string, const ColorData &current)}}]{\setlength{\rightskip}{0pt plus 5cm}float Channels\+Filter\+::\+Apply\+To\+Color (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{color, }
+\item[{const {\bf Color\+Data} \&}]{current}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classChannelsFilter_a0eec6a503fa03e7ef9f0efc00ad0761c}{}\label{classChannelsFilter_a0eec6a503fa03e7ef9f0efc00ad0761c}
+
+
+Calculate the new value for the color that is passed in. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em color} & The color to apply the algorithm to \\
+\hline
+\mbox{\tt in}  & {\em current} & The Color\+Data object of the pixel that is currently being recalculated\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The new value of the color requested 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classSimpleFilter_a4929140e4fa49ea630267e8562c4d0f1}{Simple\+Filter}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Channels\+Filter@{Channels\+Filter}!green\+\_\+channel\+\_\+@{green\+\_\+channel\+\_\+}}
+\index{green\+\_\+channel\+\_\+@{green\+\_\+channel\+\_\+}!Channels\+Filter@{Channels\+Filter}}
+\subsubsection[{\texorpdfstring{green\+\_\+channel\+\_\+}{green_channel_}}]{\setlength{\rightskip}{0pt plus 5cm}float Channels\+Filter\+::green\+\_\+channel\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChannelsFilter_adf3f927d85cd418b0e2d254e20c88381}{}\label{classChannelsFilter_adf3f927d85cd418b0e2d254e20c88381}
+Green scaling factor \index{Channels\+Filter@{Channels\+Filter}!red\+\_\+channel\+\_\+@{red\+\_\+channel\+\_\+}}
+\index{red\+\_\+channel\+\_\+@{red\+\_\+channel\+\_\+}!Channels\+Filter@{Channels\+Filter}}
+\subsubsection[{\texorpdfstring{red\+\_\+channel\+\_\+}{red_channel_}}]{\setlength{\rightskip}{0pt plus 5cm}float Channels\+Filter\+::red\+\_\+channel\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classChannelsFilter_ab844b335f0260f3b55b45be29da207a6}{}\label{classChannelsFilter_ab844b335f0260f3b55b45be29da207a6}
+Red scaling factor 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/include/channels\+\_\+filter.\+h\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/channels\+\_\+filter.\+cc\end{DoxyCompactItemize}

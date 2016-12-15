@@ -1,0 +1,72 @@
+\hypertarget{classSaturationFilter}{}\section{Saturation\+Filter Class Reference}
+\label{classSaturationFilter}\index{Saturation\+Filter@{Saturation\+Filter}}
+
+
+Implements a saturation filter.  
+
+
+
+
+{\ttfamily \#include $<$saturation\+\_\+filter.\+h$>$}
+
+
+
+Inherits \hyperlink{classSimpleFilter}{Simple\+Filter}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Saturation\+Filter} (float amount)\hypertarget{classSaturationFilter_aec12acab65dcbb9b423f649f6fc106e3}{}\label{classSaturationFilter_aec12acab65dcbb9b423f649f6fc106e3}
+
+\item 
+float \hyperlink{classSaturationFilter_a1c56517df4bbdcd1b8e61bf1254f71b6}{Apply\+To\+Color} (std\+::string, const \hyperlink{classimage__tools_1_1ColorData}{Color\+Data} \&current)
+\begin{DoxyCompactList}\small\item\em Calculate the new value for the color that is passed in. \end{DoxyCompactList}\item 
+std\+::string {\bfseries name} (void)\hypertarget{classSaturationFilter_af3e40405d633fca9979f5612a85f791d}{}\label{classSaturationFilter_af3e40405d633fca9979f5612a85f791d}
+
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float \hyperlink{classSaturationFilter_a48242a44a85710a303cb57e90b9fb1f5}{amount\+\_\+}\hypertarget{classSaturationFilter_a48242a44a85710a303cb57e90b9fb1f5}{}\label{classSaturationFilter_a48242a44a85710a303cb57e90b9fb1f5}
+
+\begin{DoxyCompactList}\small\item\em The amount to scale by. 0 = gray, -\/1 = invert, 2 = twice the color. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implements a saturation filter. 
+
+A fitler that adjusts the colorfulness of an image. This can be used to convert to grayscale, invert colors, or make things more colorful. 
+
+\subsection{Member Function Documentation}
+\index{Saturation\+Filter@{Saturation\+Filter}!Apply\+To\+Color@{Apply\+To\+Color}}
+\index{Apply\+To\+Color@{Apply\+To\+Color}!Saturation\+Filter@{Saturation\+Filter}}
+\subsubsection[{\texorpdfstring{Apply\+To\+Color(std\+::string, const Color\+Data \&current)}{ApplyToColor(std::string, const ColorData &current)}}]{\setlength{\rightskip}{0pt plus 5cm}float Saturation\+Filter\+::\+Apply\+To\+Color (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{color, }
+\item[{const {\bf Color\+Data} \&}]{current}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classSaturationFilter_a1c56517df4bbdcd1b8e61bf1254f71b6}{}\label{classSaturationFilter_a1c56517df4bbdcd1b8e61bf1254f71b6}
+
+
+Calculate the new value for the color that is passed in. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em color} & The color to apply the algorithm to \\
+\hline
+\mbox{\tt in}  & {\em current} & The Color\+Data object of the pixel that is currently being recalculated\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The new value of the color requested 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classSimpleFilter_a4929140e4fa49ea630267e8562c4d0f1}{Simple\+Filter}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/include/saturation\+\_\+filter.\+h\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/saturation\+\_\+filter.\+cc\end{DoxyCompactItemize}

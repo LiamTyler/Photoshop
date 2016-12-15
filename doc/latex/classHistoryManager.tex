@@ -1,0 +1,119 @@
+\hypertarget{classHistoryManager}{}\section{History\+Manager Class Reference}
+\label{classHistoryManager}\index{History\+Manager@{History\+Manager}}
+
+
+Class for handling the undo / redo features.  
+
+
+
+
+{\ttfamily \#include $<$history\+\_\+manager.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries History\+Manager} (\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$buff, int possible\+\_\+saves)\hypertarget{classHistoryManager_a17fa4abb7cd55bc5b3db35e7a167ebc1}{}\label{classHistoryManager_a17fa4abb7cd55bc5b3db35e7a167ebc1}
+
+\item 
+\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$ \hyperlink{classHistoryManager_ad748a9e31638b3519b4a0fc67b2bdea8}{Redo} (\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$display)
+\begin{DoxyCompactList}\small\item\em Loads the next action saved into the specified Pixel\+Buffer. \end{DoxyCompactList}\item 
+\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$ \hyperlink{classHistoryManager_a8fdf7742793182c75d40ebe67296e9b6}{Undo} (\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$display)
+\begin{DoxyCompactList}\small\item\em Loads the previous action saved into the specified Pixel\+Buffer. \end{DoxyCompactList}\item 
+void {\bfseries Save\+Canvas} (\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$buff)\hypertarget{classHistoryManager_ad854ff27de36d1d0307ee95a319d0cc3}{}\label{classHistoryManager_ad854ff27de36d1d0307ee95a319d0cc3}
+
+\item 
+void {\bfseries Init} (\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$blank\+Canvas)\hypertarget{classHistoryManager_a6427f42c8d21104a906a32a67259fe6d}{}\label{classHistoryManager_a6427f42c8d21104a906a32a67259fe6d}
+
+\item 
+bool {\bfseries cant\+\_\+undo} ()\hypertarget{classHistoryManager_a853284a3706ee57b963e9c978fcdcf7a}{}\label{classHistoryManager_a853284a3706ee57b963e9c978fcdcf7a}
+
+\item 
+bool {\bfseries cant\+\_\+redo} ()\hypertarget{classHistoryManager_ac4a9a3eeea33ba938fd7ca0bfeafd04b}{}\label{classHistoryManager_ac4a9a3eeea33ba938fd7ca0bfeafd04b}
+
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries History\+Manager} (const \hyperlink{classHistoryManager}{History\+Manager} \&h)=delete\hypertarget{classHistoryManager_a0690ec75506f596d1885e196e9b0558f}{}\label{classHistoryManager_a0690ec75506f596d1885e196e9b0558f}
+
+\item 
+\hyperlink{classHistoryManager}{History\+Manager} \& {\bfseries operator=} (const \hyperlink{classHistoryManager}{History\+Manager} \&h)=delete\hypertarget{classHistoryManager_aa16f6ffa95b2f7dc3dc31044e18563f3}{}\label{classHistoryManager_aa16f6ffa95b2f7dc3dc31044e18563f3}
+
+\item 
+\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$ {\bfseries Resize\+And\+Copy} (\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$display)\hypertarget{classHistoryManager_a65039aa3b3325eb0ae1be561e4fd64a9}{}\label{classHistoryManager_a65039aa3b3325eb0ae1be561e4fd64a9}
+
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$$\ast$ {\bfseries saved\+\_\+buffers\+\_\+}\hypertarget{classHistoryManager_ae77541e707d1407f1a0f06eca30f550c}{}\label{classHistoryManager_ae77541e707d1407f1a0f06eca30f550c}
+
+\item 
+int {\bfseries possible\+\_\+saves\+\_\+}\hypertarget{classHistoryManager_a28a9807b76666020e59afd0959c211e9}{}\label{classHistoryManager_a28a9807b76666020e59afd0959c211e9}
+
+\item 
+int {\bfseries current\+\_\+save\+\_\+}\hypertarget{classHistoryManager_af6f6362b0e1cceea277522180f79f452}{}\label{classHistoryManager_af6f6362b0e1cceea277522180f79f452}
+
+\item 
+int {\bfseries oldest\+\_\+save\+\_\+}\hypertarget{classHistoryManager_a05d643714f5bf871977f4b1b1a7c4e4e}{}\label{classHistoryManager_a05d643714f5bf871977f4b1b1a7c4e4e}
+
+\item 
+int {\bfseries newest\+\_\+save\+\_\+}\hypertarget{classHistoryManager_a338630aa7e3154d75d7433b78638d2dc}{}\label{classHistoryManager_a338630aa7e3154d75d7433b78638d2dc}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class for handling the undo / redo features. 
+
+By default it stores the Pixel\+Buffers of the last 80 actions. It will not allow and redos past the most recent, no undos past the oldest 
+
+\subsection{Member Function Documentation}
+\index{History\+Manager@{History\+Manager}!Redo@{Redo}}
+\index{Redo@{Redo}!History\+Manager@{History\+Manager}}
+\subsubsection[{\texorpdfstring{Redo(\+Pixel\+Buffer $\ast$display)}{Redo(PixelBuffer *display)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Pixel\+Buffer} $\ast$ History\+Manager\+::\+Redo (
+\begin{DoxyParamCaption}
+\item[{{\bf Pixel\+Buffer} $\ast$}]{display}
+\end{DoxyParamCaption}
+)}\hypertarget{classHistoryManager_ad748a9e31638b3519b4a0fc67b2bdea8}{}\label{classHistoryManager_ad748a9e31638b3519b4a0fc67b2bdea8}
+
+
+Loads the next action saved into the specified Pixel\+Buffer. 
+
+If there is a next action saved, it will load it into the specified buffer, resizing as needed. Given a series of undos, and then a new action, redo will not change anything because the \char`\"{}branch\char`\"{} of saved actions has been broken.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em display} & The buffer to load the next action into\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the new Pixel\+Buffer to display 
+\end{DoxyReturn}
+\index{History\+Manager@{History\+Manager}!Undo@{Undo}}
+\index{Undo@{Undo}!History\+Manager@{History\+Manager}}
+\subsubsection[{\texorpdfstring{Undo(\+Pixel\+Buffer $\ast$display)}{Undo(PixelBuffer *display)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Pixel\+Buffer} $\ast$ History\+Manager\+::\+Undo (
+\begin{DoxyParamCaption}
+\item[{{\bf Pixel\+Buffer} $\ast$}]{display}
+\end{DoxyParamCaption}
+)}\hypertarget{classHistoryManager_a8fdf7742793182c75d40ebe67296e9b6}{}\label{classHistoryManager_a8fdf7742793182c75d40ebe67296e9b6}
+
+
+Loads the previous action saved into the specified Pixel\+Buffer. 
+
+If there is a previous action saved, it will load it into the specified buffer, resizing as needed. Undo is possible as long as you haven\textquotesingle{}t Undo\textquotesingle{}ed all the way to the original image, or Undo\textquotesingle{}ed possible\+\_\+saves -\/ 1 times already.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em display} & The buffer to load the previous action into\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pointer to the new Pixel\+Buffer to display 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/include/history\+\_\+manager.\+h\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/history\+\_\+manager.\+cc\end{DoxyCompactItemize}

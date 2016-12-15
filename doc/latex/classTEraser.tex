@@ -1,0 +1,97 @@
+\hypertarget{classTEraser}{}\section{T\+Eraser Class Reference}
+\label{classTEraser}\index{T\+Eraser@{T\+Eraser}}
+
+
+Implements an eraser tool.  
+
+
+
+
+{\ttfamily \#include $<$eraser.\+h$>$}
+
+
+
+Inherits \hyperlink{classTool}{Tool}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries T\+Eraser} (int width, int height)\hypertarget{classTEraser_a8ec6f2b3993f9f3b440578dbf12b9b0f}{}\label{classTEraser_a8ec6f2b3993f9f3b440578dbf12b9b0f}
+
+\item 
+void \hyperlink{classTEraser_af3c3f1cf42dcf566673388c8c5492d13}{Apply\+Tool} (\hyperlink{classimage__tools_1_1PixelBuffer}{image\+\_\+tools\+::\+Pixel\+Buffer} $\ast$buff, \hyperlink{classimage__tools_1_1ColorData}{image\+\_\+tools\+::\+Color\+Data} current\+\_\+color, int x, int y, int last\+\_\+x, int last\+\_\+y)
+\begin{DoxyCompactList}\small\item\em Default implementation for applying the tool to the Pixel\+Buffer. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classTEraser_a7d1739530674f8f7b82485dd4337ecc5}{name} (void)
+\begin{DoxyCompactList}\small\item\em The name of the tool. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implements an eraser tool. 
+
+\hyperlink{classTool}{Tool} with a vertical circular mask that restore the pixels to the background color 
+
+\subsection{Member Function Documentation}
+\index{T\+Eraser@{T\+Eraser}!Apply\+Tool@{Apply\+Tool}}
+\index{Apply\+Tool@{Apply\+Tool}!T\+Eraser@{T\+Eraser}}
+\subsubsection[{\texorpdfstring{Apply\+Tool(image\+\_\+tools\+::\+Pixel\+Buffer $\ast$buff, image\+\_\+tools\+::\+Color\+Data current\+\_\+color, int x, int y, int last\+\_\+x, int last\+\_\+y)}{ApplyTool(image_tools::PixelBuffer *buff, image_tools::ColorData current_color, int x, int y, int last_x, int last_y)}}]{\setlength{\rightskip}{0pt plus 5cm}void T\+Eraser\+::\+Apply\+Tool (
+\begin{DoxyParamCaption}
+\item[{{\bf image\+\_\+tools\+::\+Pixel\+Buffer} $\ast$}]{buff, }
+\item[{{\bf image\+\_\+tools\+::\+Color\+Data}}]{current\+\_\+color, }
+\item[{int}]{x, }
+\item[{int}]{y, }
+\item[{int}]{last\+\_\+x, }
+\item[{int}]{last\+\_\+y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classTEraser_af3c3f1cf42dcf566673388c8c5492d13}{}\label{classTEraser_af3c3f1cf42dcf566673388c8c5492d13}
+
+
+Default implementation for applying the tool to the Pixel\+Buffer. 
+
+Uses the current\+\_\+color and last position of the tool being applied (last\+\_\+x and last\+\_\+y) to determine how to apply the mask to the buffer.
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em buff} & The buffer of pixels to apply the tool to \\
+\hline
+\mbox{\tt in}  & {\em current\+\_\+color} & The current color of the tool \\
+\hline
+\mbox{\tt in}  & {\em x} & The x position of where to apply the tool to \\
+\hline
+\mbox{\tt in}  & {\em y} & The y position of where to apply the tool to \\
+\hline
+\mbox{\tt in}  & {\em last\+\_\+x} & The x position of the last time the tool was applied (only applicable while the mouse is being dragged) \\
+\hline
+\mbox{\tt in}  & {\em last\+\_\+y} & The y position of the last time the tool was applied (only applicable while the mouse is being dragged)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classTool_a03fdae3fde745872d82613ef44d2b6db}{Tool}.
+
+\index{T\+Eraser@{T\+Eraser}!name@{name}}
+\index{name@{name}!T\+Eraser@{T\+Eraser}}
+\subsubsection[{\texorpdfstring{name(void)}{name(void)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string T\+Eraser\+::name (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classTEraser_a7d1739530674f8f7b82485dd4337ecc5}{}\label{classTEraser_a7d1739530674f8f7b82485dd4337ecc5}
+
+
+The name of the tool. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classTool_a89abd746706ed78911924a47928d6d06}{Tool}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/include/eraser.\+h\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/eraser.\+cc\end{DoxyCompactItemize}

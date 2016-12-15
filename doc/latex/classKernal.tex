@@ -1,0 +1,130 @@
+\hypertarget{classKernal}{}\section{Kernal Class Reference}
+\label{classKernal}\index{Kernal@{Kernal}}
+
+
+Superclass for all kernals.  
+
+
+
+
+{\ttfamily \#include $<$kernal.\+h$>$}
+
+
+
+Inherited by \hyperlink{classBlurKernal}{Blur\+Kernal}, \hyperlink{classEdgeDetectKernal}{Edge\+Detect\+Kernal}, \hyperlink{classEmbossKernal}{Emboss\+Kernal}, \hyperlink{classMotionBlurKernal}{Motion\+Blur\+Kernal}, and \hyperlink{classSharpenKernal}{Sharpen\+Kernal}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Kernal} (int width, int height)\hypertarget{classKernal_a55bacf5179ed4b74bd06c2ab2f46edb6}{}\label{classKernal_a55bacf5179ed4b74bd06c2ab2f46edb6}
+
+\item 
+{\bfseries Kernal} (const \hyperlink{classKernal}{Kernal} \&k)\hypertarget{classKernal_afb88d9b7df9f59fb9c84fe3a9fdb522d}{}\label{classKernal_afb88d9b7df9f59fb9c84fe3a9fdb522d}
+
+\item 
+\hyperlink{classKernal}{Kernal} \& {\bfseries operator=} (const \hyperlink{classKernal}{Kernal} \&k)\hypertarget{classKernal_aa98f75930d374bd578f4530991b0f256}{}\label{classKernal_aa98f75930d374bd578f4530991b0f256}
+
+\item 
+\hyperlink{classimage__tools_1_1ColorData}{Color\+Data} \hyperlink{classKernal_aaee07d8a1316e8e72d85bd9e81d7ddce}{Apply\+Kernal} (\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$oldimage, int start\+\_\+x, int start\+\_\+y)
+\begin{DoxyCompactList}\small\item\em Function that calculates what the next pixel should be after applying the kernal to it. \end{DoxyCompactList}\item 
+void \hyperlink{classKernal_ab68b45c23fc5d6f8957ed757bd8772f9}{Resize} (int width, int height)\hypertarget{classKernal_ab68b45c23fc5d6f8957ed757bd8772f9}{}\label{classKernal_ab68b45c23fc5d6f8957ed757bd8772f9}
+
+\begin{DoxyCompactList}\small\item\em Resize the kernal to the given parameters. \end{DoxyCompactList}\item 
+int {\bfseries get\+\_\+width} ()\hypertarget{classKernal_a43fc65406d9950976155ac7ac7fa47a5}{}\label{classKernal_a43fc65406d9950976155ac7ac7fa47a5}
+
+\item 
+int {\bfseries get\+\_\+height} ()\hypertarget{classKernal_a710ef2e886631ddf6bdfbbf186cdf50a}{}\label{classKernal_a710ef2e886631ddf6bdfbbf186cdf50a}
+
+\item 
+float $\ast$$\ast$ {\bfseries get\+\_\+kernal} ()\hypertarget{classKernal_a9949e8c60832b9468449b18a0b68ac36}{}\label{classKernal_a9949e8c60832b9468449b18a0b68ac36}
+
+\item 
+void \hyperlink{classKernal_acb794ffafc22adbe00e9473833fad933}{print} (std\+::ostream \&out) const \hypertarget{classKernal_acb794ffafc22adbe00e9473833fad933}{}\label{classKernal_acb794ffafc22adbe00e9473833fad933}
+
+\begin{DoxyCompactList}\small\item\em Prints out the kernal values. Used for debugging purposes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classKernal_a235884b216e150becade52c23e71ecbd}{Allocate\+Kernal} (int width, int height)\hypertarget{classKernal_a235884b216e150becade52c23e71ecbd}{}\label{classKernal_a235884b216e150becade52c23e71ecbd}
+
+\begin{DoxyCompactList}\small\item\em Dynamically allocate memory for the kernal. \end{DoxyCompactList}\item 
+void {\bfseries Deallocate\+Kernal} ()\hypertarget{classKernal_a97aec0d6fc0401f0eb07af64a3a51bec}{}\label{classKernal_a97aec0d6fc0401f0eb07af64a3a51bec}
+
+\item 
+virtual void \hyperlink{classKernal_a487ef0e4a0d37cb827b5c46750330952}{Initialize\+Kernal} ()=0
+\begin{DoxyCompactList}\small\item\em Give each element in the kernal it\textquotesingle{}s value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classKernal_a7d5e5d7043f47581af9143d120554892}{width\+\_\+}
+\item 
+int \hyperlink{classKernal_a62db7ebf9b112db0e3fc971e571a2e2a}{height\+\_\+}
+\item 
+float $\ast$$\ast$ {\bfseries kernal\+\_\+}\hypertarget{classKernal_a391125232eed9c5fb6ac6c88541983ba}{}\label{classKernal_a391125232eed9c5fb6ac6c88541983ba}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Superclass for all kernals. 
+
+Kernals are two dimensional arrays that are used in convolution filters. A kernal is centered over a pixel, and a weighted sum is performed between all the pixels beneath the kernal after the pixel gets multiplied by the amount in that element of the kernal. 
+
+\subsection{Member Function Documentation}
+\index{Kernal@{Kernal}!Apply\+Kernal@{Apply\+Kernal}}
+\index{Apply\+Kernal@{Apply\+Kernal}!Kernal@{Kernal}}
+\subsubsection[{\texorpdfstring{Apply\+Kernal(\+Pixel\+Buffer $\ast$oldimage, int start\+\_\+x, int start\+\_\+y)}{ApplyKernal(PixelBuffer *oldimage, int start_x, int start_y)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Color\+Data} Kernal\+::\+Apply\+Kernal (
+\begin{DoxyParamCaption}
+\item[{{\bf Pixel\+Buffer} $\ast$}]{oldimage, }
+\item[{int}]{start\+\_\+x, }
+\item[{int}]{start\+\_\+y}
+\end{DoxyParamCaption}
+)}\hypertarget{classKernal_aaee07d8a1316e8e72d85bd9e81d7ddce}{}\label{classKernal_aaee07d8a1316e8e72d85bd9e81d7ddce}
+
+
+Function that calculates what the next pixel should be after applying the kernal to it. 
+
+Centers the kernal over given pixel, multiplies each element according to the value of the corresponding kernal element, and adds them up.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em oldimage} & The image we are filtering \\
+\hline
+\mbox{\tt in}  & {\em start\+\_\+x} & The x position of the pixel we are filtering \\
+\hline
+\mbox{\tt in}  & {\em start\+\_\+y} & The y position of the pixel we are filtering\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The filtered pixel 
+\end{DoxyReturn}
+\index{Kernal@{Kernal}!Initialize\+Kernal@{Initialize\+Kernal}}
+\index{Initialize\+Kernal@{Initialize\+Kernal}!Kernal@{Kernal}}
+\subsubsection[{\texorpdfstring{Initialize\+Kernal()=0}{InitializeKernal()=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void Kernal\+::\+Initialize\+Kernal (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}\hypertarget{classKernal_a487ef0e4a0d37cb827b5c46750330952}{}\label{classKernal_a487ef0e4a0d37cb827b5c46750330952}
+
+
+Give each element in the kernal it\textquotesingle{}s value. 
+
+This function is implemented by all the inherited kernal classes, and each define the values in the kernal. 
+
+Implemented in \hyperlink{classSharpenKernal_ad6806183812745821914b253374e0173}{Sharpen\+Kernal}, \hyperlink{classMotionBlurKernal_a79623d08eed4ac6e253c322fa55a3726}{Motion\+Blur\+Kernal}, \hyperlink{classBlurKernal_a18f4bbb753d71550078700684295f9b0}{Blur\+Kernal}, \hyperlink{classEdgeDetectKernal_aa763cc245174147a0a2e264f5ee530a9}{Edge\+Detect\+Kernal}, and \hyperlink{classEmbossKernal_a56c4ada25d8b046d40fb389fabcac057}{Emboss\+Kernal}.
+
+
+
+\subsection{Member Data Documentation}
+\index{Kernal@{Kernal}!height\+\_\+@{height\+\_\+}}
+\index{height\+\_\+@{height\+\_\+}!Kernal@{Kernal}}
+\subsubsection[{\texorpdfstring{height\+\_\+}{height_}}]{\setlength{\rightskip}{0pt plus 5cm}int Kernal\+::height\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classKernal_a62db7ebf9b112db0e3fc971e571a2e2a}{}\label{classKernal_a62db7ebf9b112db0e3fc971e571a2e2a}
+The kernal height \index{Kernal@{Kernal}!width\+\_\+@{width\+\_\+}}
+\index{width\+\_\+@{width\+\_\+}!Kernal@{Kernal}}
+\subsubsection[{\texorpdfstring{width\+\_\+}{width_}}]{\setlength{\rightskip}{0pt plus 5cm}int Kernal\+::width\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classKernal_a7d5e5d7043f47581af9143d120554892}{}\label{classKernal_a7d5e5d7043f47581af9143d120554892}
+The kernal width 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/include/kernal.\+h\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/kernal.\+cc\end{DoxyCompactItemize}

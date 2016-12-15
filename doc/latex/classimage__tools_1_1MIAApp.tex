@@ -1,0 +1,135 @@
+\hypertarget{classimage__tools_1_1MIAApp}{}\section{image\+\_\+tools\+:\+:M\+I\+A\+App Class Reference}
+\label{classimage__tools_1_1MIAApp}\index{image\+\_\+tools\+::\+M\+I\+A\+App@{image\+\_\+tools\+::\+M\+I\+A\+App}}
+
+
+Inherits \hyperlink{classimage__tools_1_1BaseGfxApp}{image\+\_\+tools\+::\+Base\+Gfx\+App}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries M\+I\+A\+App} (int \hyperlink{classimage__tools_1_1BaseGfxApp_a2fe403c5392f624477c2ce4429f1a7b5}{width}, int \hyperlink{classimage__tools_1_1BaseGfxApp_aa961e13a7a8e6062204223cc33ac7503}{height}, const std\+::string \&marker\+\_\+fname)\hypertarget{classimage__tools_1_1MIAApp_a0fbfba996c29b82ef1c208e0ef0b802e}{}\label{classimage__tools_1_1MIAApp_a0fbfba996c29b82ef1c208e0ef0b802e}
+
+\item 
+void \hyperlink{classimage__tools_1_1MIAApp_a22de582c71210c873cde634130478158}{Mouse\+Dragged} (int x, int y)\hypertarget{classimage__tools_1_1MIAApp_a22de582c71210c873cde634130478158}{}\label{classimage__tools_1_1MIAApp_a22de582c71210c873cde634130478158}
+
+\begin{DoxyCompactList}\small\item\em Callback for mouse dragged interface event in the G\+L\+UT window. \end{DoxyCompactList}\item 
+void \hyperlink{classimage__tools_1_1MIAApp_afe0b149a45cba12ab1f93d54911caec5}{Mouse\+Moved} (int x, int y)\hypertarget{classimage__tools_1_1MIAApp_afe0b149a45cba12ab1f93d54911caec5}{}\label{classimage__tools_1_1MIAApp_afe0b149a45cba12ab1f93d54911caec5}
+
+\begin{DoxyCompactList}\small\item\em Callback for mouse moving interface event in the G\+L\+UT window Note that (0,0) is in the lower right corner of the image, (this is what is returned from G\+L\+UT), which is N\+OT the same as the coordinate system definition for the \hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} class. Your implementation will need to account for this. \end{DoxyCompactList}\item 
+void \hyperlink{classimage__tools_1_1MIAApp_afbfdd2f2d0773e1202c4610ffb077d11}{Left\+Mouse\+Down} (int x, int y)\hypertarget{classimage__tools_1_1MIAApp_afbfdd2f2d0773e1202c4610ffb077d11}{}\label{classimage__tools_1_1MIAApp_afbfdd2f2d0773e1202c4610ffb077d11}
+
+\begin{DoxyCompactList}\small\item\em Callback for left mouse click interface event in the G\+L\+UT window. \end{DoxyCompactList}\item 
+void \hyperlink{classimage__tools_1_1MIAApp_a2717842596d33af77f20644527a8b556}{Left\+Mouse\+Up} (int x, int y)\hypertarget{classimage__tools_1_1MIAApp_a2717842596d33af77f20644527a8b556}{}\label{classimage__tools_1_1MIAApp_a2717842596d33af77f20644527a8b556}
+
+\begin{DoxyCompactList}\small\item\em Callback for left mouse click release interface event in the G\+L\+UT window. \end{DoxyCompactList}\item 
+void {\bfseries Display} (void)\hypertarget{classimage__tools_1_1MIAApp_add76b61a146970333b216e027aabc3bc}{}\label{classimage__tools_1_1MIAApp_add76b61a146970333b216e027aabc3bc}
+
+\item 
+void {\bfseries Update} (void)\hypertarget{classimage__tools_1_1MIAApp_ab287849ffabfb942455ecb8967ae5fa1}{}\label{classimage__tools_1_1MIAApp_ab287849ffabfb942455ecb8967ae5fa1}
+
+\item 
+void \hyperlink{classimage__tools_1_1MIAApp_a4e10cc8b814e12c16c38d4e2be3bf2bb}{Glui\+Control} (int control\+\_\+id)\hypertarget{classimage__tools_1_1MIAApp_a4e10cc8b814e12c16c38d4e2be3bf2bb}{}\label{classimage__tools_1_1MIAApp_a4e10cc8b814e12c16c38d4e2be3bf2bb}
+
+\begin{DoxyCompactList}\small\item\em Callback that tells you when the user has interacted with a G\+L\+UI widget. \end{DoxyCompactList}\item 
+void \hyperlink{classimage__tools_1_1MIAApp_ab5bd2eb36e76c8bb81bef6c56f6bf55d}{Init} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]}, int x, int y, \hyperlink{classimage__tools_1_1ColorData}{Color\+Data} background\+\_\+color)
+\begin{DoxyCompactList}\small\item\em Initialize M\+IA. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classimage__tools_1_1MIAApp_a73dda8b4bfb9f31c8a267774dfecdeaa}{Init\+Glui} (void)\hypertarget{classimage__tools_1_1MIAApp_a73dda8b4bfb9f31c8a267774dfecdeaa}{}\label{classimage__tools_1_1MIAApp_a73dda8b4bfb9f31c8a267774dfecdeaa}
+
+\begin{DoxyCompactList}\small\item\em Initialize the G\+L\+UI interface. \end{DoxyCompactList}\item 
+void {\bfseries Init\+Graphics} (void)\hypertarget{classimage__tools_1_1MIAApp_a3d0f36c690bcd1f3eb85c2f92da6a5b3}{}\label{classimage__tools_1_1MIAApp_a3d0f36c690bcd1f3eb85c2f92da6a5b3}
+
+\item 
+void \hyperlink{classimage__tools_1_1MIAApp_a712453910e5325d90d7d0835ac00d059}{Initialize\+Buffers} (\hyperlink{classimage__tools_1_1ColorData}{Color\+Data} initial\+\_\+color, int \hyperlink{classimage__tools_1_1BaseGfxApp_a2fe403c5392f624477c2ce4429f1a7b5}{width}, int \hyperlink{classimage__tools_1_1BaseGfxApp_aa961e13a7a8e6062204223cc33ac7503}{height})\hypertarget{classimage__tools_1_1MIAApp_a712453910e5325d90d7d0835ac00d059}{}\label{classimage__tools_1_1MIAApp_a712453910e5325d90d7d0835ac00d059}
+
+\begin{DoxyCompactList}\small\item\em Initialize the buffers for the main window. \end{DoxyCompactList}\item 
+{\bfseries M\+I\+A\+App} (const \hyperlink{classimage__tools_1_1MIAApp}{M\+I\+A\+App} \&rhs)=delete\hypertarget{classimage__tools_1_1MIAApp_a5ae3748b77cc55a1100083b02b088927}{}\label{classimage__tools_1_1MIAApp_a5ae3748b77cc55a1100083b02b088927}
+
+\item 
+\hyperlink{classimage__tools_1_1MIAApp}{M\+I\+A\+App} \& {\bfseries operator=} (const \hyperlink{classimage__tools_1_1MIAApp}{M\+I\+A\+App} \&rhs)=delete\hypertarget{classimage__tools_1_1MIAApp_a067b980221f818a3a42d11f516d666f0}{}\label{classimage__tools_1_1MIAApp_a067b980221f818a3a42d11f516d666f0}
+
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classimage__tools_1_1MIAFilterManager}{M\+I\+A\+Filter\+Manager} \hyperlink{classimage__tools_1_1MIAApp_a5262f7ad8128fe28394613240a9bf656}{filter\+\_\+manager\+\_\+}\hypertarget{classimage__tools_1_1MIAApp_a5262f7ad8128fe28394613240a9bf656}{}\label{classimage__tools_1_1MIAApp_a5262f7ad8128fe28394613240a9bf656}
+
+\begin{DoxyCompactList}\small\item\em Manager for all filter operations. \end{DoxyCompactList}\item 
+\hyperlink{classimage__tools_1_1MIAIOManager}{M\+I\+A\+I\+O\+Manager} \hyperlink{classimage__tools_1_1MIAApp_a91bd5102cc5dc63f6a264b011b4741e9}{io\+\_\+manager\+\_\+}\hypertarget{classimage__tools_1_1MIAApp_a91bd5102cc5dc63f6a264b011b4741e9}{}\label{classimage__tools_1_1MIAApp_a91bd5102cc5dc63f6a264b011b4741e9}
+
+\begin{DoxyCompactList}\small\item\em Manager for all I/O operations. \end{DoxyCompactList}\item 
+\hyperlink{classimage__tools_1_1StateManager}{State\+Manager} \hyperlink{classimage__tools_1_1MIAApp_a17448a3210b3aa3f16395ee3693518b2}{state\+\_\+manager\+\_\+}\hypertarget{classimage__tools_1_1MIAApp_a17448a3210b3aa3f16395ee3693518b2}{}\label{classimage__tools_1_1MIAApp_a17448a3210b3aa3f16395ee3693518b2}
+
+\begin{DoxyCompactList}\small\item\em Manager for redo/undo stack. \end{DoxyCompactList}\item 
+\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$ {\bfseries display\+\_\+buffer\+\_\+}\hypertarget{classimage__tools_1_1MIAApp_aa82186db2a4f39f5d42ccb7ceb50f056}{}\label{classimage__tools_1_1MIAApp_aa82186db2a4f39f5d42ccb7ceb50f056}
+
+\item 
+\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$ {\bfseries scratch\+\_\+buffer\+\_\+}\hypertarget{classimage__tools_1_1MIAApp_a152c68fb6525ae5a5bce8f8a039431a7}{}\label{classimage__tools_1_1MIAApp_a152c68fb6525ae5a5bce8f8a039431a7}
+
+\item 
+std\+::string {\bfseries marker\+\_\+fname\+\_\+}\hypertarget{classimage__tools_1_1MIAApp_a291206124f9901005656d58a71b46e23}{}\label{classimage__tools_1_1MIAApp_a291206124f9901005656d58a71b46e23}
+
+\item 
+int \hyperlink{classimage__tools_1_1MIAApp_af1cfe4f287c9189ba71fe82b3d692512}{cur\+\_\+tool\+\_\+index\+\_\+}
+\item 
+\hyperlink{classTool}{Tool} $\ast$ {\bfseries cur\+\_\+tool\+\_\+}\hypertarget{classimage__tools_1_1MIAApp_a3b4e304ce802b266ec848731dea8cd63}{}\label{classimage__tools_1_1MIAApp_a3b4e304ce802b266ec848731dea8cd63}
+
+\item 
+std\+::vector$<$ \hyperlink{classTool}{Tool} $\ast$ $>$ {\bfseries tools\+\_\+}\hypertarget{classimage__tools_1_1MIAApp_a89c184b959b2c88cd80facd6aa74e2a5}{}\label{classimage__tools_1_1MIAApp_a89c184b959b2c88cd80facd6aa74e2a5}
+
+\item 
+int {\bfseries last\+\_\+x\+\_\+}\hypertarget{classimage__tools_1_1MIAApp_afc606cd1bb49fcc0fc0075acd8c698b3}{}\label{classimage__tools_1_1MIAApp_afc606cd1bb49fcc0fc0075acd8c698b3}
+
+\item 
+int {\bfseries last\+\_\+y\+\_\+}\hypertarget{classimage__tools_1_1MIAApp_a66d3c12e62708bc4c568c8ad72d884b9}{}\label{classimage__tools_1_1MIAApp_a66d3c12e62708bc4c568c8ad72d884b9}
+
+\item 
+\hyperlink{classimage__tools_1_1ColorData}{Color\+Data} {\bfseries current\+\_\+color\+\_\+}\hypertarget{classimage__tools_1_1MIAApp_ae53c9fd49d937636d4a8cdfc14ad7822}{}\label{classimage__tools_1_1MIAApp_ae53c9fd49d937636d4a8cdfc14ad7822}
+
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\index{image\+\_\+tools\+::\+M\+I\+A\+App@{image\+\_\+tools\+::\+M\+I\+A\+App}!Init@{Init}}
+\index{Init@{Init}!image\+\_\+tools\+::\+M\+I\+A\+App@{image\+\_\+tools\+::\+M\+I\+A\+App}}
+\subsubsection[{\texorpdfstring{Init(int argc, char $\ast$argv[], int x, int y, Color\+Data background\+\_\+color)}{Init(int argc, char *argv[], int x, int y, ColorData background_color)}}]{\setlength{\rightskip}{0pt plus 5cm}void image\+\_\+tools\+::\+M\+I\+A\+App\+::\+Init (
+\begin{DoxyParamCaption}
+\item[{int}]{argc, }
+\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{x, }
+\item[{int}]{y, }
+\item[{{\bf Color\+Data}}]{background\+\_\+color}
+\end{DoxyParamCaption}
+)}\hypertarget{classimage__tools_1_1MIAApp_ab5bd2eb36e76c8bb81bef6c56f6bf55d}{}\label{classimage__tools_1_1MIAApp_ab5bd2eb36e76c8bb81bef6c56f6bf55d}
+
+
+Initialize M\+IA. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em argc} & Unused--required by \hyperlink{classimage__tools_1_1BaseGfxApp}{Base\+Gfx\+App} \\
+\hline
+\mbox{\tt in}  & {\em argv} & Unused--required by \hyperlink{classimage__tools_1_1BaseGfxApp}{Base\+Gfx\+App} \\
+\hline
+\mbox{\tt in}  & {\em x} & Unused--required by \hyperlink{classimage__tools_1_1BaseGfxApp}{Base\+Gfx\+App} \\
+\hline
+\mbox{\tt in}  & {\em y} & Unused--required by \hyperlink{classimage__tools_1_1BaseGfxApp}{Base\+Gfx\+App} \\
+\hline
+\mbox{\tt in}  & {\em background\+\_\+color} & The initial canvas color \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\index{image\+\_\+tools\+::\+M\+I\+A\+App@{image\+\_\+tools\+::\+M\+I\+A\+App}!cur\+\_\+tool\+\_\+index\+\_\+@{cur\+\_\+tool\+\_\+index\+\_\+}}
+\index{cur\+\_\+tool\+\_\+index\+\_\+@{cur\+\_\+tool\+\_\+index\+\_\+}!image\+\_\+tools\+::\+M\+I\+A\+App@{image\+\_\+tools\+::\+M\+I\+A\+App}}
+\subsubsection[{\texorpdfstring{cur\+\_\+tool\+\_\+index\+\_\+}{cur_tool_index_}}]{\setlength{\rightskip}{0pt plus 5cm}int image\+\_\+tools\+::\+M\+I\+A\+App\+::cur\+\_\+tool\+\_\+index\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classimage__tools_1_1MIAApp_af1cfe4f287c9189ba71fe82b3d692512}{}\label{classimage__tools_1_1MIAApp_af1cfe4f287c9189ba71fe82b3d692512}
+Currently selected tool from UI 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/liam/\+Documents/\+School/3081/project/src/app/\+M\+I\+A/src/include/mia\+\_\+app.\+h\item 
+/home/liam/\+Documents/\+School/3081/project/src/app/\+M\+I\+A/src/mia\+\_\+app.\+cc\end{DoxyCompactItemize}

@@ -1,0 +1,64 @@
+\hypertarget{classBlurKernal}{}\section{Blur\+Kernal Class Reference}
+\label{classBlurKernal}\index{Blur\+Kernal@{Blur\+Kernal}}
+
+
+A blur kernal.  
+
+
+
+
+{\ttfamily \#include $<$blur\+\_\+kernal.\+h$>$}
+
+
+
+Inherits \hyperlink{classKernal}{Kernal}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Blur\+Kernal} (int amount)\hypertarget{classBlurKernal_ad3a9234c7fe9fb3e20f2a8a06cb11a99}{}\label{classBlurKernal_ad3a9234c7fe9fb3e20f2a8a06cb11a99}
+
+\item 
+int {\bfseries get\+\_\+amount} ()\hypertarget{classBlurKernal_aa8b0ab040be4792fe5e617361576b0ee}{}\label{classBlurKernal_aa8b0ab040be4792fe5e617361576b0ee}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classBlurKernal_a18f4bbb753d71550078700684295f9b0}{Initialize\+Kernal} ()
+\begin{DoxyCompactList}\small\item\em Give each element in the kernal it\textquotesingle{}s value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classBlurKernal_a968c9c6c9093bf678ee38c2440518523}{amount\+\_\+}\hypertarget{classBlurKernal_a968c9c6c9093bf678ee38c2440518523}{}\label{classBlurKernal_a968c9c6c9093bf678ee38c2440518523}
+
+\begin{DoxyCompactList}\small\item\em defines the diameter (to the nearest odd number) of the kernal \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A blur kernal. 
+
+This is used for general even blurring. 
+
+\subsection{Member Function Documentation}
+\index{Blur\+Kernal@{Blur\+Kernal}!Initialize\+Kernal@{Initialize\+Kernal}}
+\index{Initialize\+Kernal@{Initialize\+Kernal}!Blur\+Kernal@{Blur\+Kernal}}
+\subsubsection[{\texorpdfstring{Initialize\+Kernal()}{InitializeKernal()}}]{\setlength{\rightskip}{0pt plus 5cm}void Blur\+Kernal\+::\+Initialize\+Kernal (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classBlurKernal_a18f4bbb753d71550078700684295f9b0}{}\label{classBlurKernal_a18f4bbb753d71550078700684295f9b0}
+
+
+Give each element in the kernal it\textquotesingle{}s value. 
+
+This function is implemented by all the inherited kernal classes, and each define the values in the kernal. 
+
+Implements \hyperlink{classKernal_a487ef0e4a0d37cb827b5c46750330952}{Kernal}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/include/blur\+\_\+kernal.\+h\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/blur\+\_\+kernal.\+cc\end{DoxyCompactItemize}

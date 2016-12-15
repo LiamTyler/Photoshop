@@ -1,0 +1,70 @@
+\hypertarget{classMotionBlurKernal}{}\section{Motion\+Blur\+Kernal Class Reference}
+\label{classMotionBlurKernal}\index{Motion\+Blur\+Kernal@{Motion\+Blur\+Kernal}}
+
+
+A directional motion blurring kernal.  
+
+
+
+
+{\ttfamily \#include $<$motion\+\_\+blur\+\_\+kernal.\+h$>$}
+
+
+
+Inherits \hyperlink{classKernal}{Kernal}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Motion\+Blur\+Kernal} (int amount, int direction)\hypertarget{classMotionBlurKernal_a610ed56394ea95d8176444b6da802566}{}\label{classMotionBlurKernal_a610ed56394ea95d8176444b6da802566}
+
+\item 
+int {\bfseries get\+\_\+amount} ()\hypertarget{classMotionBlurKernal_a4045ec3751aff2b75259653b75181415}{}\label{classMotionBlurKernal_a4045ec3751aff2b75259653b75181415}
+
+\item 
+int {\bfseries get\+\_\+direction} ()\hypertarget{classMotionBlurKernal_a2a229add81ae4cd17d3c23813f0714cb}{}\label{classMotionBlurKernal_a2a229add81ae4cd17d3c23813f0714cb}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \hyperlink{classMotionBlurKernal_a79623d08eed4ac6e253c322fa55a3726}{Initialize\+Kernal} ()
+\begin{DoxyCompactList}\small\item\em Give each element in the kernal it\textquotesingle{}s value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries amount\+\_\+}\hypertarget{classMotionBlurKernal_a2054aae613de517fb199176f1d16b3fb}{}\label{classMotionBlurKernal_a2054aae613de517fb199176f1d16b3fb}
+
+\item 
+int \hyperlink{classMotionBlurKernal_a481f25ae433fa26910dfb4123d793ae0}{direction\+\_\+}\hypertarget{classMotionBlurKernal_a481f25ae433fa26910dfb4123d793ae0}{}\label{classMotionBlurKernal_a481f25ae433fa26910dfb4123d793ae0}
+
+\begin{DoxyCompactList}\small\item\em The dimensions of the kernal. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A directional motion blurring kernal. 
+
+Defines a kernal that blurs pixels along a straight line when applied on an image. 
+
+\subsection{Member Function Documentation}
+\index{Motion\+Blur\+Kernal@{Motion\+Blur\+Kernal}!Initialize\+Kernal@{Initialize\+Kernal}}
+\index{Initialize\+Kernal@{Initialize\+Kernal}!Motion\+Blur\+Kernal@{Motion\+Blur\+Kernal}}
+\subsubsection[{\texorpdfstring{Initialize\+Kernal()}{InitializeKernal()}}]{\setlength{\rightskip}{0pt plus 5cm}void Motion\+Blur\+Kernal\+::\+Initialize\+Kernal (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}\hypertarget{classMotionBlurKernal_a79623d08eed4ac6e253c322fa55a3726}{}\label{classMotionBlurKernal_a79623d08eed4ac6e253c322fa55a3726}
+
+
+Give each element in the kernal it\textquotesingle{}s value. 
+
+This function is implemented by all the inherited kernal classes, and each define the values in the kernal. 
+
+Implements \hyperlink{classKernal_a487ef0e4a0d37cb827b5c46750330952}{Kernal}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/include/motion\+\_\+blur\+\_\+kernal.\+h\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/motion\+\_\+blur\+\_\+kernal.\+cc\end{DoxyCompactItemize}

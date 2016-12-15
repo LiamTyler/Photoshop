@@ -1,0 +1,97 @@
+\hypertarget{classTHighlighter}{}\section{T\+Highlighter Class Reference}
+\label{classTHighlighter}\index{T\+Highlighter@{T\+Highlighter}}
+
+
+Implements a highlighter tool.  
+
+
+
+
+{\ttfamily \#include $<$highlighter.\+h$>$}
+
+
+
+Inherits \hyperlink{classTool}{Tool}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries T\+Highlighter} (int width, int height)\hypertarget{classTHighlighter_ae261eea32cbe5c0d2df91d3442b41571}{}\label{classTHighlighter_ae261eea32cbe5c0d2df91d3442b41571}
+
+\item 
+void \hyperlink{classTHighlighter_a2fdc00984b60b7b26866888f2f9f766d}{Apply\+Tool} (\hyperlink{classimage__tools_1_1PixelBuffer}{image\+\_\+tools\+::\+Pixel\+Buffer} $\ast$buff, \hyperlink{classimage__tools_1_1ColorData}{image\+\_\+tools\+::\+Color\+Data} current\+\_\+color, int x, int y, int last\+\_\+x, int last\+\_\+y)
+\begin{DoxyCompactList}\small\item\em Default implementation for applying the tool to the Pixel\+Buffer. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classTHighlighter_a60d8b5d4d24b73a06f052e9e3f1f4e90}{name} (void)
+\begin{DoxyCompactList}\small\item\em The name of the tool. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implements a highlighter tool. 
+
+\hyperlink{classTool}{Tool} with a vertical rectangular mask, so that horizontal strokes are fatter than vertical strokes. 
+
+\subsection{Member Function Documentation}
+\index{T\+Highlighter@{T\+Highlighter}!Apply\+Tool@{Apply\+Tool}}
+\index{Apply\+Tool@{Apply\+Tool}!T\+Highlighter@{T\+Highlighter}}
+\subsubsection[{\texorpdfstring{Apply\+Tool(image\+\_\+tools\+::\+Pixel\+Buffer $\ast$buff, image\+\_\+tools\+::\+Color\+Data current\+\_\+color, int x, int y, int last\+\_\+x, int last\+\_\+y)}{ApplyTool(image_tools::PixelBuffer *buff, image_tools::ColorData current_color, int x, int y, int last_x, int last_y)}}]{\setlength{\rightskip}{0pt plus 5cm}void T\+Highlighter\+::\+Apply\+Tool (
+\begin{DoxyParamCaption}
+\item[{{\bf image\+\_\+tools\+::\+Pixel\+Buffer} $\ast$}]{buff, }
+\item[{{\bf image\+\_\+tools\+::\+Color\+Data}}]{current\+\_\+color, }
+\item[{int}]{x, }
+\item[{int}]{y, }
+\item[{int}]{last\+\_\+x, }
+\item[{int}]{last\+\_\+y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classTHighlighter_a2fdc00984b60b7b26866888f2f9f766d}{}\label{classTHighlighter_a2fdc00984b60b7b26866888f2f9f766d}
+
+
+Default implementation for applying the tool to the Pixel\+Buffer. 
+
+Uses the current\+\_\+color and last position of the tool being applied (last\+\_\+x and last\+\_\+y) to determine how to apply the mask to the buffer.
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em buff} & The buffer of pixels to apply the tool to \\
+\hline
+\mbox{\tt in}  & {\em current\+\_\+color} & The current color of the tool \\
+\hline
+\mbox{\tt in}  & {\em x} & The x position of where to apply the tool to \\
+\hline
+\mbox{\tt in}  & {\em y} & The y position of where to apply the tool to \\
+\hline
+\mbox{\tt in}  & {\em last\+\_\+x} & The x position of the last time the tool was applied (only applicable while the mouse is being dragged) \\
+\hline
+\mbox{\tt in}  & {\em last\+\_\+y} & The y position of the last time the tool was applied (only applicable while the mouse is being dragged)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classTool_a03fdae3fde745872d82613ef44d2b6db}{Tool}.
+
+\index{T\+Highlighter@{T\+Highlighter}!name@{name}}
+\index{name@{name}!T\+Highlighter@{T\+Highlighter}}
+\subsubsection[{\texorpdfstring{name(void)}{name(void)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string T\+Highlighter\+::name (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classTHighlighter_a60d8b5d4d24b73a06f052e9e3f1f4e90}{}\label{classTHighlighter_a60d8b5d4d24b73a06f052e9e3f1f4e90}
+
+
+The name of the tool. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classTool_a89abd746706ed78911924a47928d6d06}{Tool}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/include/highlighter.\+h\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/highlighter.\+cc\end{DoxyCompactItemize}

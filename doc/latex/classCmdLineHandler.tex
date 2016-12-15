@@ -1,0 +1,199 @@
+\hypertarget{classCmdLineHandler}{}\section{Cmd\+Line\+Handler Class Reference}
+\label{classCmdLineHandler}\index{Cmd\+Line\+Handler@{Cmd\+Line\+Handler}}
+
+
+Class responsible for parsing the command line arguments and running them.  
+
+
+
+
+{\ttfamily \#include $<$cmd\+\_\+line\+\_\+handler.\+h$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bfseries Command} \{ \\*
+{\bfseries H\+E\+LP}, 
+{\bfseries S\+H\+A\+R\+P\+EN}, 
+{\bfseries E\+D\+GE}, 
+{\bfseries T\+H\+R\+E\+S\+H\+O\+LD}, 
+\\*
+{\bfseries Q\+U\+A\+N\+T\+I\+ZE}, 
+{\bfseries B\+L\+UR}, 
+{\bfseries S\+A\+T\+U\+R\+A\+TE}, 
+{\bfseries C\+H\+A\+N\+N\+EL}, 
+\\*
+{\bfseries C\+O\+M\+P\+A\+RE}, 
+{\bfseries I\+M\+A\+GE}, 
+{\bfseries A\+RG}
+ \}\hypertarget{classCmdLineHandler_a4d5a261aab0b196f63ce37c80a3208ba}{}\label{classCmdLineHandler_a4d5a261aab0b196f63ce37c80a3208ba}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Cmd\+Line\+Handler} (int argc, char $\ast$$\ast$argv)\hypertarget{classCmdLineHandler_a2d692be72bfcdda203ba0d86a17b33c7}{}\label{classCmdLineHandler_a2d692be72bfcdda203ba0d86a17b33c7}
+
+\item 
+bool \hyperlink{classCmdLineHandler_ad65d8e5ae28b7a764a7fea5d0f89161c}{Process\+Arguments} ()
+\begin{DoxyCompactList}\small\item\em Both parse and run the commands. \end{DoxyCompactList}\item 
+void \hyperlink{classCmdLineHandler_ac73d82a865bf69ec97def26e34838d5b}{Print\+Info} ()\hypertarget{classCmdLineHandler_ac73d82a865bf69ec97def26e34838d5b}{}\label{classCmdLineHandler_ac73d82a865bf69ec97def26e34838d5b}
+
+\begin{DoxyCompactList}\small\item\em Helper function to print the information (for debugging). \end{DoxyCompactList}\item 
+void \hyperlink{classCmdLineHandler_af4dc913e696a0f282bc924ecef9f7e15}{Print\+Help} ()\hypertarget{classCmdLineHandler_af4dc913e696a0f282bc924ecef9f7e15}{}\label{classCmdLineHandler_af4dc913e696a0f282bc924ecef9f7e15}
+
+\begin{DoxyCompactList}\small\item\em If anything is invalid or errors, print the help message. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Cmd\+Line\+Handler} (const \hyperlink{classCmdLineHandler}{Cmd\+Line\+Handler} \&c)=delete\hypertarget{classCmdLineHandler_ac771a7d5753d6b70829d01c063bbe304}{}\label{classCmdLineHandler_ac771a7d5753d6b70829d01c063bbe304}
+
+\item 
+\hyperlink{classCmdLineHandler}{Cmd\+Line\+Handler} \& {\bfseries operator=} (const \hyperlink{classCmdLineHandler}{Cmd\+Line\+Handler} \&c)=delete\hypertarget{classCmdLineHandler_ab9b698a78dbc316a60acf4d0d77d9c3c}{}\label{classCmdLineHandler_ab9b698a78dbc316a60acf4d0d77d9c3c}
+
+\item 
+bool \hyperlink{classCmdLineHandler_af196c0167259bb02dbbeb364af946a11}{Parse\+Arguments} ()
+\begin{DoxyCompactList}\small\item\em parses through the command line arguments and readies them for running. \end{DoxyCompactList}\item 
+bool \hyperlink{classCmdLineHandler_a0f9a3b8c5366f7efadde7ec8c8b7b166}{Run\+Commands} ()
+\begin{DoxyCompactList}\small\item\em Actually run the commands provided. \end{DoxyCompactList}\item 
+bool \hyperlink{classCmdLineHandler_aa169b29cf5897c1b93064fd29c7b1e7d}{Validate\+Args} (int index, Command command)
+\begin{DoxyCompactList}\small\item\em validate the args provided for the command given \end{DoxyCompactList}\item 
+Command {\bfseries get\+\_\+index} (const char $\ast$arg)\hypertarget{classCmdLineHandler_a61d490a0d2f3ebad0de5510db18ed9cb}{}\label{classCmdLineHandler_a61d490a0d2f3ebad0de5510db18ed9cb}
+
+\item 
+bool {\bfseries is\+\_\+number} (const char $\ast$arg)\hypertarget{classCmdLineHandler_a7d1663fae9409862ef62602c670cb820}{}\label{classCmdLineHandler_a7d1663fae9409862ef62602c670cb820}
+
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries argc\+\_\+}\hypertarget{classCmdLineHandler_a7a14962eec5f1c0b6da46dc2c9589882}{}\label{classCmdLineHandler_a7a14962eec5f1c0b6da46dc2c9589882}
+
+\item 
+char $\ast$$\ast$ {\bfseries argv\+\_\+}\hypertarget{classCmdLineHandler_acbb8fc4d2a6e5caabc99aff08bae64bc}{}\label{classCmdLineHandler_acbb8fc4d2a6e5caabc99aff08bae64bc}
+
+\item 
+int {\bfseries current\+\_\+arg\+\_\+}\hypertarget{classCmdLineHandler_af14719ea770dcd30c3cefdcb273d448b}{}\label{classCmdLineHandler_af14719ea770dcd30c3cefdcb273d448b}
+
+\item 
+float {\bfseries sharpen\+\_\+amt\+\_\+}\hypertarget{classCmdLineHandler_a46973ecb7930d6972c3263a811e0b730}{}\label{classCmdLineHandler_a46973ecb7930d6972c3263a811e0b730}
+
+\item 
+float {\bfseries threshold\+\_\+amt\+\_\+}\hypertarget{classCmdLineHandler_a84f8be05bfa7a402f71c5400d0b36c49}{}\label{classCmdLineHandler_a84f8be05bfa7a402f71c5400d0b36c49}
+
+\item 
+int {\bfseries quantize\+\_\+amt\+\_\+}\hypertarget{classCmdLineHandler_ac61c31a81aab870f6669695dd02adf14}{}\label{classCmdLineHandler_ac61c31a81aab870f6669695dd02adf14}
+
+\item 
+float {\bfseries blur\+\_\+amt\+\_\+}\hypertarget{classCmdLineHandler_a09f720d9f95bfa24939acff3dd1a39e8}{}\label{classCmdLineHandler_a09f720d9f95bfa24939acff3dd1a39e8}
+
+\item 
+float {\bfseries saturate\+\_\+amt\+\_\+}\hypertarget{classCmdLineHandler_a4494e898e20ec4b0603814d7dcf1fba0}{}\label{classCmdLineHandler_a4494e898e20ec4b0603814d7dcf1fba0}
+
+\item 
+float {\bfseries channel\+\_\+red\+\_\+amt\+\_\+}\hypertarget{classCmdLineHandler_a7962180ad29617e78aee5ddf977a0828}{}\label{classCmdLineHandler_a7962180ad29617e78aee5ddf977a0828}
+
+\item 
+float {\bfseries channel\+\_\+green\+\_\+amt\+\_\+}\hypertarget{classCmdLineHandler_ab76b4a83c933c1d6ab796121d869d005}{}\label{classCmdLineHandler_ab76b4a83c933c1d6ab796121d869d005}
+
+\item 
+float {\bfseries channel\+\_\+blue\+\_\+amt\+\_\+}\hypertarget{classCmdLineHandler_a722a00d746264abc7ed27ddbb9ba57ba}{}\label{classCmdLineHandler_a722a00d746264abc7ed27ddbb9ba57ba}
+
+\item 
+std\+::string {\bfseries input\+\_\+file\+\_\+}\hypertarget{classCmdLineHandler_a58722f1cd629f4f819594947b2d34009}{}\label{classCmdLineHandler_a58722f1cd629f4f819594947b2d34009}
+
+\item 
+std\+::string {\bfseries output\+\_\+file\+\_\+}\hypertarget{classCmdLineHandler_a0c8acf675fb60aaff100165f5ac3bacd}{}\label{classCmdLineHandler_a0c8acf675fb60aaff100165f5ac3bacd}
+
+\item 
+\hyperlink{classimage__tools_1_1PixelBuffer}{image\+\_\+tools\+::\+Pixel\+Buffer} $\ast$ {\bfseries in\+\_\+img\+\_\+}\hypertarget{classCmdLineHandler_a019ce0d524967719a10c201dc4c3dbb7}{}\label{classCmdLineHandler_a019ce0d524967719a10c201dc4c3dbb7}
+
+\item 
+\hyperlink{classimage__tools_1_1PixelBuffer}{image\+\_\+tools\+::\+Pixel\+Buffer} $\ast$ {\bfseries out\+\_\+img\+\_\+}\hypertarget{classCmdLineHandler_a45ea921229df1aed8f51d801c93d0225}{}\label{classCmdLineHandler_a45ea921229df1aed8f51d801c93d0225}
+
+\item 
+std\+::vector$<$ Cmd\+Line\+Handler\+::\+Command $>$ {\bfseries commands\+\_\+}\hypertarget{classCmdLineHandler_aa6cd35bdf3f91544801e64a0e5f202b1}{}\label{classCmdLineHandler_aa6cd35bdf3f91544801e64a0e5f202b1}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class responsible for parsing the command line arguments and running them. 
+
+The handlers works in two phases. First, parse all the commands, and check for validity, correct number, and extensions. Then, run through the commands given for each image applicable, and save if necessary. 
+
+\subsection{Member Function Documentation}
+\index{Cmd\+Line\+Handler@{Cmd\+Line\+Handler}!Parse\+Arguments@{Parse\+Arguments}}
+\index{Parse\+Arguments@{Parse\+Arguments}!Cmd\+Line\+Handler@{Cmd\+Line\+Handler}}
+\subsubsection[{\texorpdfstring{Parse\+Arguments()}{ParseArguments()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Cmd\+Line\+Handler\+::\+Parse\+Arguments (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classCmdLineHandler_af196c0167259bb02dbbeb364af946a11}{}\label{classCmdLineHandler_af196c0167259bb02dbbeb364af946a11}
+
+
+parses through the command line arguments and readies them for running. 
+
+\begin{DoxyReturn}{Returns}
+False if any commands or arguments were invalid 
+\end{DoxyReturn}
+\index{Cmd\+Line\+Handler@{Cmd\+Line\+Handler}!Process\+Arguments@{Process\+Arguments}}
+\index{Process\+Arguments@{Process\+Arguments}!Cmd\+Line\+Handler@{Cmd\+Line\+Handler}}
+\subsubsection[{\texorpdfstring{Process\+Arguments()}{ProcessArguments()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Cmd\+Line\+Handler\+::\+Process\+Arguments (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classCmdLineHandler_ad65d8e5ae28b7a764a7fea5d0f89161c}{}\label{classCmdLineHandler_ad65d8e5ae28b7a764a7fea5d0f89161c}
+
+
+Both parse and run the commands. 
+
+\begin{DoxyReturn}{Returns}
+False if any error occurred, True otherwise 
+\end{DoxyReturn}
+\index{Cmd\+Line\+Handler@{Cmd\+Line\+Handler}!Run\+Commands@{Run\+Commands}}
+\index{Run\+Commands@{Run\+Commands}!Cmd\+Line\+Handler@{Cmd\+Line\+Handler}}
+\subsubsection[{\texorpdfstring{Run\+Commands()}{RunCommands()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Cmd\+Line\+Handler\+::\+Run\+Commands (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classCmdLineHandler_a0f9a3b8c5366f7efadde7ec8c8b7b166}{}\label{classCmdLineHandler_a0f9a3b8c5366f7efadde7ec8c8b7b166}
+
+
+Actually run the commands provided. 
+
+\begin{DoxyReturn}{Returns}
+True if no errors occurred, false otherwise. 
+\end{DoxyReturn}
+\index{Cmd\+Line\+Handler@{Cmd\+Line\+Handler}!Validate\+Args@{Validate\+Args}}
+\index{Validate\+Args@{Validate\+Args}!Cmd\+Line\+Handler@{Cmd\+Line\+Handler}}
+\subsubsection[{\texorpdfstring{Validate\+Args(int index, Command command)}{ValidateArgs(int index, Command command)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Cmd\+Line\+Handler\+::\+Validate\+Args (
+\begin{DoxyParamCaption}
+\item[{int}]{index, }
+\item[{Command}]{command}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classCmdLineHandler_aa169b29cf5897c1b93064fd29c7b1e7d}{}\label{classCmdLineHandler_aa169b29cf5897c1b93064fd29c7b1e7d}
+
+
+validate the args provided for the command given 
+
+Checks to see if the arguments exist and are numbers.
+
+Does N\+OT check to see if the numbers are within the valid ranges for the command.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em index} & The current position we are into argv\+\_\+ \\
+\hline
+\mbox{\tt in}  & {\em command} & The \hyperlink{classCmdLineHandler}{Cmd\+Line\+Handler} enum of the command\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if arguments exist and are valid, false if not 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/include/cmd\+\_\+line\+\_\+handler.\+h\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/cmd\+\_\+line\+\_\+handler.\+cc\end{DoxyCompactItemize}

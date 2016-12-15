@@ -1,0 +1,68 @@
+\hypertarget{classimage__tools_1_1FlashPhotoIOManager}{}\section{image\+\_\+tools\+:\+:Flash\+Photo\+I\+O\+Manager Class Reference}
+\label{classimage__tools_1_1FlashPhotoIOManager}\index{image\+\_\+tools\+::\+Flash\+Photo\+I\+O\+Manager@{image\+\_\+tools\+::\+Flash\+Photo\+I\+O\+Manager}}
+
+
+The manager for I/O operations in M\+IA. This includes initializing G\+L\+UI control elements related to image loading/saving, as well as handling the load/save operations themselves. The load operation includes validating the image type and filesystem permissions before the load will proceed. It also handles loading an image from a file to the stamp.  
+
+
+
+
+{\ttfamily \#include $<$flashphoto\+\_\+io\+\_\+manager.\+h$>$}
+
+
+
+Inherits \hyperlink{classimage__tools_1_1IOManager}{image\+\_\+tools\+::\+I\+O\+Manager}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+G\+L\+U\+I\+\_\+\+Panel $\ast$ \hyperlink{classimage__tools_1_1FlashPhotoIOManager_a7acdb048b976e0efa9f4b65adf07faf8}{Init\+Glui} (const G\+L\+UI $\ast$const glui, void($\ast$s\+\_\+gluicallback)(int))
+\begin{DoxyCompactList}\small\item\em Initialize G\+L\+UI control elements for IO management. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Flash\+Photo\+I\+O\+Manager} (const \hyperlink{classimage__tools_1_1FlashPhotoIOManager}{Flash\+Photo\+I\+O\+Manager} \&rhs)=delete\hypertarget{classimage__tools_1_1FlashPhotoIOManager_ac29f81ca4d2878f3b52a9e2e562a0e9f}{}\label{classimage__tools_1_1FlashPhotoIOManager_ac29f81ca4d2878f3b52a9e2e562a0e9f}
+
+\item 
+\hyperlink{classimage__tools_1_1FlashPhotoIOManager}{Flash\+Photo\+I\+O\+Manager} \& {\bfseries operator=} (const \hyperlink{classimage__tools_1_1FlashPhotoIOManager}{Flash\+Photo\+I\+O\+Manager} \&rhs)=delete\hypertarget{classimage__tools_1_1FlashPhotoIOManager_a72220e79d2e47a7b00232649fee0c29a}{}\label{classimage__tools_1_1FlashPhotoIOManager_a72220e79d2e47a7b00232649fee0c29a}
+
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+The manager for I/O operations in M\+IA. This includes initializing G\+L\+UI control elements related to image loading/saving, as well as handling the load/save operations themselves. The load operation includes validating the image type and filesystem permissions before the load will proceed. It also handles loading an image from a file to the stamp. 
+
+\subsection{Member Function Documentation}
+\index{image\+\_\+tools\+::\+Flash\+Photo\+I\+O\+Manager@{image\+\_\+tools\+::\+Flash\+Photo\+I\+O\+Manager}!Init\+Glui@{Init\+Glui}}
+\index{Init\+Glui@{Init\+Glui}!image\+\_\+tools\+::\+Flash\+Photo\+I\+O\+Manager@{image\+\_\+tools\+::\+Flash\+Photo\+I\+O\+Manager}}
+\subsubsection[{\texorpdfstring{Init\+Glui(const G\+L\+U\+I $\ast$const glui, void($\ast$s\+\_\+gluicallback)(int))}{InitGlui(const GLUI *const glui, void(*s_gluicallback)(int))}}]{\setlength{\rightskip}{0pt plus 5cm}G\+L\+U\+I\+\_\+\+Panel $\ast$ image\+\_\+tools\+::\+Flash\+Photo\+I\+O\+Manager\+::\+Init\+Glui (
+\begin{DoxyParamCaption}
+\item[{const G\+L\+UI $\ast$const}]{glui, }
+\item[{void($\ast$)(int)}]{s\+\_\+gluicallback}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classimage__tools_1_1FlashPhotoIOManager_a7acdb048b976e0efa9f4b65adf07faf8}{}\label{classimage__tools_1_1FlashPhotoIOManager_a7acdb048b976e0efa9f4b65adf07faf8}
+
+
+Initialize G\+L\+UI control elements for IO management. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em glui} & G\+L\+UI handle \\
+\hline
+{\em s\+\_\+gluicallback} & Callback to install \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The initialized IO panel handle 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classimage__tools_1_1IOManager_a5038100a2a640a3343c4715101eec120}{image\+\_\+tools\+::\+I\+O\+Manager}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/liam/\+Documents/\+School/3081/project/src/app/\+Flash\+Photo/src/include/flashphoto\+\_\+io\+\_\+manager.\+h\item 
+/home/liam/\+Documents/\+School/3081/project/src/app/\+Flash\+Photo/src/flashphoto\+\_\+io\+\_\+manager.\+cc\end{DoxyCompactItemize}

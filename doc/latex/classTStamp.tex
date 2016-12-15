@@ -1,0 +1,110 @@
+\hypertarget{classTStamp}{}\section{T\+Stamp Class Reference}
+\label{classTStamp}\index{T\+Stamp@{T\+Stamp}}
+
+
+A stamp tool that is meant to be applied in a \char`\"{}click\char`\"{} rather than \char`\"{}click and drag\char`\"{} motion like all the other canvas tools. It can stamp images of any size onto the canvas. The stamp image must be explicitly set after initializing the stamp tool.  
+
+
+
+
+{\ttfamily \#include $<$stamp\+\_\+tool.\+h$>$}
+
+
+
+Inherits \hyperlink{classTool}{Tool}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classTStamp_a02436480f92e9ff436209cf6cf4040ed}{Load\+Image} (\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$l\+\_\+img)\hypertarget{classTStamp_a02436480f92e9ff436209cf6cf4040ed}{}\label{classTStamp_a02436480f92e9ff436209cf6cf4040ed}
+
+\begin{DoxyCompactList}\small\item\em Loads an image into the stamp tool. \end{DoxyCompactList}\item 
+void \hyperlink{classTStamp_a5588cdf156847144e8e66a5db00be7c2}{Apply\+Tool} (\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$buff, \hyperlink{classimage__tools_1_1ColorData}{image\+\_\+tools\+::\+Color\+Data} current\+\_\+color, int x, int y, int last\+\_\+x, int last\+\_\+y)
+\begin{DoxyCompactList}\small\item\em Default implementation for applying the tool to the Pixel\+Buffer. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classTStamp_ac4a470327038c405b42bbf1c76119500}{name} (void)
+\begin{DoxyCompactList}\small\item\em The name of the tool. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries T\+Stamp} (const \hyperlink{classTStamp}{T\+Stamp} \&t)=delete\hypertarget{classTStamp_a7f1eb6b0252f8c01ea1e00c18fcaddcd}{}\label{classTStamp_a7f1eb6b0252f8c01ea1e00c18fcaddcd}
+
+\item 
+\hyperlink{classTStamp}{T\+Stamp} \& {\bfseries operator=} (const \hyperlink{classTStamp}{T\+Stamp} \&t)=delete\hypertarget{classTStamp_a7d24e6b1ba90636559d555acefe5b7ed}{}\label{classTStamp_a7d24e6b1ba90636559d555acefe5b7ed}
+
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$ {\bfseries image\+\_\+}\hypertarget{classTStamp_a326bbfe85763910fdb2f0b84a9905725}{}\label{classTStamp_a326bbfe85763910fdb2f0b84a9905725}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A stamp tool that is meant to be applied in a \char`\"{}click\char`\"{} rather than \char`\"{}click and drag\char`\"{} motion like all the other canvas tools. It can stamp images of any size onto the canvas. The stamp image must be explicitly set after initializing the stamp tool. 
+
+\subsection{Member Function Documentation}
+\index{T\+Stamp@{T\+Stamp}!Apply\+Tool@{Apply\+Tool}}
+\index{Apply\+Tool@{Apply\+Tool}!T\+Stamp@{T\+Stamp}}
+\subsubsection[{\texorpdfstring{Apply\+Tool(\+Pixel\+Buffer $\ast$buff, image\+\_\+tools\+::\+Color\+Data current\+\_\+color, int x, int y, int last\+\_\+x, int last\+\_\+y)}{ApplyTool(PixelBuffer *buff, image_tools::ColorData current_color, int x, int y, int last_x, int last_y)}}]{\setlength{\rightskip}{0pt plus 5cm}void T\+Stamp\+::\+Apply\+Tool (
+\begin{DoxyParamCaption}
+\item[{{\bf Pixel\+Buffer} $\ast$}]{buff, }
+\item[{{\bf image\+\_\+tools\+::\+Color\+Data}}]{current\+\_\+color, }
+\item[{int}]{x, }
+\item[{int}]{y, }
+\item[{int}]{last\+\_\+x, }
+\item[{int}]{last\+\_\+y}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classTStamp_a5588cdf156847144e8e66a5db00be7c2}{}\label{classTStamp_a5588cdf156847144e8e66a5db00be7c2}
+
+
+Default implementation for applying the tool to the Pixel\+Buffer. 
+
+Uses the current\+\_\+color and last position of the tool being applied (last\+\_\+x and last\+\_\+y) to determine how to apply the mask to the buffer.
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em buff} & The buffer of pixels to apply the tool to \\
+\hline
+\mbox{\tt in}  & {\em current\+\_\+color} & The current color of the tool \\
+\hline
+\mbox{\tt in}  & {\em x} & The x position of where to apply the tool to \\
+\hline
+\mbox{\tt in}  & {\em y} & The y position of where to apply the tool to \\
+\hline
+\mbox{\tt in}  & {\em last\+\_\+x} & The x position of the last time the tool was applied (only applicable while the mouse is being dragged) \\
+\hline
+\mbox{\tt in}  & {\em last\+\_\+y} & The y position of the last time the tool was applied (only applicable while the mouse is being dragged)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+
+
+Reimplemented from \hyperlink{classTool_a03fdae3fde745872d82613ef44d2b6db}{Tool}.
+
+\index{T\+Stamp@{T\+Stamp}!name@{name}}
+\index{name@{name}!T\+Stamp@{T\+Stamp}}
+\subsubsection[{\texorpdfstring{name(void)}{name(void)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string T\+Stamp\+::name (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classTStamp_ac4a470327038c405b42bbf1c76119500}{}\label{classTStamp_ac4a470327038c405b42bbf1c76119500}
+
+
+The name of the tool. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classTool_a89abd746706ed78911924a47928d6d06}{Tool}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/include/stamp\+\_\+tool.\+h\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/stamp.\+cc\end{DoxyCompactItemize}

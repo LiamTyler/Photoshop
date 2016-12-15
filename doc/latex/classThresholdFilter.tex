@@ -1,0 +1,72 @@
+\hypertarget{classThresholdFilter}{}\section{Threshold\+Filter Class Reference}
+\label{classThresholdFilter}\index{Threshold\+Filter@{Threshold\+Filter}}
+
+
+A threshold filter.  
+
+
+
+
+{\ttfamily \#include $<$threshold\+\_\+filter.\+h$>$}
+
+
+
+Inherits \hyperlink{classSimpleFilter}{Simple\+Filter}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Threshold\+Filter} (float level)\hypertarget{classThresholdFilter_a93f9726e62fe176c6f37495de2233603}{}\label{classThresholdFilter_a93f9726e62fe176c6f37495de2233603}
+
+\item 
+std\+::string {\bfseries name} (void)\hypertarget{classThresholdFilter_aa3fbceaf9802b862631ef554e4f995a2}{}\label{classThresholdFilter_aa3fbceaf9802b862631ef554e4f995a2}
+
+\item 
+float \hyperlink{classThresholdFilter_a05992cf3b35d05507690521876c77fa4}{Apply\+To\+Color} (std\+::string color, const \hyperlink{classimage__tools_1_1ColorData}{image\+\_\+tools\+::\+Color\+Data} \&current)
+\begin{DoxyCompactList}\small\item\em Calculate the new value for the color that is passed in. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+float {\bfseries level\+\_\+}\hypertarget{classThresholdFilter_af63a9dc4b7bbfb05d0f04b5e64dc3dc4}{}\label{classThresholdFilter_af63a9dc4b7bbfb05d0f04b5e64dc3dc4}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A threshold filter. 
+
+The effect of this filter is to set the R\+GB components of all pixels that it operates on to 1 if the R\+GB value is greater than the threshold, and 0 otherwise 
+
+\subsection{Member Function Documentation}
+\index{Threshold\+Filter@{Threshold\+Filter}!Apply\+To\+Color@{Apply\+To\+Color}}
+\index{Apply\+To\+Color@{Apply\+To\+Color}!Threshold\+Filter@{Threshold\+Filter}}
+\subsubsection[{\texorpdfstring{Apply\+To\+Color(std\+::string color, const image\+\_\+tools\+::\+Color\+Data \&current)}{ApplyToColor(std::string color, const image_tools::ColorData &current)}}]{\setlength{\rightskip}{0pt plus 5cm}float Threshold\+Filter\+::\+Apply\+To\+Color (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{color, }
+\item[{const {\bf image\+\_\+tools\+::\+Color\+Data} \&}]{current}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classThresholdFilter_a05992cf3b35d05507690521876c77fa4}{}\label{classThresholdFilter_a05992cf3b35d05507690521876c77fa4}
+
+
+Calculate the new value for the color that is passed in. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em color} & The color to apply the algorithm to \\
+\hline
+\mbox{\tt in}  & {\em current} & The Color\+Data object of the pixel that is currently being recalculated\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The new value of the color requested 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classSimpleFilter_a4929140e4fa49ea630267e8562c4d0f1}{Simple\+Filter}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/include/threshold\+\_\+filter.\+h\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/threshold\+\_\+filter.\+cc\end{DoxyCompactItemize}

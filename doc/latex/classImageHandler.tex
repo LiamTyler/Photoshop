@@ -1,0 +1,63 @@
+\hypertarget{classImageHandler}{}\section{Image\+Handler Class Reference}
+\label{classImageHandler}\index{Image\+Handler@{Image\+Handler}}
+
+
+Class that handles overall loading and saving of images.  
+
+
+
+
+{\ttfamily \#include $<$image\+\_\+handler.\+h$>$}
+
+
+
+Inherited by \hyperlink{classIJPGHandler}{I\+J\+P\+G\+Handler}, and \hyperlink{classIPNGHandler}{I\+P\+N\+G\+Handler}.
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \hyperlink{classImageHandler_ade489694bd1fd4a2200e93f39d0efe83}{I\+M\+A\+G\+E\+\_\+\+T\+Y\+PE} \{ {\bfseries P\+N\+G\+\_\+\+I\+M\+A\+GE}, 
+{\bfseries J\+P\+G\+\_\+\+I\+M\+A\+GE}, 
+{\bfseries U\+N\+K\+N\+O\+W\+N\+\_\+\+I\+M\+A\+GE}
+ \}\hypertarget{classImageHandler_ade489694bd1fd4a2200e93f39d0efe83}{}\label{classImageHandler_ade489694bd1fd4a2200e93f39d0efe83}
+\begin{DoxyCompactList}\small\item\em Enum used to enumerate the valid image types for this app. \end{DoxyCompactList}
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$ \hyperlink{classImageHandler_aa690d376fd45e01d24d1b45a67fab1a2}{Load\+Image} (const std\+::string \&file\+\_\+name)\hypertarget{classImageHandler_aa690d376fd45e01d24d1b45a67fab1a2}{}\label{classImageHandler_aa690d376fd45e01d24d1b45a67fab1a2}
+
+\begin{DoxyCompactList}\small\item\em Returns a Pixel\+Buffer with the requested image to load. \end{DoxyCompactList}\item 
+static bool \hyperlink{classImageHandler_a85de409a4a1cf53c8ada21a217948504}{Save\+Image} (const std\+::string \&file\+\_\+name, const \hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$buffer\+To\+Save)\hypertarget{classImageHandler_a85de409a4a1cf53c8ada21a217948504}{}\label{classImageHandler_a85de409a4a1cf53c8ada21a217948504}
+
+\begin{DoxyCompactList}\small\item\em Saves the Buffer passed in to the specified file\+\_\+name. \end{DoxyCompactList}\item 
+static \hyperlink{classImageHandler_ade489694bd1fd4a2200e93f39d0efe83}{I\+M\+A\+G\+E\+\_\+\+T\+Y\+PE} \hyperlink{classImageHandler_a4e7f2a3f5ecbc60ac28755447b8647d7}{Get\+Image\+Type} (const std\+::string \&file\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Determines the image type of the file passed in. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Class that handles overall loading and saving of images. 
+
+This class will figure out the type of the image, and if the type is jpg or png, it will call the appropriate functions to handle that file type for both loading and saving. 
+
+\subsection{Member Function Documentation}
+\index{Image\+Handler@{Image\+Handler}!Get\+Image\+Type@{Get\+Image\+Type}}
+\index{Get\+Image\+Type@{Get\+Image\+Type}!Image\+Handler@{Image\+Handler}}
+\subsubsection[{\texorpdfstring{Get\+Image\+Type(const std\+::string \&file\+\_\+name)}{GetImageType(const std::string &file_name)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Image\+Handler\+::\+I\+M\+A\+G\+E\+\_\+\+T\+Y\+PE} Image\+Handler\+::\+Get\+Image\+Type (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{file\+\_\+name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classImageHandler_a4e7f2a3f5ecbc60ac28755447b8647d7}{}\label{classImageHandler_a4e7f2a3f5ecbc60ac28755447b8647d7}
+
+
+Determines the image type of the file passed in. 
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{classImageHandler_ade489694bd1fd4a2200e93f39d0efe83}{Image\+Handler\+::\+I\+M\+A\+G\+E\+\_\+\+T\+Y\+PE} (the enumerated image type) 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/include/image\+\_\+handler.\+h\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/image\+\_\+handler.\+cc\end{DoxyCompactItemize}

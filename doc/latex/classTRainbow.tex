@@ -1,0 +1,96 @@
+\hypertarget{classTRainbow}{}\section{T\+Rainbow Class Reference}
+\label{classTRainbow}\index{T\+Rainbow@{T\+Rainbow}}
+
+
+Implements a rainbow pen tool.  
+
+
+
+
+{\ttfamily \#include $<$rainbow.\+h$>$}
+
+
+
+Inherits \hyperlink{classTool}{Tool}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries T\+Rainbow} (int width, int height, double color\+\_\+offset, double rate\+\_\+of\+\_\+change)\hypertarget{classTRainbow_a262643d0c7b482779a0dd3e06fbcf04a}{}\label{classTRainbow_a262643d0c7b482779a0dd3e06fbcf04a}
+
+\item 
+void \hyperlink{classTRainbow_a9a2122d932a8df785b715b3cafd3b3a7}{Apply\+Tool} (\hyperlink{classimage__tools_1_1PixelBuffer}{image\+\_\+tools\+::\+Pixel\+Buffer} $\ast$buff, \hyperlink{classimage__tools_1_1ColorData}{image\+\_\+tools\+::\+Color\+Data} current\+\_\+color, int x, int y, int last\+\_\+x, int last\+\_\+y)\hypertarget{classTRainbow_a9a2122d932a8df785b715b3cafd3b3a7}{}\label{classTRainbow_a9a2122d932a8df785b715b3cafd3b3a7}
+
+\begin{DoxyCompactList}\small\item\em Override the apply\+Tool so we can update the color before we apply the mask. \end{DoxyCompactList}\item 
+void \hyperlink{classTRainbow_ac92a0ba45189665c678fdb04e6ecab30}{Update\+Color} (double $\ast$red, double $\ast$green, double $\ast$blue)
+\begin{DoxyCompactList}\small\item\em Change the color to be next in the rainbow. \end{DoxyCompactList}\item 
+std\+::string \hyperlink{classTRainbow_a1eef09ba9059714fcf02e1830988ad41}{name} (void)
+\begin{DoxyCompactList}\small\item\em The name of the tool. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double {\bfseries color\+\_\+offset\+\_\+}\hypertarget{classTRainbow_a78c96949e112e9c6ac77164f53e775fc}{}\label{classTRainbow_a78c96949e112e9c6ac77164f53e775fc}
+
+\item 
+double {\bfseries rate\+\_\+of\+\_\+change\+\_\+}\hypertarget{classTRainbow_a509fabca7115b4898db3abdaa0ce6502}{}\label{classTRainbow_a509fabca7115b4898db3abdaa0ce6502}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Implements a rainbow pen tool. 
+
+Same tool as the Pen, except that the colors are constantly cycling through the colors of the rainbow. 
+
+\subsection{Member Function Documentation}
+\index{T\+Rainbow@{T\+Rainbow}!name@{name}}
+\index{name@{name}!T\+Rainbow@{T\+Rainbow}}
+\subsubsection[{\texorpdfstring{name(void)}{name(void)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string T\+Rainbow\+::name (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classTRainbow_a1eef09ba9059714fcf02e1830988ad41}{}\label{classTRainbow_a1eef09ba9059714fcf02e1830988ad41}
+
+
+The name of the tool. 
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classTool_a89abd746706ed78911924a47928d6d06}{Tool}.
+
+\index{T\+Rainbow@{T\+Rainbow}!Update\+Color@{Update\+Color}}
+\index{Update\+Color@{Update\+Color}!T\+Rainbow@{T\+Rainbow}}
+\subsubsection[{\texorpdfstring{Update\+Color(double $\ast$red, double $\ast$green, double $\ast$blue)}{UpdateColor(double *red, double *green, double *blue)}}]{\setlength{\rightskip}{0pt plus 5cm}void T\+Rainbow\+::\+Update\+Color (
+\begin{DoxyParamCaption}
+\item[{double $\ast$}]{red, }
+\item[{double $\ast$}]{green, }
+\item[{double $\ast$}]{blue}
+\end{DoxyParamCaption}
+)}\hypertarget{classTRainbow_ac92a0ba45189665c678fdb04e6ecab30}{}\label{classTRainbow_ac92a0ba45189665c678fdb04e6ecab30}
+
+
+Change the color to be next in the rainbow. 
+
+Cycle the color through the color wheel acording to this algorithm\+: \href{http://academe.co.uk/wp-content/uploads/2012/04/}{\tt http\+://academe.\+co.\+uk/wp-\/content/uploads/2012/04/} 451px-\/\+H\+S\+V-\/\+R\+G\+B-\/comparison.\+svg\+\_\+.\+png
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em red} & The R value of the rainbow pen \\
+\hline
+\mbox{\tt out}  & {\em green} & The G value of the rainbow pen \\
+\hline
+\mbox{\tt out}  & {\em blue} & The B value of the rainbow pen\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/include/rainbow.\+h\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/rainbow.\+cc\end{DoxyCompactItemize}

@@ -1,0 +1,89 @@
+\hypertarget{classSimpleFilter}{}\section{Simple\+Filter Class Reference}
+\label{classSimpleFilter}\index{Simple\+Filter@{Simple\+Filter}}
+
+
+The base class for all filters.  
+
+
+
+
+{\ttfamily \#include $<$simple\+\_\+filter.\+h$>$}
+
+
+
+Inherited by \hyperlink{classChannelsFilter}{Channels\+Filter}, \hyperlink{classQuantizeFilter}{Quantize\+Filter}, \hyperlink{classSaturationFilter}{Saturation\+Filter}, and \hyperlink{classThresholdFilter}{Threshold\+Filter}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classSimpleFilter_a868ae37b1c514199f387890dfa4bf168}{Apply\+Filter} (\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$oldimage, \hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$newimage)
+\begin{DoxyCompactList}\small\item\em Apply the Simple filter to a Pixel\+Buffer. \end{DoxyCompactList}\item 
+virtual float \hyperlink{classSimpleFilter_a4929140e4fa49ea630267e8562c4d0f1}{Apply\+To\+Color} (std\+::string color, const \hyperlink{classimage__tools_1_1ColorData}{image\+\_\+tools\+::\+Color\+Data} \&current)=0
+\begin{DoxyCompactList}\small\item\em Calculate the new value for the color that is passed in. \end{DoxyCompactList}\item 
+virtual std\+::string {\bfseries name} (void)=0\hypertarget{classSimpleFilter_a9f127f21fb704b891b60cf30685b9dd7}{}\label{classSimpleFilter_a9f127f21fb704b891b60cf30685b9dd7}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The base class for all filters. 
+
+A \hyperlink{classFilter}{Filter} describes how to produce a new image based on some algorithm of filtering on a current image. 
+
+\subsection{Member Function Documentation}
+\index{Simple\+Filter@{Simple\+Filter}!Apply\+Filter@{Apply\+Filter}}
+\index{Apply\+Filter@{Apply\+Filter}!Simple\+Filter@{Simple\+Filter}}
+\subsubsection[{\texorpdfstring{Apply\+Filter(\+Pixel\+Buffer $\ast$oldimage, Pixel\+Buffer $\ast$newimage)}{ApplyFilter(PixelBuffer *oldimage, PixelBuffer *newimage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Simple\+Filter\+::\+Apply\+Filter (
+\begin{DoxyParamCaption}
+\item[{{\bf Pixel\+Buffer} $\ast$}]{oldimage, }
+\item[{{\bf Pixel\+Buffer} $\ast$}]{newimage}
+\end{DoxyParamCaption}
+)}\hypertarget{classSimpleFilter_a868ae37b1c514199f387890dfa4bf168}{}\label{classSimpleFilter_a868ae37b1c514199f387890dfa4bf168}
+
+
+Apply the Simple filter to a Pixel\+Buffer. 
+
+A method that will use Apply\+To\+Color on each R\+GB in the pixel to calculate what the new R\+GB should be for that pixel. Unaffected by neighboring pixels.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em oldimage} & The image to apply the filter to \\
+\hline
+\mbox{\tt in}  & {\em newimage} & The iamge that will be produced\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None (newimage is where the filtered image will be) 
+\end{DoxyReturn}
+\index{Simple\+Filter@{Simple\+Filter}!Apply\+To\+Color@{Apply\+To\+Color}}
+\index{Apply\+To\+Color@{Apply\+To\+Color}!Simple\+Filter@{Simple\+Filter}}
+\subsubsection[{\texorpdfstring{Apply\+To\+Color(std\+::string color, const image\+\_\+tools\+::\+Color\+Data \&current)=0}{ApplyToColor(std::string color, const image_tools::ColorData &current)=0}}]{\setlength{\rightskip}{0pt plus 5cm}virtual float Simple\+Filter\+::\+Apply\+To\+Color (
+\begin{DoxyParamCaption}
+\item[{std\+::string}]{color, }
+\item[{const {\bf image\+\_\+tools\+::\+Color\+Data} \&}]{current}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [pure virtual]}}\hypertarget{classSimpleFilter_a4929140e4fa49ea630267e8562c4d0f1}{}\label{classSimpleFilter_a4929140e4fa49ea630267e8562c4d0f1}
+
+
+Calculate the new value for the color that is passed in. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em color} & The color to apply the algorithm to \\
+\hline
+\mbox{\tt in}  & {\em current} & The Color\+Data object of the pixel that is currently being recalculated\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The new value of the color requested 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classThresholdFilter_a05992cf3b35d05507690521876c77fa4}{Threshold\+Filter}, \hyperlink{classQuantizeFilter_ae76bd6744e50c5cb48a68f93dfb596fc}{Quantize\+Filter}, \hyperlink{classSaturationFilter_a1c56517df4bbdcd1b8e61bf1254f71b6}{Saturation\+Filter}, and \hyperlink{classChannelsFilter_a0eec6a503fa03e7ef9f0efc00ad0761c}{Channels\+Filter}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/include/simple\+\_\+filter.\+h\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/simple\+\_\+filter.\+cc\end{DoxyCompactItemize}

@@ -1,0 +1,87 @@
+\hypertarget{classKernalFilter}{}\section{Kernal\+Filter Class Reference}
+\label{classKernalFilter}\index{Kernal\+Filter@{Kernal\+Filter}}
+
+
+Base class for the filters that use convolution.  
+
+
+
+
+{\ttfamily \#include $<$kernal\+\_\+filter.\+h$>$}
+
+
+
+Inherits \hyperlink{classFilter}{Filter}.
+
+
+
+Inherited by \hyperlink{classBlurFilter}{Blur\+Filter}, \hyperlink{classEdgeDetectFilter}{Edge\+Detect\+Filter}, \hyperlink{classEmbossFilter}{Emboss\+Filter}, \hyperlink{classMotionBlurFilter}{Motion\+Blur\+Filter}, and \hyperlink{classSharpenFilter}{Sharpen\+Filter}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Kernal\+Filter} (\hyperlink{classKernal}{Kernal} $\ast$kernal)\hypertarget{classKernalFilter_a0ac54d2441b5c10dab12dd1209c120ea}{}\label{classKernalFilter_a0ac54d2441b5c10dab12dd1209c120ea}
+
+\item 
+virtual void \hyperlink{classKernalFilter_a26e481e4042dcacd0ceb7e6c9416c127}{Apply\+Filter} (\hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$oldimage, \hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} $\ast$newimage)
+\begin{DoxyCompactList}\small\item\em Generate a filtered image by convolving each pixel with its neighbors. \end{DoxyCompactList}\item 
+virtual std\+::string {\bfseries name} (void)=0\hypertarget{classKernalFilter_a3cab4050cdcdc8d858a2ad933a5b950e}{}\label{classKernalFilter_a3cab4050cdcdc8d858a2ad933a5b950e}
+
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Kernal\+Filter} (const \hyperlink{classKernalFilter}{Kernal\+Filter} \&f)=delete\hypertarget{classKernalFilter_a6758d9ba0fcbea136938fa3e1171103e}{}\label{classKernalFilter_a6758d9ba0fcbea136938fa3e1171103e}
+
+\item 
+\hyperlink{classKernalFilter}{Kernal\+Filter} \& {\bfseries operator=} (const \hyperlink{classKernalFilter}{Kernal\+Filter} \&f)=delete\hypertarget{classKernalFilter_ab629d64fcea8094e096d93c0e32a7306}{}\label{classKernalFilter_ab629d64fcea8094e096d93c0e32a7306}
+
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classKernal}{Kernal} $\ast$ {\bfseries kernal\+\_\+}\hypertarget{classKernalFilter_afe62c06663cfe91cb4a9e91fdd38085c}{}\label{classKernalFilter_afe62c06663cfe91cb4a9e91fdd38085c}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Base class for the filters that use convolution. 
+
+A Convolution \hyperlink{classFilter}{Filter} generates each new pixel based on the surrounding pixels. It uses a \hyperlink{classKernal}{Kernal} object to determine which neighboring pixels to use and their amounts. It describes the algorithm for applying the \hyperlink{classKernal}{Kernal} to each of the pixels in the buffer to produce a fully filtered image. 
+
+\subsection{Member Function Documentation}
+\index{Kernal\+Filter@{Kernal\+Filter}!Apply\+Filter@{Apply\+Filter}}
+\index{Apply\+Filter@{Apply\+Filter}!Kernal\+Filter@{Kernal\+Filter}}
+\subsubsection[{\texorpdfstring{Apply\+Filter(\+Pixel\+Buffer $\ast$oldimage, Pixel\+Buffer $\ast$newimage)}{ApplyFilter(PixelBuffer *oldimage, PixelBuffer *newimage)}}]{\setlength{\rightskip}{0pt plus 5cm}void Kernal\+Filter\+::\+Apply\+Filter (
+\begin{DoxyParamCaption}
+\item[{{\bf Pixel\+Buffer} $\ast$}]{oldimage, }
+\item[{{\bf Pixel\+Buffer} $\ast$}]{newimage}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{classKernalFilter_a26e481e4042dcacd0ceb7e6c9416c127}{}\label{classKernalFilter_a26e481e4042dcacd0ceb7e6c9416c127}
+
+
+Generate a filtered image by convolving each pixel with its neighbors. 
+
+A method that uses the Kernal$\ast$ kernal\+\_\+ to perform a weighted sum of nearby pixels.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em oldimage} & The image to apply the filter to \\
+\hline
+\mbox{\tt out}  & {\em newimage} & The iamge that will be produced\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None (newimage is where the filtered image will be) 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{classFilter_ab005e437143fe1b8d075eb7891441e89}{Filter}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/include/kernal\+\_\+filter.\+h\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/kernal\+\_\+filter.\+cc\end{DoxyCompactItemize}

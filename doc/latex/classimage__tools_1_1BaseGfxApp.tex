@@ -1,0 +1,337 @@
+\hypertarget{classimage__tools_1_1BaseGfxApp}{}\section{image\+\_\+tools\+:\+:Base\+Gfx\+App Class Reference}
+\label{classimage__tools_1_1BaseGfxApp}\index{image\+\_\+tools\+::\+Base\+Gfx\+App@{image\+\_\+tools\+::\+Base\+Gfx\+App}}
+
+
+This is a base class for graphics applications built on top of the G\+L\+UT and G\+L\+UI toolkits. G\+L\+UT and G\+L\+UI are C libraries, so one function of this class is to wrap the funcationality they provide in a class structure that lends itself to C++. To receive callbaks from G\+L\+UT and G\+L\+UI that allow you to render graphics and respond to user interface events, simply override the virtual methods in this class within your own subclass.  
+
+
+
+
+{\ttfamily \#include $<$base\+\_\+gfx\+\_\+app.\+h$>$}
+
+
+
+Inherited by \hyperlink{classimage__tools_1_1FlashPhotoApp}{image\+\_\+tools\+::\+Flash\+Photo\+App}, and \hyperlink{classimage__tools_1_1MIAApp}{image\+\_\+tools\+::\+M\+I\+A\+App}.
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Base\+Gfx\+App} (int \hyperlink{classimage__tools_1_1BaseGfxApp_a2fe403c5392f624477c2ce4429f1a7b5}{width}, int \hyperlink{classimage__tools_1_1BaseGfxApp_aa961e13a7a8e6062204223cc33ac7503}{height})\hypertarget{classimage__tools_1_1BaseGfxApp_abdf78453f987997db4f4970b3b873d19}{}\label{classimage__tools_1_1BaseGfxApp_abdf78453f987997db4f4970b3b873d19}
+
+\item 
+virtual void \hyperlink{classimage__tools_1_1BaseGfxApp_a7e7e8df01cdbb96d13b7779a1f17622d}{Init} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]}, int x, int y, unsigned glut\+\_\+flags, bool create\+\_\+glui\+\_\+win, int glui\+\_\+win\+\_\+x, int glui\+\_\+win\+\_\+y)\hypertarget{classimage__tools_1_1BaseGfxApp_a7e7e8df01cdbb96d13b7779a1f17622d}{}\label{classimage__tools_1_1BaseGfxApp_a7e7e8df01cdbb96d13b7779a1f17622d}
+
+\begin{DoxyCompactList}\small\item\em Initialize the the application. This is separate from construction, which is only intended to put the object in a valid state. If you override this, be sure to still call the super class version. \end{DoxyCompactList}\item 
+void \hyperlink{classimage__tools_1_1BaseGfxApp_a82465649f9a908d341e1db1a2e39bdc8}{set\+\_\+caption} (const std\+::string \&caption)\hypertarget{classimage__tools_1_1BaseGfxApp_a82465649f9a908d341e1db1a2e39bdc8}{}\label{classimage__tools_1_1BaseGfxApp_a82465649f9a908d341e1db1a2e39bdc8}
+
+\begin{DoxyCompactList}\small\item\em Set the window/icon title for the application. \end{DoxyCompactList}\item 
+void \hyperlink{classimage__tools_1_1BaseGfxApp_aeaa3a1aef12d88e4ab0665ff841e8d8d}{Set\+Window\+Dimensions} (int \hyperlink{classimage__tools_1_1BaseGfxApp_a2fe403c5392f624477c2ce4429f1a7b5}{width}, int \hyperlink{classimage__tools_1_1BaseGfxApp_aa961e13a7a8e6062204223cc33ac7503}{height})\hypertarget{classimage__tools_1_1BaseGfxApp_aeaa3a1aef12d88e4ab0665ff841e8d8d}{}\label{classimage__tools_1_1BaseGfxApp_aeaa3a1aef12d88e4ab0665ff841e8d8d}
+
+\begin{DoxyCompactList}\small\item\em Set the dimensions of the application window. \end{DoxyCompactList}\item 
+void {\bfseries Run\+Main\+Loop} (void)\hypertarget{classimage__tools_1_1BaseGfxApp_a62fae03316774a28455f766ce808a814}{}\label{classimage__tools_1_1BaseGfxApp_a62fae03316774a28455f766ce808a814}
+
+\item 
+virtual void {\bfseries Display} (void)=0\hypertarget{classimage__tools_1_1BaseGfxApp_aba7ae5ed9a1d794d8c6c4be1d5fa4722}{}\label{classimage__tools_1_1BaseGfxApp_aba7ae5ed9a1d794d8c6c4be1d5fa4722}
+
+\item 
+void \hyperlink{classimage__tools_1_1BaseGfxApp_afec9de9223c9fc7acb2d01ec7d5283a2}{Draw\+Pixels} (int start\+\_\+x, int start\+\_\+y, int \hyperlink{classimage__tools_1_1BaseGfxApp_a2fe403c5392f624477c2ce4429f1a7b5}{width}, int \hyperlink{classimage__tools_1_1BaseGfxApp_aa961e13a7a8e6062204223cc33ac7503}{height}, void const $\ast$const pixels)\hypertarget{classimage__tools_1_1BaseGfxApp_afec9de9223c9fc7acb2d01ec7d5283a2}{}\label{classimage__tools_1_1BaseGfxApp_afec9de9223c9fc7acb2d01ec7d5283a2}
+
+\begin{DoxyCompactList}\small\item\em Draw an array of pixel data on the screen. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classimage__tools_1_1BaseGfxApp_ad07efe6b7a1f140ccdb9a41d12fc1913}{Update} (int delta\+\_\+time\+\_\+ms)
+\begin{DoxyCompactList}\small\item\em Redraw the screen. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classimage__tools_1_1BaseGfxApp_ab2aa4111469862051287ba2b9983224d}{Mouse\+Moved} (int x, int y)\hypertarget{classimage__tools_1_1BaseGfxApp_ab2aa4111469862051287ba2b9983224d}{}\label{classimage__tools_1_1BaseGfxApp_ab2aa4111469862051287ba2b9983224d}
+
+\begin{DoxyCompactList}\small\item\em Callback for mouse moving interface event in the G\+L\+UT window Note that (0,0) is in the lower right corner of the image, (this is what is returned from G\+L\+UT), which is N\+OT the same as the coordinate system definition for the \hyperlink{classimage__tools_1_1PixelBuffer}{Pixel\+Buffer} class. Your implementation will need to account for this. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classimage__tools_1_1BaseGfxApp_ac4fa9008fc0d0748c45e5bbe610efa45}{Mouse\+Dragged} (int x, int y)\hypertarget{classimage__tools_1_1BaseGfxApp_ac4fa9008fc0d0748c45e5bbe610efa45}{}\label{classimage__tools_1_1BaseGfxApp_ac4fa9008fc0d0748c45e5bbe610efa45}
+
+\begin{DoxyCompactList}\small\item\em Callback for mouse dragged interface event in the G\+L\+UT window. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classimage__tools_1_1BaseGfxApp_a329831f9843ed220fb8ec757f1e72b84}{Left\+Mouse\+Down} (int x, int y)\hypertarget{classimage__tools_1_1BaseGfxApp_a329831f9843ed220fb8ec757f1e72b84}{}\label{classimage__tools_1_1BaseGfxApp_a329831f9843ed220fb8ec757f1e72b84}
+
+\begin{DoxyCompactList}\small\item\em Callback for left mouse click interface event in the G\+L\+UT window. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classimage__tools_1_1BaseGfxApp_a38e8246acf13e59f7d563e1bb479fdba}{Left\+Mouse\+Up} (int x, int y)\hypertarget{classimage__tools_1_1BaseGfxApp_a38e8246acf13e59f7d563e1bb479fdba}{}\label{classimage__tools_1_1BaseGfxApp_a38e8246acf13e59f7d563e1bb479fdba}
+
+\begin{DoxyCompactList}\small\item\em Callback for left mouse click release interface event in the G\+L\+UT window. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classimage__tools_1_1BaseGfxApp_a62302f1b34b93f21b8bcdfe6bbfed6c7}{Right\+Mouse\+Down} (int x, int y)\hypertarget{classimage__tools_1_1BaseGfxApp_a62302f1b34b93f21b8bcdfe6bbfed6c7}{}\label{classimage__tools_1_1BaseGfxApp_a62302f1b34b93f21b8bcdfe6bbfed6c7}
+
+\begin{DoxyCompactList}\small\item\em Callback for right mouse click interface event in the G\+L\+UT window. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classimage__tools_1_1BaseGfxApp_a96716278afda904913202685a0d7e146}{Right\+Mouse\+Up} (int x, int y)\hypertarget{classimage__tools_1_1BaseGfxApp_a96716278afda904913202685a0d7e146}{}\label{classimage__tools_1_1BaseGfxApp_a96716278afda904913202685a0d7e146}
+
+\begin{DoxyCompactList}\small\item\em Callback for right mouse click release interface event in the G\+L\+UT window. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classimage__tools_1_1BaseGfxApp_adc07f734785ac1863d69e484b3b14e9c}{Middle\+Mouse\+Down} (int x, int y)\hypertarget{classimage__tools_1_1BaseGfxApp_adc07f734785ac1863d69e484b3b14e9c}{}\label{classimage__tools_1_1BaseGfxApp_adc07f734785ac1863d69e484b3b14e9c}
+
+\begin{DoxyCompactList}\small\item\em Callback for middle mouse click interface event in the G\+L\+UT window. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classimage__tools_1_1BaseGfxApp_aacd2e87274e8731f34eaf2e0816001e8}{Middle\+Mouse\+Up} (int x, int y)\hypertarget{classimage__tools_1_1BaseGfxApp_aacd2e87274e8731f34eaf2e0816001e8}{}\label{classimage__tools_1_1BaseGfxApp_aacd2e87274e8731f34eaf2e0816001e8}
+
+\begin{DoxyCompactList}\small\item\em Callback for middle mouse click release interface event in the G\+L\+UT window. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classimage__tools_1_1BaseGfxApp_afe086488f233d55e1dfd4bf4883b7cb8}{Keyboard} (unsigned char c, int x, int y)\hypertarget{classimage__tools_1_1BaseGfxApp_afe086488f233d55e1dfd4bf4883b7cb8}{}\label{classimage__tools_1_1BaseGfxApp_afe086488f233d55e1dfd4bf4883b7cb8}
+
+\begin{DoxyCompactList}\small\item\em Callback for keyboard key press interface event in the G\+L\+UT window. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classimage__tools_1_1BaseGfxApp_aba20c48d82b9da16e9e5d716e404a8df}{Keyboard\+Special} (int key, int x, int y)\hypertarget{classimage__tools_1_1BaseGfxApp_aba20c48d82b9da16e9e5d716e404a8df}{}\label{classimage__tools_1_1BaseGfxApp_aba20c48d82b9da16e9e5d716e404a8df}
+
+\begin{DoxyCompactList}\small\item\em Callback for keyboard special key press interface event in the G\+L\+UT window. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classimage__tools_1_1BaseGfxApp_a156d7877e6ed3c3d7707618ebad15e9b}{Keyboard\+Up} (unsigned char c, int x, int y)\hypertarget{classimage__tools_1_1BaseGfxApp_a156d7877e6ed3c3d7707618ebad15e9b}{}\label{classimage__tools_1_1BaseGfxApp_a156d7877e6ed3c3d7707618ebad15e9b}
+
+\begin{DoxyCompactList}\small\item\em Callback for keyboard key press release mouse moving interface event in the G\+L\+UT window. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classimage__tools_1_1BaseGfxApp_a548437fcd4b0c87fa5e5c46d68f38683}{Keyboard\+Special\+Up} (int key, int x, int y)\hypertarget{classimage__tools_1_1BaseGfxApp_a548437fcd4b0c87fa5e5c46d68f38683}{}\label{classimage__tools_1_1BaseGfxApp_a548437fcd4b0c87fa5e5c46d68f38683}
+
+\begin{DoxyCompactList}\small\item\em Callback for keyboard special key press release interface event in the G\+L\+UT window. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classimage__tools_1_1BaseGfxApp_a62fbfbb3b1f3e9d476e82c8e7640e78e}{Glui\+Control} (int control\+\_\+id)\hypertarget{classimage__tools_1_1BaseGfxApp_a62fbfbb3b1f3e9d476e82c8e7640e78e}{}\label{classimage__tools_1_1BaseGfxApp_a62fbfbb3b1f3e9d476e82c8e7640e78e}
+
+\begin{DoxyCompactList}\small\item\em Callback that tells you when the user has interacted with a G\+L\+UI widget. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classimage__tools_1_1BaseGfxApp_a082984712d240d055abe10d9d9ba5297}{Reshape} (int \hyperlink{classimage__tools_1_1BaseGfxApp_a2fe403c5392f624477c2ce4429f1a7b5}{width}, int \hyperlink{classimage__tools_1_1BaseGfxApp_aa961e13a7a8e6062204223cc33ac7503}{height})\hypertarget{classimage__tools_1_1BaseGfxApp_a082984712d240d055abe10d9d9ba5297}{}\label{classimage__tools_1_1BaseGfxApp_a082984712d240d055abe10d9d9ba5297}
+
+\begin{DoxyCompactList}\small\item\em resize the graphics window on the screen. G\+L\+UT calls this when the user resizes the graphics window by dragging on it with the mouse. The default implementation in \hyperlink{classimage__tools_1_1BaseGfxApp}{Base\+Gfx\+App} is to ignore this interaction and force the window to remain the same size. But, if desired, subclasses can override this method and implement the logic to allow for interactive resizing of windows. \end{DoxyCompactList}\item 
+virtual void \hyperlink{classimage__tools_1_1BaseGfxApp_ae4dd5d263aa016d5e767a90c4e102e49}{Render\+One\+Frame} (void)\hypertarget{classimage__tools_1_1BaseGfxApp_ae4dd5d263aa016d5e767a90c4e102e49}{}\label{classimage__tools_1_1BaseGfxApp_ae4dd5d263aa016d5e767a90c4e102e49}
+
+\begin{DoxyCompactList}\small\item\em Clear the screen and call display(). Subclasses would only need to override this method if they need direct control over clearing the the screen, which is usually not the case. \end{DoxyCompactList}\item 
+int \hyperlink{classimage__tools_1_1BaseGfxApp_a2fe403c5392f624477c2ce4429f1a7b5}{width} (void) const 
+\begin{DoxyCompactList}\small\item\em Get the width of the application. \end{DoxyCompactList}\item 
+int \hyperlink{classimage__tools_1_1BaseGfxApp_aa961e13a7a8e6062204223cc33ac7503}{height} (void) const 
+\begin{DoxyCompactList}\small\item\em Get the height of the application. \end{DoxyCompactList}\item 
+int \hyperlink{classimage__tools_1_1BaseGfxApp_a18d458232b04b17d522996101ee0945f}{handle} (void)
+\begin{DoxyCompactList}\small\item\em Get the handle for the G\+L\+UI window. \end{DoxyCompactList}\item 
+G\+L\+UI $\ast$ \hyperlink{classimage__tools_1_1BaseGfxApp_a780a6702441c4d8c821fb40ede140c71}{glui} (void)
+\begin{DoxyCompactList}\small\item\em Get the handle for the G\+L\+UI. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classimage__tools_1_1BaseGfxApp_ac5a0a94bb2c4ca05f5a679c0184fbaa2}{drag} (void)
+\begin{DoxyCompactList}\small\item\em Get the drag. \end{DoxyCompactList}\item 
+int \hyperlink{classimage__tools_1_1BaseGfxApp_a5d2fdba549f7f6c8151e11d278486810}{width} (void)
+\begin{DoxyCompactList}\small\item\em Get the width. \end{DoxyCompactList}\item 
+int \hyperlink{classimage__tools_1_1BaseGfxApp_af7fe3673933f4965f42907c9abda3368}{height} (void)
+\begin{DoxyCompactList}\small\item\em Get the height. \end{DoxyCompactList}\item 
+\hyperlink{classimage__tools_1_1BaseGfxApp}{Base\+Gfx\+App} $\ast$ \hyperlink{classimage__tools_1_1BaseGfxApp_aaf2b80d7444f6ace46f7a412ebda01fd}{s\+\_\+current\+\_\+app} (void)
+\begin{DoxyCompactList}\small\item\em Get a handle on the application. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{classimage__tools_1_1BaseGfxApp_ae80abc9298c82b1ecaf5cb34e2e69827}{s\+\_\+reshape} (int \hyperlink{classimage__tools_1_1BaseGfxApp_a2fe403c5392f624477c2ce4429f1a7b5}{width}, int \hyperlink{classimage__tools_1_1BaseGfxApp_aa961e13a7a8e6062204223cc33ac7503}{height})
+\item 
+static void {\bfseries s\+\_\+keyboard} (unsigned char c, int x, int y)\hypertarget{classimage__tools_1_1BaseGfxApp_a0391cb9a366eaf202281688265806793}{}\label{classimage__tools_1_1BaseGfxApp_a0391cb9a366eaf202281688265806793}
+
+\item 
+static void {\bfseries s\+\_\+keyboardspecial} (int key, int x, int y)\hypertarget{classimage__tools_1_1BaseGfxApp_a6c7127b21265296021dbaf94bbcfa505}{}\label{classimage__tools_1_1BaseGfxApp_a6c7127b21265296021dbaf94bbcfa505}
+
+\item 
+static void {\bfseries s\+\_\+keyboardup} (unsigned char c, int x, int y)\hypertarget{classimage__tools_1_1BaseGfxApp_a2831ddec48ca07c1b69dde729bee1ca5}{}\label{classimage__tools_1_1BaseGfxApp_a2831ddec48ca07c1b69dde729bee1ca5}
+
+\item 
+static void {\bfseries s\+\_\+keyboardspecialup} (int key, int x, int y)\hypertarget{classimage__tools_1_1BaseGfxApp_ab2e44362d949be917845c55735019544}{}\label{classimage__tools_1_1BaseGfxApp_ab2e44362d949be917845c55735019544}
+
+\item 
+static void {\bfseries s\+\_\+mousemotion} (int x, int y)\hypertarget{classimage__tools_1_1BaseGfxApp_a0b69e9306843ee2c4dded7577551edcc}{}\label{classimage__tools_1_1BaseGfxApp_a0b69e9306843ee2c4dded7577551edcc}
+
+\item 
+static void {\bfseries s\+\_\+mousebtn} (int b, int s, int x, int y)\hypertarget{classimage__tools_1_1BaseGfxApp_af4a7aa4ed9b3c77000835c4f42f9cc2d}{}\label{classimage__tools_1_1BaseGfxApp_af4a7aa4ed9b3c77000835c4f42f9cc2d}
+
+\item 
+static void {\bfseries s\+\_\+draw} (void)\hypertarget{classimage__tools_1_1BaseGfxApp_a4e7a162129d2b751edfedc01a9f0181b}{}\label{classimage__tools_1_1BaseGfxApp_a4e7a162129d2b751edfedc01a9f0181b}
+
+\item 
+static void {\bfseries s\+\_\+gluicallback} (int control\+\_\+id)\hypertarget{classimage__tools_1_1BaseGfxApp_aa942e268df49e57936fbc236fac1e56f}{}\label{classimage__tools_1_1BaseGfxApp_aa942e268df49e57936fbc236fac1e56f}
+
+\item 
+static void {\bfseries s\+\_\+idle} (void)\hypertarget{classimage__tools_1_1BaseGfxApp_a266bbee5189cf299d6be75c7761d2b50}{}\label{classimage__tools_1_1BaseGfxApp_a266bbee5189cf299d6be75c7761d2b50}
+
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Base\+Gfx\+App} (const \hyperlink{classimage__tools_1_1BaseGfxApp}{Base\+Gfx\+App} \&rhs)=delete\hypertarget{classimage__tools_1_1BaseGfxApp_a5aa8570ef1617204ac96117108c3e3ed}{}\label{classimage__tools_1_1BaseGfxApp_a5aa8570ef1617204ac96117108c3e3ed}
+
+\item 
+\hyperlink{classimage__tools_1_1BaseGfxApp}{Base\+Gfx\+App} \& {\bfseries operator=} (const \hyperlink{classimage__tools_1_1BaseGfxApp}{Base\+Gfx\+App} \&rhs)=delete\hypertarget{classimage__tools_1_1BaseGfxApp_a15d81a2ff9bd6a211c7cc63abd1eb508}{}\label{classimage__tools_1_1BaseGfxApp_a15d81a2ff9bd6a211c7cc63abd1eb508}
+
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{classimage__tools_1_1BaseGfxApp_a80d2d760d3c777be50dcfb96466746f0}{glut\+\_\+window\+\_\+handle\+\_\+}
+\item 
+G\+L\+UI $\ast$ \hyperlink{classimage__tools_1_1BaseGfxApp_af61bab5d0a9ff2bf95c3275b6f895d8e}{glui\+\_\+}
+\item 
+bool \hyperlink{classimage__tools_1_1BaseGfxApp_aa5d008059dc45fbdd387c1dcc9ef44e8}{drag\+\_\+}
+\item 
+int {\bfseries width\+\_\+}\hypertarget{classimage__tools_1_1BaseGfxApp_a8888b4592158fb5dd802e5de950777c3}{}\label{classimage__tools_1_1BaseGfxApp_a8888b4592158fb5dd802e5de950777c3}
+
+\item 
+int {\bfseries height\+\_\+}\hypertarget{classimage__tools_1_1BaseGfxApp_a42aa79ec7086b16b51264fb9821594e3}{}\label{classimage__tools_1_1BaseGfxApp_a42aa79ec7086b16b51264fb9821594e3}
+
+\item 
+int \hyperlink{classimage__tools_1_1BaseGfxApp_a2197d887035883be911d1ced510d99d9}{milliseconds\+\_\+}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classimage__tools_1_1BaseGfxApp}{Base\+Gfx\+App} $\ast$ {\bfseries s\+\_\+current\+\_\+app\+\_\+} = N\+U\+LL\hypertarget{classimage__tools_1_1BaseGfxApp_a2ce748feb529ace00e427f1d0fef4be5}{}\label{classimage__tools_1_1BaseGfxApp_a2ce748feb529ace00e427f1d0fef4be5}
+
+\item 
+static bool \hyperlink{classimage__tools_1_1BaseGfxApp_a4bfe294b3c2987edd8e8465e4047a064}{s\+\_\+glut\+\_\+initialized\+\_\+} = false
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This is a base class for graphics applications built on top of the G\+L\+UT and G\+L\+UI toolkits. G\+L\+UT and G\+L\+UI are C libraries, so one function of this class is to wrap the funcationality they provide in a class structure that lends itself to C++. To receive callbaks from G\+L\+UT and G\+L\+UI that allow you to render graphics and respond to user interface events, simply override the virtual methods in this class within your own subclass. 
+
+\subsection{Member Function Documentation}
+\index{image\+\_\+tools\+::\+Base\+Gfx\+App@{image\+\_\+tools\+::\+Base\+Gfx\+App}!drag@{drag}}
+\index{drag@{drag}!image\+\_\+tools\+::\+Base\+Gfx\+App@{image\+\_\+tools\+::\+Base\+Gfx\+App}}
+\subsubsection[{\texorpdfstring{drag(void)}{drag(void)}}]{\setlength{\rightskip}{0pt plus 5cm}bool image\+\_\+tools\+::\+Base\+Gfx\+App\+::drag (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\hypertarget{classimage__tools_1_1BaseGfxApp_ac5a0a94bb2c4ca05f5a679c0184fbaa2}{}\label{classimage__tools_1_1BaseGfxApp_ac5a0a94bb2c4ca05f5a679c0184fbaa2}
+
+
+Get the drag. 
+
+\begin{DoxyReturn}{Returns}
+The drag 
+\end{DoxyReturn}
+\index{image\+\_\+tools\+::\+Base\+Gfx\+App@{image\+\_\+tools\+::\+Base\+Gfx\+App}!glui@{glui}}
+\index{glui@{glui}!image\+\_\+tools\+::\+Base\+Gfx\+App@{image\+\_\+tools\+::\+Base\+Gfx\+App}}
+\subsubsection[{\texorpdfstring{glui(void)}{glui(void)}}]{\setlength{\rightskip}{0pt plus 5cm}G\+L\+UI$\ast$ image\+\_\+tools\+::\+Base\+Gfx\+App\+::glui (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classimage__tools_1_1BaseGfxApp_a780a6702441c4d8c821fb40ede140c71}{}\label{classimage__tools_1_1BaseGfxApp_a780a6702441c4d8c821fb40ede140c71}
+
+
+Get the handle for the G\+L\+UI. 
+
+\begin{DoxyReturn}{Returns}
+The G\+L\+UI handle 
+\end{DoxyReturn}
+\index{image\+\_\+tools\+::\+Base\+Gfx\+App@{image\+\_\+tools\+::\+Base\+Gfx\+App}!handle@{handle}}
+\index{handle@{handle}!image\+\_\+tools\+::\+Base\+Gfx\+App@{image\+\_\+tools\+::\+Base\+Gfx\+App}}
+\subsubsection[{\texorpdfstring{handle(void)}{handle(void)}}]{\setlength{\rightskip}{0pt plus 5cm}int image\+\_\+tools\+::\+Base\+Gfx\+App\+::handle (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classimage__tools_1_1BaseGfxApp_a18d458232b04b17d522996101ee0945f}{}\label{classimage__tools_1_1BaseGfxApp_a18d458232b04b17d522996101ee0945f}
+
+
+Get the handle for the G\+L\+UI window. 
+
+\begin{DoxyReturn}{Returns}
+The handle 
+\end{DoxyReturn}
+\index{image\+\_\+tools\+::\+Base\+Gfx\+App@{image\+\_\+tools\+::\+Base\+Gfx\+App}!height@{height}}
+\index{height@{height}!image\+\_\+tools\+::\+Base\+Gfx\+App@{image\+\_\+tools\+::\+Base\+Gfx\+App}}
+\subsubsection[{\texorpdfstring{height(void) const }{height(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}int image\+\_\+tools\+::\+Base\+Gfx\+App\+::height (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classimage__tools_1_1BaseGfxApp_aa961e13a7a8e6062204223cc33ac7503}{}\label{classimage__tools_1_1BaseGfxApp_aa961e13a7a8e6062204223cc33ac7503}
+
+
+Get the height of the application. 
+
+\begin{DoxyReturn}{Returns}
+The height 
+\end{DoxyReturn}
+\index{image\+\_\+tools\+::\+Base\+Gfx\+App@{image\+\_\+tools\+::\+Base\+Gfx\+App}!height@{height}}
+\index{height@{height}!image\+\_\+tools\+::\+Base\+Gfx\+App@{image\+\_\+tools\+::\+Base\+Gfx\+App}}
+\subsubsection[{\texorpdfstring{height(void)}{height(void)}}]{\setlength{\rightskip}{0pt plus 5cm}int image\+\_\+tools\+::\+Base\+Gfx\+App\+::height (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\hypertarget{classimage__tools_1_1BaseGfxApp_af7fe3673933f4965f42907c9abda3368}{}\label{classimage__tools_1_1BaseGfxApp_af7fe3673933f4965f42907c9abda3368}
+
+
+Get the height. 
+
+\begin{DoxyReturn}{Returns}
+The height 
+\end{DoxyReturn}
+\index{image\+\_\+tools\+::\+Base\+Gfx\+App@{image\+\_\+tools\+::\+Base\+Gfx\+App}!s\+\_\+current\+\_\+app@{s\+\_\+current\+\_\+app}}
+\index{s\+\_\+current\+\_\+app@{s\+\_\+current\+\_\+app}!image\+\_\+tools\+::\+Base\+Gfx\+App@{image\+\_\+tools\+::\+Base\+Gfx\+App}}
+\subsubsection[{\texorpdfstring{s\+\_\+current\+\_\+app(void)}{s_current_app(void)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Base\+Gfx\+App}$\ast$ image\+\_\+tools\+::\+Base\+Gfx\+App\+::s\+\_\+current\+\_\+app (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\hypertarget{classimage__tools_1_1BaseGfxApp_aaf2b80d7444f6ace46f7a412ebda01fd}{}\label{classimage__tools_1_1BaseGfxApp_aaf2b80d7444f6ace46f7a412ebda01fd}
+
+
+Get a handle on the application. 
+
+\begin{DoxyReturn}{Returns}
+The application handle 
+\end{DoxyReturn}
+\index{image\+\_\+tools\+::\+Base\+Gfx\+App@{image\+\_\+tools\+::\+Base\+Gfx\+App}!s\+\_\+reshape@{s\+\_\+reshape}}
+\index{s\+\_\+reshape@{s\+\_\+reshape}!image\+\_\+tools\+::\+Base\+Gfx\+App@{image\+\_\+tools\+::\+Base\+Gfx\+App}}
+\subsubsection[{\texorpdfstring{s\+\_\+reshape(int width, int height)}{s_reshape(int width, int height)}}]{\setlength{\rightskip}{0pt plus 5cm}void image\+\_\+tools\+::\+Base\+Gfx\+App\+::s\+\_\+reshape (
+\begin{DoxyParamCaption}
+\item[{int}]{width, }
+\item[{int}]{height}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}\hypertarget{classimage__tools_1_1BaseGfxApp_ae80abc9298c82b1ecaf5cb34e2e69827}{}\label{classimage__tools_1_1BaseGfxApp_ae80abc9298c82b1ecaf5cb34e2e69827}
+G\+L\+UT and G\+L\+UI event callbacks are sent to the current window/app. Right now, there is only one window anyway (not counting the G\+L\+UI UI window.. in the future could be extended to support more windows. In any case, some structure like this is always needed when using glut with C++, since the glut callbacks must be either global or static functions. \index{image\+\_\+tools\+::\+Base\+Gfx\+App@{image\+\_\+tools\+::\+Base\+Gfx\+App}!Update@{Update}}
+\index{Update@{Update}!image\+\_\+tools\+::\+Base\+Gfx\+App@{image\+\_\+tools\+::\+Base\+Gfx\+App}}
+\subsubsection[{\texorpdfstring{Update(int delta\+\_\+time\+\_\+ms)}{Update(int delta_time_ms)}}]{\setlength{\rightskip}{0pt plus 5cm}virtual void image\+\_\+tools\+::\+Base\+Gfx\+App\+::\+Update (
+\begin{DoxyParamCaption}
+\item[{int}]{delta\+\_\+time\+\_\+ms}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}\hypertarget{classimage__tools_1_1BaseGfxApp_ad07efe6b7a1f140ccdb9a41d12fc1913}{}\label{classimage__tools_1_1BaseGfxApp_ad07efe6b7a1f140ccdb9a41d12fc1913}
+
+
+Redraw the screen. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em delta\+\_\+time\+\_\+ms} & Milliseconds since the last redraw of the screen \\
+\hline
+\end{DoxyParams}
+\index{image\+\_\+tools\+::\+Base\+Gfx\+App@{image\+\_\+tools\+::\+Base\+Gfx\+App}!width@{width}}
+\index{width@{width}!image\+\_\+tools\+::\+Base\+Gfx\+App@{image\+\_\+tools\+::\+Base\+Gfx\+App}}
+\subsubsection[{\texorpdfstring{width(void) const }{width(void) const }}]{\setlength{\rightskip}{0pt plus 5cm}int image\+\_\+tools\+::\+Base\+Gfx\+App\+::width (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+) const\hspace{0.3cm}{\ttfamily [inline]}}\hypertarget{classimage__tools_1_1BaseGfxApp_a2fe403c5392f624477c2ce4429f1a7b5}{}\label{classimage__tools_1_1BaseGfxApp_a2fe403c5392f624477c2ce4429f1a7b5}
+
+
+Get the width of the application. 
+
+\begin{DoxyReturn}{Returns}
+The width 
+\end{DoxyReturn}
+\index{image\+\_\+tools\+::\+Base\+Gfx\+App@{image\+\_\+tools\+::\+Base\+Gfx\+App}!width@{width}}
+\index{width@{width}!image\+\_\+tools\+::\+Base\+Gfx\+App@{image\+\_\+tools\+::\+Base\+Gfx\+App}}
+\subsubsection[{\texorpdfstring{width(void)}{width(void)}}]{\setlength{\rightskip}{0pt plus 5cm}int image\+\_\+tools\+::\+Base\+Gfx\+App\+::width (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}\hypertarget{classimage__tools_1_1BaseGfxApp_a5d2fdba549f7f6c8151e11d278486810}{}\label{classimage__tools_1_1BaseGfxApp_a5d2fdba549f7f6c8151e11d278486810}
+
+
+Get the width. 
+
+\begin{DoxyReturn}{Returns}
+The width 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\index{image\+\_\+tools\+::\+Base\+Gfx\+App@{image\+\_\+tools\+::\+Base\+Gfx\+App}!drag\+\_\+@{drag\+\_\+}}
+\index{drag\+\_\+@{drag\+\_\+}!image\+\_\+tools\+::\+Base\+Gfx\+App@{image\+\_\+tools\+::\+Base\+Gfx\+App}}
+\subsubsection[{\texorpdfstring{drag\+\_\+}{drag_}}]{\setlength{\rightskip}{0pt plus 5cm}bool image\+\_\+tools\+::\+Base\+Gfx\+App\+::drag\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classimage__tools_1_1BaseGfxApp_aa5d008059dc45fbdd387c1dcc9ef44e8}{}\label{classimage__tools_1_1BaseGfxApp_aa5d008059dc45fbdd387c1dcc9ef44e8}
+Indicates whether the mouse is currently pressed \index{image\+\_\+tools\+::\+Base\+Gfx\+App@{image\+\_\+tools\+::\+Base\+Gfx\+App}!glui\+\_\+@{glui\+\_\+}}
+\index{glui\+\_\+@{glui\+\_\+}!image\+\_\+tools\+::\+Base\+Gfx\+App@{image\+\_\+tools\+::\+Base\+Gfx\+App}}
+\subsubsection[{\texorpdfstring{glui\+\_\+}{glui_}}]{\setlength{\rightskip}{0pt plus 5cm}G\+L\+UI$\ast$ image\+\_\+tools\+::\+Base\+Gfx\+App\+::glui\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classimage__tools_1_1BaseGfxApp_af61bab5d0a9ff2bf95c3275b6f895d8e}{}\label{classimage__tools_1_1BaseGfxApp_af61bab5d0a9ff2bf95c3275b6f895d8e}
+Pointer to G\+L\+UI master \index{image\+\_\+tools\+::\+Base\+Gfx\+App@{image\+\_\+tools\+::\+Base\+Gfx\+App}!glut\+\_\+window\+\_\+handle\+\_\+@{glut\+\_\+window\+\_\+handle\+\_\+}}
+\index{glut\+\_\+window\+\_\+handle\+\_\+@{glut\+\_\+window\+\_\+handle\+\_\+}!image\+\_\+tools\+::\+Base\+Gfx\+App@{image\+\_\+tools\+::\+Base\+Gfx\+App}}
+\subsubsection[{\texorpdfstring{glut\+\_\+window\+\_\+handle\+\_\+}{glut_window_handle_}}]{\setlength{\rightskip}{0pt plus 5cm}int image\+\_\+tools\+::\+Base\+Gfx\+App\+::glut\+\_\+window\+\_\+handle\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classimage__tools_1_1BaseGfxApp_a80d2d760d3c777be50dcfb96466746f0}{}\label{classimage__tools_1_1BaseGfxApp_a80d2d760d3c777be50dcfb96466746f0}
+Underlying glut window handle \index{image\+\_\+tools\+::\+Base\+Gfx\+App@{image\+\_\+tools\+::\+Base\+Gfx\+App}!milliseconds\+\_\+@{milliseconds\+\_\+}}
+\index{milliseconds\+\_\+@{milliseconds\+\_\+}!image\+\_\+tools\+::\+Base\+Gfx\+App@{image\+\_\+tools\+::\+Base\+Gfx\+App}}
+\subsubsection[{\texorpdfstring{milliseconds\+\_\+}{milliseconds_}}]{\setlength{\rightskip}{0pt plus 5cm}int image\+\_\+tools\+::\+Base\+Gfx\+App\+::milliseconds\+\_\+\hspace{0.3cm}{\ttfamily [private]}}\hypertarget{classimage__tools_1_1BaseGfxApp_a2197d887035883be911d1ced510d99d9}{}\label{classimage__tools_1_1BaseGfxApp_a2197d887035883be911d1ced510d99d9}
+ms since last update \index{image\+\_\+tools\+::\+Base\+Gfx\+App@{image\+\_\+tools\+::\+Base\+Gfx\+App}!s\+\_\+glut\+\_\+initialized\+\_\+@{s\+\_\+glut\+\_\+initialized\+\_\+}}
+\index{s\+\_\+glut\+\_\+initialized\+\_\+@{s\+\_\+glut\+\_\+initialized\+\_\+}!image\+\_\+tools\+::\+Base\+Gfx\+App@{image\+\_\+tools\+::\+Base\+Gfx\+App}}
+\subsubsection[{\texorpdfstring{s\+\_\+glut\+\_\+initialized\+\_\+}{s_glut_initialized_}}]{\setlength{\rightskip}{0pt plus 5cm}bool image\+\_\+tools\+::\+Base\+Gfx\+App\+::s\+\_\+glut\+\_\+initialized\+\_\+ = false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}\hypertarget{classimage__tools_1_1BaseGfxApp_a4bfe294b3c2987edd8e8465e4047a064}{}\label{classimage__tools_1_1BaseGfxApp_a4bfe294b3c2987edd8e8465e4047a064}
+Has glut\+Init been called? (only allowed once per program) 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/include/base\+\_\+gfx\+\_\+app.\+h\item 
+/home/liam/\+Documents/\+School/3081/project/src/lib/libimgtools/src/base\+\_\+gfx\+\_\+app.\+cc\end{DoxyCompactItemize}
