@@ -50,8 +50,11 @@ class MIAIOManager : public IOManager {
 
   std::string GetFile(void);
   PixelBuffer* LoadImageToCanvas(PixelBuffer* buff);
+  PixelBuffer* LoadSelectedImageToCanvas(PixelBuffer* buff,
+          const std::string& fname);
   PixelBuffer* LoadNextImage(PixelBuffer* buff);
   PixelBuffer* LoadPreviousImage(PixelBuffer* buff);
+  void set_next_previous(void);
   void set_image_file(const std::string & fname_in);
   std::string image_name_plus_seq_offset(const std::string& filename,
                                          int offset);

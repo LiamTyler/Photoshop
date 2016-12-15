@@ -75,10 +75,17 @@ class IOManager {
   GLUI_FileBrowser* file_browser(void) { return file_browser_; }
 
   /**
-   * @brief Load the selected image file to the canvas
+   * @brief Load the current image in the file browser to the canvas
    *
    */
   virtual PixelBuffer* LoadImageToCanvas(PixelBuffer* buff);
+
+  /**
+   * @brief Load the selected image to the canvas
+   *
+   */
+  virtual PixelBuffer* LoadSelectedImageToCanvas(PixelBuffer* buff,
+                                                 const std::string& fname);
 
   /**
    * @brief Load the selected image file to the stamp

@@ -141,6 +141,12 @@ PixelBuffer* IOManager::LoadImageToCanvas(PixelBuffer* buff) {
     return ImageHandler::LoadImage(file_browser()->get_file());
 }
 
+PixelBuffer* IOManager::LoadSelectedImageToCanvas(PixelBuffer* buff,
+                            const std::string& fname) {
+    delete buff;
+    return ImageHandler::LoadImage(fname);
+}
+
 void IOManager::LoadImageToStamp(TStamp* t) {
     t->LoadImage(ImageHandler::LoadImage(
                 file_browser()->get_file()));

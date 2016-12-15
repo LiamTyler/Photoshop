@@ -16,12 +16,12 @@
  * Includes
  ******************************************************************************/
 #include <string>
+#include <vector>
 #include "lib/libimgtools/src/include/base_gfx_app.h"
 #include "lib/libimgtools/src/include/state_manager.h"
 #include "app/MIA/src/include/mia_filter_manager.h"
 #include "app/MIA/src/include/mia_io_manager.h"
-
-/* FIXME: ADDITIONAL INCLUDES AS NECESSARY HERE :-) */
+#include "lib/libimgtools/src/include/tool.h"
 
 /*******************************************************************************
  * Namespaces
@@ -36,7 +36,7 @@ class MIAApp : public BaseGfxApp {
   MIAApp(int width, int height, const std::string& marker_fname);
   virtual ~MIAApp(void);
 
-  void MouseDragged(int x, int y) {}
+  void MouseDragged(int x, int y);
   void MouseMoved(int x, int y) {}
   void LeftMouseDown(int x, int y);
   void LeftMouseUp(int x, int y);
@@ -100,7 +100,15 @@ class MIAApp : public BaseGfxApp {
   // The path to the marker file
   std::string marker_fname_;
 
-  int cur_tool_;
+  // These are used to store the selections from the GLUI user interface
+  int cur_tool_index_;  /**< Currently selected tool from UI */
+  Tool* cur_tool_;
+  std::vector<Tool*> tools_;
+
+  int last_x_;
+  int last_y_;
+
+  ColorData current_color_;
 };
 
 }  /* namespace image_tools */
