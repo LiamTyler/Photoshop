@@ -45,4 +45,4 @@ class TStamp : public Tool {
   PixelBuffer* image_;  //< The image being stamped down
 };
 
-#endif  /* SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_STAMP_TOOL_H_ */
+#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_STAMP_TOOL_H_

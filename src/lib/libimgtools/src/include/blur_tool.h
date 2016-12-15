@@ -44,8 +44,8 @@ class TBlur : public Tool {
   TBlur& operator=(const TBlur& b) = delete;
   void Init();
   int radius_;
-  std::vector<BlurKernal> kernals_; 
-  image_tools::PixelBuffer *scratch_; //< Empty PixelBuffer to help copy images
+  std::vector<BlurKernal> kernals_;
+  image_tools::PixelBuffer *scratch_;  //< Empty PixelBuffer to help copy images
 };
 
-#endif  /* SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_BLUR_TOOL_H_ */
+#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_BLUR_TOOL_H_

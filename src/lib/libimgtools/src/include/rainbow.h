@@ -57,4 +57,4 @@ class TRainbow : public Tool {
   double rate_of_change_;  //< How quickly the color will change
 };
 
-#endif  /* SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_RAINBOW_H_ */
+#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_RAINBOW_H_

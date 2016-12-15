@@ -21,7 +21,7 @@ all: channels passthrough badinput blur edge threshold saturate quantize sharpen
 	-@rm -f output.txt one.txt zero.txt three.txt
 
 channels: | one.txt zero.txt test_images
-	@echo *Channels 5 5 0 Test has started
+	@echo *Channels .5 .5 0 Test has started
 
 # Create the image we are going to test with
 	@../build/bin/MIA ../resources/test-images/brainColor.jpg -channel .5 .5 0 test_images/brainColorChan550Test.jpg
@@ -32,7 +32,7 @@ channels: | one.txt zero.txt test_images
 # or not. That's what the diff does
 	@../build/bin/MIA golden_images/brainColorChan550.jpg -compare test_images/brainColorChan550Test.jpg > output.txt ;\
 		if [ $$? -eq 1 ] ; then\
-			echo "Channels 5 5 0 Test FAILED to execute" ;\
+			echo "Channels .5 .5 0 Test FAILED to execute" ;\
 		else\
 			# the > /dev/null is a trick to not print anything (idk if works on mac)\
 			diff output.txt one.txt > /dev/null ;\
