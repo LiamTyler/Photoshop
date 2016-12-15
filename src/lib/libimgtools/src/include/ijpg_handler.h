@@ -11,6 +11,9 @@
 #ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_IJPG_HANDLER_H_
 #define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_IJPG_HANDLER_H_
 
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
 #include <stdio.h>
 #include <jpeglib.h>
 #include <setjmp.h>
@@ -39,4 +42,4 @@ class IJPGHandler : public ImageHandler {
   };
 };
 
-#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_IJPG_HANDLER_H_
+#endif  /* SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_IJPG_HANDLER_H_ */

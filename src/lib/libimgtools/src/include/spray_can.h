@@ -12,6 +12,9 @@
 #ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_SPRAY_CAN_H_
 #define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_SPRAY_CAN_H_
 
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
 #include <string>
 #include "lib/libimgtools/src/include/tool.h"
 
@@ -32,4 +35,4 @@ class TSprayCan : public Tool {
   void Init();
 };
 
-#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_SPRAY_CAN_H_
+#endif  /* SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_SPRAY_CAN_H_ */

@@ -1,6 +1,3 @@
-#ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_CMD_LINE_HANDLER_H_
-#define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_CMD_LINE_HANDLER_H_
-
 /*******************************************************************************
  * Name            : cmd_line_handler.h
  * Project         : libimgtools
@@ -12,10 +9,22 @@
  *
  ******************************************************************************/
 
+#ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_CMD_LINE_HANDLER_H_
+#define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_CMD_LINE_HANDLER_H_
+
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
 #include <string>
 #include <vector>
 #include "lib/libimgtools/src/include/pixel_buffer.h"
 
+/**
+ * @brief Class that handles overall command line requests
+ *
+ * This class will parse through the command line argument and will call the appropriate 
+ * functions with the specifications
+ */
 class CmdLineHandler {
  public:
   CmdLineHandler(int argc, char** argv);
@@ -62,4 +71,4 @@ class CmdLineHandler {
   std::vector<CmdLineHandler::Command> commands_;
 };
 
-#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_CMD_LINE_HANDLER_H_
+#endif  /* SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_CMD_LINE_HANDLER_H_ */

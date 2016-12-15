@@ -56,4 +56,4 @@ class FlashPhotoIOManager : public IOManager {
 
 }  /* namespace image_tools */
 
-#endif  // SRC_APP_FLASHPHOTO_SRC_INCLUDE_FLASHPHOTO_IO_MANAGER_H_
+#endif  /* SRC_APP_FLASHPHOTO_SRC_INCLUDE_FLASHPHOTO_IO_MANAGER_H_ */

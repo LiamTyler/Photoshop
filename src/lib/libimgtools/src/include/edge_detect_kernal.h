@@ -12,6 +12,9 @@
 #ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_EDGE_DETECT_KERNAL_H_
 #define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_EDGE_DETECT_KERNAL_H_
 
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
 #include <string>
 #include "lib/libimgtools/src/include/kernal.h"
 #include "lib/libimgtools/src/include/pixel_buffer.h"
@@ -32,4 +35,4 @@ class EdgeDetectKernal : public Kernal {
   virtual void InitializeKernal();
 };
 
-#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_EDGE_DETECT_KERNAL_H_
+#endif  /* SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_EDGE_DETECT_KERNAL_H_ */

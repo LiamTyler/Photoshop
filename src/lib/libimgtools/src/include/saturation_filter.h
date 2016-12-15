@@ -12,6 +12,9 @@
 #ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_SATURATION_FILTER_H_
 #define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_SATURATION_FILTER_H_
 
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
 #include <string>
 #include "lib/libimgtools/src/include/simple_filter.h"
 #include "lib/libimgtools/src/include/color_data.h"
@@ -41,4 +44,4 @@ class SaturationFilter : public SimpleFilter {
   float amount_;
 };
 
-#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_SATURATION_FILTER_H_
+#endif  /* SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_SATURATION_FILTER_H_ */

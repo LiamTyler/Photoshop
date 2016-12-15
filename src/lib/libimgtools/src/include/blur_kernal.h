@@ -12,6 +12,9 @@
 #ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_BLUR_KERNAL_H_
 #define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_BLUR_KERNAL_H_
 
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
 #include <string>
 #include "lib/libimgtools/src/include/kernal.h"
 #include "lib/libimgtools/src/include/pixel_buffer.h"
@@ -36,7 +39,7 @@ class BlurKernal : public Kernal {
   /**
    * @brief defines the diameter (to the nearest odd number) of the kernal
    */
-  int amount_;
+  int amount_; /// Amount to blur by. The higher menas more blur.
 };
 
-#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_BLUR_KERNAL_H_
+#endif  /* SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_BLUR_KERNAL_H_ */

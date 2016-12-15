@@ -12,6 +12,9 @@
 #ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_SHARPEN_KERNAL_H_
 #define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_SHARPEN_KERNAL_H_
 
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
 #include <string>
 #include "lib/libimgtools/src/include/kernal.h"
 #include "lib/libimgtools/src/include/pixel_buffer.h"
@@ -39,4 +42,4 @@ class SharpenKernal : public Kernal {
   int amount_;  /// Amount to sharpen by. The higher the sharper.
 };
 
-#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_SHARPEN_KERNAL_H_
+#endif  /* SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_SHARPEN_KERNAL_H_ */

@@ -171,4 +171,4 @@ class IOManager {
 
 }  /* namespace image_tools */
 
-#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_IO_MANAGER_H_
+#endif  /* SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_IO_MANAGER_H_ */

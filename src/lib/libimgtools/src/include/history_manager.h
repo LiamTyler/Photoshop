@@ -69,4 +69,4 @@ class HistoryManager {
   int newest_save_;  //< Index of the newest save
 };
 
-#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_HISTORY_MANAGER_H_
+#endif  /* SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_HISTORY_MANAGER_H_ */

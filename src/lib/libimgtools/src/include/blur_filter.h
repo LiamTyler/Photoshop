@@ -12,6 +12,9 @@
 #ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_BLUR_FILTER_H_
 #define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_BLUR_FILTER_H_
 
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
 #include <string>
 #include "lib/libimgtools/src/include/kernal_filter.h"
 #include "lib/libimgtools/src/include/color_data.h"
@@ -29,4 +32,4 @@ class BlurFilter : public KernalFilter {
   std::string name(void) { return "Blur"; }
 };
 
-#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_BLUR_FILTER_H_
+#endif  /* SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_BLUR_FILTER_H_ */

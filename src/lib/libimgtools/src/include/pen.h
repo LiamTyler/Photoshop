@@ -12,6 +12,9 @@
 #ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_PEN_H_
 #define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_PEN_H_
 
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
 #include <string>
 #include "lib/libimgtools/src/include/tool.h"
 
@@ -28,4 +31,4 @@ class TPen : public Tool {
   std::string name(void) { return "Pen"; }
 };
 
-#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_PEN_H_
+#endif  /* SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_PEN_H_ */

@@ -12,8 +12,8 @@
 #define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_TOOL_FACTORY_H_
 
 /*******************************************************************************
- *  * Includes
- *   ******************************************************************************/
+ * Includes
+ *******************************************************************************/
 #include <vector>
 #include "lib/libimgtools/src/include/tool.h"
 
@@ -61,4 +61,4 @@ class ToolFactory {
 
 }  /* namespace image_tools */
 
-#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_TOOL_FACTORY_H_
+#endif  /* SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_TOOL_FACTORY_H_ */

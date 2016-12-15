@@ -12,6 +12,9 @@
 #ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_QUANTIZE_FILTER_H_
 #define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_QUANTIZE_FILTER_H_
 
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
 #include <string>
 #include "lib/libimgtools/src/include/simple_filter.h"
 #include "lib/libimgtools/src/include/color_data.h"
@@ -38,4 +41,4 @@ class QuantizeFilter : public SimpleFilter {
   int bins_;  /**< Number of bins to sort the colors into  */
 };
 
-#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_QUANTIZE_FILTER_H_
+#endif  /* SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_QUANTIZE_FILTER_H_ */

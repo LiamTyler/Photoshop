@@ -1,6 +1,3 @@
-#ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_TOOL_UTILITIES_H_
-#define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_TOOL_UTILITIES_H_
-
 /*******************************************************************************
  * Name            : tool_utilities.h
  * Project         : BrushWork
@@ -12,6 +9,12 @@
  *
  ******************************************************************************/
 
+#ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_TOOL_UTILITIES_H_
+#define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_TOOL_UTILITIES_H_
+
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
 #include "lib/libimgtools/src/include/pixel_buffer.h"
 
 using image_tools::PixelBuffer;
@@ -51,4 +54,4 @@ namespace tool_utilities {
     void CopyPixelBuffer(PixelBuffer* from, PixelBuffer* to, int x, int y);
 }  /* namespace tool_utilities */
 
-#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_TOOL_UTILITIES_H_
+#endif  /* SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_TOOL_UTILITIES_H_ */

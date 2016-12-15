@@ -12,6 +12,9 @@
 #ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_IMGTOOLS_INTERFACE_H_
 #define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_IMGTOOLS_INTERFACE_H_
 
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
 #include <string>
 #include "lib/libimgtools/src/include/pixel_buffer.h"
 
@@ -124,4 +127,4 @@ int CompareImages(const PixelBuffer* img1, const PixelBuffer* img2);
 
 }  /* namespace imgtools */
 
-#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_IMGTOOLS_INTERFACE_H_
+#endif  /* SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_IMGTOOLS_INTERFACE_H_ */

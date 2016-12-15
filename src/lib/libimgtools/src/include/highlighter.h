@@ -12,9 +12,11 @@
 #ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_HIGHLIGHTER_H_
 #define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_HIGHLIGHTER_H_
 
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
 #include <string>
 #include "lib/libimgtools/src/include/tool.h"
-
 
 /**
  * @brief Implements a highlighter tool
@@ -33,4 +35,4 @@ class THighlighter : public Tool {
   std::string name(void) { return "Highlighter"; }
 };
 
-#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_HIGHLIGHTER_H_
+#endif  /* SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_HIGHLIGHTER_H_ */

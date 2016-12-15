@@ -12,6 +12,9 @@
 #ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_SIMPLE_FILTER_H_
 #define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_SIMPLE_FILTER_H_
 
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
 #include <string>
 #include "lib/libimgtools/src/include/filter.h"
 #include "lib/libimgtools/src/include/pixel_buffer.h"
@@ -55,4 +58,4 @@ class SimpleFilter {
   virtual std::string name(void) = 0;
 };
 
-#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_SIMPLE_FILTER_H_
+#endif  /* SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_SIMPLE_FILTER_H_ */

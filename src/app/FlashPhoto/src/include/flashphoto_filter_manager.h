@@ -40,4 +40,4 @@ class FlashPhotoFilterManager : public FilterManager {
 
 }  /* namespace image_tools */
 
-#endif  // SRC_APP_FLASHPHOTO_SRC_INCLUDE_FLASHPHOTO_FILTER_MANAGER_H_
+#endif  /* SRC_APP_FLASHPHOTO_SRC_INCLUDE_FLASHPHOTO_FILTER_MANAGER_H_ */

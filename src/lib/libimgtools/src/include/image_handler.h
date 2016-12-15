@@ -12,6 +12,9 @@
 #ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_IMAGE_HANDLER_H_
 #define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_IMAGE_HANDLER_H_
 
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
 #include <string>
 #include "lib/libimgtools/src/include/pixel_buffer.h"
 
@@ -54,4 +57,4 @@ class ImageHandler {
   static IMAGE_TYPE GetImageType(const std::string & file_name);
 };
 
-#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_IMAGE_HANDLER_H_
+#endif  /* SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_IMAGE_HANDLER_H_ */

@@ -12,6 +12,9 @@
 #ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_KERNAL_H_
 #define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_KERNAL_H_
 
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
 #include <string>
 #include "lib/libimgtools/src/include/pixel_buffer.h"
 #include "lib/libimgtools/src/include/color_data.h"
@@ -81,4 +84,4 @@ class Kernal {
   float** kernal_;  /** The 2D array that is the core of the kernal object  */
 };
 
-#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_KERNAL_H_
+#endif  /* SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_KERNAL_H_ */

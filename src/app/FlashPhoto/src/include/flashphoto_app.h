@@ -130,7 +130,7 @@ class FlashPhotoApp : public BaseGfxApp {
   PixelBuffer *display_buffer_;
   PixelBuffer *scratch_buffer_;
 
-  // These are used to store the selections from the GLUI user interface
+  /** These are used to store the selections from the GLUI user interface*/
   int cur_tool_index_;  /**< Currently selected tool from UI */
   Tool* cur_tool_;
   std::vector<Tool*> tools_;
@@ -147,4 +147,4 @@ class FlashPhotoApp : public BaseGfxApp {
 
 }  /* namespace image_tools */
 
-#endif  // SRC_APP_FLASHPHOTO_SRC_INCLUDE_FLASHPHOTO_APP_H_
+#endif  /* SRC_APP_FLASHPHOTO_SRC_INCLUDE_FLASHPHOTO_APP_H_ */

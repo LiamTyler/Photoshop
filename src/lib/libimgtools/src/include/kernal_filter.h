@@ -12,6 +12,9 @@
 #ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_KERNAL_FILTER_H_
 #define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_KERNAL_FILTER_H_
 
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
 #include <string>
 #include "lib/libimgtools/src/include/filter.h"
 #include "lib/libimgtools/src/include/pixel_buffer.h"
@@ -56,4 +59,4 @@ class KernalFilter : public Filter {
   Kernal* kernal_;
 };
 
-#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_KERNAL_FILTER_H_
+#endif  /* SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_KERNAL_FILTER_H_ */

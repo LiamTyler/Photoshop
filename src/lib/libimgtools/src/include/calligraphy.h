@@ -12,10 +12,18 @@
 #ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_CALLIGRAPHY_H_
 #define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_CALLIGRAPHY_H_
 
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
 #include <string>
 #include "lib/libimgtools/src/include/tool.h"
 
-// Inheirit width and height from tool
+/**
+* @brief Implements caligraphy tool
+*
+* Tool with a vertical rectangular mask, so that horizontal strokes are
+* fatter than vertical strokes.
+*/
 class TCalligraphy : public Tool {
  public:
   TCalligraphy(int width, int height);
@@ -24,4 +32,4 @@ class TCalligraphy : public Tool {
   std::string name(void) { return "Calligraphy Pen"; }
 };
 
-#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_CALLIGRAPHY_H_
+#endif  /* SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_CALLIGRAPHY_H_ */

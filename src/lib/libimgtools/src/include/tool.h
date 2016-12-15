@@ -12,6 +12,9 @@
 #ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_TOOL_H_
 #define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_TOOL_H_
 
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
 #include <string>
 #include "lib/libimgtools/src/include/color_data.h"
 #include "lib/libimgtools/src/include/pixel_buffer.h"
@@ -85,4 +88,4 @@ class Tool {
   float** mask_;  /**< 2D array of floats representing the mask  */
 };
 
-#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_TOOL_H_
+#endif  /* SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_TOOL_H_ */

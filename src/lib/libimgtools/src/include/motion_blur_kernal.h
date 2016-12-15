@@ -12,6 +12,9 @@
 #ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_MOTION_BLUR_KERNAL_H_
 #define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_MOTION_BLUR_KERNAL_H_
 
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
 #include <string>
 #include "lib/libimgtools/src/include/kernal.h"
 #include "lib/libimgtools/src/include/pixel_buffer.h"
@@ -39,4 +42,4 @@ class MotionBlurKernal : public Kernal {
   int direction_;  /// The direction of motion blur
 };
 
-#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_MOTION_BLUR_KERNAL_H_
+#endif  /* SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_MOTION_BLUR_KERNAL_H_ */

@@ -12,6 +12,9 @@
 #ifndef SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_RAINBOW_H_
 #define SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_RAINBOW_H_
 
+/*******************************************************************************
+ * Includes
+ ******************************************************************************/
 #include <string>
 #include "lib/libimgtools/src/include/pen.h"
 #include "lib/libimgtools/src/include/pixel_buffer.h"
@@ -54,4 +57,4 @@ class TRainbow : public Tool {
   double rate_of_change_;  //< How quickly the color will change
 };
 
-#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_RAINBOW_H_
+#endif  /* SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_RAINBOW_H_ */

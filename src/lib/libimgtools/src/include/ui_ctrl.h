@@ -78,4 +78,4 @@ class UICtrl {
 
 }  /* namespace image_tools */
 
-#endif  // SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_UI_CTRL_H_
+#endif  /* SRC_LIB_LIBIMGTOOLS_SRC_INCLUDE_UI_CTRL_H_ */
