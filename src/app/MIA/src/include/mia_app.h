@@ -39,8 +39,9 @@ class MIAApp : public BaseGfxApp {
   void MouseDragged(int x, int y) {}
   void MouseMoved(int x, int y) {}
   void LeftMouseDown(int x, int y);
-  void LeftMouseUp(int x, int y) {}
+  void LeftMouseUp(int x, int y);
   void Display(void);
+  void Update(void);
   void GluiControl(int control_id);
 
   /**
@@ -94,6 +95,7 @@ class MIAApp : public BaseGfxApp {
 
   // This is the pointer to the buffer where the display PixelBuffer is stored
   PixelBuffer* display_buffer_;
+  PixelBuffer* scratch_buffer_;
 
   // The path to the marker file
   std::string marker_fname_;

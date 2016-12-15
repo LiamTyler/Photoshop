@@ -19,6 +19,7 @@
 #include "GL/glui.h"
 #include "lib/libimgtools/src/include/ui_ctrl.h"
 #include "lib/libimgtools/src/include/pixel_buffer.h"
+#include "lib/libimgtools/src/include/stamp_tool.h"
 
 using image_tools::PixelBuffer;
 
@@ -77,13 +78,13 @@ class IOManager {
    * @brief Load the selected image file to the canvas
    *
    */
-  virtual void LoadImageToCanvas(void);
+  virtual PixelBuffer* LoadImageToCanvas(PixelBuffer* buff);
 
   /**
    * @brief Load the selected image file to the stamp
    *
    */
-  void LoadImageToStamp(void);
+  void LoadImageToStamp(TStamp* t);
 
   /**
    * @brief Save the current state of the canvas to a file

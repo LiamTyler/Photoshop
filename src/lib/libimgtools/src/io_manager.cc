@@ -17,6 +17,7 @@
 #include "lib/libimgtools/src/include/ui_ctrl.h"
 #include "lib/libimgtools/src/include/ipng_handler.h"
 #include "lib/libimgtools/src/include/ijpg_handler.h"
+#include "lib/libimgtools/src/include/pixel_buffer.h"
 
 /*******************************************************************************
  * Namespaces
@@ -135,10 +136,14 @@ void IOManager::set_image_file(const std::string & file_name) {
   }
 }
 
-void IOManager::LoadImageToCanvas(void) {
+PixelBuffer* IOManager::LoadImageToCanvas(PixelBuffer* buff) {
+    delete buff;
+    return ImageHandler::LoadImage(file_browser()->get_file());
 }
 
-void IOManager::LoadImageToStamp(void) {
+void IOManager::LoadImageToStamp(TStamp* t) {
+    t->LoadImage(ImageHandler::LoadImage(
+                file_browser()->get_file()));
 }
 
 void IOManager::SaveCanvasToFile(const PixelBuffer* bufferToSave) {

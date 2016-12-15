@@ -26,13 +26,14 @@ namespace image_tools {
 /*******************************************************************************
  * Constructors/Destructor
  ******************************************************************************/
-MIAApp::MIAApp(int width, int height,
-               const std::string& marker_fname) : BaseGfxApp(width, height),
+MIAApp::MIAApp(int w, int h,
+               const std::string& markerFname) : BaseGfxApp(w, h),
                                                   filter_manager_(),
                                                   io_manager_(),
                                                   state_manager_(),
                                                   display_buffer_(nullptr),
-                                                  marker_fname_(marker_fname),
+                                                  scratch_buffer_(nullptr),
+                                                  marker_fname_(markerFname),
                                                   cur_tool_(0) {}
 
 /*******************************************************************************
@@ -69,17 +70,30 @@ MIAApp::~MIAApp(void) {
   if (display_buffer_) {
     delete display_buffer_;
   }
+  if (scratch_buffer_) {
+    delete scratch_buffer_;
+  }
 }
-
 
 void MIAApp::LeftMouseDown(int x, int y) {
   std::cout << "mousePressed " << x << " " << y << std::endl;
+  // cur_tool_->ApplyTool(display_buffer_, current_color_,
+  //                      x, y, last_x_, last_y_);
+  // last_x_ = x;
+  // last_x_ = y;
 }
 
+void MIAApp::LeftMouseUp(int x, int y) {
+  std::cout << "mouseReleased " << x << " " << y << std::endl;
+  // last_x_ = -1;
+  // last_y_ = -1;
+  state_manager_.Save(display_buffer_);
+}
 
 void MIAApp::InitializeBuffers(ColorData background_color,
-                               int width, int height) {
-  display_buffer_ = new PixelBuffer(width, height, background_color);
+                               int w, int h) {
+  display_buffer_ = new PixelBuffer(w, h, background_color);
+  scratch_buffer_ = new PixelBuffer(w, h, background_color);
 }
 
 void MIAApp::InitGlui(void) {
@@ -112,63 +126,84 @@ void MIAApp::InitGlui(void) {
   return;
 }
 
+void MIAApp::Update(void) {
+    PixelBuffer* d = display_buffer_;
+    if (d->width() != scratch_buffer_->width() ||
+        d->height() != scratch_buffer_->height()) {
+        delete scratch_buffer_;
+        scratch_buffer_ = new PixelBuffer(d->width(), d->height(),
+                                          d->background_color());
+    }
+    BaseGfxApp::SetWindowDimensions(display_buffer_->width(),
+                                  display_buffer_->height());
+}
+
 void MIAApp::GluiControl(int control_id) {
   switch (control_id) {
     case UICtrl::UI_APPLY_SHARP:
-      // filter_manager_.ApplySharpen();
-      break;
-    case UICtrl::UI_APPLY_MOTION_BLUR:
-      // filter_manager_.ApplyMotionBlur();
+      filter_manager_.ApplySharpen(display_buffer_, scratch_buffer_);
       break;
     case UICtrl::UI_APPLY_EDGE:
-      // filter_manager_.ApplyEdgeDetect();
+      filter_manager_.ApplyEdgeDetect(display_buffer_, scratch_buffer_);
       break;
     case UICtrl::UI_APPLY_THRESHOLD:
-      // filter_manager_.ApplyThreshold();
+      filter_manager_.ApplyThreshold(display_buffer_, scratch_buffer_);
       break;
     case UICtrl::UI_APPLY_SATURATE:
-      // filter_manager_.ApplySaturate();
+      filter_manager_.ApplySaturate(display_buffer_, scratch_buffer_);
       break;
     case UICtrl::UI_APPLY_CHANNEL:
-      // filter_manager_.ApplyChannel();
+      filter_manager_.ApplyChannel(display_buffer_, scratch_buffer_);
       break;
     case UICtrl::UI_APPLY_QUANTIZE:
-      // filter_manager_.ApplyQuantize();
+      filter_manager_.ApplyQuantize(display_buffer_, scratch_buffer_);
       break;
     case UICtrl::UI_APPLY_BLUR:
-      // filter_manager_.ApplyBlur();
+      filter_manager_.ApplyBlur(display_buffer_, scratch_buffer_);
       break;
     case UICtrl::UI_FILE_BROWSER:
-      // io_manager_.set_image_file(io_manager_.file_browser()->get_file());
+      io_manager_.set_image_file(io_manager_.file_browser()->get_file());
       break;
     case UICtrl::UI_LOAD_CANVAS_BUTTON:
-      // io_manager_.LoadImageToCanvas();
-      break;
-    case UICtrl::UI_LOAD_STAMP_BUTTON:
-      // io_manager_.LoadImageToStamp();
+      display_buffer_ = io_manager_.LoadImageToCanvas(display_buffer_);
+      Update();
+      state_manager_.Save(display_buffer_);
       break;
     case UICtrl::UI_SAVE_CANVAS_BUTTON:
       // Reload the current directory:
-      // io_manager_.file_browser()->fbreaddir(".");
-      // io_manager_.SaveCanvasToFile();
+      io_manager_.SaveCanvasToFile(display_buffer_);
+      io_manager_.file_browser()->fbreaddir(".");
       break;
     case UICtrl::UI_NEXT_IMAGE_BUTTON:
-      // io_manager_.LoadNextImage();
+      display_buffer_ = io_manager_.LoadNextImage(display_buffer_);
+      Update();
       break;
     case UICtrl::UI_PREV_IMAGE_BUTTON:
-      // io_manager_.LoadPreviousImage();
+      display_buffer_ = io_manager_.LoadPreviousImage(display_buffer_);
+      Update();
       break;
     case UICtrl::UI_FILE_NAME:
-      // io_manager_.set_image_file(io_manager_.file_name());
+      io_manager_.set_image_file(io_manager_.file_name());
       break;
     case UICtrl::UI_UNDO:
-      // state_manager_.UndoOperation(display_buffer_);
+      display_buffer_ = state_manager_.UndoOperation(display_buffer_);
+      Update();
       break;
     case UICtrl::UI_REDO:
-      // state_manager_.RedoOperation(display_buffer_);
+      display_buffer_ = state_manager_.RedoOperation(display_buffer_);
+      Update();
       break;
     default:
       break;
+  }
+
+  PixelBuffer* tmp;
+  if (control_id >= UICtrl::UI_APPLY_BLUR &&
+          control_id <= UICtrl::UI_APPLY_QUANTIZE) {
+      tmp = display_buffer_;
+      display_buffer_ = scratch_buffer_;
+      scratch_buffer_ = tmp;
+      state_manager_.Save(display_buffer_);
   }
 
   // Forces canvas to update changes made in this function

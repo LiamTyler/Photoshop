@@ -13,12 +13,10 @@
  * Includes
  ******************************************************************************/
 #include "app/MIA/src/include/mia_io_manager.h"
-
+// #include "lib/libimgtools/src/include/io_manager.h"
 #include <assert.h>
 #include <iostream>
 #include <sstream>
-
-/* FIXME: ADDITIONAL INCLUDES AS NECESSARY HERE :-) */
 
 /*******************************************************************************
  * Namespaces
@@ -33,7 +31,8 @@ MIAIOManager::MIAIOManager(void) :
     next_image_btn_(nullptr),
     prev_image_btn_(nullptr),
     prev_file_name_(),
-    next_file_name_() {}
+    next_file_name_(),
+    current_file_() {}
 
 /*******************************************************************************
  * Member Functions
@@ -59,23 +58,30 @@ GLUI_Panel* MIAIOManager::InitGlui(const GLUI *const glui,
   return image_panel;
 }
 
-void MIAIOManager::LoadNextImage(void) {
+std::string MIAIOManager::GetFile(void) {
+    return current_file_;
+}
+
+PixelBuffer* MIAIOManager::LoadNextImage(PixelBuffer* buff) {
   set_image_file(next_file_name_);
-  LoadImageToCanvas();
+  current_file_ = next_file_name_;
+  return LoadImageToCanvas(buff);
 }
 
-void MIAIOManager::LoadPreviousImage(void) {
+PixelBuffer* MIAIOManager::LoadPreviousImage(PixelBuffer* buff) {
   set_image_file(prev_file_name_);
-  LoadImageToCanvas();
+  current_file_ = next_file_name_;
+  return LoadImageToCanvas(buff);
 }
 
-void MIAIOManager::LoadImageToCanvas(void) {
+PixelBuffer* MIAIOManager::LoadImageToCanvas(PixelBuffer* buff) {
   // Determining whether there are next or previous images
   next_file_name_ = image_name_plus_seq_offset(file_name(), 1);
   prev_file_name_ = image_name_plus_seq_offset(file_name(), -1);
 
   next_image_toggle(is_valid_image_file(next_file_name_));
   prev_image_toggle(is_valid_image_file(prev_file_name_));
+  return IOManager::LoadImageToCanvas(buff);
 }
 
 void MIAIOManager::set_image_file(const std::string & fname_in) {
