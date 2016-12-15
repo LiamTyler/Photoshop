@@ -30,7 +30,7 @@ channels: | one.txt zero.txt test_images
 # something went wrong in the c++ code. If it returns 0, we still have to check to
 # see what was printed out (saved in output.txt) to see if the images are the same
 # or not. That's what the diff does
-	@../build/bin/FlashPhoto golden_images/brainColorChan550.jpg -compare test_images/brainColorChan550Test.jpg > output.txt ;\
+	@../build/bin/MIA golden_images/brainColorChan550.jpg -compare test_images/brainColorChan550Test.jpg > output.txt ;\
 		if [ $$? -eq 1 ] ; then\
 			echo "Channels 5 5 0 Test FAILED to execute" ;\
 		else\
