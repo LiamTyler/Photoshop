@@ -49,11 +49,48 @@ class MIAIOManager : public IOManager {
                        void (*s_gluicallback)(int));
 
   std::string GetFile(void);
+
+  /**
+   * @brief Load the current image into the buffer
+   *
+   * @param[in] buff The buffer to load the image into
+   *
+   * @return The new image
+   */
   PixelBuffer* LoadImageToCanvas(PixelBuffer* buff);
+
+  /**
+   * @brief Load the given image into the buffer
+   *
+   * @param[in] buff The buffer to load the image into
+   * @param[in] fname The name of the image to load
+   *
+   * @return The new image
+   */
   PixelBuffer* LoadSelectedImageToCanvas(PixelBuffer* buff,
           const std::string& fname);
+
+  /**
+   * @brief Load the next image into the canvas
+   *
+   * @param[in] buff The buffer to load the image into
+   *
+   * @return The next image
+   */
   PixelBuffer* LoadNextImage(PixelBuffer* buff);
+
+  /**
+   * @brief Load the previous image into the canvas
+   *
+   * @param[in] buff The buffer to load the image into
+   *
+   * @return The previous image
+   */
   PixelBuffer* LoadPreviousImage(PixelBuffer* buff);
+
+  /**
+   * @brief Set the next and previous text for the glui
+   */
   void set_next_previous(void);
   void set_image_file(const std::string & fname_in);
   std::string image_name_plus_seq_offset(const std::string& filename,

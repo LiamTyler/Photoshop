@@ -92,19 +92,32 @@ bool operator== (const ColorData& a, const ColorData& b) {
 
 bool operator!= (const ColorData& a, const ColorData& b) {
     // If a pixel is within 1 / 256 they are the same really
-    float delta = 1.0 / 256;
-    float dr = abs(a.red_ - b.red_);
-    float dg = abs(a.green_ - b.green_);
-    float db = abs(a.blue_ - b.blue_);
-    bool t = (dr < delta && dg < delta && db < delta);
+    // float delta = 1.0 / 256;
+    float delta = .079;
+    // cout << "DELTA: " << delta << endl;
+    float dr = std::abs(a.red_ - b.red_);
+    float dg = std::abs(a.green_ - b.green_);
+    float db = std::abs(a.blue_ - b.blue_);
+    float da = std::abs(a.alpha_ - b.alpha_);
+    bool t = !(dr <= delta && dg <= delta && db <= delta && da <= delta);
     /*
     if (t) {
+        cout << "dr = " << dr << endl;
+        cout << "dg = " << dg << endl;
+        cout << "db = " << db << endl;
+        cout << "da = " << da << endl;
         cout << "a red = " << a.red_ << ", b red = " << b.red_ << endl;
         cout << "a green = " << a.green_ << ", b green = " << b.green_ << endl;
         cout << "a blue = " << a.blue_ << ", b blue = " << b.blue_ << endl;
         cout << "a alpha = " << a.alpha_ << ", b alpha = " << b.alpha_ << endl;
     }
     */
+    /*
+        cout << "dr = " << dr << endl;
+        cout << "dg = " << dg << endl;
+        cout << "db = " << db << endl;
+        cout << "da = " << da << endl;
+        */
     return t;
 }
 

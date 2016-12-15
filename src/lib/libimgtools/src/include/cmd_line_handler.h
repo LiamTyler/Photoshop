@@ -16,11 +16,32 @@
 #include <vector>
 #include "lib/libimgtools/src/include/pixel_buffer.h"
 
+/**
+ * @brief Class responsible for parsing the command line arguments and running
+ * them
+ *
+ * The handlers works in two phases. First, parse all the commands, and check
+ * for validity, correct number, and extensions. Then, run through the commands
+ * given for each image applicable, and save if necessary.
+ */
 class CmdLineHandler {
  public:
   CmdLineHandler(int argc, char** argv);
+  /**
+   * @brief Both parse and run the commands
+   *
+   * @return False if any error occurred, True otherwise
+   */
   bool ProcessArguments();
+
+  /**
+   * @brief Helper function to print the information (for debugging).
+   */
   void PrintInfo();
+
+  /**
+   * @brief If anything is invalid or errors, print the help message.
+   */
   void PrintHelp();
   enum Command {
     HELP,
@@ -39,8 +60,25 @@ class CmdLineHandler {
  private:
   CmdLineHandler(const CmdLineHandler& c) = delete;
   CmdLineHandler& operator=(const CmdLineHandler& c) = delete;
+
+  /**
+   * @brief parses through the command line arguments and readies them
+   * for running.
+   *
+   * @return False if any commands or arguments were invalid
+   */
   bool ParseArguments();
+
+  /**
+   * @brief Actually run the commands provided
+   *
+   * @return True if no errors occurred, false otherwise.
+   */
   bool RunCommands();
+
+  /**
+   * @brief validate the args provided for the command given
+   */
   bool ValidateArgs(int index, Command command);
   Command get_index(const char* arg);
   bool is_number(const char* arg);
