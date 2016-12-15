@@ -71,7 +71,7 @@ PixelBuffer* MIAIOManager::LoadNextImage(PixelBuffer* buff) {
 
 PixelBuffer* MIAIOManager::LoadPreviousImage(PixelBuffer* buff) {
   set_image_file(prev_file_name_);
-  current_file_ = next_file_name_;
+  current_file_ = prev_file_name_;
   set_next_previous();
   return LoadSelectedImageToCanvas(buff, current_file_);
 }
