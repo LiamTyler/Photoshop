@@ -166,6 +166,7 @@ void FlashPhotoApp::InitializeBuffers(ColorData background_color,
     scratch_buffer_ = new PixelBuffer(w, h, background_color);
 }
 
+/*
 // Copies the image that will load into the current buffer
 // Also updates the window dimensions to fi the image
 void FlashPhotoApp::LoadImageToCanvas(void) {
@@ -183,6 +184,7 @@ void FlashPhotoApp::SaveCanvasToFile(void) {
      ImageHandler::SaveImage(io_manager_.file_browser()->get_file(),
                              display_buffer_);
 }
+*/
 
 void FlashPhotoApp::InitGlui(void) {
     // Select first tool (this activates the first radio button in glui)
@@ -336,19 +338,15 @@ void FlashPhotoApp::GluiControl(int control_id) {
             io_manager_.set_image_file(io_manager_.file_browser()->get_file());
             break;
         case UICtrl::UI_LOAD_CANVAS_BUTTON:
-            io_manager_.LoadImageToCanvas();
-            LoadImageToCanvas();
+            display_buffer_ = io_manager_.LoadImageToCanvas(display_buffer_);
             UpdateScratch();
+            BaseGfxApp::SetWindowDimensions(display_buffer_->width(),
+                                  display_buffer_->height());
             state_manager_.Save(display_buffer_);
             break;
         case UICtrl::UI_LOAD_STAMP_BUTTON:
-            {
-                io_manager_.LoadImageToStamp();
-                TStamp* t = dynamic_cast<TStamp*>(
-                        tools_[ToolFactory::TOOLS::TOOL_STAMP]);
-                t->LoadImage(ImageHandler::LoadImage(
-                            io_manager_.file_browser()->get_file()));
-            }
+            io_manager_.LoadImageToStamp(dynamic_cast<TStamp*>(
+                        tools_[ToolFactory::TOOLS::TOOL_STAMP]));
             break;
         case UICtrl::UI_SAVE_CANVAS_BUTTON:
             io_manager_.SaveCanvasToFile(display_buffer_);

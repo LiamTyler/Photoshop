@@ -92,9 +92,9 @@ class FlashPhotoApp : public BaseGfxApp {
   /**
    * @brief Initialize functions to load/save images
    */
-  void LoadImageToCanvas(void);
+  // void LoadImageToCanvas(void);
 
-  void SaveCanvasToFile(void);
+  // void SaveCanvasToFile(void);
 
   void UpdateScratch(void);
 

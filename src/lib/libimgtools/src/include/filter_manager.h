@@ -35,7 +35,7 @@ namespace image_tools {
 class FilterManager {
  public:
   FilterManager();
-  ~FilterManager() {}
+  virtual ~FilterManager() {}
 
   /**
    * @brief Apply a blur filter to the buffer, blurring sharply defined edges
@@ -132,6 +132,8 @@ class FilterManager {
                              void (*s_gluicallback)(int));
 
  private:
+  FilterManager(const FilterManager& rhs) = delete;
+  FilterManager& operator=(const FilterManager& rhs) = delete;
   float channel_color_red_;
   float channel_color_green_;
   float channel_color_blue_;

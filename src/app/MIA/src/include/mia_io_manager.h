@@ -36,7 +36,7 @@ namespace image_tools {
 class MIAIOManager : public IOManager {
  public:
   MIAIOManager();
-  ~MIAIOManager() {}
+  virtual ~MIAIOManager() {}
 
   /**
    * @brief Initialize GLUI control elements for IO management
@@ -48,9 +48,13 @@ class MIAIOManager : public IOManager {
   GLUI_Panel* InitGlui(const GLUI *const glui,
                        void (*s_gluicallback)(int));
 
-  void LoadImageToCanvas(void);
-  void LoadNextImage(void);
-  void LoadPreviousImage(void);
+  std::string GetFile(void);
+  PixelBuffer* LoadImageToCanvas(PixelBuffer* buff);
+  PixelBuffer* LoadSelectedImageToCanvas(PixelBuffer* buff,
+          const std::string& fname);
+  PixelBuffer* LoadNextImage(PixelBuffer* buff);
+  PixelBuffer* LoadPreviousImage(PixelBuffer* buff);
+  void set_next_previous(void);
   void set_image_file(const std::string & fname_in);
   std::string image_name_plus_seq_offset(const std::string& filename,
                                          int offset);
@@ -74,6 +78,7 @@ class MIAIOManager : public IOManager {
   GLUI_Button* prev_image_btn_;
   std::string prev_file_name_;
   std::string next_file_name_;
+  std::string current_file_;
 };
 
 }  /* namespace image_tools */

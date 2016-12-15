@@ -19,6 +19,7 @@
 #include "GL/glui.h"
 #include "lib/libimgtools/src/include/ui_ctrl.h"
 #include "lib/libimgtools/src/include/pixel_buffer.h"
+#include "lib/libimgtools/src/include/stamp_tool.h"
 
 using image_tools::PixelBuffer;
 
@@ -74,16 +75,23 @@ class IOManager {
   GLUI_FileBrowser* file_browser(void) { return file_browser_; }
 
   /**
-   * @brief Load the selected image file to the canvas
+   * @brief Load the current image in the file browser to the canvas
    *
    */
-  virtual void LoadImageToCanvas(void);
+  virtual PixelBuffer* LoadImageToCanvas(PixelBuffer* buff);
+
+  /**
+   * @brief Load the selected image to the canvas
+   *
+   */
+  virtual PixelBuffer* LoadSelectedImageToCanvas(PixelBuffer* buff,
+                                                 const std::string& fname);
 
   /**
    * @brief Load the selected image file to the stamp
    *
    */
-  void LoadImageToStamp(void);
+  void LoadImageToStamp(TStamp* t);
 
   /**
    * @brief Save the current state of the canvas to a file
