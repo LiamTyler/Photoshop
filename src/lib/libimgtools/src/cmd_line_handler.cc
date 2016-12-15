@@ -324,6 +324,8 @@ bool CmdLineHandler::RunCommands() {
         string modified_out = output_file_;
         // Find the modified output file name if there are #'s in it
         if (fname.find("###") != string::npos) {
+            if (output_file_.find("###") == string::npos)
+                return false;
             string before = fname.substr(0, fname.find("###"));
             before = curr.substr(0, curr.find(before)) + before;
             string numbers = curr.substr(before.length(), 3);
@@ -335,6 +337,7 @@ bool CmdLineHandler::RunCommands() {
 
         // Process commands one at a time in order of appearance
         int commands_size = commands_.size();
+        bool compared = false;
         for (int i = 0; i < commands_size; i++) {
             bool swap = true;
             switch (commands_[i]) {
@@ -366,6 +369,7 @@ bool CmdLineHandler::RunCommands() {
                             channel_green_amt_, channel_blue_amt_);
                     break;
                 case COMPARE:
+                    compared = true;
                     delete out_img_;
                     out_img_ = imgtools::LoadImage(modified_out);
                     if (out_img_ == nullptr) {
@@ -390,7 +394,7 @@ bool CmdLineHandler::RunCommands() {
             }
         }
         // Output the image created
-        if (!imgtools::SaveImage(modified_out, in_img_))
+        if (!compared && !imgtools::SaveImage(modified_out, in_img_))
             ret = false;
 
         delete in_img_;

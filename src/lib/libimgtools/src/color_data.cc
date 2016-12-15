@@ -13,6 +13,7 @@
  * Includes
  ******************************************************************************/
 #include "lib/libimgtools/src/include/color_data.h"
+#include <cmath>
 #include <iostream>
 #include <iomanip>
 
@@ -90,8 +91,12 @@ bool operator== (const ColorData& a, const ColorData& b) {
 }
 
 bool operator!= (const ColorData& a, const ColorData& b) {
-    bool t = !(a.red_ == b.red_ && a.green_ == b.green_ &&
-           a.blue_ == b.blue_ && a.alpha_ == b.alpha_);
+    // If a pixel is within 1 / 256 they are the same really
+    float delta = 1.0 / 256;
+    float dr = abs(a.red_ - b.red_);
+    float dg = abs(a.green_ - b.green_);
+    float db = abs(a.blue_ - b.blue_);
+    bool t = (dr < delta && dg < delta && db < delta);
     /*
     if (t) {
         cout << "a red = " << a.red_ << ", b red = " << b.red_ << endl;
